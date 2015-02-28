@@ -7,6 +7,9 @@
 
 #ifndef CONF_H_
 #define CONF_H_
+
+#define DEBUG
+
 #ifdef __AVR_ATtiny13A__
 
 
@@ -23,7 +26,7 @@
 
 /* LED */
 typedef enum {STATUS_LED, DEBUG_LED, LED_TYPE_SIZE} tLedType_E;
-#define NOF_LED        LED_SIZE
+#define NOF_LED        LED_TYPE_SIZE
 #define LED_PORT       PORTB
 #define LED_DDR        DDRB
 #define STATUS_LED_BIT DDB3
