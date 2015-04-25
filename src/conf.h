@@ -31,7 +31,7 @@ typedef enum {STATUS_LED, DEBUG_LED, LED_TYPE_SIZE} tLedType_E;
 #define LED_DDR        DDRB
 #define STATUS_LED_BIT DDB3
 #define DEBUG_LED_BIT  DDB0
-
+#define STATUS_LEDD PORTB, DDB3
 
 
 

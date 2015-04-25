@@ -28,7 +28,8 @@ typedef struct
 
 static tLedState_str ledState_astr[LED_TYPE_SIZE];
 
-PROGMEM const tLedChararteristics ledCharacteristics[LED_STATE_SIZE] =
+
+const PROGMEM const tLedChararteristics ledCharacteristics[LED_STATE_SIZE] =
 {
 { 0, 1 },
 { 1, 0 },
@@ -44,29 +45,32 @@ void Ledc_init(void)
 
 void Ledc_loop(void)
 {
-    tU08 i_U08 = 0;
+    tU08 i_U08;
     for (i_U08 = 0; i_U08 < NOF_LED; i_U08++)
     {
-        if(ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOn_U08 == 0)
+        if (ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOn_U08 == 0)
         {
             setLedOff(i_U08);
         }
-        else if (ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOff_U08 == 0)
+        else if (ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOff_U08
+                == 0)
         {
-            setLedOn(i_U08);
+            setLedOn(LED_PORT);
         }
         else
         {
             if (ledState_astr[i_U08].ticksOnOrOff_U08 == 0)
             {
                 //TODO: Check pin status, switch it and update counter
-                if(1==1)
+                if (1 == 1)
                 {
-                    ledState_astr[i_U08].ticksOnOrOff_U08 = ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOff_U08;
+                    ledState_astr[i_U08].ticksOnOrOff_U08 =
+                            ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOff_U08;
                 }
                 else
                 {
-                    ledState_astr[i_U08].ticksOnOrOff_U08 = ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOn_U08;
+                    ledState_astr[i_U08].ticksOnOrOff_U08 =
+                            ledCharacteristics[ledState_astr[i_U08].ledState_E].ledOn_U08;
                 }
 
             }
