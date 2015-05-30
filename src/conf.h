@@ -4,20 +4,56 @@
  *  Created on: 28 feb 2015
  *      Author: andreas
  */
+#include <avr/io.h>
 
 #ifndef CONF_H_
 #define CONF_H_
 
 #define DEBUG
+#define REDUCE_PWR 1
 
-#ifdef __AVR_ATtiny13A__
+#define INPUT    0
+#define OUTPUT   1
+#define PULLUP   1
+#define NOPULLUP 0
+
+#define CONF_IO(CFG, IO, EXT)                             \
+({                                                        \
+    if((IO) == INPUT)                                     \
+    {                                                     \
+    	    GET_DDR(CFG) = GET_DDR(CFG) & ~GET_MASK(CFG); \
+                                                          \
+    }                                                     \
+    else if((IO) == OUTPUT)                               \
+    {                                                     \
+        GET_DDR(CFG) = GET_DDR(CFG) | GET_MASK(CFG);      \
+        GET_PORT(CFG)=(GET_PORT(CFG)&~GET_MASK(CFG)) |    \
+            ((EXT)<<GET_BIT(CFG));                        \
+    }                                                     \
+})                                                        \
+
+#define GET_DDR(P,...) (DDR ## P)
+#define GET_PORT(P,...) (PORT ## P)
+#define GET_PIN(P,...)  (PIN  ## P)
+#define GET_BIT(P, bit) (bit)
+#define GET_MASK(P, bit) (1 << (bit))
+#define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
+
+#ifdef __AVR_ATtiny13__
+
+#define TICK 10
+
+/*************************************************
+ * PIN CONFIGURATION
+ *************************************************/
+#define DSEN_CFG      B,3
+#define BUTT_CFG      B,0
+#define RED_LED_CFG   B,1
+#define GREEN_LED_CFG B,2
+#define BUZZ_CFG      B,4
 
 
-/* Digital Switch Monitor */
-#define DSWM_PORT       PORTB
-#define DSWM_PIN        PINB
-#define DSWM_OPEN_BIT   PB1
-#define DSWM_CLOSED_BIT PB2
+
 
 /* Buzzer */
 #define BUZZER_PORT PORTB
@@ -39,4 +75,5 @@ typedef enum {STATUS_LED, DEBUG_LED, LED_TYPE_SIZE} tLedType_E;
 #else
 #error "Not supported MCU."
 #endif
+
 #endif /* CONF_H_ */
