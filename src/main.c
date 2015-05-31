@@ -29,11 +29,6 @@ typedef enum
     WDTO_16MS_E, WDTO_1S_E,
 } tWatchdogTimeout_E;
 
-typedef enum
-{
-    NO_LOCK_E, BOD_RESET_E, WDT_RESET_E, MCU_LOAD_E,
-} tLockMode_E;
-
 typedef struct
 {
     tMainState_E state_E;
@@ -53,6 +48,7 @@ ISR(WDT_vect)
     if (!loopFinished_B)
     {
         lockMode_E = MCU_LOAD_E;
+        WDTCR |= _BV(WDTIE);
     }
 }
 
@@ -80,9 +76,10 @@ int main(void)
     Buzz_init();
     Ledc_init();
 
+#ifdef __AVR_ATtiny13A__
     /* Reduce power consumption - turn off BOD during power down. */
     BODCR = (1 << BODS) | (1 << BODSE);
-
+#endif
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= (1 << ACD);
 
@@ -100,7 +97,7 @@ int main(void)
         /* Actuators */
         Ledc_loop();
         Buzz_loop();
-
+        _delay_ms(10);
         //TODO: If door been closed > X s and button not bee pushed for Y s reinit watchdog for deep sleep.
         if (FALSE)
         {
@@ -108,8 +105,10 @@ int main(void)
             enableButtonInt();
         }
 
-        loopFinished_B = TRUE;
-
+        if (lockMode_E != MCU_LOAD_E)
+        {
+            loopFinished_B = TRUE;
+        }
         powerDown();
     }
     return 0;
@@ -122,10 +121,10 @@ static void enableWatchdog(tWatchdogTimeout_E time_E)
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDE);
+        WDTCR = _BV(WDTIE) | _BV(WDCE);
         break;
     case WDTO_1S_E:
-        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDE) | _BV(WDP2) | _BV(WDP1);
+        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDP2) | _BV(WDP1);
         break;
     default:
         break;
