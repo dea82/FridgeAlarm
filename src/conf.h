@@ -17,20 +17,26 @@
 #define PULLUP   1
 #define NOPULLUP 0
 
-#define CONF_IO(CFG, IO, EXT)                             \
-({                                                        \
-    if((IO) == INPUT)                                     \
-    {                                                     \
-    	    GET_DDR(CFG) = GET_DDR(CFG) & ~GET_MASK(CFG); \
-                                                          \
-    }                                                     \
-    else if((IO) == OUTPUT)                               \
-    {                                                     \
-        GET_DDR(CFG) = GET_DDR(CFG) | GET_MASK(CFG);      \
-        GET_PORT(CFG)=(GET_PORT(CFG)&~GET_MASK(CFG)) |    \
-            ((EXT)<<GET_BIT(CFG));                        \
-    }                                                     \
-})                                                        \
+#define CONF_IO(CFG, IO, EXT)                               \
+({                                                          \
+    if((IO) == INPUT)                                       \
+    {                                                       \
+    	GET_DDR(CFG) = GET_DDR(CFG) & ~GET_MASK(CFG);       \
+        if((EXT) == PULLUP)                                 \
+            GET_PORT(CFG) = GET_PORT(CFG) | GET_MASK(CFG);  \
+        else if ((EXT) == NOPULLUP)                         \
+            GET_PORT(CFG) = GET_PORT(CFG) & ~GET_MASK(CFG); \
+    }                                                       \
+    else if((IO) == OUTPUT)                                 \
+    {                                                       \
+        GET_DDR(CFG) = GET_DDR(CFG) | GET_MASK(CFG);        \
+        GET_PORT(CFG)=(GET_PORT(CFG)&~GET_MASK(CFG)) |      \
+            ((EXT)<<GET_BIT(CFG));                          \
+    }                                                       \
+})                                                          \
+
+#define IO_SET(CFG)  ({ GET_PORT(CFG) |=  GET_MASK(CFG); })
+#define IO_CLR(CFG)  ({ GET_PORT(CFG) &= ~GET_MASK(CFG); })
 
 #define GET_DDR(P,...) (DDR ## P)
 #define GET_PORT(P,...) (PORT ## P)
