@@ -13,6 +13,7 @@
 
 #include "butt.h"
 #include "buzz.h"
+#include "cont.h"
 #include "dsen.h"
 #include "ledc.h"
 #include "conf.h"
@@ -25,17 +26,13 @@ typedef enum
 
 typedef enum
 {
-    WDTO_16MS_E,
-    WDTO_32MS_E,
-    WDTO_64MS_E,
-    WDTO_125MS_E,
-    WDTO_250MS_E,
-    WDTO_500MS_E,
-    WDTO_1S_E,
-    WDTO_2S_E,
-    WDTO_4S_E,
-    WDTO_8S_E
+    WDTO_16MS_E, WDTO_1S_E,
 } tWatchdogTimeout_E;
+
+typedef enum
+{
+    NO_LOCK_E, BOD_RESET_E, WDT_RESET_E, MCU_LOAD_E,
+} tLockMode_E;
 
 typedef struct
 {
@@ -43,60 +40,113 @@ typedef struct
     unsigned int timeInState_U16;
 } tMainState_str;
 
-static void enableWatchdogInt(tWatchdogTimeout_E time_E);
+static void enableWatchdog(tWatchdogTimeout_E time_E);
 static void powerDown(void);
+static void enableButtonInt(void);
+static void disableButtonInt(void);
+
+static tLockMode_E lockMode_E = NO_LOCK_E;
+static tB loopFinished_B = TRUE;
 
 ISR(WDT_vect)
 {
-//    CONF_IO(GREEN_LED_CFG, OUTPUT, 0);
-//    CONF_IO(RED_LED_CFG, OUTPUT, 1);
+    if (!loopFinished_B)
+    {
+        lockMode_E = MCU_LOAD_E;
+    }
 }
 
 ISR(PCINT0_vect)
 {
-
+    disableButtonInt();
 }
 
 int main(void)
 {
-    tB lockMode_B = FALSE;
-
-    if (MCUSR & ((1 << WDRF) | (1 << BORF)))
+    /* Find out what caused reset. */
+    if (MCUSR & (1 << BORF))
     {
-        lockMode_B = TRUE;
+        lockMode_E = BOD_RESET_E;
     }
+    else if (MCUSR & (1 << WDRF))
+    {
+        lockMode_E = WDT_RESET_E;
+    }
+
+    MCUSR = 0;
 
     Butt_init();
     Dsen_init();
     Buzz_init();
     Ledc_init();
 
-    /* Important to disable the WDT reset even if not used due to flipping pointers. */
-    WDTCR |= (1 << WDTIE) | (1 << WDCE);
-    WDTCR |= (1 << WDP1) | (1 << WDP2);
+    /* Reduce power consumption - turn off BOD during power down. */
+    BODCR = (1 << BODS) | (1 << BODSE);
+
+    /* Reduce power consumption - switch of Analog Comparator */
+    ACSR |= (1 << ACD);
+
     sei();
 
     for (;;)
     {
-        CONF_IO(GREEN_LED_CFG, OUTPUT, 1);
-        CONF_IO(RED_LED_CFG, OUTPUT, 0);
-        wdt_reset();
+        enableWatchdog(WDTO_16MS_E);
+        loopFinished_B = FALSE;
+        /* Sensors */
+        Butt_loop();
+        Dsen_loop();
+        /* Controls*/
+        Cont_loop(lockMode_E);
+        /* Actuators */
+        Ledc_loop();
+        Buzz_loop();
+
+        //TODO: If door been closed > X s and button not bee pushed for Y s reinit watchdog for deep sleep.
+        if (FALSE)
+        {
+            enableWatchdog(WDTO_1S_E);
+            enableButtonInt();
+        }
+
+        loopFinished_B = TRUE;
+
         powerDown();
-        CONF_IO(GREEN_LED_CFG, OUTPUT, 0);
-        CONF_IO(RED_LED_CFG, OUTPUT, 1);
-        _delay_ms(1000);
     }
     return 0;
 }
 
-static void enableWatchdogInt(tWatchdogTimeout_E time_E)
+static void enableWatchdog(tWatchdogTimeout_E time_E)
 {
+    wdt_reset();
+
+    switch (time_E)
+    {
+    case WDTO_16MS_E:
+        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDE);
+        break;
+    case WDTO_1S_E:
+        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDE) | _BV(WDP2) | _BV(WDP1);
+        break;
+    default:
+        break;
+    }
 
 }
 
 static void powerDown(void)
 {
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    sleep_mode();
+    sleep_mode()
+    ;
+}
+
+static void enableButtonInt(void)
+{
+    GIMSK = _BV(PCIE);
+}
+
+static void disableButtonInt(void)
+{
+    GIMSK = 0;
 }
 

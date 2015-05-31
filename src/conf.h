@@ -39,7 +39,7 @@
 #define GET_MASK(P, bit) (1 << (bit))
 #define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
 
-#ifdef __AVR_ATtiny13__
+#ifdef __AVR_ATtiny13A__
 
 #define TICK 10
 
