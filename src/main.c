@@ -45,16 +45,16 @@ static tB loopFinished_B = TRUE;
 
 ISR(WDT_vect)
 {
+    disableButtonInt();
     if (!loopFinished_B)
     {
         lockMode_E = MCU_LOAD_E;
-        WDTCR |= _BV(WDTIE);
+       // WDTCR |= _BV(WDTIE);
     }
 }
 
 ISR(PCINT0_vect)
 {
-    disableButtonInt();
 }
 
 int main(void)
@@ -83,12 +83,16 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= (1 << ACD);
 
-    sei();
+    /* Pin change interrupt on button - this does not enables the interrupt! */
+    PCMSK = _BV(PCINT0);
 
     for (;;)
     {
+        cli();
         enableWatchdog(WDTO_16MS_E);
+        disableButtonInt();
         loopFinished_B = FALSE;
+        sei();
         /* Sensors */
         Butt_loop();
         Dsen_loop();
@@ -99,7 +103,7 @@ int main(void)
         Buzz_loop();
         _delay_ms(10);
         //TODO: If door been closed > X s and button not bee pushed for Y s reinit watchdog for deep sleep.
-        if (FALSE)
+        if (TRUE)
         {
             enableWatchdog(WDTO_1S_E);
             enableButtonInt();
@@ -135,8 +139,7 @@ static void enableWatchdog(tWatchdogTimeout_E time_E)
 static void powerDown(void)
 {
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    sleep_mode()
-    ;
+    sleep_mode();
 }
 
 static void enableButtonInt(void)
