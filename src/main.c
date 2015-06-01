@@ -98,7 +98,7 @@ int main(void)
         Buzz_loop();
         _delay_ms(10);
         //TODO: If door been closed > X s and button not bee pushed for Y s reinit watchdog for deep sleep.
-        if (TRUE)
+        if (FALSE)
         {
             enableWatchdog(WDTO_1S_E);
             Butt_enableInterrupt();

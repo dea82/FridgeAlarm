@@ -47,7 +47,7 @@
 
 #ifdef __AVR_ATtiny13__
 
-#define TICK 10
+#define TICK 16
 
 /*************************************************
  * PIN CONFIGURATION
