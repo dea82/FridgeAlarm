@@ -37,24 +37,22 @@ typedef struct
 
 static void enableWatchdog(tWatchdogTimeout_E time_E);
 static void powerDown(void);
-static void enableButtonInt(void);
-static void disableButtonInt(void);
 
 static tLockMode_E lockMode_E = NO_LOCK_E;
 static tB loopFinished_B = TRUE;
 
 ISR(WDT_vect)
 {
-    disableButtonInt();
+    /* If loop flag was not finished the execution was not finished before next tick. */
     if (!loopFinished_B)
     {
         lockMode_E = MCU_LOAD_E;
-       // WDTCR |= _BV(WDTIE);
     }
 }
 
 ISR(PCINT0_vect)
 {
+    /* Just for wake-up */
 }
 
 int main(void)
@@ -83,14 +81,11 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= (1 << ACD);
 
-    /* Pin change interrupt on button - this does not enables the interrupt! */
-    PCMSK = _BV(PCINT0);
-
     for (;;)
     {
         cli();
         enableWatchdog(WDTO_16MS_E);
-        disableButtonInt();
+        Butt_disableInterrupt();
         loopFinished_B = FALSE;
         sei();
         /* Sensors */
@@ -106,7 +101,7 @@ int main(void)
         if (TRUE)
         {
             enableWatchdog(WDTO_1S_E);
-            enableButtonInt();
+            Butt_enableInterrupt();
         }
 
         if (lockMode_E != MCU_LOAD_E)
@@ -140,15 +135,5 @@ static void powerDown(void)
 {
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_mode();
-}
-
-static void enableButtonInt(void)
-{
-    GIMSK = _BV(PCIE);
-}
-
-static void disableButtonInt(void)
-{
-    GIMSK = 0;
 }
 
