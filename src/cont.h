@@ -13,7 +13,7 @@ typedef enum
     NO_LOCK_E, BOD_RESET_E, WDT_RESET_E, MCU_LOAD_E,
 } tLockMode_E;
 
-
-void Cont_loop(tLockMode_E lockMode_E);
+void Cont_loop(void);
+tB Cont_deepSleepOk_B(void);
 
 #endif /* CONT_H_ */

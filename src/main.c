@@ -26,7 +26,7 @@ typedef enum
 
 typedef enum
 {
-    WDTO_16MS_E, WDTO_1S_E,
+    WDTO_16MS_E, WDTO_8S_E,
 } tWatchdogTimeout_E;
 
 typedef struct
@@ -38,16 +38,10 @@ typedef struct
 static void enableWatchdog(tWatchdogTimeout_E time_E);
 static void powerDown(void);
 
-static tLockMode_E lockMode_E = NO_LOCK_E;
-static tB loopFinished_B = TRUE;
 
 ISR(WDT_vect)
 {
-    /* If loop flag was not finished the execution was not finished before next tick. */
-    if (!loopFinished_B)
-    {
-        lockMode_E = MCU_LOAD_E;
-    }
+
 }
 
 ISR(PCINT0_vect)
@@ -57,6 +51,7 @@ ISR(PCINT0_vect)
 
 int main(void)
 {
+#if 0
     /* Find out what caused reset. */
     if (MCUSR & (1 << BORF))
     {
@@ -68,15 +63,17 @@ int main(void)
     }
 
     MCUSR = 0;
-
+#endif
     Butt_init();
     Dsen_init();
     Buzz_init();
     Ledc_init();
 
-#ifdef __AVR_ATtiny13A__
+#if defined(__AVR_ATtiny13A__)
     /* Reduce power consumption - turn off BOD during power down. */
     BODCR = (1 << BODS) | (1 << BODSE);
+#elif defined(__AVR_ATtiny85__)
+    MCUCR |= _BV(BODS) | _BV(BODSE);
 #endif
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= (1 << ACD);
@@ -86,27 +83,19 @@ int main(void)
         cli();
         enableWatchdog(WDTO_16MS_E);
         Butt_disableInterrupt();
-        loopFinished_B = FALSE;
         sei();
         /* Sensors */
         Butt_loop();
         Dsen_loop();
         /* Controls*/
-        Cont_loop(lockMode_E);
+        Cont_loop();
         /* Actuators */
         Ledc_loop();
         Buzz_loop();
-        _delay_ms(10);
-        //TODO: If door been closed > X s and button not bee pushed for Y s reinit watchdog for deep sleep.
-        if (FALSE)
+        if (Cont_deepSleepOk_B())
         {
-            enableWatchdog(WDTO_1S_E);
+            enableWatchdog(WDTO_8S_E);
             Butt_enableInterrupt();
-        }
-
-        if (lockMode_E != MCU_LOAD_E)
-        {
-            loopFinished_B = TRUE;
         }
         powerDown();
     }
@@ -120,10 +109,10 @@ static void enableWatchdog(tWatchdogTimeout_E time_E)
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = _BV(WDTIE) | _BV(WDCE);
+        WDTCR = _BV(WDT_INT) | _BV(WDCE);
         break;
-    case WDTO_1S_E:
-        WDTCR = _BV(WDTIE) | _BV(WDCE) | _BV(WDP2) | _BV(WDP1);
+    case WDTO_8S_E:
+        WDTCR = _BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0);
         break;
     default:
         break;

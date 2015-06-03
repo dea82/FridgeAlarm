@@ -5,6 +5,7 @@
  *      Author: andreas
  */
 #include <avr/io.h>
+#include "type.h"
 
 #ifndef CONF_H_
 #define CONF_H_
@@ -45,7 +46,7 @@
 #define GET_MASK(P, bit) (1 << (bit))
 #define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
 
-#ifdef __AVR_ATtiny13__
+#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
 
 #define TICK 16
 
@@ -58,28 +59,18 @@
 #define GREEN_LED_CFG B,2
 #define BUZZ_CFG      B,4
 
-
-
-
-/* Buzzer */
-#define BUZZER_PORT PORTB
-#define BUZZER_DDR  DDRB
-#define BUZZER_BIT  DDB4
-
-/* LED */
-typedef enum {STATUS_LED, DEBUG_LED, LED_TYPE_SIZE} tLedType_E;
-#define NOF_LED        LED_TYPE_SIZE
-#define LED_PORT       PORTB
-#define LED_DDR        DDRB
-#define STATUS_LED_BIT DDB3
-#define DEBUG_LED_BIT  DDB0
-#define STATUS_LEDD PORTB, DDB3
-
-
-
-
 #else
 #error "Not supported MCU."
 #endif
+
+#if defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
+    #define WDT_INT WDTIE
+#elif defined(__AVR_ATtiny85__)
+    #define WDT_INT WDIE
+#endif
+
+#define ABS(a)     (((a) < 0) ? -(a) : (a))
+#define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
+#define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
 
 #endif /* CONF_H_ */
