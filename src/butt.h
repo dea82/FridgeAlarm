@@ -23,7 +23,6 @@ typedef struct
 
 void Butt_init(void);
 void Butt_loop(void);
-void Butt_updateState(void);
 tButt_State_str Butt_getState_str(void);
 tB Butt_pressFlank_str(void);
 void Butt_enableInterrupt(void);

@@ -13,9 +13,6 @@
 #include "dsen.h"
 #include "type.h"
 
-#define CALIBRATION_TIME_BUTTON 4000
-#define DEEP_SLEEP_TIME 8000
-#define ALARM_OPEN 3000
 
 typedef enum
 {
@@ -24,6 +21,11 @@ typedef enum
 
 static tB deepSleepOk_B = FALSE;
 
+void Cont_init(void)
+{
+    /* Nothing */
+}
+
 void Cont_loop(void)
 {
     static tCalibrationState_E calibrationState_E;
@@ -31,7 +33,7 @@ void Cont_loop(void)
     static tU08 counter_U08;
     tDsen_doorState_str doorState_str = Dsen_getDoorState_str();
 
-    /* Calibration */
+    /* Calibration state */
     if ((Butt_getState_str().state_E == BUTT_PRESSED_E
             && Butt_getState_str().tickInState_U08 * TICK
                     > CALIBRATION_TIME_BUTTON)
@@ -72,7 +74,7 @@ void Cont_loop(void)
         case DSEN_CLOSED_E:
             Buzz_setSound(BUZZ_OFF_E);
             if ((doorState_str.timeInState_U16 > DEEP_SLEEP_TIME / TICK)
-                    && counter_U08 > 100)
+                    && counter_U08 > MIN_TIME_AWAKE / TICK)
             {
                 deepSleepOk_B = TRUE;
                 counter_U08 = 0;

@@ -5,93 +5,90 @@
  *      Author: andreas
  */
 
+/*** Standard library ***/
 #include <avr/interrupt.h>
-#include <avr/power.h>
 #include <avr/sleep.h>
-#include <util/delay.h>
 #include <avr/wdt.h>
 
+/*** User library ***/
 #include "butt.h"
 #include "buzz.h"
+#include "conf.h"
 #include "cont.h"
 #include "dsen.h"
 #include "ledc.h"
-#include "conf.h"
 #include "type.h"
-
-typedef enum
-{
-    DOOR_OPEN_E, ALARM_E, DOOR_CLOSED_E, SLEEP_E
-} tMainState_E;
 
 typedef enum
 {
     WDTO_16MS_E, WDTO_8S_E,
 } tWatchdogTimeout_E;
 
-typedef struct
-{
-    tMainState_E state_E;
-    unsigned int timeInState_U16;
-} tMainState_str;
-
-static void enableWatchdog(tWatchdogTimeout_E time_E);
+static void enableWatchdog(const tWatchdogTimeout_E time_E);
 static void powerDown(void);
 
-
-ISR(WDT_vect)
+ISR(WDT_vect, ISR_NAKED)
 {
-
+    /* Just for wake-up, turn-off interrupt and reinitialize them again in main loop.
+     * Interrupt flag is cleared by MCU when entering the interrupt routine. */
+    asm volatile("ret");
 }
 
-ISR(PCINT0_vect)
+ISR(PCINT0_vect, ISR_NAKED)
 {
-    /* Just for wake-up */
+    /* Just for wake-up, turn-off interrupt and reinitialize them again in main loop.
+     * Interrupt flag is cleared by MCU when entering the interrupt routine. */
+    asm volatile("ret");
 }
 
 int main(void)
 {
-#if 0
-    /* Find out what caused reset. */
-    if (MCUSR & (1 << BORF))
-    {
-        lockMode_E = BOD_RESET_E;
-    }
-    else if (MCUSR & (1 << WDRF))
-    {
-        lockMode_E = WDT_RESET_E;
-    }
-
-    MCUSR = 0;
-#endif
-    Butt_init();
-    Dsen_init();
-    Buzz_init();
-    Ledc_init();
+    /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
+     * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4. */
+    WDTCR = 0;
 
 #if defined(__AVR_ATtiny13A__)
     /* Reduce power consumption - turn off BOD during power down. */
-    BODCR = (1 << BODS) | (1 << BODSE);
+    BODCR = _BV(BODS) | _BV(BODSE);
 #elif defined(__AVR_ATtiny85__)
     MCUCR |= _BV(BODS) | _BV(BODSE);
 #endif
     /* Reduce power consumption - switch of Analog Comparator */
-    ACSR |= (1 << ACD);
+    ACSR |= _BV(ACD);
+
+
+    /* Initialize sensors */
+    Butt_init();
+    Dsen_init();
+    /* Initialize controls */
+    Cont_init();
+    /* Initialize actuators */
+    Buzz_init();
+    Ledc_init();
 
     for (;;)
     {
-        cli();
+        /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);
+        /* Make sure to disable button interrupt before continue. The MCU is awake. */
         Butt_disableInterrupt();
+        /* Ready to fire off interrupt again, but it should not happen until it's at sleep. */
         sei();
+
         /* Sensors */
         Butt_loop();
         Dsen_loop();
+
         /* Controls*/
         Cont_loop();
+
         /* Actuators */
         Ledc_loop();
         Buzz_loop();
+
+        /* If the controls find it ok to go to sleep, door closed for a long time then set
+         * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
+         * deep sleep.*/
         if (Cont_deepSleepOk_B())
         {
             enableWatchdog(WDTO_8S_E);
@@ -102,22 +99,21 @@ int main(void)
     return 0;
 }
 
-static void enableWatchdog(tWatchdogTimeout_E time_E)
+static void enableWatchdog(const tWatchdogTimeout_E time_E)
 {
     wdt_reset();
 
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = _BV(WDT_INT) | _BV(WDCE);
+        WDTCR = (_BV(WDT_INT) | _BV(WDCE));
         break;
     case WDTO_8S_E:
-        WDTCR = _BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0);
+        WDTCR = (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
         break;
     default:
         break;
     }
-
 }
 
 static void powerDown(void)

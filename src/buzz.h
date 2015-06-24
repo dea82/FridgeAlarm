@@ -15,6 +15,6 @@ typedef enum
 } tSoundType_E;
 void Buzz_init(void);
 void Buzz_loop(void);
-void Buzz_setSound(tSoundType_E soundTypeReq_E);
+void Buzz_setSound(const tSoundType_E soundTypeReq_E);
 
 #endif /* BUZZ_H_ */

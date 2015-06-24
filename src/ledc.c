@@ -94,7 +94,7 @@ void Ledc_loop(void)
     }
 }
 
-void Ledc_setState(tLedState_E state_E)
+void Ledc_setState(const tLedState_E state_E)
 {
     ledState_E = state_E;
 }

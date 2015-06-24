@@ -10,44 +10,19 @@
 #ifndef CONF_H_
 #define CONF_H_
 
-#define DEBUG
-#define REDUCE_PWR 1
+/* Time the button shall be pressed for a calibration. [ms] */
+#define CALIBRATION_TIME_BUTTON 4000
+/* Time before the system goes to power save mode when door is closed. [ms] */
+#define DEEP_SLEEP_TIME 8000
+/* Time before the alarm goes of with open door. [ms] */
+#define ALARM_OPEN 20000
+/* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
+#define MIN_TIME_AWAKE 1000
 
-#define INPUT    0
-#define OUTPUT   1
-#define PULLUP   1
-#define NOPULLUP 0
-
-#define CONF_IO(CFG, IO, EXT)                               \
-({                                                          \
-    if((IO) == INPUT)                                       \
-    {                                                       \
-    	GET_DDR(CFG) = GET_DDR(CFG) & ~GET_MASK(CFG);       \
-        if((EXT) == PULLUP)                                 \
-            GET_PORT(CFG) = GET_PORT(CFG) | GET_MASK(CFG);  \
-        else if ((EXT) == NOPULLUP)                         \
-            GET_PORT(CFG) = GET_PORT(CFG) & ~GET_MASK(CFG); \
-    }                                                       \
-    else if((IO) == OUTPUT)                                 \
-    {                                                       \
-        GET_DDR(CFG) = GET_DDR(CFG) | GET_MASK(CFG);        \
-        GET_PORT(CFG)=(GET_PORT(CFG)&~GET_MASK(CFG)) |      \
-            ((EXT)<<GET_BIT(CFG));                          \
-    }                                                       \
-})                                                          \
-
-#define IO_SET(CFG)  ({ GET_PORT(CFG) |=  GET_MASK(CFG); })
-#define IO_CLR(CFG)  ({ GET_PORT(CFG) &= ~GET_MASK(CFG); })
-
-#define GET_DDR(P,...) (DDR ## P)
-#define GET_PORT(P,...) (PORT ## P)
-#define GET_PIN(P,...)  (PIN  ## P)
-#define GET_BIT(P, bit) (bit)
-#define GET_MASK(P, bit) (1 << (bit))
-#define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
 
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
 
+/* Milliseconds between each loop. */
 #define TICK 16
 
 /*************************************************
@@ -68,9 +43,5 @@
 #elif defined(__AVR_ATtiny85__)
     #define WDT_INT WDIE
 #endif
-
-#define ABS(a)     (((a) < 0) ? -(a) : (a))
-#define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
-#define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
 
 #endif /* CONF_H_ */

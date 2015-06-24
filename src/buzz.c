@@ -60,7 +60,7 @@ void Buzz_loop(void)
     }
 }
 
-void Buzz_setSound(tSoundType_E soundTypeReq_E)
+void Buzz_setSound(const tSoundType_E soundTypeReq_E)
 {
     soundType_E = soundTypeReq_E;
 }

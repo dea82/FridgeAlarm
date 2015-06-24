@@ -21,15 +21,10 @@ void Butt_init(void)
     CONF_IO(BUTT_CFG, INPUT, PULLUP);
 
     /* Pin change interrupt on button - this does not enables the interrupt! */
-    PCMSK = _BV(PCINT0);
+    PCMSK = _BV(PCINT4);
 }
 
 void Butt_loop(void)
-{
-    Butt_updateState();
-}
-
-void Butt_updateState(void)
 {
     static tButt_State_str buttonRawOld_str;
     tU08 buttonRaw_E = (
@@ -38,7 +33,7 @@ void Butt_updateState(void)
     /* Is raw button glitching */
     if (buttonRawOld_str.state_E == buttonRaw_E)
     {
-        buttonRawOld_str.tickInState_U08++;
+        INC_U08(buttonRawOld_str.tickInState_U08);
     }
     else
     {
@@ -61,25 +56,14 @@ void Butt_updateState(void)
     }
 
     buttonRawOld_str.state_E = buttonRaw_E;
+
 }
 
 tButt_State_str Butt_getState_str(void)
 {
     return buttState_str;
 }
-#if 0
-tB Butt_pressFlank_str(void)
-{
-    if(buttState_str.state_E == BUTT_PRESSED_E && buttState_str.tickInState_U08 == 0)
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
-}
-#endif
+
 void Butt_enableInterrupt(void)
 {
     GIMSK = _BV(PCIE);

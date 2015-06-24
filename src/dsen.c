@@ -9,9 +9,9 @@
 tU16 EEMEM doorClosed_EE;
 
 static tDsen_doorState_str doorState_str;
-
 static tU16 doorClosed_U16;
 
+static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
 
 void Dsen_init(void)
@@ -33,7 +33,7 @@ void Dsen_init(void)
 #else
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif
-    /* Connect pin to ADC with 8-bit precision */
+    /* Connect pin to ADC with 10-bit precision */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
     doorClosed_U16 = eeprom_read_word(&doorClosed_EE);
@@ -105,7 +105,7 @@ tDsen_doorState_str Dsen_getDoorState_str(void)
     return doorState_str;
 }
 
-tB withinRange_B(tU16 sensorValue_U16)
+static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
     if ((ABS(sensorValue_U16 - 512)) > 40)
