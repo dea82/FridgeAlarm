@@ -29,7 +29,7 @@ void Dsen_init(void)
     ADCSRA |= (1 << ADPS2) | (1 << ADPS0);
 #elif F_CPU == 600000
     /* Prescaler for ADC clock is set to 4, which gives a ADC clock of 150 kHz. */
-    ADCSRA |= (1 << ADPS1);
+        ADCSRA |= (1 << ADPS1);
 #else
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif
@@ -43,34 +43,26 @@ void Dsen_loop(void)
 {
     tU16 sensorValue_U16 = getDoorRawPos_U16();
     tDsen_doorState_E newDoorState_E;
-    if (ABS(sensorValue_U16 - 512) < 40)
+    if (doorClosed_U16 < 512)
     {
-        newDoorState_E = DSEN_OPEN_E;
-    }
-    else
-    {
-        if (doorClosed_U16 < 512)
+        if (sensorValue_U16 > doorClosed_U16 + 50)
         {
-
-            if (sensorValue_U16 > doorClosed_U16 + 50)
-            {
-                newDoorState_E = DSEN_PARTIALLY_OPEN_E;
-            }
-            else
-            {
-                newDoorState_E = DSEN_CLOSED_E;
-            }
+            newDoorState_E = DSEN_OPEN_E;
         }
         else
         {
-            if (sensorValue_U16 < doorClosed_U16 - 50)
-            {
-                newDoorState_E = DSEN_PARTIALLY_OPEN_E;
-            }
-            else
-            {
-                newDoorState_E = DSEN_CLOSED_E;
-            }
+            newDoorState_E = DSEN_CLOSED_E;
+        }
+    }
+    else
+    {
+        if (sensorValue_U16 < doorClosed_U16 - 50)
+        {
+            newDoorState_E = DSEN_OPEN_E;
+        }
+        else
+        {
+            newDoorState_E = DSEN_CLOSED_E;
         }
     }
 
@@ -83,8 +75,11 @@ void Dsen_loop(void)
         doorState_str.timeInState_U16 = 0;
     }
     doorState_str.doorState_E = newDoorState_E;
-}
 
+    /* Sensor outputs Vcc/2 when no magnet is present. This will make
+     * it nosensitive for magnet mounting direction. */
+//sensorValue_U16 = ABS(sensorValue_U16 - 512);
+}
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;

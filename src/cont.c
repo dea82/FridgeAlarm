@@ -13,6 +13,7 @@
 #include "dsen.h"
 #include "type.h"
 
+
 typedef enum
 {
     NO_CALIBRATION_E, CALIBRATION_SUCCESS_E, CALIBRATION_FAIL_E
@@ -89,14 +90,9 @@ void Cont_loop(void)
 
             break;
         case DSEN_OPEN_E:
-        case DSEN_PARTIALLY_OPEN_E:
             counter_U08 = 0;
             deepSleepOk_B = FALSE;
-            if ((doorState_str.doorState_E == DSEN_OPEN_E
-                    && (doorState_str.timeInState_U16 > (ALARM_OPEN / TICK)))
-                    || ((doorState_str.doorState_E == DSEN_PARTIALLY_OPEN_E)
-                            && (doorState_str.timeInState_U16
-                                    > (ALARM_PARTIALLY_OPEN / TICK))))
+            if (doorState_str.timeInState_U16 > ALARM_OPEN / TICK)
             {
                 if (Butt_getState_str().state_E == BUTT_PRESSED_E)
                 {

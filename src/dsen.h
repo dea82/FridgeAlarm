@@ -13,8 +13,7 @@
 typedef enum
 {
   DSEN_CLOSED_E,
-  DSEN_OPEN_E,
-  DSEN_PARTIALLY_OPEN_E
+  DSEN_OPEN_E
 } tDsen_doorState_E;
 
 typedef struct

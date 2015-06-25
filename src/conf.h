@@ -16,8 +16,6 @@
 #define DEEP_SLEEP_TIME 8000
 /* Time before the alarm goes of with open door. [ms] */
 #define ALARM_OPEN 20000
-/* Time before the alarm goes of with partially open door. [ms] */
-#define ALARM_PARTIALLY_OPEN 5000
 /* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
 #define MIN_TIME_AWAKE 1000
 
