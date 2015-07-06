@@ -21,6 +21,7 @@ void Butt_init(void)
     CONF_IO(BUTT_CFG, INPUT, PULLUP);
 
     /* Pin change interrupt on button - this does not enables the interrupt! */
+    // TODO: Replace with macro.
     PCMSK = _BV(PCINT4);
 }
 
@@ -71,5 +72,9 @@ void Butt_enableInterrupt(void)
 
 void Butt_disableInterrupt(void)
 {
+    /* Disable interrupt */
     GIMSK = 0;
+    /* Important to clear interrupt flag (by writing ONE!),
+     * otherwise an interrupt will be triggered as soon as global interrupt flag is set again. */
+    GIFR = _BV(PCIF);
 }

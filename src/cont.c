@@ -20,6 +20,7 @@ typedef enum
 } tCalibrationState_E;
 
 static tB deepSleepOk_B = FALSE;
+static tSleepMode_E sleepMode_E = CONT_SHORT_DEEP_SLEEP_E;
 
 void Cont_init(void)
 {
@@ -57,10 +58,13 @@ void Cont_loop(void)
 
     }
 
+    sleepMode_E = CONT_SHORT_DEEP_SLEEP_E;
+
     if (calibrationState_E == CALIBRATION_SUCCESS_E)
     {
         Buzz_setSound(BUZZ_OFF_E);
         Ledc_setState(LEDC_GREEN_BLINK_E);
+
     }
     else if (calibrationState_E == CALIBRATION_FAIL_E)
     {
@@ -73,12 +77,14 @@ void Cont_loop(void)
         {
         case DSEN_CLOSED_E:
             Buzz_setSound(BUZZ_OFF_E);
-            if ((doorState_str.timeInState_U16 > DEEP_SLEEP_TIME / TICK)
-                    && counter_U08 > MIN_TIME_AWAKE / TICK)
+            if ((doorState_str.timeInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
+                    && counter_U08 > MIN_TIME_AWAKE / TICK
+                    && Butt_getState_str().state_E == BUTT_RELEASED_E)
             {
                 deepSleepOk_B = TRUE;
                 counter_U08 = 0;
                 Ledc_setState(LEDC_OFF_E);
+                sleepMode_E = CONT_LONG_DEEP_SLEEP_E;
             }
             else
             {
@@ -104,7 +110,8 @@ void Cont_loop(void)
                 }
                 else
                 {
-                    Buzz_setSound(BUZZ_ON_E);
+                    Buzz_setSound(BUZZ_ALARM_E);
+                    sleepMode_E = CONT_SLEEP_WITH_TIMER_RUNNING_E;
                 }
                 Ledc_setState(LEDC_RED_BLINK_E);
             }
@@ -121,4 +128,9 @@ void Cont_loop(void)
 tB Cont_deepSleepOk_B(void)
 {
     return deepSleepOk_B;
+}
+
+tSleepMode_E Cont_sleepMode_E(void)
+{
+    return sleepMode_E;
 }

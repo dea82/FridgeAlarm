@@ -20,16 +20,19 @@ void Dsen_init(void)
 
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
-    ADCSRA |= (1 << ADPS2) | (1 << ADPS1);
+    ADCSRA = (1 << ADPS2) | (1 << ADPS1);
+#elif F_CPU == 1000000
+    /* Prescaler for ADC clock is set to 8, which gives a ADC clock of 125 kHz. */
+    ADCSRA = (1 << ADPS1) | (1 << ADPS0);
 #elif F_CPU == 1200000
     /* Prescaler for ADC clock is set to 8, which gives a ADC clock of 150 kHz. */
-    ADCSRA |= (1 << ADPS1) | (1 << ADPS0);
+    ADCSRA = (1 << ADPS1) | (1 << ADPS0);
 #elif F_CPU == 4800000
     /* Prescaler for ADC clock is set to 32, which gives a ADC clock of 150 kHz. */
-    ADCSRA |= (1 << ADPS2) | (1 << ADPS0);
+    ADCSRA = (1 << ADPS2) | (1 << ADPS0);
 #elif F_CPU == 600000
     /* Prescaler for ADC clock is set to 4, which gives a ADC clock of 150 kHz. */
-        ADCSRA |= (1 << ADPS1);
+    ADCSRA = (1 << ADPS1);
 #else
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif

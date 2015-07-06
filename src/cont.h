@@ -14,6 +14,13 @@ typedef enum
 } tLockMode_E;
 
 
+typedef enum
+{
+    CONT_SHORT_DEEP_SLEEP_E,
+    CONT_LONG_DEEP_SLEEP_E,
+    CONT_SLEEP_WITH_TIMER_RUNNING_E
+} tSleepMode_E;
+
 void Cont_init(void);
 void Cont_loop(void);
 tB Cont_deepSleepOk_B(void);

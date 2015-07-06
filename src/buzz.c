@@ -16,7 +16,9 @@ void Buzz_init(void)
 {
     CONF_IO(BUZZ_CFG, OUTPUT, 0);
 
-#if 1
+
+    //TODO: Make sure to connect PWM to correct IO pin.
+#if 0
 
     TCCR0B = (1 << CS01) | (1 << CS00);
     // Set to 'Fast PWM' mode
@@ -29,6 +31,7 @@ void Buzz_init(void)
 
 void Buzz_loop(void)
 {
+#if 0
     static tU16 counter_U16;
 
     switch (soundType_E)
@@ -58,6 +61,7 @@ void Buzz_loop(void)
         }
         break;
     }
+#endif
 }
 
 void Buzz_setSound(const tSoundType_E soundTypeReq_E)
