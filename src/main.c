@@ -34,12 +34,8 @@ ISR(WDT_vect, ISR_NAKED)
     asm volatile("ret");
 }
 
-ISR(PCINT0_vect, ISR_NAKED)
-{
-    /* Just for wake-up, turn-off interrupt and reinitialize them again in main loop.
-     * Interrupt flag is cleared by MCU when entering the interrupt routine. */
-    asm volatile("ret");
-}
+ISR(PCINT0_vect, ISR_ALIASOF(WDT_vect));
+
 
 int main(void)
 {
@@ -103,13 +99,15 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
 {
     wdt_reset();
 
+
+
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = (_BV(WDT_INT) | _BV(WDCE));
+        WDTCR = _BV(WDIF) | (_BV(WDT_INT) | _BV(WDCE));
         break;
     case WDTO_8S_E:
-        WDTCR = (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
+        WDTCR = _BV(WDIF) | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
         break;
     default:
         break;
