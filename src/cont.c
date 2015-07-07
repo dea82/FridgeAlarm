@@ -13,13 +13,11 @@
 #include "dsen.h"
 #include "type.h"
 
-
 typedef enum
 {
     NO_CALIBRATION_E, CALIBRATION_SUCCESS_E, CALIBRATION_FAIL_E
 } tCalibrationState_E;
 
-static tB deepSleepOk_B = FALSE;
 static tSleepMode_E sleepMode_E = CONT_SHORT_DEEP_SLEEP_E;
 
 void Cont_init(void)
@@ -81,7 +79,6 @@ void Cont_loop(void)
                     && counter_U08 > MIN_TIME_AWAKE / TICK
                     && Butt_getState_str().state_E == BUTT_RELEASED_E)
             {
-                deepSleepOk_B = TRUE;
                 counter_U08 = 0;
                 Ledc_setState(LEDC_OFF_E);
                 sleepMode_E = CONT_LONG_DEEP_SLEEP_E;
@@ -89,7 +86,6 @@ void Cont_loop(void)
             else
             {
                 INC_U08(counter_U08);
-                deepSleepOk_B = FALSE;
                 Ledc_setState(LEDC_GREEN_E);
             }
             inhibitAlarm_B = FALSE;
@@ -97,7 +93,7 @@ void Cont_loop(void)
             break;
         case DSEN_OPEN_E:
             counter_U08 = 0;
-            deepSleepOk_B = FALSE;
+
             if (doorState_str.timeInState_U16 > ALARM_OPEN / TICK)
             {
                 if (Butt_getState_str().state_E == BUTT_PRESSED_E)
@@ -110,7 +106,7 @@ void Cont_loop(void)
                 }
                 else
                 {
-                    Buzz_setSound(BUZZ_ALARM_E);
+                    Buzz_setSound(BUZZ_ON_E);
                     sleepMode_E = CONT_SLEEP_WITH_TIMER_RUNNING_E;
                 }
                 Ledc_setState(LEDC_RED_BLINK_E);
@@ -123,11 +119,6 @@ void Cont_loop(void)
             break;
         }
     }
-}
-
-tB Cont_deepSleepOk_B(void)
-{
-    return deepSleepOk_B;
 }
 
 tSleepMode_E Cont_sleepMode_E(void)

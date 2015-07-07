@@ -9,6 +9,7 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
+#include <util/delay.h>
 
 /*** User library ***/
 #include "butt.h"
@@ -25,7 +26,7 @@ typedef enum
 } tWatchdogTimeout_E;
 
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
-static void powerDown(void);
+static void powerDown(tSleepMode_E sleepMode_E);
 
 ISR(WDT_vect, ISR_NAKED)
 {
@@ -62,6 +63,9 @@ int main(void)
     Buzz_init();
     Ledc_init();
 
+//    PORTB |= (_BV(PORTB1) | _BV(PORTB2));
+//    _delay_ms(2000);
+
     for (;;)
     {
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
@@ -82,15 +86,8 @@ int main(void)
         Ledc_loop();
         Buzz_loop();
 
-        /* If the controls find it ok to go to sleep, door closed for a long time then set
-         * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
-         * deep sleep.*/
-        if (Cont_deepSleepOk_B())
-        {
-            enableWatchdog(WDTO_8S_E);
-            Butt_enableInterrupt();
-        }
-        powerDown();
+
+        powerDown(Cont_sleepMode_E());
     }
     return 0;
 }
@@ -114,9 +111,26 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
     }
 }
 
-static void powerDown(void)
+static void powerDown(tSleepMode_E sleepMode_E)
 {
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+
+    /* If the controls find it ok to go to sleep, door closed for a long time then set
+      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
+      * deep sleep.*/
+     if (sleepMode_E == CONT_LONG_DEEP_SLEEP_E)
+     {
+         enableWatchdog(WDTO_8S_E);
+         Butt_enableInterrupt();
+     }
+
+    if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
+    {
+        set_sleep_mode(SLEEP_MODE_IDLE);
+    }
+    else
+    {
+        set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    }
     sleep_mode();
 }
 

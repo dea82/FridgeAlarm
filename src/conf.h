@@ -17,7 +17,7 @@
 /* Time before the alarm goes of with open door. [ms] */
 #define ALARM_OPEN 5000
 /* Lights on after door closed [ms] */
-#define LIGHTS_ON_DOOR_CLOSED 4000
+#define LIGHTS_ON_DOOR_CLOSED 8000
 /* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
 #define MIN_TIME_AWAKE 250
 

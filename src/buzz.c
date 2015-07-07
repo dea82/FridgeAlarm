@@ -18,46 +18,45 @@ void Buzz_init(void)
 
 
     //TODO: Make sure to connect PWM to correct IO pin.
-#if 0
+#if 1
 
-    TCCR0B = (1 << CS01) | (1 << CS00);
-    // Set to 'Fast PWM' mode
-    TCCR0A |= (1 << WGM01) | (1 << WGM00) | (1 << COM0B1);
+        // Set to 'CTC' mode, toggle on match
+    TCCR0A |= (1 << WGM01) |  (1 << COM0A0);
 
-    OCR0B = 15;
+    OCR0A = 249;
 #endif
 
 }
 
 void Buzz_loop(void)
 {
-#if 0
-    static tU16 counter_U16;
+#if 1
+    static tU08 counter_U08;
 
     switch (soundType_E)
     {
     case BUZZ_OFF_E:
-        IO_CLR(BUZZ_CFG);
+        TCCR0B = 0;
         break;
     case BUZZ_ON_E:
-        IO_SET(BUZZ_CFG);
+        TCCR0B = _BV(CS00);
         break;
     case BUZZ_ALARM_E:
-        if (counter_U16 > 1000)
+        if (counter_U08 > 100)
         {
-            counter_U16 = 0;
+            counter_U08 = 0;
         }
         else
         {
-            counter_U16++;
+            counter_U08++;
         }
-        if (counter_U16 < 500)
+        if (counter_U08 < 50)
         {
-            IO_SET(BUZZ_CFG);
+            TCCR0B = _BV(CS00);
         }
         else
         {
-            IO_CLR(BUZZ_CFG);
+            TCCR0B = 0;
         }
         break;
     }

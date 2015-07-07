@@ -23,6 +23,6 @@ typedef enum
 
 void Cont_init(void);
 void Cont_loop(void);
-tB Cont_deepSleepOk_B(void);
+tSleepMode_E Cont_sleepMode_E(void);
 
 #endif /* CONT_H_ */
