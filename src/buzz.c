@@ -12,7 +12,7 @@
 
 static tSoundType_E soundType_E;
 
-void Buzz_init(void)
+inline void Buzz_init(void)
 {
     CONF_IO(BUZZ_CFG, OUTPUT, 0);
 
@@ -28,7 +28,7 @@ void Buzz_init(void)
 
 }
 
-void Buzz_loop(void)
+inline void Buzz_loop(void)
 {
 #if 1
     static tU08 counter_U08;

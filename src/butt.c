@@ -15,7 +15,7 @@
 
 static tButt_State_str buttState_str;
 
-void Butt_init(void)
+inline void Butt_init(void)
 {
     /* Activate internal pull-up */
     CONF_IO(BUTT_CFG, INPUT, PULLUP);

@@ -20,12 +20,12 @@ typedef enum
 
 static tSleepMode_E sleepMode_E = CONT_SHORT_DEEP_SLEEP_E;
 
-void Cont_init(void)
+inline void Cont_init(void)
 {
     /* Nothing */
 }
 
-void Cont_loop(void)
+inline void Cont_loop(void)
 {
     static tCalibrationState_E calibrationState_E;
     static tB inhibitAlarm_B;
@@ -106,7 +106,7 @@ void Cont_loop(void)
                 }
                 else
                 {
-                    Buzz_setSound(BUZZ_ON_E);
+                    Buzz_setSound(BUZZ_ALARM_E);
                     sleepMode_E = CONT_SLEEP_WITH_TIMER_RUNNING_E;
                 }
                 Ledc_setState(LEDC_RED_BLINK_E);

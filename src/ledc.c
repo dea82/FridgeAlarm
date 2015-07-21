@@ -16,13 +16,13 @@
 
 static tLedState_E ledState_E = LEDC_OFF_E;
 
-void Ledc_init(void)
+inline void Ledc_init(void)
 {
     CONF_IO(RED_LED_CFG, OUTPUT, 0);
     CONF_IO(GREEN_LED_CFG, OUTPUT, 0);
 }
 
-void Ledc_loop(void)
+inline void Ledc_loop(void)
 {
     static tU08 counter_U08;
     if (counter_U08++ > BLINK_PERIOD_TIME / TICK)

@@ -14,7 +14,7 @@ static tU16 doorClosed_U16;
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
 
-void Dsen_init(void)
+inline void Dsen_init(void)
 {
     CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
 
@@ -42,7 +42,7 @@ void Dsen_init(void)
     doorClosed_U16 = eeprom_read_word(&doorClosed_EE);
 }
 
-void Dsen_loop(void)
+inline void Dsen_loop(void)
 {
     tU16 sensorValue_U16 = getDoorRawPos_U16();
     tDsen_doorState_E newDoorState_E;
