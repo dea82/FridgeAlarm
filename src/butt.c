@@ -25,10 +25,10 @@ void Butt_init(void)
     PCMSK = _BV(PCINT4);
 }
 
-void Butt_loop(void)
+inline void Butt_loop(void)
 {
     static tButt_State_str buttonRawOld_str;
-    tU08 buttonRaw_E = (
+    tButt_State_E buttonRaw_E = (
     GET_STATUS(BUTT_CFG) ? BUTT_RELEASED_E : BUTT_PRESSED_E);
 
     /* Is raw button glitching */
@@ -42,18 +42,15 @@ void Butt_loop(void)
     }
 
     /* Check if raw value is stable */
-    if (buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK)
+    if ((buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK) &&
+            (buttState_str.state_E != buttonRaw_E))
     {
-
-        if (buttState_str.state_E == buttonRaw_E)
-        {
-            INC_U08(buttState_str.tickInState_U08);
-        }
-        else
-        {
-            buttState_str.tickInState_U08 = 0;
-        }
         buttState_str.state_E = buttonRaw_E;
+        buttState_str.tickInState_U08 = 0;
+    }
+    else
+    {
+        INC_U08(buttState_str.tickInState_U08);
     }
 
     buttonRawOld_str.state_E = buttonRaw_E;
