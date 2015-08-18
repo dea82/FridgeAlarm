@@ -1,6 +1,7 @@
 #include <avr/eeprom.h>
 #include <avr/io.h>
 #include <stdio.h>
+#include <util/delay.h>
 
 #include "conf.h"
 #include "dsen.h"
@@ -86,6 +87,8 @@ inline void Dsen_loop(void)
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;
+    //TODO: Turn on sensor
+    _delay_us(5);
 
     /* Start conversion */
     ADCSRA |= (1 << ADEN) | (1 << ADSC);
@@ -96,7 +99,7 @@ static tU16 getDoorRawPos_U16(void)
     }
 
     ADCSRA &= ~(_BV(ADEN));
-
+    //TODO: Turn off sensor
     sensorValue_U16 = ADCL;
     sensorValue_U16 |= ((ADCH & 0x3) << 8);
 
