@@ -17,7 +17,7 @@ static tU16 getDoorRawPos_U16(void);
 
 inline void Dsen_init(void)
 {
-    CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
+//    CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
 
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
@@ -37,6 +37,8 @@ inline void Dsen_init(void)
 #else
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif
+
+    // TODO: Replace with macro
     /* Connect pin to ADC with 10-bit precision */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
@@ -87,7 +89,8 @@ inline void Dsen_loop(void)
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;
-    //TODO: Turn on sensor
+    // Turn on sensor
+    IO_SET(DSEN_SWITCH_CFG);
     _delay_us(5);
 
     /* Start conversion */
@@ -99,7 +102,9 @@ static tU16 getDoorRawPos_U16(void)
     }
 
     ADCSRA &= ~(_BV(ADEN));
-    //TODO: Turn off sensor
+    // Turn off sensor
+    IO_CLR(DSEN_SWITCH_CFG);
+
     sensorValue_U16 = ADCL;
     sensorValue_U16 |= ((ADCH & 0x3) << 8);
 

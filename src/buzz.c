@@ -14,7 +14,7 @@ static tSoundType_E soundType_E;
 
 inline void Buzz_init(void)
 {
-    CONF_IO(BUZZ_CFG, OUTPUT, 0);
+//    CONF_IO(BUZZ_CFG, OUTPUT, 0);
 
 
     //TODO: Make sure to connect PWM to correct IO pin.
@@ -23,7 +23,7 @@ inline void Buzz_init(void)
         // Set to 'CTC' mode, toggle on match
     TCCR0A |= (1 << WGM01) |  (1 << COM0A0);
 
-    OCR0A = 249;
+    OCR0A = 30;
 #endif
 
 }
@@ -39,7 +39,7 @@ inline void Buzz_loop(void)
         TCCR0B = 0;
         break;
     case BUZZ_ON_E:
-        TCCR0B = _BV(CS00);
+        TCCR0B = _BV(CS01);
         break;
     case BUZZ_ALARM_E:
         if (counter_U08 > 100)
@@ -52,7 +52,7 @@ inline void Buzz_loop(void)
         }
         if (counter_U08 < 50)
         {
-            TCCR0B = _BV(CS00);
+            TCCR0B = _BV(CS01);
         }
         else
         {

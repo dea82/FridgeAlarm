@@ -27,6 +27,7 @@ inline void Cont_init(void)
 
 inline void Cont_loop(void)
 {
+#if 1
     static tCalibrationState_E calibrationState_E;
     static tB inhibitAlarm_B;
     static tU08 counter_U08;
@@ -119,6 +120,7 @@ inline void Cont_loop(void)
             break;
         }
     }
+#endif
 }
 
 tSleepMode_E Cont_sleepMode_E(void)

@@ -54,6 +54,9 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
+    DDRB  = 0b00010111;
+    PORTB = 0b00100000;
+
 
     /* Initialize sensors */
     Butt_init();
@@ -63,9 +66,6 @@ int main(void)
     /* Initialize actuators */
     Buzz_init();
     Ledc_init();
-
-//    PORTB |= (_BV(PORTB1) | _BV(PORTB2));
-//    _delay_ms(2000);
 
     for (;;)
     {
@@ -87,9 +87,9 @@ int main(void)
         Ledc_loop();
         Buzz_loop();
 
-
         powerDown(Cont_sleepMode_E());
-    }
+}
+
     return 0;
 }
 
@@ -97,15 +97,13 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
 {
     wdt_reset();
 
-
-
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = _BV(WDIF) | (_BV(WDT_INT) | _BV(WDCE));
+        WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE));
         break;
     case WDTO_8S_E:
-        WDTCR = _BV(WDIF) | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
+        WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
         break;
     default:
         break;
@@ -130,6 +128,8 @@ static void powerDown(tSleepMode_E sleepMode_E)
     }
     else
     {
+        //set_sleep_mode(SLEEP_MODE_IDLE);
+
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
     sleep_mode();
