@@ -37,8 +37,6 @@ ISR(WDT_vect, ISR_NAKED)
 
 ISR(PCINT0_vect, ISR_ALIASOF(WDT_vect));
 
-
-
 int main(void)
 {
     /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
@@ -54,9 +52,12 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
-    DDRB  = 0b00010111;
-    PORTB = 0b00100000;
+    /* Power reduction */
+    PRR |= _BV(PRTIM1) | _BV(PRUSI); // | _BV(PRADC);
+    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: ADC3D
 
+    DDRB = 0b00010111;
+    PORTB = 0b00100000;
 
     /* Initialize sensors */
     Butt_init();
@@ -88,7 +89,7 @@ int main(void)
         Buzz_loop();
 
         powerDown(Cont_sleepMode_E());
-}
+    }
 
     return 0;
 }
@@ -103,7 +104,8 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
         WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE));
         break;
     case WDTO_8S_E:
-        WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
+        WDTCR = _BV(WDIF_C)
+                | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
         break;
     default:
         break;
@@ -114,13 +116,13 @@ static void powerDown(tSleepMode_E sleepMode_E)
 {
 
     /* If the controls find it ok to go to sleep, door closed for a long time then set
-      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
-      * deep sleep.*/
-     if (sleepMode_E == CONT_LONG_DEEP_SLEEP_E)
-     {
-         enableWatchdog(WDTO_8S_E);
-         Butt_enableInterrupt();
-     }
+     * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
+     * deep sleep.*/
+    if (sleepMode_E == CONT_LONG_DEEP_SLEEP_E)
+    {
+        enableWatchdog(WDTO_8S_E);
+        Butt_enableInterrupt();
+    }
 
     if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
     {
@@ -128,10 +130,9 @@ static void powerDown(tSleepMode_E sleepMode_E)
     }
     else
     {
-        //set_sleep_mode(SLEEP_MODE_IDLE);
-
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
-    sleep_mode();
+    sleep_mode()
+    ;
 }
 

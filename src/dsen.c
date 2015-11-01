@@ -91,6 +91,8 @@ static tU16 getDoorRawPos_U16(void)
     tU16 sensorValue_U16;
     // Turn on sensor
     IO_SET(DSEN_SWITCH_CFG);
+    PRR &= ~_BV(PRADC);
+    DIDR0 &= ~_BV(ADC3D);
     _delay_us(5);
 
     /* Start conversion */
@@ -104,6 +106,8 @@ static tU16 getDoorRawPos_U16(void)
     ADCSRA &= ~(_BV(ADEN));
     // Turn off sensor
     IO_CLR(DSEN_SWITCH_CFG);
+    PRR |= _BV(PRADC);
+    DIDR0 |= _BV(ADC3D);
 
     sensorValue_U16 = ADCL;
     sensorValue_U16 |= ((ADCH & 0x3) << 8);

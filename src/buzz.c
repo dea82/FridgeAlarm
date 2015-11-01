@@ -16,12 +16,11 @@ inline void Buzz_init(void)
 {
 //    CONF_IO(BUZZ_CFG, OUTPUT, 0);
 
-
-    //TODO: Make sure to connect PWM to correct IO pin.
+//TODO: Make sure to connect PWM to correct IO pin.
 #if 1
 
-        // Set to 'CTC' mode, toggle on match
-    TCCR0A |= (1 << WGM01) |  (1 << COM0A0);
+    // Set to 'CTC' mode, toggle on match
+    TCCR0A |= (1 << WGM01) | (1 << COM0A0);
 
     OCR0A = 30;
 #endif
@@ -37,11 +36,14 @@ inline void Buzz_loop(void)
     {
     case BUZZ_OFF_E:
         TCCR0B = 0;
+//        PRR |= _BV(PRTIM0);
         break;
     case BUZZ_ON_E:
+//        PRR &= ~_BV(PRTIM0);
         TCCR0B = _BV(CS01);
         break;
     case BUZZ_ALARM_E:
+//        PRR &= ~_BV(PRTIM0);
         if (counter_U08 > 100)
         {
             counter_U08 = 0;

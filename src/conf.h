@@ -15,7 +15,7 @@
 /* Time before the system goes to power save mode when door is closed. [ms] */
 #define DEEP_SLEEP_TIME 2000
 /* Time before the alarm goes of with open door. [ms] */
-#define ALARM_OPEN 20000
+#define ALARM_OPEN 40000
 /* Lights on after door closed [ms] */
 #define LIGHTS_ON_DOOR_CLOSED 2000
 /* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
