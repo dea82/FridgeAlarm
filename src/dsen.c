@@ -94,14 +94,15 @@ static tU16 getDoorRawPos_U16(void)
     PRR &= ~_BV(PRADC);
     DIDR0 &= ~_BV(ADC3D);
     _delay_us(5);
-
     /* Start conversion */
     ADCSRA |= (1 << ADEN) | (1 << ADSC);
 
     /* Wait for conversion */
+    //TODO: Implement sleep while ADC
     while (ADCSRA & _BV(ADSC))
     {
     }
+    //TODO: Make another conversion just to be sure? Is the first conversion incorrect? Make mean value?
 
     ADCSRA &= ~(_BV(ADEN));
     // Turn off sensor
