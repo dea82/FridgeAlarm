@@ -24,6 +24,8 @@
 /* Milliseconds between each loop. */
 #define TICK 16
 
+#define UART_ENABLE 1
+
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
 
 /*************************************************
@@ -35,6 +37,7 @@
 #define GREEN_LED_CFG   B,1
 #define BUZZ_CFG        B,0
 #define DSEN_SWITCH_CFG B,4
+#define UART_CFG        B,0
 
 #else
 #error "Not supported MCU."
