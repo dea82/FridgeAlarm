@@ -19,6 +19,7 @@
 #include "dsen.h"
 #include "ledc.h"
 #include "type.h"
+#include "uart.h"
 
 typedef enum
 {
@@ -60,35 +61,37 @@ int main(void)
     PORTB = 0b00100000;
 
     /* Initialize sensors */
-    Butt_init();
+    //Butt_init();
     Dsen_init();
     /* Initialize controls */
-    Cont_init();
+    //Cont_init();
     /* Initialize actuators */
-    Buzz_init();
+    //Buzz_init();
     Ledc_init();
-
+    Uart_Enable();
     for (;;)
     {
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
-        enableWatchdog(WDTO_16MS_E);
+        //enableWatchdog(WDTO_16MS_E);
         /* Make sure to disable button interrupt before continue. The MCU is awake. */
         Butt_disableInterrupt();
         /* Ready to fire off interrupt again, but it should not happen until it's at sleep. */
         sei();
 
         /* Sensors */
-        Butt_loop();
+        //Butt_loop();
         Dsen_loop();
 
         /* Controls*/
-        Cont_loop();
+        //Cont_loop();
 
         /* Actuators */
-        Ledc_loop();
-        Buzz_loop();
+        //Ledc_loop();
+       //Buzz_loop();
 
-        powerDown(Cont_sleepMode_E());
+
+        //powerDown(Cont_sleepMode_E());
+        _delay_ms(1000);
     }
 
     return 0;
