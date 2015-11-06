@@ -117,13 +117,14 @@ static void transmitHandler(void)
             Uart_Data_U08 = Uart_Buffer_U08;
             Uart_Status_U08 &= ~_BV(SW_UART_TX_BUFFER_FULL);
             IO_CLR(UART_CFG);
+            Uart_Counter_U08 = 2;
         }
         else
         {
             /* Disable interrupt */
             TIMSK = 0;
+            Uart_Counter_U08 = 0;
         }
-        Uart_Counter_U08 = 0;
     }
 }
 
