@@ -18,6 +18,8 @@
 #define SW_UART_RX_BUFFER_OVERFLOW 3
 #define SW_UART_FRAME_ERROR        4
 
+extern void startTransmit (int, char);
+
 static tU08 Uart_Status_U08;
 static tU08 Uart_Counter_U08;
 static tU08 Uart_Data_U08;
@@ -75,6 +77,7 @@ tB Uart_Transmit_B(uint8_t data_U08)
             /* Enable interrupt */
             TIMSK = (1 << OCIE0A);
             Uart_Counter_U08 = 2;
+            startTransmit(_SFR_MEM_ADDR(PORTB), 0);
             IO_CLR(UART_CFG);
             /* Start timer */
             TCCR0B = (1 << CS00);

@@ -5,7 +5,7 @@
  *      Author: andreas
  */
 #include <avr/io.h>
-#include "type.h"
+
 
 #ifndef CONF_H_
 #define CONF_H_
@@ -25,6 +25,8 @@
 #define TICK 16
 
 #define UART_ENABLE 1
+
+#define GET_PORT(P,...) (PORT ## P)
 
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
 

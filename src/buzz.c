@@ -9,6 +9,7 @@
 
 #include "buzz.h"
 #include "conf.h"
+#include "type.h"
 
 static tSoundType_E soundType_E;
 

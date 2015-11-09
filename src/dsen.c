@@ -49,7 +49,7 @@ inline void Dsen_init(void)
 inline void Dsen_loop(void)
 {
     tU16 sensorValue_U16 = getDoorRawPos_U16();
-    Uart_Transmit_B(0x30);
+    Uart_Transmit_B(0x10);
     //Uart_Transmit_B(0x31);
 
     tDsen_doorState_E newDoorState_E;
