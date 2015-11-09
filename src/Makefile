@@ -45,9 +45,9 @@ AVRDUDE = avrdude
 ##########------------------------------------------------------##########
 
 ## The name of your project (without the .c)
-# TARGET = blinkLED
+TARGET = FridgeAlarm
 ## Or name it automatically after the enclosing directory
-TARGET = $(lastword $(subst /, ,$(CURDIR)))
+#TARGET = $(lastword $(subst /, ,$(CURDIR)))
 
 # Object files: will find all .c/.h files in current directory
 #  and in LIBDIR.  If you have any other (sub-)directories with code,
@@ -58,7 +58,7 @@ HEADERS=$(SOURCES:.c=.h)
 
 ## Compilation options, type man avr-gcc if you're curious.
 CPPFLAGS = -DF_CPU=$(F_CPU) -DBAUD=$(BAUD) -I. -I$(LIBDIR)
-CFLAGS = -Os -g -std=gnu99 -Wall
+CFLAGS = -Os -g2 -std=gnu99 -Wall -mmcu=$(MCU)
 ## Use short (8-bit) data types 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 ## Splits up object files per function
@@ -92,7 +92,7 @@ $(TARGET).elf: $(OBJECTS)
 ## These targets don't have files named after them
 .PHONY: all disassemble disasm eeprom size clean squeaky_clean flash fuses
 
-all: $(TARGET).hex debug disassemble size
+all: $(TARGET).hex debug disassemble size 
 
 debug:
 	@echo
