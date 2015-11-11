@@ -34,7 +34,7 @@
 # Output Directory name
 # Use OUTDIR= .
 # for current directory
-OUTDIR = output
+OUTDIR = .
 
 
 # MCU name
