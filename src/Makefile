@@ -34,7 +34,7 @@
 # Output Directory name
 # Use OUTDIR= .
 # for current directory
-OUTDIR = .
+OUTDIR = output
 
 
 # MCU name
@@ -273,7 +273,7 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
 # Default target.
-all: begin gccversion sizebefore build sizeafter finished end
+all: begin gccversion createdir sizebefore build sizeafter finished end
 
 build: elf hex eep lss sym
 
@@ -312,10 +312,12 @@ sizeafter:
 
 
 # Display compiler version information.
-gccversion :
+gccversion:
 	@$(CC) --version
 
-
+# Create output dir if not exist
+createdir:
+	mkdir -p $(OUTDIR)
 
 # Program the device.
 program: $(OUTDIR)/$(TARGET).hex $(OUTDIR)/$(TARGET).eep
