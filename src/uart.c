@@ -77,7 +77,7 @@ tB Uart_Transmit_B(uint8_t data_U08)
             /* Enable interrupt */
             TIMSK = (1 << OCIE0A);
             Uart_Counter_U08 = 2;
-            startTransmit(_SFR_MEM_ADDR(PORTB), 0);
+            //startTransmit(_SFR_MEM_ADDR(PORTB), 0);
             IO_CLR(UART_CFG);
             /* Start timer */
             TCCR0B = (1 << CS00);
