@@ -2,7 +2,7 @@
 language: c
 
 compiler:
-  - gcc
+  - avr-gcc
   
 before_install:
   - cd src
