@@ -18,7 +18,7 @@ addons:
       name: "dea82/FridgeAlarm"
       description: "Fridge Alarm"
     notification_email: andreas.laghamn@gmail.com
-    build_command_prepend: "cd src"
+    build_command_prepend: ""
     build_command:   "make all"
     branch_pattern: develop
 
