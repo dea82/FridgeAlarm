@@ -1,9 +1,6 @@
 ---
 language: c
 
-compiler:
-  - avr-gcc
-  
 before_install:
   - cd src
   - sudo apt-get update -qq
