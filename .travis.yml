@@ -10,21 +10,5 @@ before_install:
 install:
   - sudo apt-get install -qq gcc-avr binutils-avr avr-libc
 
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "bL3DNU6KuiKWQvm8uc39M5L9DN4EKXqr4s6m3jM7OHG5/ESdJ5US5mCcDJtnBpytkpIccSkRohu4eqRtQlXUpWZsefI6rNUeNNmhr3eXtL+GxlbUlLtbwtpeo1rN5up5DnWk9DQgQlTWjYu4D1iNhXH9RIH4y51wMKuyUj1K7JILU4lPW9SpM+Yvy9ClDDOG/sOq5jTa9b+Gj8G2OSupsrJ5B/n8dNYuu4Q0izbhsIhq5cK3wCNRqnvy8WeIvr5KRWuj+F/e5qiPIYL2knexe7vwRV6xm13Cwa/9PD5jGu+6esjP3pXt3X8MwhVKlokTfgvTYPi4LEDZCgopcmf/ccl6OSKVzGRvtR1JN0DreaGaHn4F27tYtTYp/yb3JCZ+LHLBR+xoisQSXtwU90r2IzYdAMIxlDw89intgucQIaFQd0SwUSQ7LNQbTNHJuKpQ0Kz/YTWnusf2nZuwkaGe4hcg26mFQTGYP1Mnc+N6xjLrZWjWKUKGTbAA7oFJh58dvMIOs+GglmnPqEXcDfXT1bmSkMUQRxBV7FYwHS61c1f8IUpprqcyZeEiT9yrJEyjJFC3ridg22mzaK/Wu8RgjqF2lpD44Rh5nGgrEFre9OTQdnO+LqlnCFCYpE92serWcBHM6zDl86mTqY9RV3WnSH8y933deSzUODF6ydUKzgw="
-
-addons:
-  coverity_scan:
-    project:
-      name: "dea82/FridgeAlarm"
-      description: "Fridge Alarm"
-    notification_email: andreas.laghamn@gmail.com
-    build_command_prepend: ""
-    build_command:   "make all"
-    branch_pattern: develop
-
 script: 
   - make all
