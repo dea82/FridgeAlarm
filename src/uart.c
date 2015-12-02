@@ -14,11 +14,6 @@
 
 #define BAUD 9600
 
-#define SW_UART_TX_BUFFER_FULL     1
-#define SW_UART_RX_BUFFER_FULL     2
-#define SW_UART_RX_BUFFER_OVERFLOW 3
-#define SW_UART_FRAME_ERROR        4
-
 extern void transmit (unsigned char);
 
 void Uart_Enable(void)
