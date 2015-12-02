@@ -29,6 +29,7 @@
 
     .global transmit
 transmit:
+    cli                     ; Disable interrupt
     ldi     bitcnt, 10      ; Number of bits to be sent 1 start bit 8 data bits 1 stop bit.
     com     data            ; Invert data and set carry
 
@@ -50,5 +51,5 @@ putchar2:
     dec     bitcnt          ; decrese cnt       ; ### 1
     brne    putchar0        ; send next         ; ### true = 2, false = 1
                             ; else
-    ret                     ; return
+    reti                    ; return
 
