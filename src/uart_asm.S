@@ -30,8 +30,7 @@
     .global transmit
 transmit:
     ldi     bitcnt, 10      ; Number of bits to be sent 1 start bit 8 data bits 1 stop bit.
-    com     data            ; Invert data
-    sec                     ; Set carry to send start bit
+    com     data            ; Invert data and set carry
 
 putchar0:
     brcc    putchar1                            ; ### true = 2, false = 1
