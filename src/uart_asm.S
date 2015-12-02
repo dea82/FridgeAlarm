@@ -35,10 +35,10 @@ transmit:
 
 putchar0:
     brcc    putchar1                            ; ### true = 2, false = 1
-    sbi     PORTB, PORTB0   ; Transmit 1        ; ### 2
+    cbi     PORTB, PORTB0   ; Transmit 0        ; ### 2
     rjmp    putchar2        ; else              ; ### 2
 putchar1:
-    cbi     PORTB, PORTB0   ; Transmit 0        ; ### 2
+    sbi     PORTB, PORTB0   ; Transmit 1        ; ### 2
     nop                     ; to equalize delay ; ### 1
 putchar2:
     ldi     temp, BIT_COUNT ;                   ; ### 1
