@@ -20,11 +20,11 @@
 */
 
 
-#define CLOCK 1600000
-#define BAUD_RATE 19200
+#define CLOCK 1000000
+#define BAUD_RATE 9600
 
 
-#define BIT_COUNT (((CLOCK + (BAUD_RATE/2))/BAUD_RATE - 8 + 1) / 3)
+#define BIT_COUNT (((CLOCK + (BAUD_RATE/2))/BAUD_RATE - 10 + 1) / 3)
 
 
     .global transmit
@@ -49,6 +49,8 @@ putchar2:
 
     lsr     data            ; Get next bit      ; ### 1
     dec     bitcnt          ; decrese cnt       ; ### 1
+    nop
+    nop
     brne    putchar0        ; send next         ; ### true = 2, false = 1
                             ; else
     reti                    ; return
