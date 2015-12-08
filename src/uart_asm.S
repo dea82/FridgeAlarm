@@ -19,12 +19,10 @@
 
 */
 
-
-#define CLOCK 1000000
 #define BAUD_RATE 9600
 
 
-#define BIT_COUNT (((CLOCK + (BAUD_RATE/2))/BAUD_RATE - 10 + 1) / 3)
+#define BIT_COUNT (((F_CPU + (BAUD_RATE/2))/BAUD_RATE - 10 + 1) / 3)
 
 
     .global transmit
