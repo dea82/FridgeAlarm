@@ -7,22 +7,10 @@
 #define data    r24
 #define temp    r23
 
-/*
-
-    us per bit @ B baud = 1/B * 1000000 = bit_time [us]
-
-    cycle time = 1/F_CPU * 1000000 = cycle_time [us]
-
-
-    nof_cycles_per_bit = bit_time / cycle_time + 0.5F = (F_CPU + (BAUD/2))/BAUD
-
-
-*/
-
 #define BAUD_RATE 9600
 
 /* Number of cycles per bit to achive correct baudrate. */
-#define CYCLES_PER_BIT ((CLOCK + (BAUD_RATE/2))/BAUD_RATE)
+#define CYCLES_PER_BIT ((F_CPU + (BAUD_RATE/2))/BAUD_RATE)
 
 /* Static number of cycles in transmit between each bit. */
 #define CYCLES_IN_TRANSMIT 10
@@ -35,10 +23,6 @@
 
 /* Calculate number of "balance" cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 cycles. */
 #define NOF_EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
-
-
-
-#define BIT_COUNT (((CLOCK + (BAUD_RATE/2))/BAUD_RATE - 10 + 1) / 3)
 
 
     .global transmit
