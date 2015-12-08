@@ -25,3 +25,9 @@ void Uart_Transmit(char data_U08)
 {
     transmit(data_U08);
 }
+
+void Uart_TransmitInt(tU08 data_U16)
+{
+    Uart_Transmit(HI(data_U16));
+    Uart_Transmit(LO(data_U16));
+}
