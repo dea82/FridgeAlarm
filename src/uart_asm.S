@@ -20,8 +20,21 @@
 */
 
 
+/* TODO: Remove CLOCK and replace with F_CPU */
 #define CLOCK 1000000
 #define BAUD_RATE 9600
+
+/* Number of cycles per bit to achive correct baudrate. */
+#define CYCLES_PER_BIT ((CLOCK + (BAUD_RATE/2))/BAUD_RATE)
+
+/* Static number of cycles in transmit between each bit. */
+#define CYCLES_IN_TRANSMIT (10)
+
+/* Calculate number of delay cycles needed. */
+#define CALC_NOF_DELAY_CYCLES(cycles) ((cycles + 1) / 3)
+
+/* Calculate number of "balance" cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 cycles. */
+#define CALC_NOF_EXTRA_DELAYS(cycles) ((cycles + 1) % 3)
 
 
 #define BIT_COUNT (((CLOCK + (BAUD_RATE/2))/BAUD_RATE - 10 + 1) / 3)
