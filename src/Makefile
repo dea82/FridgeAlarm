@@ -40,6 +40,9 @@ OUTDIR = output
 # MCU name
 MCU = attiny85
 
+# Clock frequency
+F_CPU = 1000000
+
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
 
@@ -92,7 +95,7 @@ EXTRAINCDIRS =
 CSTANDARD = -std=gnu99
 
 # Place -D or -U options here
-CDEFS =
+CDEFS = -DF_CPU=$(F_CPU)
 
 # Place -I options here
 CINCS =
@@ -122,7 +125,7 @@ CFLAGS += $(CSTANDARD)
 #             for use in COFF files, additional information about filenames
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
-ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs
+ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
 
 
 
