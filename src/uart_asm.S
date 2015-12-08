@@ -20,6 +20,10 @@
 /* Calculate number of delay cycles needed. */
 #define NOF_DELAY_CYCLES ((DELAY_CYCLES + 1) / 3)
 
+#if NOF_DELAY_CYCLES > 255 || NOF_DELAY_CYCLES < 0
+    #error Not supported baud rate.
+#endif
+
 /* Calculate number of "balance" cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 cycles. */
 #define NOF_EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
 
