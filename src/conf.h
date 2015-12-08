@@ -25,6 +25,7 @@
 #define TICK 16
 
 #define UART_ENABLE 1
+#define BAUD_RATE 9600
 
 #define GET_PORT(P,...) (PORT ## P)
 

@@ -2,12 +2,11 @@
 #define __SFR_OFFSET 0
 
 #include <avr/io.h>
+#include "conf.h"
 
 #define bitcnt  r25
 #define data    r24
 #define temp    r23
-
-#define BAUD_RATE 9600
 
 /* Number of cycles per bit to achive correct baudrate. */
 #define CYCLES_PER_BIT ((F_CPU + (BAUD_RATE/2))/BAUD_RATE)
