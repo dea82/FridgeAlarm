@@ -22,15 +22,15 @@
 #define DELAY_CYCLES (CYCLES_PER_BIT - CYCLES_IN_TRANSMIT)
 
 /* Calculate number of delay loops needed. */
-#define NOF_DELAY_LOOPS ((DELAY_CYCLES + 1) / 3)
+#define DELAY_LOOPS ((DELAY_CYCLES + 1) / 3)
 
 /* Check if baudrate can be achived. */
-#if NOF_DELAY_LOOPS > 255 || NOF_DELAY_LOOPS < 1
+#if DELAY_LOOPS > 255 || DELAY_LOOPS < 1
     #error Specified baud rate can't be achived.
 #endif
 
 /* Calculate number of "balance" cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 cycles. */
-#define NOF_EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
+#define EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
 
 
     .global transmit
@@ -48,17 +48,17 @@ putchar1:
     sbi     PORTB, PORTB0   ; Transmit 1        ; ### 2
     nop                     ; to equalize delay ; ### 1
 putchar2:
-    ldi     loopcnt, NOF_DELAY_CYCLES           ; ### 1
+    ldi     loopcnt, DELAY_LOOPS                ; ### 1
 1:
     dec     loopcnt                             ; ### 1
     brne    1b                                  ; ### true = 2, false = 1
 
     lsr     data            ; Get next bit      ; ### 1
     dec     bitcnt          ; decrese cnt       ; ### 1
-#if NOF_EXTRA_DELAYS > 0   
+#if EXTRA_DELAYS > 0   
     nop
 #endif
-#if NOF_EXTRA_DELAYS > 1   
+#if EXTRA_DELAYS > 1   
     nop
 #endif
     brne    putchar0        ; send next         ; ### true = 2, false = 1
