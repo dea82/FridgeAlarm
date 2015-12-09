@@ -11,9 +11,7 @@
 #include "conf.h"
 #include "type.h"
 
-
-#define BAUD 9600
-
+/* Assembly function. */
 extern void transmit (unsigned char);
 
 void Uart_Enable(void)
