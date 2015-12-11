@@ -68,7 +68,9 @@ int main(void)
     /* Initialize actuators */
     //Buzz_init();
     Ledc_init();
+#if UART_ENABLE
     Uart_Enable();
+#endif
     for (;;)
     {
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
