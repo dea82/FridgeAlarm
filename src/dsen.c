@@ -49,12 +49,17 @@ inline void Dsen_init(void)
 inline void Dsen_loop(void)
 {
     tU16 sensorValue_U16 = getDoorRawPos_U16();
+
+    //L: 168  M: 496 H: 849
+    //      328      353
+    Uart_TransmitInt(0xFFFF);
     Uart_TransmitInt(sensorValue_U16);
+
 
     tDsen_doorState_E newDoorState_E;
     if (doorClosed_U16 < 512)
     {
-        if (sensorValue_U16 > doorClosed_U16 + 50)
+        if (sensorValue_U16 > doorClosed_U16 + 20)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -65,7 +70,7 @@ inline void Dsen_loop(void)
     }
     else
     {
-        if (sensorValue_U16 < doorClosed_U16 - 50)
+        if (sensorValue_U16 < doorClosed_U16 - 20)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -105,6 +110,7 @@ static tU16 getDoorRawPos_U16(void)
     while (ADCSRA & _BV(ADSC))
     {
     }
+
     //TODO: Make another conversion just to be sure? Is the first conversion incorrect? Make mean value?
 
     ADCSRA &= ~(_BV(ADEN));
@@ -127,7 +133,7 @@ tDsen_doorState_str Dsen_getDoorState_str(void)
 static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
-    if ((ABS(sensorValue_U16 - 512)) > 40)
+    if ((ABS((tS16)sensorValue_U16 - 512)) > 60)
     {
         ret_B = TRUE;
     }
@@ -145,6 +151,12 @@ tB Dsen_storeClosedPos(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(sensorValue_U16))
     {
+/*
+        Uart_TransmitStr("S: 0x");
+        Uart_TransmitInt(sensorValue_U16);
+        Uart_TransmitChar('\n');*/
+        Uart_TransmitInt(0xAAAA);
+        Uart_TransmitInt(sensorValue_U16);
         eeprom_write_word(&doorClosed_EE, sensorValue_U16);
         doorClosed_U16 = sensorValue_U16;
         calibrationOk_B = TRUE;

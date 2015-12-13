@@ -9,6 +9,7 @@
 #define UART_H_
 
 void Uart_Enable(void);
-void Uart_TransmitU08(char data_U08);
-void Uart_TransmitInt(tU08 data_U16);
+void Uart_TransmitChar(const char data_U08);
+void Uart_TransmitInt(const tU16 data_U16);
+void Uart_TransmitStr(const const char *str);
 #endif /* UART_H_ */
