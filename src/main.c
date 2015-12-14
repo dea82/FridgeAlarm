@@ -19,6 +19,7 @@
 #include "dsen.h"
 #include "ledc.h"
 #include "type.h"
+#include "uart.h"
 
 typedef enum
 {
@@ -65,9 +66,11 @@ int main(void)
     /* Initialize controls */
     Cont_init();
     /* Initialize actuators */
-    Buzz_init();
+//    Buzz_init();
     Ledc_init();
-
+#if UART_ENABLE
+    Uart_Enable();
+#endif
     for (;;)
     {
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
@@ -86,9 +89,11 @@ int main(void)
 
         /* Actuators */
         Ledc_loop();
-        Buzz_loop();
+//        Buzz_loop();
+
 
         powerDown(Cont_sleepMode_E());
+
     }
 
     return 0;

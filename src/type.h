@@ -22,6 +22,9 @@ typedef unsigned char tU08;
 typedef unsigned int  tU16;
 #define MAX_U16 UINT_MAX
 
+typedef signed int tS16;
+
+
 /*** PORT MANIPULATION DEFINITIONS ***/
 
 #define INPUT    0
@@ -63,5 +66,7 @@ typedef unsigned int  tU16;
 #define ABS(a)     (((a) < 0) ? -(a) : (a))
 #define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
 #define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
+#define LO(a)      ((tU08)((a) & 0xFF))
+#define HI(a)      ((tU08)((a) >> 8) )
 
 #endif /* TYPE_H_ */

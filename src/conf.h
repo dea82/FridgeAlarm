@@ -5,7 +5,7 @@
  *      Author: andreas
  */
 #include <avr/io.h>
-#include "type.h"
+
 
 #ifndef CONF_H_
 #define CONF_H_
@@ -24,6 +24,11 @@
 /* Milliseconds between each loop. */
 #define TICK 16
 
+#define UART_ENABLE 1
+#define BAUD_RATE 57600
+
+#define GET_PORT(P,...) (PORT ## P)
+
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
 
 /*************************************************
@@ -35,6 +40,7 @@
 #define GREEN_LED_CFG   B,1
 #define BUZZ_CFG        B,0
 #define DSEN_SWITCH_CFG B,4
+#define UART_CFG        B,0
 
 #else
 #error "Not supported MCU."

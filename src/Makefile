@@ -40,6 +40,9 @@ OUTDIR = output
 # MCU name
 MCU = attiny85
 
+# Clock frequency
+F_CPU = 1000000
+
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
 
@@ -65,7 +68,7 @@ SRC=$(wildcard *.c $(LIBDIR)/*.c)
 # Even though the DOS/Win* filesystem matches both .s and .S the same,
 # it will preserve the spelling of the filenames, and gcc itself does
 # care about how the name is spelled on its command-line.
-ASRC =
+ASRC=$(wildcard *.S $(LIBDIR)/*.S)
 
 
 
@@ -92,7 +95,7 @@ EXTRAINCDIRS =
 CSTANDARD = -std=gnu99
 
 # Place -D or -U options here
-CDEFS =
+CDEFS = -DF_CPU=$(F_CPU)
 
 # Place -I options here
 CINCS =
@@ -109,6 +112,7 @@ CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS += -ffunction-sections # Create separate section
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
@@ -122,7 +126,7 @@ CFLAGS += $(CSTANDARD)
 #             for use in COFF files, additional information about filenames
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
-ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs
+ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
 
 
 
@@ -163,6 +167,8 @@ EXTMEMOPTS =
 #    -Map:      create map file
 #    --cref:    add cross reference to  map file
 LDFLAGS = -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref
+LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
+LDFLAGS += -Wl,--relax
 LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 
