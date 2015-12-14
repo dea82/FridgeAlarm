@@ -26,6 +26,10 @@ typedef enum
     WDTO_16MS_E, WDTO_8S_E,
 } tWatchdogTimeout_E;
 
+/* Assembly function. */
+extern void startTimer(void);
+extern unsigned char stopTimer(void);
+
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
 static void powerDown(tSleepMode_E sleepMode_E);
 
@@ -73,6 +77,7 @@ int main(void)
 #endif
     for (;;)
     {
+        startTimer();
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);
         /* Make sure to disable button interrupt before continue. The MCU is awake. */
@@ -137,6 +142,7 @@ static void powerDown(tSleepMode_E sleepMode_E)
     {
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
+    Uart_TransmitChar(stopTimer());
     sleep_mode()
     ;
 }
