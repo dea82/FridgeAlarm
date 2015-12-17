@@ -58,7 +58,7 @@ int main(void)
     ACSR |= _BV(ACD);
 
     /* Power reduction */
-    PRR |= _BV(PRTIM1) | _BV(PRUSI); // | _BV(PRADC);
+    PRR |= _BV(PRUSI); // | _BV(PRADC);
     DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: ADC3D
 
     DDRB = 0b00010111;
@@ -70,7 +70,7 @@ int main(void)
     /* Initialize controls */
     Cont_init();
     /* Initialize actuators */
-//    Buzz_init();
+    Buzz_init();
     Ledc_init();
 #if UART_ENABLE
     Uart_Enable();
@@ -94,7 +94,7 @@ int main(void)
 
         /* Actuators */
         Ledc_loop();
-//        Buzz_loop();
+        Buzz_loop();
 
 
         powerDown(Cont_sleepMode_E());
@@ -124,7 +124,7 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
 
 static void powerDown(tSleepMode_E sleepMode_E)
 {
-
+    static unsigned char maxCycles_U08;
     /* If the controls find it ok to go to sleep, door closed for a long time then set
      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
      * deep sleep.*/
@@ -142,7 +142,8 @@ static void powerDown(tSleepMode_E sleepMode_E)
     {
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
-    Uart_TransmitChar(stopTimer());
+    maxCycles_U08 = (stopTimer() > maxCycles_U08) ?  stopTimer() : maxCycles_U08;
+    Uart_TransmitChar(maxCycles_U08);
     sleep_mode()
     ;
 }

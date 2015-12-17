@@ -13,8 +13,6 @@ startTimer:
 
     .global stopTimer
 stopTimer:                                                  ;#3
-    out TCCR1, R1                                           ;#1
-    in r24, TCNT1                                           ;
-    subi r24, 8                                             ;
-    clr 25                                                  ;
+    out     TCCR1, R1                                       ;#1
+    in      r24, TCNT1                                      ;
     ret                                                     ;

@@ -41,7 +41,7 @@ OUTDIR = output
 MCU = attiny85
 
 # Clock frequency
-F_CPU = 1000000
+F_CPU = 8000000
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex

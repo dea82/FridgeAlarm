@@ -1,4 +1,4 @@
-avrtarget/ClockFrequency=1000000
+avrtarget/ClockFrequency=8000000
 avrtarget/ExtRAMSize=0
 avrtarget/ExtendedRAM=false
 avrtarget/MCUType=attiny85
@@ -10,7 +10,7 @@ avrtarget/avrdude/EEPROMFile=
 avrtarget/avrdude/EEPROMFromConfig=true
 avrtarget/avrdude/FlashFile=/Users/andreas/Projects/FridgeAlarm/src/output/FridgeAlarm.hex
 avrtarget/avrdude/FlashFromConfig=false
-avrtarget/avrdude/Fuses/ByteValues=98\:95\:255
+avrtarget/avrdude/Fuses/ByteValues=194\:223\:255
 avrtarget/avrdude/Fuses/FileName=
 avrtarget/avrdude/Fuses/MCUid=attiny85
 avrtarget/avrdude/Fuses/UseFile=false

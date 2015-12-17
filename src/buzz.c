@@ -21,7 +21,9 @@ inline void Buzz_init(void)
 #if 1
 
     // Set to 'CTC' mode, toggle on match
-    TCCR0A |= (1 << WGM01) | (1 << COM0A0);
+#if !UART_ENABLE
+        TCCR0A |= (1 << WGM01) | (1 << COM0A0);
+#endif
 
     OCR0A = 30;
 #endif

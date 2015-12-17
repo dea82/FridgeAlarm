@@ -35,6 +35,9 @@ inline void Dsen_init(void)
 #elif F_CPU == 600000
     /* Prescaler for ADC clock is set to 4, which gives a ADC clock of 150 kHz. */
     ADCSRA = (1 << ADPS1);
+#elif F_CPU == 8000000
+    /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 125 kHz. */
+    ADCSRA = (1 << ADPS2) | (1 << ADPS1);
 #else
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif
@@ -52,8 +55,6 @@ inline void Dsen_loop(void)
 
     //L: 168  M: 496 H: 849
     //      328      353
-    Uart_TransmitInt(0xFFFF);
-    Uart_TransmitInt(sensorValue_U16);
 
 
     tDsen_doorState_E newDoorState_E;
@@ -151,12 +152,6 @@ tB Dsen_storeClosedPos(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(sensorValue_U16))
     {
-/*
-        Uart_TransmitStr("S: 0x");
-        Uart_TransmitInt(sensorValue_U16);
-        Uart_TransmitChar('\n');*/
-        Uart_TransmitInt(0xAAAA);
-        Uart_TransmitInt(sensorValue_U16);
         eeprom_write_word(&doorClosed_EE, sensorValue_U16);
         doorClosed_U16 = sensorValue_U16;
         calibrationOk_B = TRUE;
