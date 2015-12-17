@@ -26,6 +26,11 @@
 
 #define UART_ENABLE 1
 #define BAUD_RATE 57600
+#define CPU_LOAD 0
+
+#define MEASURE_CPU_LOAD (CPU_LOAD & UART_ENABLE)
+
+
 
 #define GET_PORT(P,...) (PORT ## P)
 

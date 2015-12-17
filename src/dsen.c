@@ -1,5 +1,7 @@
 #include <avr/eeprom.h>
+#include <avr/interrupt.h>
 #include <avr/io.h>
+#include <avr/sleep.h>
 #include <stdio.h>
 #include <util/delay.h>
 
@@ -15,6 +17,8 @@ static tU16 doorClosed_U16;
 
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
+
+EMPTY_INTERRUPT(ADC_vect);
 
 inline void Dsen_init(void)
 {
@@ -55,6 +59,7 @@ inline void Dsen_loop(void)
 
     //L: 168  M: 496 H: 849
     //      328      353
+    Uart_TransmitInt(sensorValue_U16);
 
 
     tDsen_doorState_E newDoorState_E;
@@ -98,23 +103,27 @@ inline void Dsen_loop(void)
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;
+
+    /* Prepare for sleep */
+    set_sleep_mode(SLEEP_MODE_ADC);
+
     // Turn on sensor
     IO_SET(DSEN_SWITCH_CFG);
     PRR &= ~_BV(PRADC);
     DIDR0 &= ~_BV(ADC3D);
     _delay_us(5);
+
+    /* Clear any pending interrupt - should not happen */
+    ADCSRA |= _BV(ADIF);
     /* Start conversion */
-    ADCSRA |= (1 << ADEN) | (1 << ADSC);
+    ADCSRA |= (1 << ADEN) | (1 << ADSC) | _BV(ADIE);
 
     /* Wait for conversion */
-    //TODO: Implement sleep while ADC
-    while (ADCSRA & _BV(ADSC))
-    {
-    }
+    sleep_mode();
 
     //TODO: Make another conversion just to be sure? Is the first conversion incorrect? Make mean value?
 
-    ADCSRA &= ~(_BV(ADEN));
+    ADCSRA &= ~(_BV(ADEN) | _BV(ADIE));
     // Turn off sensor
     IO_CLR(DSEN_SWITCH_CFG);
     PRR |= _BV(PRADC);

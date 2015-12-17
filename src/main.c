@@ -58,8 +58,12 @@ int main(void)
     ACSR |= _BV(ACD);
 
     /* Power reduction */
-    PRR |= _BV(PRUSI); // | _BV(PRADC);
-    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: ADC3D
+#if MEASURE_CPU_LOAD
+    PRR |= _BV(PRUSI);
+#else
+    PRR |= _BV(PRUSI) | _BV(PRTIM1); //TODO: Does not work _BV(PRADC), why?
+#endif
+    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D);
 
     DDRB = 0b00010111;
     PORTB = 0b00100000;
@@ -77,7 +81,9 @@ int main(void)
 #endif
     for (;;)
     {
+#if MEASURE_CPU_LOAD
         startTimer();
+#endif
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);
         /* Make sure to disable button interrupt before continue. The MCU is awake. */
@@ -124,7 +130,9 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
 
 static void powerDown(tSleepMode_E sleepMode_E)
 {
+#if MEASURE_CPU_LOAD
     static unsigned char maxCycles_U08;
+#endif
     /* If the controls find it ok to go to sleep, door closed for a long time then set
      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
      * deep sleep.*/
@@ -142,8 +150,10 @@ static void powerDown(tSleepMode_E sleepMode_E)
     {
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
+#if MEASURE_CPU_LOAD
     maxCycles_U08 = (stopTimer() > maxCycles_U08) ?  stopTimer() : maxCycles_U08;
     Uart_TransmitChar(maxCycles_U08);
+#endif
     sleep_bod_disable();
     sleep_mode()
     ;
