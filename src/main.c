@@ -144,6 +144,7 @@ static void powerDown(tSleepMode_E sleepMode_E)
     }
     maxCycles_U08 = (stopTimer() > maxCycles_U08) ?  stopTimer() : maxCycles_U08;
     Uart_TransmitChar(maxCycles_U08);
+    sleep_bod_disable();
     sleep_mode()
     ;
 }
