@@ -57,7 +57,7 @@ int main(void)
 #else
     PRR |= _BV(PRUSI) | _BV(PRTIM1); //TODO: Does not work _BV(PRADC), why?
 #endif
-    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D);
+    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: Add ADC3D
 
     DDRB = 0b00010111;
     PORTB = 0b00100000;
