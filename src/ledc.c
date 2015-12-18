@@ -18,8 +18,6 @@ static tLedState_E ledState_E = LEDC_OFF_E;
 
 inline void Ledc_init(void)
 {
-//    CONF_IO(RED_LED_CFG, OUTPUT, 0);
-//    CONF_IO(GREEN_LED_CFG, OUTPUT, 0);
 }
 
 inline void Ledc_loop(void)
@@ -43,7 +41,7 @@ inline void Ledc_loop(void)
         IO_CLR(GREEN_LED_CFG);
         IO_SET(RED_LED_CFG);
         break;
-#if 1
+#if 0
     case LEDC_ORANGE_E:
         IO_SET(GREEN_LED_CFG);
         IO_SET(RED_LED_CFG);
@@ -74,7 +72,6 @@ inline void Ledc_loop(void)
         IO_CLR(GREEN_LED_CFG);
         break;
 #endif
-
     default:
         IO_CLR(GREEN_LED_CFG);
         IO_CLR(RED_LED_CFG);
