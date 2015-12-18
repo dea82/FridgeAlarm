@@ -48,12 +48,6 @@ int main(void)
      * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4. */
     WDTCR = 0;
 
-#if defined(__AVR_ATtiny13A__)
-    /* Reduce power consumption - turn off BOD during power down. */
-    BODCR = _BV(BODS) | _BV(BODSE);
-#elif defined(__AVR_ATtiny85__)
-    MCUCR |= _BV(BODS) | _BV(BODSE);
-#endif
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
