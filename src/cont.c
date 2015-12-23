@@ -67,6 +67,7 @@ inline void Cont_loop(void)
     }
     else if (calibrationState_E == CALIBRATION_FAIL_E)
     {
+        sleepMode_E = CONT_SLEEP_WITH_TIMER_RUNNING_E;
         Ledc_setState(LEDC_RED_BLINK_E);
         Buzz_setSound(BUZZ_ON_E);
     }

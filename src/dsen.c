@@ -105,7 +105,14 @@ static tU16 getDoorRawPos_U16(void)
     tU16 sensorValue_U16;
 
     /* Prepare for sleep */
-    set_sleep_mode(SLEEP_MODE_ADC);
+    if(TCCR0B == 0)
+    {
+        set_sleep_mode(SLEEP_MODE_ADC);
+    }
+    else
+    {
+        set_sleep_mode(SLEEP_MODE_IDLE);
+    }
 
     // Turn on sensor
     IO_SET(DSEN_SWITCH_CFG);
@@ -118,10 +125,12 @@ static tU16 getDoorRawPos_U16(void)
     /* Start conversion */
     ADCSRA |= (1 << ADEN) | (1 << ADSC) | _BV(ADIE);
 
-    /* Wait for conversion */
-    sleep_mode();
 
-    //TODO: Make another conversion just to be sure? Is the first conversion incorrect? Make mean value?
+    while (ADCSRA & _BV(ADSC))
+    {
+        /* Wait for conversion */
+        sleep_mode();
+    }
 
     ADCSRA &= ~(_BV(ADEN) | _BV(ADIE));
     // Turn off sensor

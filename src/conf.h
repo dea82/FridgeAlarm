@@ -24,7 +24,7 @@
 /* Milliseconds between each loop. */
 #define TICK 16
 
-#define UART_ENABLE 1
+#define UART_ENABLE 0
 #define BAUD_RATE 57600
 #define CPU_LOAD 0
 

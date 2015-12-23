@@ -27,8 +27,10 @@ typedef enum
 } tWatchdogTimeout_E;
 
 /* Assembly function. */
+#if MEASURE_CPU_LOAD
 extern void startTimer(void);
 extern unsigned char stopTimer(void);
+#endif
 
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
 static void powerDown(tSleepMode_E sleepMode_E);
@@ -73,6 +75,7 @@ int main(void)
 #if UART_ENABLE
     Uart_Enable();
 #endif
+
     for (;;)
     {
 #if MEASURE_CPU_LOAD
@@ -96,9 +99,7 @@ int main(void)
         Ledc_loop();
         Buzz_loop();
 
-
         powerDown(Cont_sleepMode_E());
-
     }
 
     return 0;
@@ -148,7 +149,6 @@ static void powerDown(tSleepMode_E sleepMode_E)
     maxCycles_U08 = (stopTimer() > maxCycles_U08) ?  stopTimer() : maxCycles_U08;
     Uart_TransmitChar(maxCycles_U08);
 #endif
-    sleep_bod_disable();
     sleep_mode()
     ;
 }

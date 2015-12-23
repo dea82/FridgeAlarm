@@ -16,11 +16,11 @@ static tSoundType_E soundType_E;
 inline void Buzz_init(void)
 {
 #if !UART_ENABLE
-        /* Set to 'CTC' mode, toggle on match */
-        TCCR0A |= (1 << WGM01) | (1 << COM0A0);
+    /* Set to 'CTC' mode, toggle on match */
+    TCCR0A |= (1 << WGM01) | (1 << COM0A0);
 #endif
     /* TODO: Change compare value*/
-    OCR0A = 30;
+    OCR0A = 36;
 }
 
 inline void Buzz_loop(void)
@@ -32,6 +32,7 @@ inline void Buzz_loop(void)
     {
     case BUZZ_OFF_E:
         TCCR0B = 0;
+        counter_U08 = 0;
 //        PRR |= _BV(PRTIM0);
         break;
     case BUZZ_ON_E:
