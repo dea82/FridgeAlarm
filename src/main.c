@@ -55,9 +55,9 @@ int main(void)
 
     /* Power reduction */
 #if MEASURE_CPU_LOAD
-    PRR |= _BV(PRUSI);
+    PRR |= _BV(PRUSI) | _BV(PRTIM0);
 #else
-    PRR |= _BV(PRUSI) | _BV(PRTIM1); //TODO: Does not work _BV(PRADC), why?
+    PRR |= _BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1); //TODO: Does not work _BV(PRADC), why?
 #endif
     DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: Add ADC3D
 
