@@ -14,6 +14,7 @@ tU16 EEMEM doorClosed_EE;
 
 static tDsen_doorState_str doorState_str;
 static tU16 doorClosed_U16;
+static tU16 doorPos_U16;
 
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
@@ -55,17 +56,17 @@ inline void Dsen_init(void)
 
 inline void Dsen_loop(void)
 {
-    tU16 sensorValue_U16 = getDoorRawPos_U16();
+    doorPos_U16 = getDoorRawPos_U16();
 
     //L: 168  M: 496 H: 849
     //      328      353
-    Uart_TransmitInt(sensorValue_U16);
+    Uart_TransmitInt(doorPos_U16);
 
 
     tDsen_doorState_E newDoorState_E;
     if (doorClosed_U16 < 512)
     {
-        if (sensorValue_U16 > doorClosed_U16 + 20)
+        if (doorPos_U16 > doorClosed_U16 + 20)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -76,7 +77,7 @@ inline void Dsen_loop(void)
     }
     else
     {
-        if (sensorValue_U16 < doorClosed_U16 - 20)
+        if (doorPos_U16 < doorClosed_U16 - 20)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -166,12 +167,11 @@ static tB withinRange_B(const tU16 sensorValue_U16)
 
 tB Dsen_storeClosedPos(void)
 {
-    tU16 sensorValue_U16 = getDoorRawPos_U16();
     tB calibrationOk_B = FALSE;
-    if (withinRange_B(sensorValue_U16))
+    if (withinRange_B(doorPos_U16))
     {
-        eeprom_write_word(&doorClosed_EE, sensorValue_U16);
-        doorClosed_U16 = sensorValue_U16;
+        eeprom_write_word(&doorClosed_EE, doorPos_U16);
+        doorClosed_U16 = doorPos_U16;
         calibrationOk_B = TRUE;
     }
     return calibrationOk_B;
