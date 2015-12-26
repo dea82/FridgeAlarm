@@ -4,3 +4,5 @@ FridgeWarninig_0.5.log
 *.b##
 src/output
 src/.dep
+*.*#*
+AutoSave*.skp
