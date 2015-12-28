@@ -53,16 +53,12 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
-    /* Power reduction */
-#if MEASURE_CPU_LOAD
-    PRR |= _BV(PRUSI) | _BV(PRTIM0);
-#else
-    PRR |= _BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1); //TODO: Does not work _BV(PRADC), why?
-#endif
-    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: Add ADC3D
+    /* Power reduction
+     * Turns off Timer0, (Timer1) and USI */
+    PRR = PRR_BYTE;
 
-    DDRB = 0b00010111;
-    PORTB = 0b00100000;
+    /* Power reduction - turn off digital input buffers*/
+    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
 
     /* Initialize sensors */
     Butt_init();
@@ -96,8 +92,8 @@ int main(void)
         Cont_loop();
 
         /* Actuators */
-        Ledc_loop();
         Buzz_loop();
+        Ledc_loop();
 
         powerDown(Cont_sleepMode_E());
     }
@@ -112,11 +108,10 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
     switch (time_E)
     {
     case WDTO_16MS_E:
-        WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE));
+        WDTCR = _BV(WDIF) | (_BV(WDIE) | _BV(WDCE));
         break;
     case WDTO_8S_E:
-        WDTCR = _BV(WDIF_C)
-                | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
+        WDTCR = _BV(WDIF) | (_BV(WDIE) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
         break;
     default:
         break;
@@ -146,7 +141,7 @@ static void powerDown(tSleepMode_E sleepMode_E)
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
 #if MEASURE_CPU_LOAD
-    maxCycles_U08 = (stopTimer() > maxCycles_U08) ?  stopTimer() : maxCycles_U08;
+    maxCycles_U08 = (stopTimer() > maxCycles_U08) ? stopTimer() : maxCycles_U08;
     Uart_TransmitChar(maxCycles_U08);
 #endif
     sleep_mode()

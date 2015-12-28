@@ -17396,7 +17396,7 @@ http://www.allegromicro.com/en/Products/Part_Numbers/1381/1381.pdf</description>
 <instance part="GND2" gate="1" x="129.54" y="93.98"/>
 <instance part="P+4" gate="VCC" x="129.54" y="132.08"/>
 <instance part="R5" gate="G$1" x="119.38" y="101.6" rot="R180"/>
-<instance part="SW1" gate="G$1" x="106.68" y="76.2" rot="R270"/>
+<instance part="SW1" gate="G$1" x="106.68" y="76.2" rot="R90"/>
 <instance part="JP2" gate="G$1" x="101.6" y="22.86" rot="R90"/>
 <instance part="D3" gate="D" x="142.24" y="109.22" rot="R90"/>
 <instance part="R4" gate="G$1" x="91.44" y="45.72"/>
@@ -17509,7 +17509,7 @@ http://www.allegromicro.com/en/Products/Part_Numbers/1381/1381.pdf</description>
 <pinref part="IC1" gate="G$1" pin="PB0/PCINT0/AIN0/OC0A/MOSI"/>
 <label x="111.76" y="53.34" size="1.778" layer="95"/>
 <wire x1="106.68" y1="53.34" x2="121.92" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="SW1" gate="G$1" pin="1"/>
+<pinref part="SW1" gate="G$1" pin="2"/>
 <wire x1="106.68" y1="68.58" x2="106.68" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -17645,10 +17645,10 @@ http://www.allegromicro.com/en/Products/Part_Numbers/1381/1381.pdf</description>
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="SW1" gate="G$1" pin="2"/>
-<wire x1="106.68" y1="83.82" x2="106.68" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="R5" gate="G$1" pin="2"/>
 <wire x1="106.68" y1="101.6" x2="114.3" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="SW1" gate="G$1" pin="1"/>
+<wire x1="106.68" y1="83.82" x2="106.68" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

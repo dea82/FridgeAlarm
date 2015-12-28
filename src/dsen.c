@@ -19,11 +19,12 @@ static tU16 doorPos_U16;
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
 
+/* Just for wake-up */
 EMPTY_INTERRUPT(ADC_vect);
 
 inline void Dsen_init(void)
 {
-//    CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
+    CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
 
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
@@ -47,7 +48,6 @@ inline void Dsen_init(void)
 #error "Prescaler for ADC conversion is not supported for this CPU clock."
 #endif
 
-    // TODO: Replace with macro
     /* Connect pin to ADC with 10-bit precision */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
@@ -58,12 +58,8 @@ inline void Dsen_loop(void)
 {
     doorPos_U16 = getDoorRawPos_U16();
 
-    //L: 168  M: 496 H: 849
-    //      328      353
-    Uart_TransmitInt(doorPos_U16);
-
-
     tDsen_doorState_E newDoorState_E;
+    /* Algorithm handles both direction of magnet field */
     if (doorClosed_U16 < 512)
     {
         if (doorPos_U16 > doorClosed_U16 + 20)
@@ -97,16 +93,13 @@ inline void Dsen_loop(void)
     }
     doorState_str.doorState_E = newDoorState_E;
 
-    /* Sensor outputs Vcc/2 when no magnet is present. This will make
-     * it nosensitive for magnet mounting direction. */
-//sensorValue_U16 = ABS(sensorValue_U16 - 512);
 }
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;
 
     /* Prepare for sleep */
-    if(TCCR0B == 0)
+    if (TCCR0B == 0)
     {
         set_sleep_mode(SLEEP_MODE_ADC);
     }
@@ -118,7 +111,9 @@ static tU16 getDoorRawPos_U16(void)
     // Turn on sensor
     IO_SET(DSEN_SWITCH_CFG);
     PRR &= ~_BV(PRADC);
+    //TODO: Should be possible to remove!
     DIDR0 &= ~_BV(ADC3D);
+    /* According to (Allegro 1302) data sheet of sensor star-up time is 5 us.*/
     _delay_us(5);
 
     /* Clear any pending interrupt - should not happen */
@@ -126,17 +121,21 @@ static tU16 getDoorRawPos_U16(void)
     /* Start conversion */
     ADCSRA |= (1 << ADEN) | (1 << ADSC) | _BV(ADIE);
 
-
+    /* Necessary check if any other interrupt wakes the MCU. */
     while (ADCSRA & _BV(ADSC))
     {
         /* Wait for conversion */
-        sleep_mode();
+        sleep_mode()
+        ;
     }
 
+    /* Disable interrupt and ADC. */
     ADCSRA &= ~(_BV(ADEN) | _BV(ADIE));
     // Turn off sensor
     IO_CLR(DSEN_SWITCH_CFG);
+    /* Power savings */
     PRR |= _BV(PRADC);
+    //TODO: Should be possible to remove!
     DIDR0 |= _BV(ADC3D);
 
     sensorValue_U16 = ADCL;
@@ -153,7 +152,8 @@ tDsen_doorState_str Dsen_getDoorState_str(void)
 static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
-    if ((ABS((tS16)sensorValue_U16 - 512)) > 60)
+    /* Cast should not be a problem due to the 10-bit resolution. */
+    if ((ABS((tS16 )sensorValue_U16 - 512)) > 60)
     {
         ret_B = TRUE;
     }

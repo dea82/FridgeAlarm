@@ -18,11 +18,10 @@ static tButt_State_str buttState_str;
 inline void Butt_init(void)
 {
     /* Activate internal pull-up */
-//    CONF_IO(BUTT_CFG, INPUT, PULLUP);
+    CONF_IO(BUTT_CFG, INPUT, PULLUP);
 
-    /* Pin change interrupt on button - this does not enables the interrupt! */
-    // TODO: Replace with macro.
-    PCMSK = _BV(PCINT5);
+    /* Pin change interrupt on button - this does not enables the interrupt, this is done later. */
+    PCINT(BUTT_CFG);
 }
 
 inline void Butt_loop(void)
@@ -42,8 +41,8 @@ inline void Butt_loop(void)
     }
 
     /* Check if raw value is stable */
-    if ((buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK) &&
-            (buttState_str.state_E != buttonRaw_E))
+    if ((buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK)
+            && (buttState_str.state_E != buttonRaw_E))
     {
         buttState_str.state_E = buttonRaw_E;
         buttState_str.tickInState_U08 = 0;
@@ -64,6 +63,7 @@ tButt_State_str Butt_getState_str(void)
 
 void Butt_enableInterrupt(void)
 {
+    /* This enables the pin change interrupt. */
     GIMSK = _BV(PCIE);
 }
 

@@ -18,6 +18,8 @@ static tLedState_E ledState_E = LEDC_OFF_E;
 
 inline void Ledc_init(void)
 {
+    CONF_IO(GREEN_LED_CFG, OUTPUT, 0);
+    CONF_IO(RED_LED_CFG, OUTPUT, 0);
 }
 
 inline void Ledc_loop(void)

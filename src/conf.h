@@ -6,7 +6,6 @@
  */
 #include <avr/io.h>
 
-
 #ifndef CONF_H_
 #define CONF_H_
 
@@ -24,17 +23,22 @@
 /* Milliseconds between each loop. */
 #define TICK 16
 
+/* Debug options */
 #define UART_ENABLE 0
 #define BAUD_RATE 57600
 #define CPU_LOAD 0
-
 #define MEASURE_CPU_LOAD (CPU_LOAD & UART_ENABLE)
 
-
+/**/
+#if MEASURE_CPU_LOAD
+#define PRR_BYTE (_BV(PRUSI) | _BV(PRTIM0))
+#else
+#define PRR_BYTE (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
+#endif
 
 #define GET_PORT(P,...) (PORT ## P)
 
-#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
+#if defined(__AVR_ATtiny85__)
 
 /*************************************************
  * PIN CONFIGURATION
@@ -49,14 +53,6 @@
 
 #else
 #error "Not supported MCU."
-#endif
-
-#if defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
-#define WDT_INT WDTIE
-#define WDIF_C WDTIF
-#elif defined(__AVR_ATtiny85__)
-#define WDT_INT WDIE
-#define WDIF_C WDIF
 #endif
 
 #endif /* CONF_H_ */
