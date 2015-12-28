@@ -6,3 +6,4 @@ src/output
 src/.dep
 *.*#*
 AutoSave*.skp
+*~.skp
