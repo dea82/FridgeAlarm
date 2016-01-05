@@ -33,7 +33,7 @@ extern unsigned char stopTimer(void);
 #endif
 
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
-static void powerDown(tSleepMode_E sleepMode_E);
+static void powerDown(const tSleepMode_E sleepMode_E);
 
 ISR(WDT_vect, ISR_NAKED)
 {
@@ -118,7 +118,7 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
     }
 }
 
-static void powerDown(tSleepMode_E sleepMode_E)
+static void powerDown(const tSleepMode_E sleepMode_E)
 {
 #if MEASURE_CPU_LOAD
     static unsigned char maxCycles_U08;
