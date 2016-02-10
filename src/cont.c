@@ -30,11 +30,11 @@ inline void Cont_loop(void)
     static tCalibrationState_E calibrationState_E;
     static tB inhibitAlarm_B;
     static tU08 counter_U08;
-    tDsen_doorState_str doorState_str = Dsen_getDoorState_str();
+    tButt_State_str buttState_str = Butt_getState_str();
 
     /* Calibration state */
-    if ((Butt_getState_str().state_E == BUTT_PRESSED_E
-            && Butt_getState_str().tickInState_U08 * TICK
+    if ((buttState_str.state_E == BUTT_PRESSED_E
+            && buttState_str.tickInState_U08 * TICK
                     > CALIBRATION_TIME_BUTTON)
             && calibrationState_E == NO_CALIBRATION_E)
     {
@@ -51,7 +51,7 @@ inline void Cont_loop(void)
     else
     {
         /* Leaves calibration mode */
-        if (Butt_getState_str().state_E == BUTT_RELEASED_E)
+        if (buttState_str.state_E == BUTT_RELEASED_E)
         {
             calibrationState_E = NO_CALIBRATION_E;
         }
@@ -74,6 +74,7 @@ inline void Cont_loop(void)
     }
     else
     {
+        tDsen_doorState_str doorState_str = Dsen_getDoorState_str();
         /* Normal mode - non calibration mode */
         switch (doorState_str.doorState_E)
         {
@@ -81,7 +82,7 @@ inline void Cont_loop(void)
             Buzz_setSound(BUZZ_OFF_E);
             if ((doorState_str.timeInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
                     && counter_U08 > MIN_TIME_AWAKE / TICK
-                    && Butt_getState_str().state_E == BUTT_RELEASED_E)
+                    && buttState_str.state_E == BUTT_RELEASED_E)
             {
                 /* When door has been closed for a long time and no activity on button it's OK to go to deep sleep.*/
                 counter_U08 = 0;
@@ -104,7 +105,7 @@ inline void Cont_loop(void)
             if (doorState_str.timeInState_U16 > ALARM_OPEN / TICK)
             {
                 /* Door has been open too long, sound the alarm if button has not inhibit it from going off. */
-                if (Butt_getState_str().state_E == BUTT_PRESSED_E)
+                if (buttState_str.state_E == BUTT_PRESSED_E)
                 {
                     inhibitAlarm_B = TRUE;
                 }
