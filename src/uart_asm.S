@@ -12,16 +12,18 @@
 /* Max baud 83333 @ 1 Mhz */
 /* Min baud  1292 @ 1 Mhz */
 
-/* Number of cycles per bit to achive correct baudrate. */
+/* Number of clock cycles per bit to achive correct baudrate. */
 #define CYCLES_PER_BIT ((F_CPU + (BAUD_RATE/2))/BAUD_RATE)
 
-/* Static number of cycles in transmit function between each bit. */
+/* Static number of clock cycles in transmit function between each bit. */
 #define CYCLES_IN_TRANSMIT 10
 
-/* Number of cycles that needs to be delayed (wasted). */
+/* Number of clock cycles that needs to be delayed (wasted). */
 #define DELAY_CYCLES (CYCLES_PER_BIT - CYCLES_IN_TRANSMIT)
 
-/* Calculate number of delay loops needed. */
+/* Calculate number of delay loops needed. 
+ * The one "1" is  compensation for the last loop which is only 2 clock cycles long, instead of normal 3 clock cycles.
+ */
 #define DELAY_LOOPS ((DELAY_CYCLES + 1) / 3)
 
 /* Check if baudrate can be achived. */
@@ -29,7 +31,7 @@
     #error Specified baud rate can't be achived.
 #endif
 
-/* Calculate number of "balance" cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 cycles. */
+/* Calculate number of "balance" clock cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 clock cycles. */
 #define EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
 
 
@@ -40,7 +42,7 @@ transmit:
     com     data            ; Invert data and set carry
 
 putchar0:
-    ; Total cycles 10
+    ; Total clock cycles 10
     brcc    putchar1                            ; ### true = 2, false = 1
     cbi     PORTB, PORTB0   ; Transmit 0        ; ### 2
     rjmp    putchar2        ; else              ; ### 2
@@ -49,9 +51,9 @@ putchar1:
     nop                     ; to equalize delay ; ### 1
 putchar2:
     ldi     loopcnt, DELAY_LOOPS                ; ### 1
-1:
+delay:
     dec     loopcnt                             ; ### 1
-    brne    1b                                  ; ### true = 2, false = 1
+    brne    delay                               ; ### true = 2, false = 1
 
     lsr     data            ; Get next bit      ; ### 1
     dec     bitcnt          ; decrese cnt       ; ### 1
