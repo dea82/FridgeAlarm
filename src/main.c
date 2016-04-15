@@ -28,8 +28,9 @@ typedef enum
 
 /* Assembly function. */
 #if MEASURE_CPU_LOAD
-extern void startTimer(void);
-extern unsigned char stopTimer(void);
+extern void Cpul_startPoint(void);
+extern void Cpul_stopPoint(void);
+extern char Cpul_getMaxCycles_U08(void);
 #endif
 
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
@@ -75,7 +76,7 @@ int main(void)
     for (;;)
     {
 #if MEASURE_CPU_LOAD
-        startTimer();
+        Cpul_startPoint();
 #endif
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);
@@ -120,9 +121,6 @@ static void enableWatchdog(const tWatchdogTimeout_E time_E)
 
 static void powerDown(const tSleepMode_E sleepMode_E)
 {
-#if MEASURE_CPU_LOAD
-    static unsigned char maxCycles_U08;
-#endif
     /* If the controls find it ok to go to sleep, door closed for a long time then set
      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
      * deep sleep.*/
@@ -141,8 +139,9 @@ static void powerDown(const tSleepMode_E sleepMode_E)
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
 #if MEASURE_CPU_LOAD
-    maxCycles_U08 = (stopTimer() > maxCycles_U08) ? stopTimer() : maxCycles_U08;
-    Uart_TransmitChar(maxCycles_U08);
+    Cpul_stopPoint();
+    
+    Uart_TransmitChar(Cpul_getMaxCycles());
 #endif
     sleep_mode()
     ;
