@@ -30,6 +30,10 @@ maxCycles:
 Cpul_startPoint:
     out     TCCR1, r1   ; Stop timer                        
     out     TCNT1, r1   ; Reset timer                       
+    in      r18, TIFR   ; Clear overflow flag by setting bit
+    sbr     r18, TOV1
+    out     TIFR, r18
+    
     
     ; Start timer with prescaler 64
     ldi     r18, 7        
@@ -55,7 +59,7 @@ Cpul_startPoint:
 ;############################################################
     .global Cpul_stopPoint
 Cpul_stopPoint:                                             
-    out     TCCR1, R1     ;  Stop timer as fast as possible
+    out     TCCR1, r1     ;  Stop timer as fast as possible
     in      r18, TCNT1    ;  Read counter value  
     in      r19, TIFR     ;  Do we have an overflow?
     sbrc    r19, TOV1
