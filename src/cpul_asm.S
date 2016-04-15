@@ -5,6 +5,12 @@
 
 #include <avr/io.h>
 
+    .section .data
+max_cycles:
+    .data 0
+    
+    .section .text
+    
     .global startTimer
 startTimer:
     out     TCCR1, r1   ; Stop timer                        ;
@@ -18,3 +24,5 @@ stopTimer:                                                  ;#3
     out     TCCR1, R1                                       ;#1
     in      r24, TCNT1                                      ;
     ret                                                     ;
+
+    .end
