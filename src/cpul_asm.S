@@ -43,7 +43,8 @@ Cpul_startPoint:
 ;#  This function will stop the timer used for calulation  
 ;#  which can be used for CPU load calculation, benchmarks  
 ;#  etc. It will also store the maximum number of cycles in
-;#  RAM variable "maxCycles".
+;#  RAM variable "maxCycles". If also handles overflow of
+;#  counter and saturates counter value to 0xFF.
 ;#                                                          
 ;#  INPUT
 ;#  -
@@ -53,11 +54,14 @@ Cpul_startPoint:
 ;#                                                          
 ;############################################################
     .global Cpul_stopPoint
-Cpul_stopPoint:                                              ;#3
-    out     TCCR1, R1      ;  Stop timer as fast as possible ;#1
-    in      r18, TCNT1
-    lds     r19, maxCycles
-    cp      r18, r19
+Cpul_stopPoint:                                             
+    out     TCCR1, R1     ;  Stop timer as fast as possible
+    in      r18, TCNT1    ;  Read counter value  
+    in      r19, TIFR     ;  Do we have an overflow?
+    sbrc    r19, TOV1
+    ldi     r18, 0xFF     ;  Overflow has occured set to max
+    lds     r19, maxCycles;  What is the max value stored?
+    cp      r18, r19    
     brlo    Cpul_stopPoint_1
     sts     maxCycles, r18
 Cpul_stopPoint_1:
