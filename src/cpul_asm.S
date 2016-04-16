@@ -72,7 +72,7 @@ Cpul_stopPoint_1:
     ret                     
 
 ;############################################################
-;#  FUNCTION: Cpul_getMaxCycles                               
+;#  FUNCTION: Cpul_getMaxCycles_U08
 ;#                                                          
 ;#  SUMMARY                                                 
 ;#  Returns maximum number of cycles identified.
@@ -84,8 +84,8 @@ Cpul_stopPoint_1:
 ;#  maxCycles (one byte, r24)
 ;#                                                          
 ;############################################################
-    .global Cpul_getMaxCycles
-Cpul_getMaxCycles:
+    .global Cpul_getMaxCycles_U08
+Cpul_getMaxCycles_U08:
     lds r24, maxCycles
     ret
 

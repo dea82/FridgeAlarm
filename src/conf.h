@@ -24,16 +24,20 @@
 #define TICK 16
 
 /* Debug options */
-#define UART_ENABLE 0
+#define UART_DEBUG_PRINTOUT_ENABLE 0
+#define CPU_LOAD_MEASUREMENT_ENABLE 0
 #define BAUD_RATE 57600
-#define CPU_LOAD 0
-#define MEASURE_CPU_LOAD (CPU_LOAD & UART_ENABLE)
+
+
+/* Inherited defines */
+#define UART_ENABLE (UART_DEBUG_PRINTOUT_ENABLE | CPU_LOAD_MEASUREMENT_ENABLE)
+
 
 /**/
-#if MEASURE_CPU_LOAD
-#define PRR_BYTE (_BV(PRUSI) | _BV(PRTIM0))
+#if CPU_LOAD_MEASUREMENT_ENABLE
+#define PRR_REG (_BV(PRUSI) | _BV(PRTIM0))
 #else
-#define PRR_BYTE (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
+#define PRR_REG (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
 #endif
 
 #define GET_PORT(P,...) (PORT ## P)

@@ -27,7 +27,7 @@ typedef enum
 } tWatchdogTimeout_E;
 
 /* Assembly function. */
-#if MEASURE_CPU_LOAD
+#if CPU_LOAD_MEASUREMENT_ENABLE
 extern void Cpul_startPoint(void);
 extern void Cpul_stopPoint(void);
 extern char Cpul_getMaxCycles_U08(void);
@@ -56,7 +56,7 @@ int main(void)
 
     /* Power reduction
      * Turns off Timer0, (Timer1) and USI */
-    PRR = PRR_BYTE;
+    PRR = PRR_REG;
 
     /* Power reduction - turn off digital input buffers*/
     DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
@@ -75,7 +75,7 @@ int main(void)
 
     for (;;)
     {
-#if MEASURE_CPU_LOAD
+#if CPU_LOAD_MEASUREMENT_ENABLE
         Cpul_startPoint();
 #endif
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
@@ -138,10 +138,10 @@ static void powerDown(const tSleepMode_E sleepMode_E)
     {
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     }
-#if MEASURE_CPU_LOAD
+#if CPU_LOAD_MEASUREMENT_ENABLE
     Cpul_stopPoint();
     
-    Uart_TransmitChar(Cpul_getMaxCycles());
+    Uart_TransmitChar(Cpul_getMaxCycles_U08());
 #endif
     sleep_mode()
     ;
