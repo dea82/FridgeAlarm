@@ -76,7 +76,7 @@ int main(void)
     for (;;)
     {
 #if CPU_LOAD_MEASUREMENT_ENABLE
-        Cpul_startPoint();
+        Cpul_startPoint(_BV(CS12) | _BV(CS11) | _BV(CS10));
 #endif
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);

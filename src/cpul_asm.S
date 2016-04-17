@@ -20,7 +20,7 @@ maxCycles:
 ;#  etc. 
 ;#                                                          
 ;#  INPUT
-;#  -
+;#  TCCR1 register (prescaler)
 ;#
 ;#  RETURN
 ;#  -                                           
@@ -35,9 +35,8 @@ Cpul_startPoint:
     out     TIFR, r18
     
     
-    ; Start timer with prescaler 64
-    ldi     r18, 7        
-    out     TCCR1, r18    
+    ; Start timer
+    out     TCCR1, r24
     ret
 
 ;############################################################
