@@ -119,7 +119,7 @@ static tU16 getDoorRawPos_U16(void)
     /* Clear any pending interrupt - should not happen */
     ADCSRA |= _BV(ADIF);
     /* Start conversion */
-    ADCSRA |= (1 << ADEN) | (1 << ADSC) | _BV(ADIE);
+    ADCSRA |= _BV(ADEN) | _BV(ADSC) | _BV(ADIE);
 
     /* Necessary check if any other interrupt wakes the MCU. */
     while (ADCSRA & _BV(ADSC))
