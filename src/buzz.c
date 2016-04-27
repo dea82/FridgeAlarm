@@ -20,7 +20,7 @@ inline void Buzz_init(void)
     CONF_IO(BUZZ_CFG, OUTPUT, 0);
 #if !UART_ENABLE
     /* Set to 'CTC' mode, toggle on match */
-    TCCR0A |= (1 << WGM01) | (1 << COM0A0);
+    TCCR0A |= _BV(WGM01) | _BV(COM0A0);
 #endif
 #if F_CPU == 8000000
     /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
@@ -50,7 +50,7 @@ inline void Buzz_loop(void)
         counter_U08 = 0;
         break;
     case BUZZ_ALARM_E:
-        if (counter_U08++ > BUZZ_ALARM_PERIOD_TIME / TICK)
+        if (++counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK)
         {
             counter_U08 = 0;
         }

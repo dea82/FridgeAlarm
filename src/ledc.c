@@ -25,7 +25,7 @@ inline void Ledc_init(void)
 inline void Ledc_loop(void)
 {
     static tU08 counter_U08;
-    if (counter_U08++ > BLINK_PERIOD_TIME / TICK)
+    if (++counter_U08 > BLINK_PERIOD_TIME / TICK)
     {
         counter_U08 = 0;
     }

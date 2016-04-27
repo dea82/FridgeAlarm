@@ -111,8 +111,9 @@ CINCS =
 CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
-CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -ffunction-sections # Create separate section
+CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -mcall-prologues
+#CFLAGS += -fdata-sections -ffunction-sections
+#CFLAGS += -ffunction-sections # Create separate section
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
@@ -127,7 +128,8 @@ CFLAGS += $(CSTANDARD)
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
 ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
-
+#ASFLAGS += -Wl,-gc-sections
+ASFLAGS += -Wl,--relax
 
 
 #Additional libraries.
