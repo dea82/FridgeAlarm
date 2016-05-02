@@ -111,13 +111,17 @@ CINCS =
 CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
-CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -mcall-prologues
+CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 #CFLAGS += -fdata-sections -ffunction-sections
 #CFLAGS += -ffunction-sections # Create separate section
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
+CFLAGS += -flto
+#CFLAGS += -fno-inline-small-functions
+
+
 
 
 # Assembler flags.
@@ -173,7 +177,10 @@ LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
 LDFLAGS += -Wl,--relax
 LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
-
+LDFLAGS += -flto
+#LDFLAGS += -fwhole-program
+#LDFLAGS += -fno-inline-small-functions
+#LDFLAGS += -nostartfiles # Can save som bytes but reset vector must be manually specified!
 
 
 
