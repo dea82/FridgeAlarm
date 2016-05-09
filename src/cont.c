@@ -76,9 +76,8 @@ inline void Cont_loop(void)
     {
         tDsen_doorState_str doorState_str = Dsen_getDoorState_str();
         /* Normal mode - non calibration mode */
-        switch (doorState_str.doorState_E)
+        if (doorState_str.doorState_E == DSEN_CLOSED_E)
         {
-        case DSEN_CLOSED_E:
             Buzz_setSound(BUZZ_OFF_E);
             if ((doorState_str.timeInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
                     && counter_U08 > MIN_TIME_AWAKE / TICK
@@ -98,8 +97,9 @@ inline void Cont_loop(void)
             /* Reset */
             inhibitAlarm_B = FALSE;
 
-            break;
-        case DSEN_OPEN_E:
+        }
+        else /* DSEN_OPEN_E */
+        {
             counter_U08 = 0;
 
             if (doorState_str.timeInState_U16 > ALARM_OPEN / TICK)
@@ -127,7 +127,6 @@ inline void Cont_loop(void)
                 Ledc_setState(LEDC_RED_E);
                 Buzz_setSound(BUZZ_OFF_E);
             }
-            break;
         }
     }
 }

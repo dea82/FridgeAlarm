@@ -16,10 +16,8 @@ typedef enum
     LEDC_OFF_E,
     LEDC_GREEN_E,
     LEDC_RED_E,
-    LEDC_ORANGE_E,
     LEDC_GREEN_BLINK_E,
     LEDC_RED_BLINK_E,
-    LEDC_ORANGE_BLINK_E
 } tLedState_E;
 
 void Ledc_init(void);

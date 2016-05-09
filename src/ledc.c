@@ -69,10 +69,6 @@ inline void Ledc_loop(void)
         }
         IO_CLR(GREEN_LED_CFG);
         break;
-
-    default:
-        IO_CLR(GREEN_LED_CFG);
-        IO_CLR(RED_LED_CFG);
     }
 }
 
