@@ -18,6 +18,8 @@ static tU16 doorPos_U16;
 
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
+static void eepromWrite(tU08 address_U08, tU08 data_U08);
+static tU08 eepromRead_U08(tU08 address);
 
 /* Just for wake-up */
 EMPTY_INTERRUPT(ADC_vect);
@@ -51,7 +53,8 @@ inline void Dsen_init(void)
     /* Connect pin to ADC with 10-bit precision */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
-    doorClosed_U16 = eeprom_read_word(&doorClosed_EE);
+    doorClosed_U16 = (eepromRead_U08(0) << 8);
+    doorClosed_U16 += eepromRead_U08(1);
 }
 
 inline void Dsen_loop(void)
@@ -170,9 +173,41 @@ tB Dsen_storeClosedPos(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))
     {
-        eeprom_write_word(&doorClosed_EE, doorPos_U16);
+        //eeprom_write_word(&doorClosed_EE, doorPos_U16);
+        eepromWrite(0x00, HI(doorPos_U16));
+        eepromWrite(0x01, LO(doorPos_U16));
         doorClosed_U16 = doorPos_U16;
         calibrationOk_B = TRUE;
     }
     return calibrationOk_B;
+}
+
+
+static void eepromWrite(tU08 address_U08, tU08 data_U08)
+{
+    /* Wait for completion of previous write */
+    while(EECR & _BV(EEPE));
+    /* Set Programming mode */
+    EECR = 0;
+    /* Set up address and data registers */
+    EEAR = address_U08;
+    EEDR = data_U08;
+    cli();
+    /* Write logical one to EEMPE */
+    EECR |= (1<<EEMPE);
+    /* Start eeprom write by setting EEPE */
+    EECR |= (1<<EEPE);
+    sei();
+}
+
+static tU08 eepromRead_U08(tU08 address_U08)
+{
+    /* Wait for completion of previous write */
+    while(EECR & (1<<EEPE));
+    /* Set up address register */
+    EEAR = address_U08;
+    /* Start eeprom read by writing EERE */
+    EECR |= (1<<EERE);
+    /* Return data from data register */
+    return EEDR;
 }

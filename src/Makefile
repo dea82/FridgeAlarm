@@ -49,26 +49,10 @@ FORMAT = ihex
 # Target file name (without extension).
 TARGET = FridgeAlarm
 
-## A directory for common include files and the simple USART library.
-## If you move either the current folder or the Library folder, you'll 
-##  need to change this path to match.
-LIBDIR = #../../AVR-Programming-Library
-
 
 # List C source files here. (C dependencies are automatically generated.)
-#SRC = $(TARGET).c 
-SRC=$(wildcard *.c $(LIBDIR)/*.c)
-
-
-
-# List Assembler source files here.
-# Make them always end in a capital .S.  Files ending in a lowercase .s
-# will not be considered source files but generated files (assembler
-# output from the compiler), and will be deleted upon "make clean"!
-# Even though the DOS/Win* filesystem matches both .s and .S the same,
-# it will preserve the spelling of the filenames, and gcc itself does
-# care about how the name is spelled on its command-line.
-ASRC=$(wildcard *.S $(LIBDIR)/*.S)
+#SRC = $(TARGET).c
+SRC=$(wildcard *.c)
 
 
 
@@ -82,10 +66,6 @@ OPT = s
 # AVR (extended) COFF requires stabs, plus an avr-objcopy run.
 DEBUG = stabs
 
-# List any extra directories to look for include files here.
-#     Each directory must be seperated by a space.
-EXTRAINCDIRS =
-
 
 # Compiler flag to set the C Standard level.
 # c89   - "ANSI" C
@@ -96,9 +76,6 @@ CSTANDARD = -std=gnu99
 
 # Place -D or -U options here
 CDEFS = -DF_CPU=$(F_CPU)
-
-# Place -I options here
-CINCS =
 
 
 # Compiler flags.
@@ -111,16 +88,14 @@ CINCS =
 CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
-CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 #CFLAGS += -fdata-sections -ffunction-sections
-#CFLAGS += -ffunction-sections # Create separate section
+CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
 CFLAGS += -flto
 #CFLAGS += -fno-inline-small-functions
-
 
 
 
@@ -132,7 +107,6 @@ CFLAGS += -flto
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
 ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
-#ASFLAGS += -Wl,-gc-sections
 ASFLAGS += -Wl,--relax
 
 
@@ -219,7 +193,6 @@ AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
 AVRDUDE_FLAGS += $(AVRDUDE_NO_VERIFY)
 AVRDUDE_FLAGS += $(AVRDUDE_VERBOSE)
 AVRDUDE_FLAGS += $(AVRDUDE_ERASE_COUNTER)
-
 
 
 # ---------------------------------------------------------------------------
@@ -336,7 +309,7 @@ createdir:
 
 # Program the device.
 program: $(OUTDIR)/$(TARGET).hex $(OUTDIR)/$(TARGET).eep
-	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) 
+	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
 $(AVRDUDE_WRITE_EEPROM)
 
 

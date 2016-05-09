@@ -80,8 +80,8 @@ inline void Cont_loop(void)
         {
             Buzz_setSound(BUZZ_OFF_E);
             if ((doorState_str.timeInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
-                    && counter_U08 > MIN_TIME_AWAKE / TICK
-                    && buttState_str.state_E == BUTT_RELEASED_E)
+                && (counter_U08 > MIN_TIME_AWAKE / TICK)
+                && (buttState_str.state_E == BUTT_RELEASED_E))
             {
                 /* When door has been closed for a long time and no activity on button it's OK to go to deep sleep.*/
                 counter_U08 = 0;

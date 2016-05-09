@@ -59,7 +59,7 @@ int main(void)
     PRR = PRR_REG;
 
     /* Power reduction - turn off digital input buffers*/
-    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
+    DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
 
     /* Initialize sensors */
     Butt_init();

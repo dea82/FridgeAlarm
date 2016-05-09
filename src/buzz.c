@@ -37,19 +37,14 @@ inline void Buzz_loop(void)
 {
     static tU08 counter_U08;
 
-    switch (soundType_E)
+    if (soundType_E == BUZZ_ON_E)
     {
-    case BUZZ_OFF_E:
-        TCCR0B = 0;
-        PRR |= _BV(PRTIM0);
-        counter_U08 = 0;
-        break;
-    case BUZZ_ON_E:
         TCCR0B = _BV(CS01) | _BV(CS00);
         PRR &= ~_BV(PRTIM0);
         counter_U08 = 0;
-        break;
-    case BUZZ_ALARM_E:
+    }
+    else if (soundType_E == BUZZ_ALARM_E)
+    {
         if (++counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK)
         {
             counter_U08 = 0;
@@ -64,7 +59,13 @@ inline void Buzz_loop(void)
             TCCR0B = 0;
             PRR |= _BV(PRTIM0);
         }
-        break;
+
+    }
+    else
+    {
+        TCCR0B = 0;
+        PRR |= _BV(PRTIM0);
+        counter_U08 = 0;
     }
 }
 
