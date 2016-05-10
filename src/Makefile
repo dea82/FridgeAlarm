@@ -51,9 +51,11 @@ TARGET = FridgeAlarm
 
 
 # List C source files here. (C dependencies are automatically generated.)
-#SRC = $(TARGET).c
-SRC=$(wildcard *.c)
+SRC = main.c $(filter-out main.c,$(wildcard *.c))
 
+# List S (assembler) files here. Mandatory file is boot.S which
+# contains the reset and interrupt vector.
+ASRC= boot.S $(filter-out boot.S,$(wildcard *.S))
 
 
 # Optimization level, can be [0, 1, 2, 3, s].
@@ -88,13 +90,14 @@ CDEFS = -DF_CPU=$(F_CPU)
 CFLAGS = -g$(DEBUG)
 CFLAGS += $(CDEFS) $(CINCS)
 CFLAGS += -O$(OPT)
-#CFLAGS += -fdata-sections -ffunction-sections
+CFLAGS += -fdata-sections -ffunction-sections
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
 CFLAGS += -flto
+#CFLAGS += -nostartfiles
 #CFLAGS += -fno-inline-small-functions
 
 
@@ -107,7 +110,7 @@ CFLAGS += -flto
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
 ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
-ASFLAGS += -Wl,--relax
+ASFLAGS += -Wl,--relax -Wl,-gc-sections -flto
 
 
 #Additional libraries.
@@ -130,17 +133,7 @@ SCANF_LIB =
 
 MATH_LIB = -lm
 
-# External memory options
 
-# 64 KB of external RAM, starting after internal RAM (ATmega128!),
-# used for variables (.data/.bss) and heap (malloc()).
-#EXTMEMOPTS = -Wl,-Tdata=0x801100,--defsym=__heap_end=0x80ffff
-
-# 64 KB of external RAM, starting after internal RAM (ATmega128!),
-# only used for heap (malloc()).
-#EXTMEMOPTS = -Wl,--defsym=__heap_start=0x801100,--defsym=__heap_end=0x80ffff
-
-EXTMEMOPTS =
 
 # Linker flags.
 #  -Wl,...:     tell GCC to pass this to linker.
@@ -149,12 +142,12 @@ EXTMEMOPTS =
 LDFLAGS = -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref
 LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
 LDFLAGS += -Wl,--relax
-LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 LDFLAGS += -flto
-#LDFLAGS += -fwhole-program
+LDFLAGS += -nostartfiles
+#LDFLAGS += -nodefaultlibs
 #LDFLAGS += -fno-inline-small-functions
-#LDFLAGS += -nostartfiles # Can save som bytes but reset vector must be manually specified!
+
 
 
 
@@ -241,7 +234,7 @@ MSG_CLEANING = Cleaning project:
 
 
 # Define all object files.
-OBJ = $(SRC:%.c=$(OUTDIR)/%.o) $(ASRC:%.S=$(OUTDIR)/%.o)
+OBJ = $(ASRC:%.S=$(OUTDIR)/%.o) $(SRC:%.c=$(OUTDIR)/%.o)
 
 # Define all listing files.
 LST = $(ASRC:%.S=$(OUTDIR)/%.lst) $(SRC:%.c=$(OUTDIR)/%.lst)

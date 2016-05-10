@@ -17,7 +17,6 @@ static tSoundType_E soundType_E;
 
 inline void Buzz_init(void)
 {
-    CONF_IO(BUZZ_CFG, OUTPUT, 0);
 #if !UART_ENABLE
     /* Set to 'CTC' mode, toggle on match */
     TCCR0A |= _BV(WGM01) | _BV(COM0A0);

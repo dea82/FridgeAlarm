@@ -35,9 +35,9 @@
 
 /**/
 #if CPU_LOAD_MEASUREMENT_ENABLE
-#define PRR_REG (_BV(PRUSI) | _BV(PRTIM0))
+#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0))
 #else
-#define PRR_REG (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
+#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
 #endif
 
 #define GET_PORT(P,...) (PORT ## P)
@@ -54,6 +54,9 @@
 #define BUZZ_CFG        B,0
 #define DSEN_SWITCH_CFG B,4
 #define UART_CFG        B,0
+
+#define DDRB_INIT   0b00000111
+#define PORTB_INIT  0b00100000
 
 #else
 #error "Not supported MCU."

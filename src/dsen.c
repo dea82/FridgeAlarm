@@ -26,8 +26,6 @@ EMPTY_INTERRUPT(ADC_vect);
 
 inline void Dsen_init(void)
 {
-    CONF_IO(DSEN_CFG, INPUT, NOPULLUP);
-
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
     ADCSRA = (1 << ADPS2) | (1 << ADPS1);

@@ -17,9 +17,6 @@ static tButt_State_str buttState_str;
 
 inline void Butt_init(void)
 {
-    /* Activate internal pull-up */
-    CONF_IO(BUTT_CFG, INPUT, PULLUP);
-
     /* Pin change interrupt on button - this does not enables the interrupt, this is done later. */
     PCINT(BUTT_CFG);
 }

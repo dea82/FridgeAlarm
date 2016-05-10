@@ -21,6 +21,7 @@
 #include "type.h"
 #include "uart.h"
 
+
 typedef enum
 {
     WDTO_16MS_E, WDTO_8S_E,
@@ -36,30 +37,24 @@ extern char Cpul_getMaxCycles_U08(void);
 static void enableWatchdog(const tWatchdogTimeout_E time_E);
 static void powerDown(const tSleepMode_E sleepMode_E);
 
-ISR(WDT_vect, ISR_NAKED)
-{
-    /* Just for wake-up, turn-off interrupt and reinitialize them again in main loop.
-     * Interrupt flag is cleared by MCU when entering the interrupt routine. */
-    asm volatile("ret");
-}
-
-ISR(PCINT0_vect, ISR_ALIASOF(WDT_vect));
-
+/* Declaring main as OS_main saves some register pushing to stack. */
+int main(void) __attribute__((OS_main));
 int main(void)
 {
-    /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
-     * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4. */
-    WDTCR = 0;
+    /* ATTENTION! Initialization code can be found in boot.S */
 
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
-    /* Power reduction
-     * Turns off Timer0, (Timer1) and USI */
-    PRR = PRR_REG;
+    /* Turns off Timer0, (Timer1) and USI */
+    PRR = PRR_INIT;
 
     /* Power reduction - turn off digital input buffers*/
     DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
+
+    /* Initialize I/O Ports */
+    DDRB = DDRB_INIT;
+    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed. */
 
     /* Initialize sensors */
     Butt_init();
@@ -140,10 +135,9 @@ static void powerDown(const tSleepMode_E sleepMode_E)
     }
 #if CPU_LOAD_MEASUREMENT_ENABLE
     Cpul_stopPoint();
-    
+
     Uart_TransmitChar(Cpul_getMaxCycles_U08());
 #endif
     sleep_mode()
     ;
 }
-
