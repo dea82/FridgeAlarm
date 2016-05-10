@@ -145,6 +145,6 @@ static void powerDown(const tSleepMode_E sleepMode_E)
 
     Uart_TransmitChar(Cpul_getMaxCycles_U08());
 #endif
-    sleep_mode()
-    ;
+    sleep_bod_disable();
+    sleep_mode();
 }

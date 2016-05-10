@@ -26,6 +26,6 @@ void Dsen_init(void);
 void Dsen_loop(void);
 tDsen_doorState_str Dsen_getDoorState_str(void);
 tB Dsen_calibrationNeeded_B(void);
-tB Dsen_storeClosedPos(void);
+tB Dsen_storeClosedPos_B(void);
 
 #endif /* DSEN_H_ */

@@ -166,7 +166,7 @@ static tB withinRange_B(const tU16 sensorValue_U16)
     return ret_B;
 }
 
-tB Dsen_storeClosedPos(void)
+tB Dsen_storeClosedPos_B(void)
 {
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))

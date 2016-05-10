@@ -39,7 +39,7 @@ inline void Cont_loop(void)
             && calibrationState_E == NO_CALIBRATION_E)
     {
         /* Enters calibration mode */
-        if (Dsen_storeClosedPos())
+        if (Dsen_storeClosedPos_B() == TRUE)
         {
             calibrationState_E = CALIBRATION_SUCCESS_E;
         }
