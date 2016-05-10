@@ -51,7 +51,11 @@ int main(void)
 
     /* Power reduction - turn off digital input buffers*/
     DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
-
+    if (MCUSR & _BV(BORF))
+    {
+      CONF_IO(RED_LED_CFG, OUTPUT, 1);
+      for(;;){}
+    }
     /* Initialize I/O Ports */
     DDRB = DDRB_INIT;
     PORTB |= PORTB_INIT; /* Optimization, only one bit is changed. */
