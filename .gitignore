@@ -1,9 +1,5 @@
-*.b##
 src/output
-src/.dep
-*.*#*
-AutoSave*.skp
-*~.skp
 .DS_Store
-src/build
+.idea
+*.*#*
 *.lck
