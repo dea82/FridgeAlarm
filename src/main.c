@@ -29,7 +29,7 @@ typedef enum
 
 /* Assembly function. */
 #if CPU_LOAD_MEASUREMENT_ENABLE
-extern void Cpul_startPoint(void);
+extern void Cpul_startPoint(tU08);
 extern void Cpul_stopPoint(void);
 extern char Cpul_getMaxCycles_U08(void);
 #endif
@@ -49,16 +49,19 @@ int main(void)
     /* Turns off Timer0, (Timer1) and USI */
     PRR = PRR_INIT;
 
-    /* Power reduction - turn off digital input buffers*/
+    /* Power reduction - turn off digital input buffers except for button */
     DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
-    if (MCUSR & _BV(BORF))
+
+    /* Reset due to low battery or other causes that should not occur */
+    if (!(MCUSR & _BV(PORF)))
     {
       CONF_IO(RED_LED_CFG, OUTPUT, 1);
+      CONF_IO(GREEN_LED_CFG, OUTPUT, 1);
       for(;;){}
     }
     /* Initialize I/O Ports */
     DDRB = DDRB_INIT;
-    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed. */
+    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
 
     /* Initialize sensors */
     Butt_init();
