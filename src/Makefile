@@ -1,39 +1,4 @@
-# Hey Emacs, this is a -*- makefile -*-
-#
-# WinAVR Sample makefile written by Eric B. Weddington, Jörg Wunsch, et al.
-# Released to the Public Domain
-# Please read the make user manual!
-#
-# Additional material for this makefile was submitted by:
-#  Tim Henigan
-#  Peter Fleury
-#  Reiner Patommel
-#  Sander Pool
-#  Frederik Rouleau
-#  Markus Pfaff
-#
-# On command line:
-#
-# make all = Make software.
-#
-# make clean = Clean out built project files.
-#
-# make coff = Convert ELF to AVR COFF (for use with AVR Studio 3.x or VMLAB).
-#
-# make extcoff = Convert ELF to AVR Extended COFF (for use with AVR Studio
-#                4.07 or greater).
-#
-# make program = Download the hex file to the device, using avrdude.  Please
-#                customize the avrdude settings below first!
-#
-# make filename.s = Just compile filename.c into the assembler code only
-#
-# To rebuild project do "make clean" then "make all".
-#
-
-# Output Directory name
-# Use OUTDIR= .
-# for current directory
+# Build directory
 OUTDIR = output
 
 
@@ -51,151 +16,41 @@ TARGET = FridgeAlarm
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = main.c $(filter-out main.c,$(wildcard *.c))
+SRC = $(wildcard *.c)
 
 # List S (assembler) files here. Mandatory file is boot.S which
 # contains the reset and interrupt vector.
 ASRC= boot.S $(filter-out boot.S,$(wildcard *.S))
 
 
-# Optimization level, can be [0, 1, 2, 3, s].
-# 0 = turn off optimization. s = optimize for size.
-# (Note: 3 is not always the best optimization level. See avr-libc FAQ.)
+# Optimize for size
 OPT = s
 
-# Debugging format.
-# Native formats for AVR-GCC's -g are stabs [default], or dwarf-2.
-# AVR (extended) COFF requires stabs, plus an avr-objcopy run.
-DEBUG = stabs
-
-
-# Compiler flag to set the C Standard level.
-# c89   - "ANSI" C
-# gnu89 - c89 plus GCC extensions
-# c99   - ISO C99 standard (not yet fully implemented)
-# gnu99 - c99 plus GCC extensions
 CSTANDARD = -std=gnu99
 
 # Place -D or -U options here
 CDEFS = -DF_CPU=$(F_CPU)
 
 
-# Compiler flags.
-#  -g*:          generate debugging information
-#  -O*:          optimization level
-#  -f...:        tuning, see GCC manual and avr-libc documentation
-#  -Wall...:     warning level
-#  -Wa,...:      tell GCC to pass this to the assembler.
-#    -adhlns...: create assembler listing
-CFLAGS = -g$(DEBUG)
-CFLAGS += $(CDEFS) $(CINCS)
+CFLAGS = $(CDEFS)
 CFLAGS += -O$(OPT)
-CFLAGS += -fdata-sections -ffunction-sections
-CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -Wall -Wstrict-prototypes
-CFLAGS += -Wa,-adhlns=$(<:%.c=$(OUTDIR)/%.lst)
-CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
+CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+# Put data and functions in separate sections - not linked if not used
+CFLAGS += -fdata-sections -ffunction-sections
+CFLAGS += -Wall -Wstrict-prototypes
+# Link time optimization - more straight instruction and not so many jumps.
 CFLAGS += -flto
-#CFLAGS += -nostartfiles
-#CFLAGS += -fno-inline-small-functions
 
 
+ASFLAGS = -DF_CPU=$(F_CPU)
+ASFLAGS += -fdata-sections -ffunction-sections -flto
 
-# Assembler flags.
-#  -Wa,...:   tell GCC to pass this to the assembler.
-#  -ahlms:    create listing
-#  -gstabs:   have the assembler create line number information; note that
-#             for use in COFF files, additional information about filenames
-#             and function names needs to be present in the assembler source
-#             files -- see avr-libc docs [FIXME: not yet described there]
-ASFLAGS = -Wa,-adhlns=$(<:%.S=$(OUTDIR)/%.lst),-gstabs -DF_CPU=$(F_CPU)
-ASFLAGS += -Wl,--relax -Wl,-gc-sections -flto
-
-
-#Additional libraries.
-
-# Minimalistic printf version
-PRINTF_LIB_MIN = -Wl,-u,vfprintf -lprintf_min
-
-# Floating point printf version (requires MATH_LIB = -lm below)
-PRINTF_LIB_FLOAT = -Wl,-u,vfprintf -lprintf_flt
-
-PRINTF_LIB =
-
-# Minimalistic scanf version
-SCANF_LIB_MIN = -Wl,-u,vfscanf -lscanf_min
-
-# Floating point + %[ scanf version (requires MATH_LIB = -lm below)
-SCANF_LIB_FLOAT = -Wl,-u,vfscanf -lscanf_flt
-
-SCANF_LIB =
-
-MATH_LIB = -lm
-
-
-
-# Linker flags.
-#  -Wl,...:     tell GCC to pass this to linker.
-#    -Map:      create map file
-#    --cref:    add cross reference to  map file
-LDFLAGS = -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref
-LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
+LDFLAGS = -Wl,-gc-sections # Do not link unused function sections
 LDFLAGS += -Wl,--relax
-LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 LDFLAGS += -flto
 LDFLAGS += -nostartfiles
-#LDFLAGS += -nodefaultlibs
-#LDFLAGS += -fno-inline-small-functions
 
-
-
-
-# Programming support using avrdude. Settings and variables.
-
-# Programming hardware: alf avr910 avrisp bascom bsd
-# dt006 pavr picoweb pony-stk200 sp12 stk200 stk500
-#
-# Type: avrdude -c ?
-# to get a full listing.
-#
-AVRDUDE_PROGRAMMER = stk500
-
-# com1 = serial port. Use lpt1 to connect to parallel port.
-AVRDUDE_PORT = com1    # programmer connected to serial device
-
-AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
-#AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
-
-
-# Uncomment the following if you want avrdude's erase cycle counter.
-# Note that this counter needs to be initialized first using -Yn,
-# see avrdude manual.
-#AVRDUDE_ERASE_COUNTER = -y
-
-# Uncomment the following if you do /not/ wish a verification to be
-# performed after programming the device.
-#AVRDUDE_NO_VERIFY = -V
-
-# Increase verbosity level.  Please use this when submitting bug
-# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude>
-# to submit bug reports.
-#AVRDUDE_VERBOSE = -v -v
-
-AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
-AVRDUDE_FLAGS += $(AVRDUDE_NO_VERIFY)
-AVRDUDE_FLAGS += $(AVRDUDE_VERBOSE)
-AVRDUDE_FLAGS += $(AVRDUDE_ERASE_COUNTER)
-
-
-# ---------------------------------------------------------------------------
-
-# Define directories, if needed.
-DIRAVR = c:/winavr
-DIRAVRBIN = $(DIRAVR)/bin
-DIRAVRUTILS = $(DIRAVR)/utils/bin
-DIRINC = .
-DIRLIB = $(DIRAVR)/avr/lib
 
 
 # Define programs and commands.
@@ -205,7 +60,6 @@ OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
 NM = avr-nm
-AVRDUDE = avrdude
 REMOVE = rm -f
 COPY = cp
 
@@ -233,7 +87,8 @@ MSG_CLEANING = Cleaning project:
 
 
 
-# Define all object files.
+# Define all object files. Important to build assembly first because
+# it contains init0 section.
 OBJ = $(ASRC:%.S=$(OUTDIR)/%.o) $(SRC:%.c=$(OUTDIR)/%.o)
 
 # Define all listing files.
