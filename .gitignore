@@ -3,3 +3,4 @@ src/output
 .idea
 *.*#*
 *.lck
+.dep
