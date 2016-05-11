@@ -20,7 +20,7 @@ SRC = $(wildcard *.c)
 
 # List S (assembler) files here. Mandatory file is boot.S which
 # contains the reset and interrupt vector.
-ASRC= boot.S $(filter-out boot.S,$(wildcard *.S))
+ASRC = boot.S $(filter-out boot.S,$(wildcard *.S))
 
 
 # Optimize for size
@@ -28,28 +28,28 @@ OPT = s
 
 CSTANDARD = -std=gnu99
 
-# Place -D or -U options here
-CDEFS = -DF_CPU=$(F_CPU)
+DEBUG = stabs
 
 
-CFLAGS = $(CDEFS)
+COMMONFLAGS = -mmcu=$(MCU) -g$(DEBUG) -DF_CPU=$(F_CPU) -flto
+
+CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
 CFLAGS += $(CSTANDARD)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 # Put data and functions in separate sections - not linked if not used
 CFLAGS += -fdata-sections -ffunction-sections
 CFLAGS += -Wall -Wstrict-prototypes
-# Link time optimization - more straight instruction and not so many jumps.
-CFLAGS += -flto
 
+ASFLAGS = $(COMMONFLAGS)
+ASFLAGS += -DF_CPU=$(F_CPU)
+ASFLAGS += -fdata-sections -ffunction-sections
 
-ASFLAGS = -DF_CPU=$(F_CPU)
-ASFLAGS += -fdata-sections -ffunction-sections -flto
-
-LDFLAGS = -Wl,-gc-sections # Do not link unused function sections
+LDFLAGS = $(COMMONFLAGS)
+LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
 LDFLAGS += -Wl,--relax
-LDFLAGS += -flto
 LDFLAGS += -nostartfiles
+
 
 
 
@@ -101,8 +101,8 @@ GENDEPFLAGS = -Wp,-M,-MP,-MT,$(*F).o,-MF,.dep/$(@F).d
 
 # Combine all necessary flags and optional flags.
 # Add target processor to flags.
-ALL_CFLAGS = -mmcu=$(MCU) -I. $(CFLAGS) $(GENDEPFLAGS)
-ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
+ALL_CFLAGS = -I. $(CFLAGS) $(GENDEPFLAGS)
+ALL_ASFLAGS = -I. -x assembler-with-cpp $(ASFLAGS)
 
 
 
