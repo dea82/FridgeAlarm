@@ -46,7 +46,7 @@ int main(void)
     /* Reduce power consumption - switch of Analog Comparator */
     ACSR |= _BV(ACD);
 
-    /* Turns off Timer0, (Timer1) and USI */
+    /* Turns off (Timer1) and USI */
     PRR = PRR_INIT;
 
     /* Power reduction - turn off digital input buffers except for button */
@@ -55,10 +55,15 @@ int main(void)
     /* Reset due to low battery or other causes that should not occur */
     if (!(MCUSR & _BV(PORF)))
     {
-      CONF_IO(RED_LED_CFG, OUTPUT, 1);
-      CONF_IO(GREEN_LED_CFG, OUTPUT, 1);
-      for(;;){}
+        CONF_IO(GREEN_LED_CFG, OUTPUT, 1);
+        CONF_IO(RED_LED_CFG, OUTPUT, 1);
+        for(;;){}
     }
+    else
+    {
+        MCUSR = 0;
+    }
+
     /* Initialize I/O Ports */
     DDRB = DDRB_INIT;
     PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
@@ -80,11 +85,13 @@ int main(void)
 #if CPU_LOAD_MEASUREMENT_ENABLE
         Cpul_startPoint(_BV(CS12) | _BV(CS11) | _BV(CS10));
 #endif
+
         /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
         enableWatchdog(WDTO_16MS_E);
         /* Make sure to disable button interrupt before continue. The MCU is awake. */
         Butt_disableInterrupt();
         /* Ready to fire off interrupt again, but it should not happen until it's at sleep. */
+
         sei();
 
         /* Sensors */
@@ -131,8 +138,7 @@ static void powerDown(const tSleepMode_E sleepMode_E)
         enableWatchdog(WDTO_8S_E);
         Butt_enableInterrupt();
     }
-
-    if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
+    else if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
     {
         set_sleep_mode(SLEEP_MODE_IDLE);
     }
@@ -151,4 +157,6 @@ static void powerDown(const tSleepMode_E sleepMode_E)
     sei(); /* To be able to wake-up */
     asm volatile("sleep"::);
     MCUCR &= ~_BV(SE);
+    //sleep_mode();
+
 }

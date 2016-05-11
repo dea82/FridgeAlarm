@@ -11,7 +11,7 @@
 #include "conf.h"
 #include "type.h"
 
-#define BUZZ_ALARM_PERIOD_TIME 150
+#define BUZZ_ALARM_PERIOD_TIME 1000 /* [ms]*/
 
 static tSoundType_E soundType_E;
 
@@ -38,8 +38,9 @@ inline void Buzz_loop(void)
 
     if (soundType_E == BUZZ_ON_E)
     {
-        TCCR0B = _BV(CS01) | _BV(CS00);
+        /* Enable module before accessing registers */
         PRR &= ~_BV(PRTIM0);
+        TCCR0B = _BV(CS01) | _BV(CS00);
         counter_U08 = 0;
     }
     else if (soundType_E == BUZZ_ALARM_E)
@@ -50,11 +51,13 @@ inline void Buzz_loop(void)
         }
         if (counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK / 2)
         {
-            TCCR0B = _BV(CS01) | _BV(CS00);
+            /* Enable module before accessing registers */
             PRR &= ~_BV(PRTIM0);
+            TCCR0B = _BV(CS01) | _BV(CS00);
         }
         else
         {
+            /* Stop clock before disabling module */
             TCCR0B = 0;
             PRR |= _BV(PRTIM0);
         }
@@ -62,6 +65,7 @@ inline void Buzz_loop(void)
     }
     else
     {
+        /* Stop clock before disabling module */
         TCCR0B = 0;
         PRR |= _BV(PRTIM0);
         counter_U08 = 0;

@@ -123,8 +123,7 @@ static tU16 getDoorRawPos_U16(void)
     while (ADCSRA & _BV(ADSC))
     {
         /* Wait for conversion */
-        sleep_mode()
-        ;
+        sleep_mode();
     }
 
     /* Disable interrupt and ADC. */
@@ -168,7 +167,6 @@ tB Dsen_storeClosedPos_B(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))
     {
-        //eeprom_write_word(&doorClosed_EE, doorPos_U16);
         eepromWrite(0x00, HI(doorPos_U16));
         eepromWrite(0x01, LO(doorPos_U16));
         doorClosed_U16 = doorPos_U16;

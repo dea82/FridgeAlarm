@@ -14,7 +14,7 @@
 /* Time before the system goes to power save mode when door is closed. [ms] */
 #define DEEP_SLEEP_TIME 2000
 /* Time before the alarm goes of with open door. [ms] */
-#define ALARM_OPEN 40000
+#define ALARM_OPEN 5000
 /* Lights on after door closed [ms] */
 #define LIGHTS_ON_DOOR_CLOSED 2000
 /* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
@@ -33,19 +33,23 @@
 #define UART_ENABLE (UART_DEBUG_PRINTOUT_ENABLE | CPU_LOAD_MEASUREMENT_ENABLE)
 
 
-/**/
+/* Rationale why Timer0 and PRADC is not disabled:
+ * The module is disconnected and all registers connected
+ * to the module is frozen and not accessible,
+ * Buzz_init and Dsen_init will fail to set registers. */
 #if defined(__AVR_ATtiny85__)
 
 #if CPU_LOAD_MEASUREMENT_ENABLE
-#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0))
-#else
-#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
-#endif
 
+/* See comment above why these bits are choosen. */
+#define PRR_INIT _BV(PRUSI)
+#else
+#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM1))
+#endif
 
 #elif defined(__AVR_ATtiny13A__)
 
-#define PRR_INIT (_BV(PRTIM0))
+#define PRR_INIT (0)
 #define WDIF WDTIF
 #define WDIE WDTIE
 
@@ -67,7 +71,7 @@
 #define DSEN_SWITCH_CFG B,4
 #define UART_CFG        B,0
 
-#define DDRB_INIT   0b00000111
+#define DDRB_INIT   0b00010111
 #define PORTB_INIT  0b00100000
 
 #else
