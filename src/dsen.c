@@ -21,9 +21,6 @@ static tU16 getDoorRawPos_U16(void);
 static void eepromWrite(tU08 address_U08, tU08 data_U08);
 static tU08 eepromRead_U08(tU08 address);
 
-/* Just for wake-up */
-EMPTY_INTERRUPT(ADC_vect);
-
 inline void Dsen_init(void)
 {
 #if F_CPU == 9600000

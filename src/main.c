@@ -145,6 +145,9 @@ static void powerDown(const tSleepMode_E sleepMode_E)
 
     Uart_TransmitChar(Cpul_getMaxCycles_U08());
 #endif
-    sleep_bod_disable();
-    sleep_mode();
+    MCUSR |= (_BV(BODS) | _BV(SE) | _BV(BODSE));
+    MCUSR &= ~_BV(BODSE);
+    sei();
+    asm volatile("sleep"::);
+    MCUSR &= ~_BV(SE);
 }
