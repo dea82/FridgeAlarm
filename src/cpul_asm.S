@@ -5,7 +5,7 @@
 
 #include <avr/io.h>
 
-#if defined(__attiny85__)
+#if defined(__AVR_ATtiny85__)
     .section .data
 maxCycles:
     .data 0

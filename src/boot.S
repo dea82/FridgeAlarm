@@ -16,13 +16,13 @@ rjmp __do_clear_bss
 nop
 nop
 nop
-#if defined(__attiny85__)
+#if defined(__AVR_ATtiny85__)
 reti        ; ADC Conversion Complete
 nop
 nop
 nop
 ret         ; WDT timeout
-#elsif defined(__attiny13__)
+#elsif defined(__AVR_ATtiny13A__)
 ret         ; WDT timeout
 reti        ; ADC Conversion Complete
 #endif
