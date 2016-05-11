@@ -3,6 +3,7 @@ OUTDIR = output
 
 
 # MCU name
+#MCU = attiny13a
 MCU = attiny85
 
 # Clock frequency

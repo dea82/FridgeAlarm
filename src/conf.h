@@ -34,15 +34,27 @@
 
 
 /**/
+#if defined(__AVR_ATtiny85__)
+
 #if CPU_LOAD_MEASUREMENT_ENABLE
 #define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0))
 #else
 #define PRR_INIT (_BV(PRUSI) | _BV(PRTIM0) | _BV(PRTIM1))
 #endif
 
+
+#elif defined(__AVR_ATtiny13A__)
+
+#define PRR_INIT (_BV(PRTIM0))
+#define WDIF WDTIF
+#define WDIE WDTIE
+
+#endif
+
+
 #define GET_PORT(P,...) (PORT ## P)
 
-#if defined(__AVR_ATtiny85__)
+#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
 
 /*************************************************
  * PIN CONFIGURATION

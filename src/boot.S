@@ -16,11 +16,16 @@ rjmp __do_clear_bss
 nop
 nop
 nop
+#if defined(__attiny85__)
 reti        ; ADC Conversion Complete
 nop
 nop
 nop
 ret         ; WDT timeout
+#elsif defined(__attiny13__)
+ret         ; WDT timeout
+reti        ; ADC Conversion Complete
+#endif
 ; Initialization of SRAM is done here automatically by avr-gcc.
 .section .init9
 rjmp main

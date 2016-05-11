@@ -55,7 +55,7 @@ typedef signed int tS16;
 #define IO_CLR(CFG)  ({ GET_PORT(CFG) &= ~GET_MASK(CFG); })
 #define IO_PIN(CFG)  ({ GET_BIT(CFG)})
 
-#if defined(__AVR_ATtiny85__)
+#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
 #define PCINT(CFG)   ({ PCMSK |= GET_MASK(CFG); })
 #endif
 
