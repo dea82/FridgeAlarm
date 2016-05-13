@@ -96,8 +96,10 @@ static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;
 
-    /* Prepare for sleep */
-    if (TCCR0B == 0)
+
+    /* Prepare for sleep - check if timer is running.
+     * Assume that timer is not running if module is disconnected. */
+    if (PRR & _BV(PRTIM0))
     {
         set_sleep_mode(SLEEP_MODE_ADC);
     }
@@ -106,11 +108,12 @@ static tU16 getDoorRawPos_U16(void)
         set_sleep_mode(SLEEP_MODE_IDLE);
     }
 
-    // Turn on sensor
+    /* Turn on sensor */
     IO_SET(DSEN_SWITCH_CFG);
+
+    /* Activate ADC module */
     PRR &= ~_BV(PRADC);
-    //TODO: Should be possible to remove!
-    DIDR0 &= ~_BV(ADC3D);
+
     /* According to (Allegro 1302) data sheet of sensor star-up time is 5 us.*/
     _delay_us(5);
 
@@ -128,12 +131,12 @@ static tU16 getDoorRawPos_U16(void)
 
     /* Disable interrupt and ADC. */
     ADCSRA &= ~(_BV(ADEN) | _BV(ADIE));
-    // Turn off sensor
+
+    /* Turn off sensor */
     IO_CLR(DSEN_SWITCH_CFG);
+
     /* Power savings */
     PRR |= _BV(PRADC);
-    //TODO: Should be possible to remove!
-    DIDR0 |= _BV(ADC3D);
 
     sensorValue_U16 = ADCL;
     sensorValue_U16 |= ((ADCH & 0x3) << 8);

@@ -15,11 +15,13 @@
 
 static tSoundType_E soundType_E;
 
+static void turnOn(void);
+static void turnOff(void);
+
 inline void Buzz_init(void)
 {
 #if !UART_ENABLE
-    /* Set to 'CTC' mode, toggle on match */
-    TCCR0A |= _BV(WGM01) | _BV(COM0A0);
+
 #endif
 #if F_CPU == 8000000
     /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
@@ -38,9 +40,7 @@ inline void Buzz_loop(void)
 
     if (soundType_E == BUZZ_ON_E)
     {
-        /* Enable module before accessing registers */
-        PRR &= ~_BV(PRTIM0);
-        TCCR0B = _BV(CS01) | _BV(CS00);
+        turnOn();
         counter_U08 = 0;
     }
     else if (soundType_E == BUZZ_ALARM_E)
@@ -51,25 +51,40 @@ inline void Buzz_loop(void)
         }
         if (counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK / 2)
         {
-            /* Enable module before accessing registers */
-            PRR &= ~_BV(PRTIM0);
-            TCCR0B = _BV(CS01) | _BV(CS00);
+            turnOn();
         }
         else
         {
-            /* Stop clock before disabling module */
-            TCCR0B = 0;
-            PRR |= _BV(PRTIM0);
+            turnOff();
         }
 
     }
     else
     {
-        /* Stop clock before disabling module */
-        TCCR0B = 0;
-        PRR |= _BV(PRTIM0);
+        turnOff();
         counter_U08 = 0;
     }
+}
+
+static void turnOn(void)
+{
+    /* Enable module before accessing registers */
+    PRR = PRR_INIT & ~_BV(PRTIM0);
+    /* Set to 'CTC' mode, toggle on match */
+    TCCR0A = _BV(COM0A0) | _BV(WGM01);
+    /* Start clock */
+    TCCR0B = _BV(CS01) | _BV(CS00);
+}
+
+static void turnOff(void)
+{
+    /* Stop clock */
+    TCCR0B = 0;
+    /* Normal port operation, disconnect OC0A with potential of leaving
+     * pin state high. */
+    TCCR0A = 0;
+    /* Disconnect module */
+    PRR = PRR_INIT | _BV(PRTIM0);
 }
 
 void Buzz_setSound(const tSoundType_E soundTypeReq_E)

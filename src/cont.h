@@ -18,7 +18,8 @@ typedef enum
 {
     CONT_SHORT_DEEP_SLEEP_E,
     CONT_LONG_DEEP_SLEEP_E,
-    CONT_SLEEP_WITH_TIMER_RUNNING_E
+    CONT_SLEEP_WITH_TIMER_RUNNING_E,
+    CONT_INFINITE_SLEEP_E
 } tSleepMode_E;
 
 void Cont_init(void);

@@ -52,21 +52,18 @@ int main(void)
     /* Power reduction - turn off digital input buffers except for button */
     DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
 
+    /* Initialize I/O Ports */
+    DDRB = DDRB_INIT;
+    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
+
     /* Reset due to low battery or other causes that should not occur */
     if (!(MCUSR & _BV(PORF)))
     {
         CONF_IO(GREEN_LED_CFG, OUTPUT, 1);
         CONF_IO(RED_LED_CFG, OUTPUT, 1);
-        for(;;){}
+        powerDown(CONT_INFINITE_SLEEP_E);
     }
-    else
-    {
-        MCUSR = 0;
-    }
-
-    /* Initialize I/O Ports */
-    DDRB = DDRB_INIT;
-    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
+    MCUSR = 0;
 
     /* Initialize sensors */
     Butt_init();
@@ -138,7 +135,13 @@ static void powerDown(const tSleepMode_E sleepMode_E)
         enableWatchdog(WDTO_8S_E);
         Butt_enableInterrupt();
     }
-    else if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
+    else if (sleepMode_E == CONT_INFINITE_SLEEP_E)
+    {
+        Butt_init();
+        Butt_enableInterrupt();
+    }
+    /* Determine if timer shall be running in sleep */
+    if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
     {
         set_sleep_mode(SLEEP_MODE_IDLE);
     }
@@ -157,6 +160,4 @@ static void powerDown(const tSleepMode_E sleepMode_E)
     sei(); /* To be able to wake-up */
     asm volatile("sleep"::);
     MCUCR &= ~_BV(SE);
-    //sleep_mode();
-
 }

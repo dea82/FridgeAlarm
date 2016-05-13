@@ -83,7 +83,8 @@ inline void Cont_loop(void)
                 && (counter_U08 > MIN_TIME_AWAKE / TICK)
                 && (buttState_str.state_E == BUTT_RELEASED_E))
             {
-                /* When door has been closed for a long time and no activity on button it's OK to go to deep sleep.*/
+                /* When door has been closed for a long time and no activity
+                 * on button it's OK to go to deep sleep. */
                 counter_U08 = 0;
                 Ledc_setState(LEDC_OFF_E);
                 sleepMode_E = CONT_LONG_DEEP_SLEEP_E;
