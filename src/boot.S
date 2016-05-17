@@ -2,6 +2,7 @@
 #define __SFR_OFFSET 0
 
 #include <avr/io.h>
+#include "conf.h"
 
 .org 0x0000
 .section .init0
@@ -10,12 +11,14 @@ rjmp Init
 ret         ; PCINT0
 Init:
 ;Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
-;then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4. */
+;then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4.
 out WDTCR, r1
+;Reduce power consumption - switch of Analog Comparator
+sbi ACSR, ACD
+;Turns off (Timer1) and USI
+ldi r16, PRR_INIT
+out PRR, r16
 rjmp __do_clear_bss
-nop
-nop
-nop
 #if defined(__AVR_ATtiny85__)
 reti        ; ADC Conversion Complete
 nop

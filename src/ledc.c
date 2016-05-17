@@ -44,6 +44,11 @@ inline void Ledc_loop(void)
         IO_SET(RED_LED_CFG);
         break;
 
+    case LEDC_ORANGE_E:
+        IO_SET(GREEN_LED_CFG);
+        IO_SET(RED_LED_CFG);
+        break;
+
     case LEDC_GREEN_BLINK_E:
         if (counter_U08 > BLINK_PERIOD_TIME / TICK / 2)
         {

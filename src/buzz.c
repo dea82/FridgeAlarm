@@ -57,7 +57,6 @@ inline void Buzz_loop(void)
         {
             turnOff();
         }
-
     }
     else
     {
