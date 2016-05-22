@@ -3,8 +3,8 @@ OUTDIR = output
 
 
 # MCU name
-#MCU = attiny13a
-MCU = attiny85
+MCU = attiny13a
+#MCU = attiny85
 
 # Clock frequency
 F_CPU = 8000000

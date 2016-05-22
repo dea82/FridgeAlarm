@@ -6,8 +6,8 @@ typedef enum
     PWRD_INFINITE_SLEEP_E
 } tPwrd_sleepMode_E;
 
-void Pwrd_init(void);
+void Pwrd_sleep(void);
 
-void Pwrd_loop(void);
+void Pwrd_wakeup(void);
 
 void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E);

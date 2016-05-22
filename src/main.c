@@ -5,9 +5,9 @@
  *      Author: andreas
  */
 
-/* TODO: Cleanup! */
+/* TODO:0 Cleanup! */
 /*** Standard library ***/
-#include <util/delay.h>
+//#include <util/delay.h>
 
 /*** User library ***/
 #include "butt.h"
@@ -27,14 +27,25 @@ extern void Cpul_stopPoint(void);
 extern char Cpul_getMaxCycles_U08(void);
 #endif
 
+tU08 resetRegister_U08;
+
 /* Declaring main as OS_main saves some register pushing to stack. */
 int main(void) __attribute__((OS_main));
 int main(void)
 {
     /* ATTENTION! Initialization code can be found in boot.S */
 
-    /* Power reduction - turn off digital input buffers except for button */
-    DIDR0 = _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D);
+    /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
+     * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4.
+     */
+    Cont_storeStatusRegister(MCUSR);
+    MCUSR = 0;
+    WDTCR = _BV(WDCE) | _BV(WDE);
+    WDTCR = 0;
+
+
+    /* Pwer saving - switch of analog comparator */
+    ACSR |= _BV(ACD);
 
     /* Initialize I/O Ports */
     DDRB = DDRB_INIT;
@@ -48,6 +59,7 @@ int main(void)
     /* Initialize actuators */
     Buzz_init();
     Ledc_init();
+
 #if UART_ENABLE
     Uart_Enable();
 #endif
@@ -57,12 +69,8 @@ int main(void)
 #if CPU_LOAD_MEASUREMENT_ENABLE
         Cpul_startPoint(_BV(CS12) | _BV(CS11) | _BV(CS10));
 #endif
-
-        /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
-        //enableWatchdog(WDTO_16MS_E);
-        /* Make sure to disable button interrupt before continue. The MCU is awake. */
-        //Butt_disableInterrupt();
-        /* Ready to fire off interrupt again, but it should not happen until it's at sleep. */
+        /* Startup */
+        Pwrd_wakeup();
 
         /* Sensors */
         Butt_loop();
@@ -74,7 +82,9 @@ int main(void)
         /* Actuators */
         Buzz_loop();
         Ledc_loop();
-        Pwrd_loop();
+
+        /* Powerdown */
+        Pwrd_sleep();
     }
 
     return 0;

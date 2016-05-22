@@ -19,8 +19,14 @@ typedef enum
     NO_CALIBRATION_E, CALIBRATION_SUCCESS_E, CALIBRATION_FAIL_E
 } tCalibrationState_E;
 
+static tU08 statusRegister_U08;
 static tCalibrationState_E getCalibrationState_E(void);
 static void normalModeStateMachine(void);
+
+void Cont_storeStatusRegister(const tU08 register_U08)
+{
+    statusRegister_U08 = register_U08;
+}
 
 inline void Cont_init(void)
 {
@@ -35,11 +41,11 @@ inline void Cont_loop(void)
     Pwrd_setSleepMode(PWRD_SHORT_DEEP_SLEEP_E);
 
     /* Check if there has been other then power on reset, i.e BOD reset */
-    if (!(MCUSR & _BV(PORF)))
+    if (!(statusRegister_U08 & _BV(PORF)))
     {
         /* Make sure to clear it,
          * otherwise we will not be able to reset with button */
-        MCUSR = 0;
+        statusRegister_U08 = 0;
         Buzz_setSound(BUZZ_OFF_E);
         Ledc_setState(LEDC_ORANGE_E);
         Pwrd_setSleepMode(PWRD_INFINITE_SLEEP_E);

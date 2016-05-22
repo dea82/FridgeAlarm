@@ -8,13 +8,11 @@
 .section .init0
 eor r1,r1
 rjmp Init
-ret         ; PCINT0
+reti         ; PCINT0
 Init:
-;Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
-;then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4.
-out WDTCR, r1
-;Reduce power consumption - switch of Analog Comparator
-sbi ACSR, ACD
+; Power reduction - turn off digital input buffers except for button
+ldi r16, _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D) | _BV(ADC3D)
+out DIDR0, r16
 ;Turns off (Timer1) and USI
 ldi r16, PRR_INIT
 out PRR, r16
@@ -24,9 +22,9 @@ reti        ; ADC Conversion Complete
 nop
 nop
 nop
-ret         ; WDT timeout
+reti        ; WDT timeout
 #elsif defined(__AVR_ATtiny13A__)
-ret         ; WDT timeout
+reti        ; WDT timeout
 reti        ; ADC Conversion Complete
 #endif
 ; Initialization of SRAM is done here automatically by avr-gcc.

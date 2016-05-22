@@ -1,16 +1,12 @@
-#include <avr/eeprom.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/sleep.h>
-#include <stdio.h>
 #include <util/delay.h>
 
 #include "conf.h"
 #include "dsen.h"
 #include "type.h"
 #include "uart.h"
-
-tU16 EEMEM doorClosed_EE;
 
 static tDsen_doorState_str doorState_str;
 static tU16 doorClosed_U16;
