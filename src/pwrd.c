@@ -57,7 +57,7 @@ void Pwrd_sleep(void)
     Butt_disableInterrupt();
 }
 
-void Pwrd_setSleepMode(tPwrd_sleepMode_E mode_E)
+void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E)
 {
     sleepMode_E = mode_E;
 }

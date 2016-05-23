@@ -14,8 +14,8 @@ static tU16 doorPos_U16;
 
 static tB withinRange_B(const tU16 sensorValue_U16);
 static tU16 getDoorRawPos_U16(void);
-static void eepromWrite(tU08 address_U08, tU08 data_U08);
-static tU08 eepromRead_U08(tU08 address);
+static void eepromWrite(const tU08 address_U08, const tU08 data_U08);
+static tU08 eepromRead_U08(const tU08 address);
 
 inline void Dsen_init(void)
 {
@@ -175,7 +175,7 @@ tB Dsen_storeClosedPos_B(void)
 }
 
 
-static void eepromWrite(tU08 address_U08, tU08 data_U08)
+static void eepromWrite(const tU08 address_U08, const tU08 data_U08)
 {
     /* Wait for completion of previous write */
     while(EECR & _BV(EEPE));
@@ -192,7 +192,7 @@ static void eepromWrite(tU08 address_U08, tU08 data_U08)
     sei();
 }
 
-static tU08 eepromRead_U08(tU08 address_U08)
+static tU08 eepromRead_U08(const tU08 address_U08)
 {
     /* Wait for completion of previous write */
     while(EECR & (1<<EEPE));
