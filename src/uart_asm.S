@@ -1,3 +1,25 @@
+;The MIT License (MIT)
+;
+;Copyright (c) 2015-2016 Andreas L.
+;
+;Permission is hereby granted, free of charge, to any person obtaining a copy
+;of this software and associated documentation files (the "Software"), to deal
+;in the Software without restriction, including without limitation the rights
+;to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+;copies of the Software, and to permit persons to whom the Software is
+;furnished to do so, subject to the following conditions:
+;
+;The above copyright notice and this permission notice shall be included in
+;all copies or substantial portions of the Software.
+;
+;THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+;OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+;THE SOFTWARE.
+
 #define _SFR_ASM_COMPAT 1
 #define __SFR_OFFSET 0
 
@@ -21,7 +43,7 @@
 /* Number of clock cycles that needs to be delayed (wasted). */
 #define DELAY_CYCLES (CYCLES_PER_BIT - CYCLES_IN_TRANSMIT)
 
-/* Calculate number of delay loops needed. 
+/* Calculate number of delay loops needed.
  * The one "1" is  compensation for the last loop which is only 2 clock cycles long, instead of normal 3 clock cycles.
  */
 #define DELAY_LOOPS ((DELAY_CYCLES + 1) / 3)
@@ -57,12 +79,11 @@ delay:
 
     lsr     data            ; Get next bit      ; ### 1
     dec     bitcnt          ; decrese cnt       ; ### 1
-#if EXTRA_DELAYS > 0   
+#if EXTRA_DELAYS > 0
     nop
 #endif
-#if EXTRA_DELAYS > 1   
+#if EXTRA_DELAYS > 1
     nop
 #endif
     brne    putchar0        ; send next         ; ### true = 2, false = 1
     reti                    ; return and enable interrupt again
-

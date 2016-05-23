@@ -1,10 +1,11 @@
+#include "dsen.h"
+
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
 
 #include "conf.h"
-#include "dsen.h"
 #include "type.h"
 #include "uart.h"
 
