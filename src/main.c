@@ -40,8 +40,6 @@ extern void Cpul_stopPoint(void);
 extern char Cpul_getMaxCycles_U08(void);
 #endif
 
-tU08 resetRegister_U08;
-
 /* Declaring main as OS_main saves some register pushing to stack. */
 int main(void) __attribute__((OS_main));
 int main(void)
@@ -70,7 +68,9 @@ int main(void)
     /* Initialize controls */
     Cont_init();
     /* Initialize actuators */
+#if !UART_ENABLE    
     Buzz_init();
+#endif
     Ledc_init();
 
 #if UART_ENABLE
@@ -93,7 +93,9 @@ int main(void)
         Cont_loop();
 
         /* Actuators */
+#if !UART_ENABLE        
         Buzz_loop();
+#endif
         Ledc_loop();
 
         /* Powerdown */

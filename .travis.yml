@@ -1,12 +1,14 @@
 ---
+sudo: required
+dist: trusty
+
 language: c
 
 before_install:
-  - sudo add-apt-repository ppa:pmjdebruijn/gcc-avr-release -y
-  - sudo apt-get update -q
+  - sudo apt-get update -qq
 install:
-  - sudo apt-get install gcc-avr-release binutils-avr avr-libc
+  - sudo apt-get install -qq gcc-avr binutils-avr avr-libc
 
-script:
+script: 
   - cd src
   - make all
