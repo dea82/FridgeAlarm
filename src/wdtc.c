@@ -26,6 +26,8 @@ THE SOFTWARE.
 
 #include <avr/io.h>
 
+#include "conf.h"
+
 void Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB interrupt_B)
 {
     switch(timeout_E)
