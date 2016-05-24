@@ -78,8 +78,6 @@ void Pwrd_sleep(void)
     MCUCR &= ~_BV(BODSE);
     sei(); /* To be able to wake-up */
     asm volatile("sleep"::);
-    //TODO:10 Is it ok to keep Sleep Enabled
-    //MCUCR &= ~_BV(SE);
     Butt_disableInterrupt();
 }
 

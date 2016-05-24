@@ -25,10 +25,6 @@ THE SOFTWARE.
 #include "wdtc.h"
 
 #include <avr/io.h>
-#include <avr/wdt.h>
-
-#include "conf.h"
-#include "type.h"
 
 void Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB interrupt_B)
 {

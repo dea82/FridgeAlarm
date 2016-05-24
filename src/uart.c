@@ -24,11 +24,7 @@ THE SOFTWARE.
 
 #include "uart.h"
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-
 #include "conf.h"
-#include "type.h"
 
 /* Assembly function. */
 extern void transmit(unsigned char);

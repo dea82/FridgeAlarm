@@ -27,7 +27,6 @@ THE SOFTWARE.
 #include <avr/io.h>
 
 #include "conf.h"
-#include "type.h"
 
 #define FILTER_TIME  70  /*  70 ms */
 

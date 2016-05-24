@@ -30,7 +30,6 @@ THE SOFTWARE.
 #include "ledc.h"
 #include "dsen.h"
 #include "pwrd.h"
-#include "type.h"
 
 typedef enum
 {

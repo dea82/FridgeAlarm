@@ -1,3 +1,27 @@
+/*
+The MIT License (MIT)
+
+Copyright (c) 2015-2016 Andreas L.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
 #include "dsen.h"
 
 #include <avr/interrupt.h>
@@ -5,8 +29,9 @@
 #include <util/delay.h>
 
 #include "conf.h"
-#include "type.h"
-#include "uart.h"
+
+/* 10-bit ADC resolution - maximum value 2^10 */
+#define ADC_MAX_VALUE (2^10)
 
 static tDsen_doorState_str doorState_str;
 static tU16 doorClosed_U16;
@@ -54,9 +79,9 @@ inline void Dsen_loop(void)
 
     tDsen_doorState_E newDoorState_E;
     /* Algorithm handles both direction of magnet field */
-    if (doorClosed_U16 < 512)
+    if (doorClosed_U16 < ADC_MAX_VALUE/2)
     {
-        if (doorPos_U16 > doorClosed_U16 + 20)
+        if (doorPos_U16 > doorClosed_U16 + DOOR_CLOSED_OFFSET)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -67,7 +92,7 @@ inline void Dsen_loop(void)
     }
     else
     {
-        if (doorPos_U16 < doorClosed_U16 - 20)
+        if (doorPos_U16 < doorClosed_U16 - DOOR_CLOSED_OFFSET)
         {
             newDoorState_E = DSEN_OPEN_E;
         }
@@ -151,7 +176,7 @@ static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
     /* Cast should not be a problem due to the 10-bit resolution. */
-    if ((ABS((tS16 )sensorValue_U16 - 512)) > 60)
+    if ((ABS((tS16 )sensorValue_U16 - ADC_MAX_VALUE)) > MIN_CAL_DOOR_CLOSED_POS)
     {
         ret_B = TRUE;
     }
@@ -186,6 +211,7 @@ static void eepromWrite(const tU08 address_U08, const tU08 data_U08)
     /* Set up address and data registers */
     EEAR = address_U08;
     EEDR = data_U08;
+    /* Timed sequence - disable interrupt */
     cli();
     /* Write logical one to EEMPE */
     EECR |= (1<<EEMPE);

@@ -24,8 +24,6 @@ THE SOFTWARE.
 
 #include "ledc.h"
 
-#include <avr/io.h>
-
 #include "conf.h"
 #include "type.h"
 

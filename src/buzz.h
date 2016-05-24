@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 #ifndef BUZZ_H_
 #define BUZZ_H_
+
 typedef enum
 {
     BUZZ_OFF_E,

@@ -25,9 +25,6 @@ THE SOFTWARE.
 #ifndef LEDC_H_
 #define LEDC_H_
 
-#include "conf.h"
-#include "type.h"
-
 typedef enum
 {
     LEDC_OFF_E,
