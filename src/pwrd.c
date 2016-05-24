@@ -26,7 +26,6 @@ THE SOFTWARE.
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
-#include <avr/sleep.h>
 
 #include "butt.h"
 #include "wdtc.h"
@@ -60,11 +59,13 @@ void Pwrd_sleep(void)
     /* Determine if timer shall be running in sleep */
     if (sleepMode_E == PWRD_SLEEP_WITH_TIMER_RUNNING_E)
     {
-        set_sleep_mode(SLEEP_MODE_IDLE);
+        /* Sleep mode idle */
+        MCUCR = 0;
     }
     else
     {
-        set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+        /* Sleep mode power-down */
+        MCUCR = _BV(SM1);
     }
 
 #if CPU_LOAD_MEASUREMENT_ENABLE

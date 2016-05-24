@@ -2,7 +2,6 @@
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
-#include <avr/sleep.h>
 #include <util/delay.h>
 
 #include "conf.h"
@@ -98,11 +97,13 @@ static tU16 getDoorRawPos_U16(void)
      * Assume that timer is not running if module is disconnected. */
     if (PRR & _BV(PRTIM0))
     {
-        set_sleep_mode(SLEEP_MODE_ADC);
+        /* Sleep mode ADC noise reduction */
+        MCUCR = _BV(SE) | _BV(SM0);
     }
     else
     {
-        set_sleep_mode(SLEEP_MODE_IDLE);
+        /* Sleep mode idle */
+        MCUCR = _BV(SE);
     }
 
     /* Turn on sensor */
@@ -123,7 +124,7 @@ static tU16 getDoorRawPos_U16(void)
     while (ADCSRA & _BV(ADSC))
     {
         /* Wait for conversion */
-        sleep_mode();
+        asm volatile("sleep"::);
     }
 
     /* Disable interrupt and ADC. */
