@@ -38,15 +38,14 @@ static void turnOff(void);
 
 inline void Buzz_init(void)
 {
-#if !UART_ENABLE
-
-#endif
+/* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
+ *   
+ * In this case gives a buzzer frequency of 1690 Hz
+ */    
 #if F_CPU == 8000000
-    /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
-     *
-     * In this case gives a buzzer frequency of 1690 Hz
-     */
     OCR0A = 36;
+#elif F_CPU == 9600000
+    OCR0A = 43;     
 #else
 #error "Correct compare value to CPU speed."
 #endif
@@ -89,7 +88,7 @@ static void turnOn(void)
     PRR = PRR_INIT & ~_BV(PRTIM0);
     /* Set to 'CTC' mode, toggle on match */
     TCCR0A = _BV(COM0A0) | _BV(WGM01);
-    /* Start clock */
+    /* Start clock - prescaler 64 */
     TCCR0B = _BV(CS01) | _BV(CS00);
 }
 
