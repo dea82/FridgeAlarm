@@ -73,9 +73,7 @@ typedef signed int tS16;
 #define IO_CLR(CFG)  ({ GET_PORT(CFG) &= ~GET_MASK(CFG); })
 #define IO_PIN(CFG)  ({ GET_BIT(CFG)})
 
-#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
-#define PCINT(CFG)   ({ PCMSK |= GET_MASK(CFG); })
-#endif
+
 
 #define GET_DDR(P,...) (DDR ## P)
 #define GET_PORT(P,...) (PORT ## P)
@@ -84,12 +82,32 @@ typedef signed int tS16;
 #define GET_MASK(P, bit) (1 << (bit))
 #define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
 
-/*** MATH MACRO DEFINITIONS ***/
+/* MATH MACRO DEFINITIONS */
 
 #define ABS(a)     (((a) < 0) ? -(a) : (a))
 #define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
 #define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
 #define LO(a)      ((tU08)((a) & 0xFF))
 #define HI(a)      ((tU08)((a) >> 8) )
+
+/* Pin interrupt macro */
+#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
+#define PCINT(CFG)   ({ PCMSK |= GET_MASK(CFG); })
+#endif
+
+
+/* Register redefinitions */
+#ifndef EEPE
+#define EEPE EEWE
+#endif
+#ifndef EEMPE
+#define EEMPE EEMWE
+#endif
+#ifndef BODS
+#define BODS BPDS
+#endif
+#ifndef BODSE
+#define BODSE BPDSE
+#endif
 
 #endif /* TYPE_H_ */
