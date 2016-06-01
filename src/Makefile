@@ -27,23 +27,24 @@ PROGRAM = FridgeAlarm
 BUILDDIR = output
 
 # Default target
-#MCU_TARGET = attiny85
+MCU_TARGET = attiny85
+F_CPU = 8000000
 
 attiny13a: MCU_TARGET=attiny13a
 attiny13a: F_CPU := 9600000
-#attiny13a: LFUSE ?= 0xFF #FIXME: Change to ...
-#attiny13a: HFUSE ?= 0xFF #FIXME: Change to ...
-#attiny13a: EFUSE ?= 0xFF #FIXME: Change to ...
-attiny13a: createdir $(PROGRAM)_attiny13a.hex
-#attiny13a: $(PROGRAM)_attiny85.lst
+attiny13a: LFUSE ?= 0xFF #FIXME: Change to ...
+attiny13a: HFUSE ?= 0xFF #FIXME: Change to ...
+attiny13a: EFUSE ?= 0xFF #FIXME: Change to ...
+attiny13a: createdir $(BUILDDIR)/$(PROGRAM)_attiny13a.hex
+attiny13a: $(BUILDDIR)/$(PROGRAM)_attiny13a.lst
 
 attiny85: MCU_TARGET = attiny85
 attiny85: F_CPU = 8000000
 attiny85: LFUSE ?= 0xFF #FIXME: Change to ...
 attiny85: HFUSE ?= 0xFF #FIXME: Change to ...
 attiny85: EFUSE ?= 0xFF #FIXME: Change to ...
-attiny85: $(BUILDDIR)/$(MCU_TARGET)/$(PROGRAM)_$(MCU_TARGET).hex
-#attiny85: $(PROGRAM)_attiny85.lst
+attiny85: createdir $(BUILDDIR)/$(PROGRAM)_attiny85a.hex
+attiny85: $(BUILDDIR)/$(PROGRAM)_attiny85.lst
 
 
 
@@ -56,10 +57,10 @@ ASRC = boot.S $(filter-out boot.S,$(wildcard *.S))
 
 # Define all object files. Important to build assembly first because
 # it contains init0 section.
-OBJ = $(ASRC:%.S=$(OUTDIR)/%.o) $(SRC:%.c=$(OUTDIR)/%.o)
+OBJ = $(ASRC:%.S=$(BUILDDIR)/%.o) $(SRC:%.c=$(BUILDDIR)/%.o)
 
 # Define all listing files.
-LST = $(ASRC:%.S=$(OUTDIR)/%.lst) $(SRC:%.c=$(OUTDIR)/%.lst)
+LST = $(ASRC:%.S=$(BUILDDIR)/%.lst) $(SRC:%.c=$(BUILDDIR)/%.lst)
 
 # Optimize for size
 OPT = s
@@ -103,6 +104,7 @@ ALL_ASFLAGS = -I. -x assembler-with-cpp $(ASFLAGS)
 # Commands
 CC = avr-gcc
 OBJCOPY = avr-objcopy
+OBJDUMP = avr-objdump
 SIZE = avr-size
 
 # Define Messages
@@ -139,16 +141,23 @@ FORCE:
 	-$(OBJCOPY) -j .eeprom --set-section-flags=.eeprom="alloc,load" \
 	--change-section-lma .eeprom=0 -O $(FORMAT) $< $@
 
+
+# Create extended listing file from ELF output file.
+$(BUILDDIR)/%.lst: $(BUILDDIR)/%.elf
+	@echo
+	@echo $(MSG_EXTENDED_LISTING) $(BUILDDIR)/$@
+	$(OBJDUMP) -h -S $< > $@
+
 # Create output dir if not exist
 createdir:
 	mkdir -p $(BUILDDIR)
 size:
-	$(SIZE) -C --mcu=$(MCU_TARGET) $(OUTDIR)/$(PROGRAM)_$(MCU_TARGET).elf
+	$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 
 # Link: create ELF output file from object files.
-.SECONDARY : $(OUTDIR)/$(PROGRAM)_$(MCU_TARGET).elf
+.SECONDARY : $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 .PRECIOUS : $(OBJ)
-$(OUTDIR)/%.elf: $(OBJ)
+$(BUILDDIR)/%.elf: $(OBJ)
 	@echo
 	@echo $(MSG_LINKING) $@
 	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
@@ -159,10 +168,6 @@ $(BUILDDIR)/%.o : %.c
 	@echo $(MSG_COMPILING) $<
 	$(CC) -c $(ALL_CFLAGS) $< -o $@
 
-
-# Compile: create assembler files from C source files.
-%.s : %.c
-	$(CC) -S $(ALL_CFLAGS) $< -o $@
 
 
 # Assemble: create object files from assembler source files.
