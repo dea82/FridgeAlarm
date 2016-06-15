@@ -42,6 +42,12 @@ OBJ = $(ASRC:%.S=$(BUILDDIR)/%.o) $(SRC:%.c=$(BUILDDIR)/%.o)
 # Define all listing files.
 LST = $(ASRC:%.S=$(BUILDDIR)/%.lst) $(SRC:%.c=$(BUILDDIR)/%.lst)
 
+# Flash file name and path
+FLASHFILE = $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
+
+# List file name and path
+LISTFILE = $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).lst
+
 # Optimize for size
 OPT = s
 
@@ -53,9 +59,6 @@ DEPDIR = $(BUILDDIR)/.d
 
 # Compiler flags to generate dependency files.
 GENDEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
-
-
-
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
@@ -104,11 +107,9 @@ MSG_ASSEMBLING = Assembling:
 MSG_CLEANING = Cleaning project:
 
 
-all: check-inputs createdir $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex size
+all: check-inputs createdir build size
 
 check-inputs:
-# Note that ifndef and endif are not indented - they control what make sees,
-#$< taking effect before the Makefile is run.
 ifndef MCU_TARGET
 	$(error MCU_TARGET must be specified!)
 endif
@@ -116,13 +117,14 @@ ifndef F_CPU
 	$(error F_CPU must be specified!)
 endif
 
-#build: $(BUILDDIR)/$(MCU_TARGET)/$(PROGRAM)_$(MCU_TARGET).hex
+build: $(FLASHFILE) $(LISTFILE)
 
 # Create final output files (.hex, .eep) from ELF output file.
 %.hex:  %.elf
 	@echo $(MSG_FLASH) $@
 	@$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
 
+# UNUSED - application does not need eeprom file
 %.eep: %.elf
 	@echo
 	@echo $(MSG_EEPROM) $@
@@ -132,14 +134,12 @@ endif
 
 # Create extended listing file from ELF output file.
 $(BUILDDIR)/%.lst: $(BUILDDIR)/%.elf
-	@echo
 	@echo $(MSG_EXTENDED_LISTING) $(BUILDDIR)/$@
-	$(OBJDUMP) -h -S $< > $@
+	@$(OBJDUMP) -h -S $< > $@
 
 # Create output dir if not exist
 createdir:
-	$(shell mkdir -p $(BUILDDIR) >/dev/null)
-	$(shell mkdir -p $(DEPDIR) >/dev/null)
+	@mkdir -p $(DEPDIR)
 size:
 	@echo
 	@$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
@@ -172,11 +172,8 @@ complete-message:
 	@echo "Successfully created: " $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
 
 clean:
-	$(shell rm -rf $(BUILDDIR) >/dev/null)
+	@rm -rf $(BUILDROOT)
 	@echo "Clean successfully!"
 
 $(DEPDIR)/%.d: ;
 .PRECIOUS: $(DEPDIR)/%.d
-
--include $(patsubst %,$(DEPDIR)/%.d, $(basename $(SRC)))
--include $(patsubst %,$(DEPDIR)/%.d, $(basename $(ASRC)))
