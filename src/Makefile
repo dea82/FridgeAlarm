@@ -26,28 +26,6 @@ PROGRAM = FridgeAlarm
 # Build directory
 BUILDDIR = output
 
-# Default target
-MCU_TARGET = attiny85
-F_CPU = 8000000
-
-attiny13a: MCU_TARGET=attiny13a
-attiny13a: F_CPU := 9600000
-attiny13a: LFUSE ?= 0xFF #FIXME: Change to ...
-attiny13a: HFUSE ?= 0xFF #FIXME: Change to ...
-attiny13a: EFUSE ?= 0xFF #FIXME: Change to ...
-attiny13a: createdir $(BUILDDIR)/$(PROGRAM)_attiny13a.hex
-attiny13a: $(BUILDDIR)/$(PROGRAM)_attiny13a.lst
-
-attiny85: MCU_TARGET = attiny85
-attiny85: F_CPU = 8000000
-attiny85: LFUSE ?= 0xFF #FIXME: Change to ...
-attiny85: HFUSE ?= 0xFF #FIXME: Change to ...
-attiny85: EFUSE ?= 0xFF #FIXME: Change to ...
-attiny85: createdir $(BUILDDIR)/$(PROGRAM)_attiny85a.hex
-attiny85: $(BUILDDIR)/$(PROGRAM)_attiny85.lst
-
-
-
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(wildcard *.c)
 
@@ -69,8 +47,10 @@ CSTANDARD = -std=gnu99
 
 DEBUG = stabs
 
+DEPDIR = $(BUILDDIR)/.d
+
 # Compiler flags to generate dependency files.
-GENDEPFLAGS = -Wp,-M,-MP,-MT,$(*F).o,-MF,.dep/$(@F).d
+GENDEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 
 
 
@@ -78,6 +58,7 @@ GENDEPFLAGS = -Wp,-M,-MP,-MT,$(*F).o,-MF,.dep/$(@F).d
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
 
+# -flto - link time optimization, removes function jumps etc.
 COMMONFLAGS = -mmcu=$(MCU_TARGET) -g$(DEBUG) -DF_CPU=$(F_CPU) -flto
 
 CFLAGS = $(COMMONFLAGS)
@@ -98,7 +79,8 @@ LDFLAGS += -nostartfiles
 
 # Combine all necessary flags and optional flags.
 # Add target processor to flags.
-ALL_CFLAGS = -I. $(CFLAGS)# $(GENDEPFLAGS)
+# -I tells compiler wher to look for header files
+ALL_CFLAGS = -I. $(CFLAGS) $(GENDEPFLAGS)
 ALL_ASFLAGS = -I. -x assembler-with-cpp $(ASFLAGS)
 
 # Commands
@@ -126,11 +108,17 @@ MSG_ASSEMBLING = Assembling:
 MSG_CLEANING = Cleaning project:
 
 
-FORCE:
+all: check-inputs createdir $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex size complete-message
 
+check-inputs:
+# Note that ifndef and endif are not indented - they control what make sees,
+#$< taking effect before the Makefile is run.
+ifndef MCU_TARGET
+	$(error MCU_TARGET is undefined)
+endif
 
 # Create final output files (.hex, .eep) from ELF output file.
-%.hex: %.elf
+%.hex:  %.elf
 	@echo
 	@echo $(MSG_FLASH) $@
 	$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
@@ -150,23 +138,29 @@ $(BUILDDIR)/%.lst: $(BUILDDIR)/%.elf
 
 # Create output dir if not exist
 createdir:
-	mkdir -p $(BUILDDIR)
+	$(shell mkdir -p $(BUILDDIR) >/dev/null)
+	$(shell mkdir -p $(DEPDIR) >/dev/null)
 size:
 	$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 
 # Link: create ELF output file from object files.
+# ELF file will not be deleted
 .SECONDARY : $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
+# Object files will not be deleted if make is killed or interrupted.
 .PRECIOUS : $(OBJ)
-$(BUILDDIR)/%.elf: $(OBJ)
+%.elf: $(OBJ)
 	@echo
 	@echo $(MSG_LINKING) $@
 	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
 
 # Compile: create object files from C source files.
 $(BUILDDIR)/%.o : %.c
+$(BUILDDIR)/%.o : %.c $(DEPDIR)/%.d
 	@echo
 	@echo $(MSG_COMPILING) $<
+# -c tells the compiler not to link
 	$(CC) -c $(ALL_CFLAGS) $< -o $@
+	mv -f  $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 
 
@@ -175,3 +169,15 @@ $(BUILDDIR)/%.o : %.S
 	@echo
 	@echo $(MSG_ASSEMBLING) $<
 	$(CC) -c $(ALL_ASFLAGS) $< -o $@
+
+complete-message:
+	@echo "Successfully created: " $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
+
+clean:
+	$(shell rm -rf $(BUILDDIR) >/dev/null)
+	@echo "Clean successfully!"
+
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+-include $(patsubst %,$(DEPDIR)/%.d, $(basename $(SRC)))
