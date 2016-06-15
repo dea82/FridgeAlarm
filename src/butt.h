@@ -60,7 +60,7 @@ typedef struct
 /**
  * @brief      Function which initializes module.
  */
-inline void Butt_init(void);
+void Butt_init(void);
 
 /**
  * @brief      Function that shall be called periodically.
@@ -68,7 +68,7 @@ inline void Butt_init(void);
  * @warning    Before making any call to this function make sure that
  * 			   Butt_init() has been called at least once.
  */
-inline void Butt_loop(void);
+void Butt_loop(void);
 
 /**
  * @brief      Get actual button state

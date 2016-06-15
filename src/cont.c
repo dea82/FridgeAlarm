@@ -127,7 +127,7 @@ static void normalModeStateMachine(void)
     if (doorState_str.doorState_E == DSEN_CLOSED_E)
     {
         Buzz_setSound(BUZZ_OFF_E);
-        if ((doorState_str.timeInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
+        if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
             && (counter_U08 > MIN_TIME_AWAKE / TICK)
             && (buttState_str.state_E == BUTT_RELEASED_E))
         {
@@ -151,7 +151,7 @@ static void normalModeStateMachine(void)
     {
         counter_U08 = 0;
 
-        if (doorState_str.timeInState_U16 > ALARM_OPEN / TICK)
+        if (doorState_str.ticksInState_U16 > ALARM_OPEN / TICK)
         {
             /* Door has been open too long, sound the alarm if button has not inhibit it from going off. */
             if (buttState_str.state_E == BUTT_PRESSED_E)
