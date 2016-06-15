@@ -7,7 +7,12 @@ language: c
 before_install:
   - sudo apt-get update -qq
 install:
-  - sudo apt-get install -qq gcc-avr binutils-avr avr-libc
+  - sudo apt-get install -qq gcc-avr binutils-avr avr-libc doxygen graphviz
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "992952f03676"
+  - COMMIT_AUTHOR_EMAIL: "andreas.laghamn@gmail.com"
 
 script: 
   - cd src
@@ -17,3 +22,5 @@ script:
   # Attiny does not have a Timer1 => CPU_LOAD impossible
   - make MCU_TARGET=attiny13a F_CPU=9600000 DEBUG_ENABLE=1 CPU_LOAD=0 BAUD_RATE=57600
   - make MCU_TARGET=attiny85 F_CPU=8000000 DEBUG_ENABLE=1 CPU_LOAD=1 BAUD_RATE=57600
+  - bash doc/publish_doxygen.sh
+  # TODO: Upload to github pages...?

@@ -22,6 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*------------------------------------------------------------------------*//**
+ * 
+ * @file pwrd.h
+ * @author     Andreas L.
+ * @date       2016-06-03
+ * 
+ * @brief      Power down module
+ * 
+ * This module takes care of power down of the MCU.
+ *----------------------------------------------------------------------------*/
+
 #ifndef PWRD_H_
 #define PWRD_H_
 
