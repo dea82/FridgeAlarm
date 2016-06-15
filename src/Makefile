@@ -57,7 +57,8 @@ DEBUG = stabs
 
 DEPDIR = $(BUILDDIR)/.d
 
-# Compiler flags to generate dependency files.
+# Compiler flags to generate dependency files. Name it .Td and rename it after
+# successful compile to not pollute with corrupted dependency file.
 GENDEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 
 # Output format. (can be srec, ihex, binary)
@@ -66,7 +67,8 @@ FORMAT = ihex
 # -flto - link time optimization, removes function jumps etc.
 # -fdata-sections -ffunction-sections: Put data and functions
 # in separate sections - not linked if not used
-COMMONFLAGS = -I. -mmcu=$(MCU_TARGET) -g$(DEBUG) $(GENDEPFLAGS) -DF_CPU=$(F_CPU) -flto -fdata-sections -ffunction-sections
+COMMONFLAGS = -I. -mmcu=$(MCU_TARGET) -g$(DEBUG) $(GENDEPFLAGS) \
+-DF_CPU=$(F_CPU) -flto -fdata-sections -ffunction-sections
 
 CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
@@ -88,25 +90,6 @@ OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
 
-# Define Messages
-# English
-MSG_ERRORS_NONE = Errors: none
-MSG_BEGIN = -------- begin --------
-MSG_END = --------  end  --------
-MSG_SIZE_BEFORE = Size before:
-MSG_SIZE_AFTER = Size after:
-MSG_COFF = Converting to AVR COFF:
-MSG_EXTENDED_COFF = Converting to AVR Extended COFF:
-MSG_FLASH = Creating load file for Flash:
-MSG_EEPROM = Creating load file for EEPROM:
-MSG_EXTENDED_LISTING = Creating Extended Listing:
-MSG_SYMBOL_TABLE = Creating Symbol Table:
-MSG_LINKING = Linking:
-MSG_COMPILING = Compiling:
-MSG_ASSEMBLING = Assembling:
-MSG_CLEANING = Cleaning project:
-
-
 all: check-inputs createdir build size
 
 check-inputs:
@@ -119,9 +102,14 @@ endif
 
 build: $(FLASHFILE) $(LISTFILE)
 
+
+# Create output dir if not exist
+createdir:
+	@mkdir -p $(DEPDIR)
+
 # Create final output files (.hex, .eep) from ELF output file.
 %.hex:  %.elf
-	@echo $(MSG_FLASH) $@
+	@echo "Creating load file for Flash:" $@
 	@$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
 
 # UNUSED - application does not need eeprom file
@@ -131,18 +119,10 @@ build: $(FLASHFILE) $(LISTFILE)
 	-$(OBJCOPY) -j .eeprom --set-section-flags=.eeprom="alloc,load" \
 	--change-section-lma .eeprom=0 -O $(FORMAT) $< $@
 
-
 # Create extended listing file from ELF output file.
 $(BUILDDIR)/%.lst: $(BUILDDIR)/%.elf
-	@echo $(MSG_EXTENDED_LISTING) $(BUILDDIR)/$@
+	@echo "Creating Extended Listing:" $(BUILDDIR)/$@
 	@$(OBJDUMP) -h -S $< > $@
-
-# Create output dir if not exist
-createdir:
-	@mkdir -p $(DEPDIR)
-size:
-	@echo
-	@$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 
 # Link: create ELF output file from object files.
 # ELF file will not be deleted
@@ -150,30 +130,30 @@ size:
 # Object files will not be deleted if make is killed or interrupted.
 .PRECIOUS : $(OBJ)
 %.elf: $(OBJ)
-	@echo $(MSG_LINKING) $@
+	@echo "Linking:" $@
 	@$(CC) $(CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
 
 # Compile: create object files from C source files.
 $(BUILDDIR)/%.o : %.c $(DEPDIR)/%.d
-	@echo $(MSG_COMPILING) $<
-# -c tells the compiler not to link
+	@echo "Compiling:" $<
 	@$(CC) -c $(CFLAGS) $< -o $@
 	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
-
-
 # Assemble: create object files from assembler source files.
 $(BUILDDIR)/%.o : %.S $(DEPDIR)/%.d
-	@echo $(MSG_ASSEMBLING) $<
+	@echo "Assembling:" $<
 	@$(CC) -c $(ASFLAGS) $< -o $@
 	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
-complete-message:
-	@echo "Successfully created: " $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
+# Dependency files. These are generated during compile of .c and .S.
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+# Print size of output file
+size:
+	@echo
+	@$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 
 clean:
 	@rm -rf $(BUILDROOT)
 	@echo "Clean successfully!"
-
-$(DEPDIR)/%.d: ;
-.PRECIOUS: $(DEPDIR)/%.d
