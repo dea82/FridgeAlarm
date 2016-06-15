@@ -11,6 +11,7 @@ install:
 
 script: 
   - cd src
+  - doxygen -v
   - make MCU_TARGET=attiny13a F_CPU=9600000
   - make MCU_TARGET=attiny85 F_CPU=8000000
   - make clean
