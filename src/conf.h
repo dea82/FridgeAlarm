@@ -46,15 +46,8 @@ THE SOFTWARE.
 /* Milliseconds between each loop. */
 #define TICK 16
 
-/* Debug options */
-#define UART_DEBUG_PRINTOUT_ENABLE 0
-#define CPU_LOAD_MEASUREMENT_ENABLE 0
-#define BAUD_RATE 57600
-
-
 /* Inherited defines */
-#define UART_ENABLE (UART_DEBUG_PRINTOUT_ENABLE | CPU_LOAD_MEASUREMENT_ENABLE)
-
+#define UART_ENABLE (DEBUG_ENABLE | CPU_LOAD)
 
 /* Rationale why Timer0 and PRADC is not disabled:
  * The module is disconnected and all registers connected
@@ -62,8 +55,7 @@ THE SOFTWARE.
  * Buzz_init and Dsen_init will fail to set registers. */
 #if defined(__AVR_ATtiny85__)
 
-#if CPU_LOAD_MEASUREMENT_ENABLE
-
+#if CPU_LOAD
 /* See comment above why these bits are choosen. */
 #define PRR_INIT _BV(PRUSI)
 #else
