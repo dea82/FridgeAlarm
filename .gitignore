@@ -1,6 +1,4 @@
 src/output
 .DS_Store
-.idea
-*.*#*
-*.lck
-.dep
+src/doc/doxygen
+src/doc/doxygen_sqlite3.db

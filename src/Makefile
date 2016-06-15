@@ -167,3 +167,9 @@ size:
 clean:
 	@rm -rf $(BUILDROOT)
 	@echo "Clean successfully!"
+
+
+doc: .FORCE
+	@echo "Generating doxygen documentation..."
+	doxygen doxygen_config
+.FORCE:
