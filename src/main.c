@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include "uart.h"
 
 /* Assembly function. */
-#if CPU_LOAD_MEASUREMENT_ENABLE
+#if CPU_LOAD
 extern void Cpul_startPoint(tU08);
 extern void Cpul_stopPoint(void);
 extern char Cpul_getMaxCycles_U08(void);
@@ -79,7 +79,7 @@ int main(void)
 
     for (;;)
     {
-#if CPU_LOAD_MEASUREMENT_ENABLE
+#if CPU_LOAD
         Cpul_startPoint(_BV(CS12) | _BV(CS11) | _BV(CS10));
 #endif
         /* Startup */

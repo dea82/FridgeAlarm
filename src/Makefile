@@ -23,6 +23,15 @@
 # Program name
 PROGRAM = FridgeAlarm
 
+# Makefile user input, setting it to default off
+# Makes it possible to use uart for debug output
+DEBUG_ENABLE ?= 0
+# Uses uart to output cpu load statistics
+CPU_LOAD ?= 0
+# Baudrate
+BAUD_RATE ?= 57600
+
+
 # Build directory
 BUILDROOT = output
 
@@ -68,7 +77,8 @@ FORMAT = ihex
 # -fdata-sections -ffunction-sections: Put data and functions
 # in separate sections - not linked if not used
 COMMONFLAGS = -I. -mmcu=$(MCU_TARGET) -g$(DEBUG) $(GENDEPFLAGS) \
--DF_CPU=$(F_CPU) -flto -fdata-sections -ffunction-sections
+-DF_CPU=$(F_CPU) -DDEBUG_ENABLE=$(DEBUG_ENABLE) -DCPU_LOAD=$(CPU_LOAD) \
+-DBAUD_RATE=$(BAUD_RATE) -flto -fdata-sections -ffunction-sections
 
 CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
