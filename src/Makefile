@@ -170,6 +170,7 @@ clean:
 
 
 doc: .FORCE
-	@echo "Generating doxygen documentation..."
-	doxygen doxygen_config
+	@echo "Generating doxygen documentation."
+	doxygen -v
+	doxygen doc/doxygen_config
 .FORCE:
