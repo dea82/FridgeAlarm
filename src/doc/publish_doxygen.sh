@@ -6,7 +6,7 @@ TARGET_BRANCH="gh-pages"
 
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-    echo "Don't publish docs"
+    echo "Don't publish on other branches than develop."
     exit 0;
 fi
 
@@ -27,14 +27,23 @@ make doc
 cd gh-repo-temp
 cp -r ../doc/doxygen/* .
 git reset .
+
+git config user.name "Travis CI"
+git config user.email "andreas.laghamn@gmail.com"
+
+if [[ -z $(git status --porcelain) ]]; then
+    echo "No changes to documentation, do not deploy!"
+    exit 0
+fi
+	
 git add .
-git commit -m "Deploy to GitHub Pages ${SHA}" --dry-run
+git commit -m "Deploy to GitHub Pages ${SHA}"
 
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
 ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
 ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in deploy_key.enc -out deploy_key -d
+openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in ../doc/deploy_key.enc -out deploy_key -d
 chmod 600 deploy_key
 eval `ssh-agent -s`
 ssh-add deploy_key
