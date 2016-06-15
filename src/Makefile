@@ -30,7 +30,7 @@ BUILDDIR = output
 SRC = $(wildcard *.c)
 
 # List S (assembler) files here. Mandatory file is boot.S which
-# contains the reset and interrupt vector.
+# contains the reset and interrupt vector which must be built first!.
 ASRC = boot.S $(filter-out boot.S,$(wildcard *.S))
 
 # Define all object files. Important to build assembly first because
@@ -59,29 +59,24 @@ GENDEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 FORMAT = ihex
 
 # -flto - link time optimization, removes function jumps etc.
-COMMONFLAGS = -mmcu=$(MCU_TARGET) -g$(DEBUG) -DF_CPU=$(F_CPU) -flto
+# -fdata-sections -ffunction-sections: Put data and functions
+# in separate sections - not linked if not used
+COMMONFLAGS = -I. -mmcu=$(MCU_TARGET) -g$(DEBUG) $(GENDEPFLAGS) -DF_CPU=$(F_CPU) -flto -fdata-sections -ffunction-sections
 
 CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
 CFLAGS += $(CSTANDARD)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-# Put data and functions in separate sections - not linked if not used
-CFLAGS += -fdata-sections -ffunction-sections
+
 CFLAGS += -Wall -Wstrict-prototypes -Werror=missing-prototypes
 
 ASFLAGS = $(COMMONFLAGS)
-ASFLAGS += -fdata-sections -ffunction-sections
+ASFLAGS += -x assembler-with-cpp
 
 LDFLAGS = $(COMMONFLAGS)
 LDFLAGS += -Wl,-gc-sections # Do not link unused function sections
 LDFLAGS += -Wl,--relax
 LDFLAGS += -nostartfiles
-
-# Combine all necessary flags and optional flags.
-# Add target processor to flags.
-# -I tells compiler wher to look for header files
-ALL_CFLAGS = -I. $(CFLAGS) $(GENDEPFLAGS)
-ALL_ASFLAGS = -I. -x assembler-with-cpp $(ASFLAGS)
 
 # Commands
 CC = avr-gcc
@@ -151,24 +146,24 @@ size:
 %.elf: $(OBJ)
 	@echo
 	@echo $(MSG_LINKING) $@
-	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
 
 # Compile: create object files from C source files.
-$(BUILDDIR)/%.o : %.c
 $(BUILDDIR)/%.o : %.c $(DEPDIR)/%.d
 	@echo
 	@echo $(MSG_COMPILING) $<
 # -c tells the compiler not to link
-	$(CC) -c $(ALL_CFLAGS) $< -o $@
-	mv -f  $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+	$(CC) -c $(CFLAGS) $< -o $@
+	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 
 
 # Assemble: create object files from assembler source files.
-$(BUILDDIR)/%.o : %.S
+$(BUILDDIR)/%.o : %.S $(DEPDIR)/%.d
 	@echo
 	@echo $(MSG_ASSEMBLING) $<
-	$(CC) -c $(ALL_ASFLAGS) $< -o $@
+	$(CC) -c $(ASFLAGS) $< -o $@
+	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 complete-message:
 	@echo "Successfully created: " $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
@@ -181,3 +176,4 @@ $(DEPDIR)/%.d: ;
 .PRECIOUS: $(DEPDIR)/%.d
 
 -include $(patsubst %,$(DEPDIR)/%.d, $(basename $(SRC)))
+-include $(patsubst %,$(DEPDIR)/%.d, $(basename $(ASRC)))
