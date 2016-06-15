@@ -24,7 +24,7 @@
 PROGRAM = FridgeAlarm
 
 # Build directory
-BUILDDIR = output
+BUILDROOT = output
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(wildcard *.c)
@@ -32,6 +32,8 @@ SRC = $(wildcard *.c)
 # List S (assembler) files here. Mandatory file is boot.S which
 # contains the reset and interrupt vector which must be built first!.
 ASRC = boot.S $(filter-out boot.S,$(wildcard *.S))
+
+BUILDDIR = $(BUILDROOT)/$(MCU_TARGET)
 
 # Define all object files. Important to build assembly first because
 # it contains init0 section.
@@ -67,7 +69,6 @@ CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
 CFLAGS += $(CSTANDARD)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-
 CFLAGS += -Wall -Wstrict-prototypes -Werror=missing-prototypes
 
 ASFLAGS = $(COMMONFLAGS)
@@ -103,20 +104,24 @@ MSG_ASSEMBLING = Assembling:
 MSG_CLEANING = Cleaning project:
 
 
-all: check-inputs createdir $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex size complete-message
+all: check-inputs createdir $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex size
 
 check-inputs:
 # Note that ifndef and endif are not indented - they control what make sees,
 #$< taking effect before the Makefile is run.
 ifndef MCU_TARGET
-	$(error MCU_TARGET is undefined)
+	$(error MCU_TARGET must be specified!)
 endif
+ifndef F_CPU
+	$(error F_CPU must be specified!)
+endif
+
+#build: $(BUILDDIR)/$(MCU_TARGET)/$(PROGRAM)_$(MCU_TARGET).hex
 
 # Create final output files (.hex, .eep) from ELF output file.
 %.hex:  %.elf
-	@echo
 	@echo $(MSG_FLASH) $@
-	$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
+	@$(OBJCOPY) -O $(FORMAT) -R .eeprom $< $@
 
 %.eep: %.elf
 	@echo
@@ -136,7 +141,8 @@ createdir:
 	$(shell mkdir -p $(BUILDDIR) >/dev/null)
 	$(shell mkdir -p $(DEPDIR) >/dev/null)
 size:
-	$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
+	@echo
+	@$(SIZE) -C --mcu=$(MCU_TARGET) $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).elf
 
 # Link: create ELF output file from object files.
 # ELF file will not be deleted
@@ -144,26 +150,23 @@ size:
 # Object files will not be deleted if make is killed or interrupted.
 .PRECIOUS : $(OBJ)
 %.elf: $(OBJ)
-	@echo
 	@echo $(MSG_LINKING) $@
-	$(CC) $(CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
 
 # Compile: create object files from C source files.
 $(BUILDDIR)/%.o : %.c $(DEPDIR)/%.d
-	@echo
 	@echo $(MSG_COMPILING) $<
 # -c tells the compiler not to link
-	$(CC) -c $(CFLAGS) $< -o $@
-	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+	@$(CC) -c $(CFLAGS) $< -o $@
+	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 
 
 # Assemble: create object files from assembler source files.
 $(BUILDDIR)/%.o : %.S $(DEPDIR)/%.d
-	@echo
 	@echo $(MSG_ASSEMBLING) $<
-	$(CC) -c $(ASFLAGS) $< -o $@
-	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+	@$(CC) -c $(ASFLAGS) $< -o $@
+	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 complete-message:
 	@echo "Successfully created: " $(BUILDDIR)/$(PROGRAM)_$(MCU_TARGET).hex
