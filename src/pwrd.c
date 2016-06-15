@@ -28,7 +28,17 @@ THE SOFTWARE.
 #include <avr/io.h>
 
 #include "butt.h"
+#if CPU_LOAD
+#include "uart.h"
+#endif
 #include "wdtc.h"
+
+
+/* Assembly functions */
+#if CPU_LOAD
+extern void Cpul_stopPoint(void);
+extern tU08 Cpul_getMaxCycles_U08(void);
+#endif
 
 static tPwrd_sleepMode_E sleepMode_E;
 
@@ -68,9 +78,8 @@ void Pwrd_sleep(void)
         MCUCR = _BV(SM1);
     }
 
-#if CPU_LOAD_MEASUREMENT_ENABLE
+#if CPU_LOAD
     Cpul_stopPoint();
-
     Uart_TransmitChar(Cpul_getMaxCycles_U08());
 #endif
     cli(); /* Timed sequence make sure it's not disturbed */
