@@ -27,11 +27,6 @@ THE SOFTWARE.
 
 #include "type.h"
 
-typedef enum
-{
-    NO_LOCK_E, BOD_RESET_E, WDT_RESET_E, MCU_LOAD_E,
-} tLockMode_E;
-
 void Cont_storeStatusRegister(const tU08 register_U08);
 void Cont_init(void);
 void Cont_loop(void);

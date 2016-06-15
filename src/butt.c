@@ -21,7 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-
+/**
+ * @file
+ */
 #include "butt.h"
 
 #include <avr/io.h>
@@ -34,7 +36,8 @@ static tButt_State_str buttState_str;
 
 inline void Butt_init(void)
 {
-    /* Pin change interrupt on button - this does not enables the interrupt, this is done later. */
+    /* Pin change interrupt on button - this does not enables the interrupt,
+    this is done later. */
     PCINT(BUTT_CFG);
 }
 
@@ -86,6 +89,7 @@ void Butt_disableInterrupt(void)
     /* Disable interrupt */
     GIMSK = 0;
     /* Important to clear interrupt flag (by writing ONE!),
-     * otherwise an interrupt will be triggered as soon as global interrupt flag is set again. */
+     * otherwise an interrupt will be triggered as soon as global interrupt flag
+     *  is set again. */
     GIFR = _BV(PCIF);
 }

@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 #include "conf.h"
 
-/* 10-bit ADC resolution - maximum value 2^10 */
+/** 10-bit ADC resolution - maximum value 2^10 */
 #define ADC_MAX_VALUE (2^10)
 
 static tDsen_doorState_str doorState_str;
@@ -42,6 +42,9 @@ static tU16 getDoorRawPos_U16(void);
 static void eepromWrite(const tU08 address_U08, const tU08 data_U08);
 static tU08 eepromRead_U08(const tU08 address);
 
+/**
+ * @brief Setup ADC conversion.
+ */
 inline void Dsen_init(void)
 {
 #if F_CPU == 9600000
@@ -104,15 +107,20 @@ inline void Dsen_loop(void)
 
     if (doorState_str.doorState_E == newDoorState_E)
     {
-        INC_U16(doorState_str.timeInState_U16);
+        INC_U16(doorState_str.ticksInState_U16);
     }
     else
     {
-        doorState_str.timeInState_U16 = 0;
+        doorState_str.ticksInState_U16 = 0;
     }
     doorState_str.doorState_E = newDoorState_E;
 
 }
+
+/**
+ * Make an AD conversion
+ * @return  door position
+ */
 static tU16 getDoorRawPos_U16(void)
 {
     tU16 sensorValue_U16;

@@ -22,6 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/**
+ * @file
+ * 
+ * @brief Door sensor module
+ * 
+ * @details This module handles the the hall sensor ADC conversion including validation
+ * of sensor value. It stores/reads sensor value to/from EEPROM. Finally
+ * it also creates door state with help of sensor value.
+ */
+
 #ifndef DSEN_H_
 #define DSEN_H_
 
@@ -29,20 +39,21 @@ THE SOFTWARE.
 
 typedef enum
 {
-  DSEN_CLOSED_E,
-  DSEN_OPEN_E
+  DSEN_CLOSED_E,/**< Door considered closed */
+  DSEN_OPEN_E	/**< Door considered open */
 } tDsen_doorState_E;
 
 typedef struct
 {
-    tDsen_doorState_E doorState_E;
-    tU16 timeInState_U16;
+    tDsen_doorState_E doorState_E; /**< Door state */
+    tU16 ticksInState_U16; /**< Numer of ticks in state */
 }tDsen_doorState_str ;
 
+/** @brief Initializes dsen module. Must be called before Dsen_loop. */
 void Dsen_init(void);
+/** @brief Updates door state. */
 void Dsen_loop(void);
 tDsen_doorState_str Dsen_getDoorState_str(void);
-tB Dsen_calibrationNeeded_B(void);
 tB Dsen_storeClosedPos_B(void);
 
 #endif /* DSEN_H_ */
