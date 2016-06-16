@@ -76,8 +76,11 @@ int main(void)
 #if UART_ENABLE
     Uart_Enable();
 #endif
-    /** @todo is this necessary? Isn't it enabled in Pwrd_wakeup? */
+
+    /* Enable global interrupt otherwise dsen will not be able to wake up
+     * from ADC Noise reduction mode. */
     asm volatile("sei"::);
+
     for (;;)
     {
 #if CPU_LOAD

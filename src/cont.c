@@ -61,7 +61,7 @@ inline void Cont_loop(void)
      * @todo This shall be changed to check for other reset than power on
      */
     /* Check if there has been other then power on reset, i.e BOD reset */
-    if ((statusRegister_U08 & _BV(WDRF)))
+    if (!(statusRegister_U08 & _BV(PORF)))
     {
         /* Make sure to clear it,
          * otherwise we will not be able to reset with button */
