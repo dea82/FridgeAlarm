@@ -51,6 +51,17 @@ https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
 
 ## Verification
 
+
+### Install
+To upload the hex-file to the MCU (Attiny85) I use the following command with avrdude:
+`avrdude -B250 -cusbasp -pt85 -Uflash:w:<path to hex file> -Ulfuse:w:0xE2:m -Uhfuse:w:0x55:m`
+The -B250 makes it slow - however if the clock of the MCU is to slow it might not work otherwise.
+
+#### Fuses
+|MCU      |Low fuse|High fuse|
+|---------|:------:|:-------:|
+|Attiny13A|?       |?        |
+|Attiny85 |0xE2    |0x55     |
 ### Power consumption
 The following current consumption has been observed with prototype pcb, Attiny85 and magnetic buzzer.
 System mode      |Current consumption [mA]
