@@ -86,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3>Box design</h3>
 <h3>PCB</h3>
 <h3>Software</h3>
+<p><a href="http://dea82.github.io/FridgeAlarm GitHub Pages">Doxygen documentation</a></p>
 <h4>Doxygen deployment by Travis</h4>
 <p>The source code documentation is generated with <a href="www.doxygen.com Doxygen: Main Page">Doxygen</a> and pushed automatically to GitHub Pages by <a href="www.travis-ci.org">Travis CI</a>.</p>
 <h5>Setup</h5>
@@ -113,6 +114,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ol>
 <h2>Verification</h2>
+<h3>Install</h3>
+<p>To upload the hex-file to the MCU (Attiny85) I use the following command with avrdude: <code>avrdude -B250 -cusbasp -pt85 -Uflash:w:&lt;path to hex file&gt; -Ulfuse:w:0xE2:m -Uhfuse:w:0x55:m</code> The -B250 makes it slow - however if the clock of the MCU is to slow it might not work otherwise.</p>
+<h4>Fuses</h4>
+<table class="doxtable">
+<tr>
+<th>MCU </th><th align="center">Low fuse</th><th align="center">High fuse  </th></tr>
+<tr>
+<td>Attiny13A</td><td align="center">? </td><td align="center">? </td></tr>
+<tr>
+<td>Attiny85 </td><td align="center">0xE2 </td><td align="center">0x55 </td></tr>
+</table>
 <h3>Power consumption</h3>
 <p>The following current consumption has been observed with prototype pcb, Attiny85 and magnetic buzzer. </p>
 <table class="doxtable">
