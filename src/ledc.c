@@ -34,7 +34,10 @@ static tLedState_E ledState_E = LEDC_OFF_E;
 inline void Ledc_init(void)
 {
 }
-
+/**
+ * @brief Turns led on or off by request
+ *
+ */
 inline void Ledc_loop(void)
 {
     static tU08 counter_U08;
