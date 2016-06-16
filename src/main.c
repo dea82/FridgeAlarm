@@ -39,9 +39,7 @@ THE SOFTWARE.
 
 /* Assembly function. */
 #if CPU_LOAD
-extern void Cpul_startPoint(tU08);
-extern void Cpul_stopPoint(void);
-extern char Cpul_getMaxCycles_U08(void);
+#include "cpul_asm.h"
 #endif
 
 /* Declaring main as OS_main saves some register pushing to stack. */
