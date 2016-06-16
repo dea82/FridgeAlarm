@@ -12,7 +12,7 @@ install:
 env:
   global:
   # Used for deployment
-  - ENCRYPTION_LABEL: "992952f03676"
+  - ENCRYPTION_LABEL: "78f1b569ea9f"
   - COMMIT_AUTHOR_EMAIL: "andreas.laghamn@gmail.com"
 
 script: 
