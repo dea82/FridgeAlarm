@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ledc_5floop',['Ledc_loop',['../ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5',1,'ledc.c']]]
+  ['dsen_5finit',['Dsen_init',['../dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969',1,'Dsen_init(void):&#160;dsen.c'],['../dsen_8h.html#a37ada16d7ede7f4bbd4f489290c02969',1,'Dsen_init(void):&#160;dsen.c']]],
+  ['dsen_5floop',['Dsen_loop',['../dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173',1,'Dsen_loop(void):&#160;dsen.c'],['../dsen_8h.html#a24adfba35d327aca1dc02e8bb949a173',1,'Dsen_loop(void):&#160;dsen.c']]]
 ];
