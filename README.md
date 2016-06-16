@@ -1,4 +1,5 @@
 # FridgeAlarm
+
 ## System overview
 Alarm system for unintentionally open fridge door
 
@@ -13,9 +14,10 @@ Alarm system for unintentionally open fridge door
 ### PCB
 
 ### Software
+[Doxygen documentation](http://dea82.github.io/FridgeAlarm)
 
 #### Doxygen deployment by Travis
-The source code documentation is generated with [Doxygen](www.doxygen.com Doxygen: Main Page) and pushed automatically to GitHub Pages by [Travis CI](www.travis-ci.org).
+The source code documentation is generated with [Doxygen](http://www.doxygen.com) and pushed automatically to GitHub Pages by [Travis CI](http://www.travis-ci.org).
 
 ##### Setup
 This assumes that you've already figures out how to genereate Doxygen documentation and are able to build with Travis CI.
