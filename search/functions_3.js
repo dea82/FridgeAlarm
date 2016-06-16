@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getdoorrawpos_5fu16',['getDoorRawPos_U16',['../dsen_8c.html#a3a16057763b76b73843fe98bcab303d9',1,'dsen.c']]]
+  ['ledc_5floop',['Ledc_loop',['../ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5',1,'ledc.c']]]
 ];

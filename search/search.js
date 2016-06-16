@@ -10,12 +10,11 @@ var indexSectionsWithContent =
   0: "bcdglmpstuw",
   1: "t",
   2: "bcdlmpuw",
-  3: "bcdglp",
+  3: "bdglp",
   4: "dst",
   5: "t",
   6: "bd",
-  7: "u",
-  8: "t"
+  7: "u"
 };
 
 var indexSectionNames =
@@ -27,8 +26,7 @@ var indexSectionNames =
   4: "variables",
   5: "enums",
   6: "enumvalues",
-  7: "defines",
-  8: "pages"
+  7: "defines"
 };
 
 function convertToId(search)
