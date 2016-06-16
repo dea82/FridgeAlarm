@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   0: "bdlpst",
   1: "t",
   2: "bdlp",
-  3: "bdl",
+  3: "bdlp",
   4: "dst",
   5: "t",
   6: "bd"
