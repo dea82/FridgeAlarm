@@ -4,3 +4,4 @@ src/doc/doxygen
 src/doc/doxygen_sqlite3.db
 #Emacs files
 *#.*
+*~
