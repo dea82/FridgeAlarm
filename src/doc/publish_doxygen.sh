@@ -6,7 +6,7 @@ TARGET_BRANCH="gh-pages"
 
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-    echo "Don't publish on other branches than develop."
+    echo "Don't deploy on other branches than develop."
     exit 0;
 fi
 
