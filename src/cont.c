@@ -57,8 +57,11 @@ inline void Cont_loop(void)
     /* Sets it default. */
     Pwrd_setSleepMode(PWRD_SHORT_DEEP_SLEEP_E);
 
+    /**
+     * @todo This shall be changed to check for other reset than power on
+     */
     /* Check if there has been other then power on reset, i.e BOD reset */
-    if (!(statusRegister_U08 & _BV(PORF)))
+    if ((statusRegister_U08 & _BV(WDRF)))
     {
         /* Make sure to clear it,
          * otherwise we will not be able to reset with button */

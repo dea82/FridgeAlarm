@@ -76,7 +76,8 @@ int main(void)
 #if UART_ENABLE
     Uart_Enable();
 #endif
-
+    /** @todo is this necessary? Isn't it enabled in Pwrd_wakeup? */
+    asm volatile("sei"::);
     for (;;)
     {
 #if CPU_LOAD

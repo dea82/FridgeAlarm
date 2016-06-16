@@ -30,8 +30,11 @@ THE SOFTWARE.
 
 #include "conf.h"
 
-/** 10-bit ADC resolution - maximum value 2^10 */
-#define ADC_MAX_VALUE (2^10)
+/** 
+ * Due to ~0.135 V supply loss to sensor compared with supply to ADC-converter 
+ * the normal ADC-range will be 0-986 instead of 0-1023.
+ */
+#define UNAFFECTED_SENSOR_VALUE 493
 
 static tDsen_doorState_str doorState_str;
 static tU16 doorClosed_U16;
@@ -82,7 +85,7 @@ inline void Dsen_loop(void)
 
     tDsen_doorState_E newDoorState_E;
     /* Algorithm handles both direction of magnet field */
-    if (doorClosed_U16 < ADC_MAX_VALUE/2)
+    if (doorClosed_U16 < UNAFFECTED_SENSOR_VALUE)
     {
         if (doorPos_U16 > doorClosed_U16 + DOOR_CLOSED_OFFSET)
         {
@@ -184,7 +187,7 @@ static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
     /* Cast should not be a problem due to the 10-bit resolution. */
-    if ((ABS((tS16 )sensorValue_U16 - ADC_MAX_VALUE)) > MIN_CAL_DOOR_CLOSED_POS)
+    if (ABS((tS16)sensorValue_U16 - UNAFFECTED_SENSOR_VALUE) > MIN_CAL_DOOR_CLOSED_POS)
     {
         ret_B = TRUE;
     }

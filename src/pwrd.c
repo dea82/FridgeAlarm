@@ -44,6 +44,12 @@ static tPwrd_sleepMode_E sleepMode_E;
 
 inline void Pwrd_wakeup(void)
 {
+    /** 
+     * If wakeup was caused by button interrupt the watchdog timer can have any value.
+     *  Make sure to reset it before activating WDT reset otherwise we will have
+     *  might have a reset during next cycle.
+     */
+    asm volatile("wdr"::);
     Wdtc_SetTimer(WDTC_16MS_E, FALSE);
 }
 

@@ -35,13 +35,13 @@ void Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB interrupt_B)
         case WDTC_OFF_E:
             /* Timed sequence to turn WDT off. */
             WDTCR = _BV(WDCE) | _BV(WDE);
-            WDTCR = _BV(WDCE);
+            WDTCR = 0;
             break;
         case WDTC_16MS_E:
-            WDTCR = _BV(WDIF) | (_BV(WDIE) && interrupt_B) | _BV(WDE);
+            WDTCR = _BV(WDIF) | ((1 & interrupt_B) << WDIE) | _BV(WDE);
             break;
         case WDTC_8S_E:
-            WDTCR = _BV(WDIF) | (_BV(WDIE) && interrupt_B) | _BV(WDE) | _BV(WDP3) | _BV(WDP0);
+            WDTCR = _BV(WDIF) | ((1 & interrupt_B) << WDIE) | _BV(WDE) | _BV(WDP3) | _BV(WDP0);
             break;
     }
 }
