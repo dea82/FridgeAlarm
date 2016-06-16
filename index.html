@@ -85,10 +85,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3>Component selection</h3>
 <h3>Box design</h3>
 <h3>PCB</h3>
-<h3>Source code</h3>
-<div class="image">
-<img src="doc/cdoxygen-arch.png"  alt="alt text" title="Logo Title Text 1"/>
-</div>
+<h3>Software</h3>
+<h4>Doxygen deployment by Travis</h4>
+<p>The source code documentation is generated with <a href="www.doxygen.com Doxygen: Main Page">Doxygen</a> and pushed automatically to GitHub Pages by <a href="www.travis-ci.org">Travis CI</a>.</p>
+<h5>Setup</h5>
+<p>This assumes that you've already figures out how to genereate Doxygen documentation and are able to build with Travis CI.</p>
+<p>To be able to automatically update Doxygen documentation when a commit is done to GitHub follow these steps: </p>
+<h6>Generation of SSH-key</h6>
+<ol type="1">
+<li>Generate a new SSH key with the following command: <code>ssh-keygen -t rsa -b 4096 -C "your_email\@example.com"</code></li>
+<li>You are then prompted to enter a name for the new keypair. Enter a file in which to save the key.</li>
+<li>When asked for passphrase just press ENTER for empty passphrase. Confirm with ENTER again.</li>
+</ol>
+<h6>Setup GitHub</h6>
+<ol type="1">
+<li>Navigate to your GitHub settings page <code><a href="https://github.com/">https://github.com/</a>&lt;username&gt;/&lt;your_repository&gt;/settings/keys</code> and paste the content from the public ssh-key file, the one ending with .pub. <b>Make sure to check the box that allows write access!</b></li>
+</ol>
+<h6>Setup Travis CI</h6>
+<p>This is the trickiest part.</p>
+<ol type="1">
+<li>Make sure you're able to connect to Travis console.</li>
+<li>Run command: <code>travis encrypt-file name-of-key-generated</code>. It's the key that doesn't end with .pub that shall be used.</li>
+<li>You get an instruction from Travis CI. As it says you should now make sure to add the returned key, ending with .enc, to your repository. All others keys can and should now be removed!</li>
+<li>Next update your .travis.yml with the encryption label, the 12-digit hex value returned from step 2. ``` env: global:<ul>
+<li>ENCRYPTION_LABEL: "12-digit hex value" ``` TODO: Finalize <a href="https://gist.github.com/domenic/ec8b0fc8ab45f39403dd">https://gist.github.com/domenic/ec8b0fc8ab45f39403dd</a></li>
+</ul>
+</li>
+</ol>
 <h2>Verification</h2>
 <h3>Power consumption</h3>
 <p>The following current consumption has been observed with prototype pcb, Attiny85 and magnetic buzzer. </p>
