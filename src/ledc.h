@@ -38,5 +38,6 @@ typedef enum
 void Ledc_init(void);
 void Ledc_loop(void);
 void Ledc_setState(const tLedState_E state_E);
+void Ledc_setOrange(void);
 
 #endif /* LEDC_H_ */

@@ -54,6 +54,7 @@ inline void Pwrd_wakeup(void)
      *  might have a reset during next cycle.
      */
     asm volatile("wdr"::);
+    Butt_disableInterrupt();
     Wdtc_SetTimer(WDTC_16MS_E, FALSE);
 }
 
@@ -97,7 +98,6 @@ void Pwrd_sleep(void)
     MCUCR &= ~_BV(BODSE);
     sei(); /* To be able to wake-up */
     asm volatile("sleep"::);
-    Butt_disableInterrupt();
 }
 
 void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E)

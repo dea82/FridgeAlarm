@@ -102,3 +102,9 @@ void Ledc_setState(const tLedState_E state_E)
 {
     ledState_E = state_E;
 }
+
+void Ledc_setOrange(void)
+{
+    IO_SET(GREEN_LED_CFG);
+    IO_SET(RED_LED_CFG);
+}
