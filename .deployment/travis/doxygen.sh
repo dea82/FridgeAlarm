@@ -71,7 +71,7 @@ if [[ -z $(git -C $CLONE_DIR status --porcelain) ]]; then
 fi
 
 # Commit changes
-git -C $CLONE_DIR add .
+git -C $CLONE_DIR add -A .
 git -C $CLONE_DIR commit -m "Travis: Deploy to GitHub Pages ${SHA}"
 
 # Travis encryption stuff, ENCTRYPTION_LABEL is found in .travis.yml
