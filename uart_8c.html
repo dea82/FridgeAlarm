@@ -23,7 +23,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fridge Alarm
-   &#160;<span id="projectnumber">2.0</span>
    </div>
   </td>
  </tr>
@@ -38,7 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -86,34 +85,172 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">uart.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;uart.h&quot;</code><br/>
-<code>#include &quot;conf.h&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
+<div class="textblock"><div class="dynheader">
 Include dependency graph for uart.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="uart_8c__incl.png" border="0" usemap="#uart_8c" alt=""/></div>
 <map name="uart_8c" id="uart_8c">
-<area shape="rect" id="node2" href="uart_8h_source.html" title="uart.h" alt="" coords="11,80,65,107"/><area shape="rect" id="node5" href="conf_8h_source.html" title="conf.h" alt="" coords="93,80,151,107"/><area shape="rect" id="node3" href="type_8h_source.html" title="type.h" alt="" coords="8,155,65,181"/></map>
+<area shape="rect" id="node2" href="uart_8h.html" title="uart.h" alt="" coords="11,80,65,107"/><area shape="rect" id="node5" href="conf_8h.html" title="conf.h" alt="" coords="93,80,151,107"/><area shape="rect" id="node3" href="type_8h.html" title="type.h" alt="" coords="8,155,65,181"/></map>
 </div>
-</div><table class="memberdecls">
+</div>
+<p><a href="uart_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa428a976224eafb19d08eaf4dcb79fa7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa428a976224eafb19d08eaf4dcb79fa7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>transmit</b> (unsigned char)</td></tr>
+<tr class="memitem:aa428a976224eafb19d08eaf4dcb79fa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7">transmit</a> (unsigned char)</td></tr>
 <tr class="separator:aa428a976224eafb19d08eaf4dcb79fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0bdc4676149c5ac8b29e07f38aaebae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0bdc4676149c5ac8b29e07f38aaebae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Uart_Enable</b> (void)</td></tr>
+<tr class="memitem:ac0bdc4676149c5ac8b29e07f38aaebae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#ac0bdc4676149c5ac8b29e07f38aaebae">Uart_Enable</a> (void)</td></tr>
 <tr class="separator:ac0bdc4676149c5ac8b29e07f38aaebae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7988f5013b060a04a4454c73297fca3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7988f5013b060a04a4454c73297fca3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Uart_TransmitChar</b> (const char data_U08)</td></tr>
+<tr class="memitem:af7988f5013b060a04a4454c73297fca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#af7988f5013b060a04a4454c73297fca3">Uart_TransmitChar</a> (const char data_U08)</td></tr>
 <tr class="separator:af7988f5013b060a04a4454c73297fca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b802c1cb03edb5f419c6a2a8962e28c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b802c1cb03edb5f419c6a2a8962e28c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Uart_TransmitInt</b> (const tU16 data_U16)</td></tr>
+<tr class="memitem:a5b802c1cb03edb5f419c6a2a8962e28c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a5b802c1cb03edb5f419c6a2a8962e28c">Uart_TransmitInt</a> (const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> data_U16)</td></tr>
 <tr class="separator:a5b802c1cb03edb5f419c6a2a8962e28c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0e2dfafbfa626311cce6ed3e97f7906"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0e2dfafbfa626311cce6ed3e97f7906"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Uart_TransmitStr</b> (const char *str)</td></tr>
+<tr class="memitem:ad0e2dfafbfa626311cce6ed3e97f7906"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#ad0e2dfafbfa626311cce6ed3e97f7906">Uart_TransmitStr</a> (const char *str)</td></tr>
 <tr class="separator:ad0e2dfafbfa626311cce6ed3e97f7906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aa428a976224eafb19d08eaf4dcb79fa7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transmit </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>char</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_aa428a976224eafb19d08eaf4dcb79fa7_icgraph.png" border="0" usemap="#uart_8c_aa428a976224eafb19d08eaf4dcb79fa7_icgraph" alt=""/></div>
+<map name="uart_8c_aa428a976224eafb19d08eaf4dcb79fa7_icgraph" id="uart_8c_aa428a976224eafb19d08eaf4dcb79fa7_icgraph">
+<area shape="rect" id="node2" href="uart_8h.html#af7988f5013b060a04a4454c73297fca3" title="Uart_TransmitChar" alt="" coords="123,56,256,83"/><area shape="rect" id="node3" href="pwrd_8h.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="320,5,411,32"/><area shape="rect" id="node5" href="uart_8h.html#a5b802c1cb03edb5f419c6a2a8962e28c" title="Uart_TransmitInt" alt="" coords="305,56,425,83"/><area shape="rect" id="node6" href="uart_8c.html#ad0e2dfafbfa626311cce6ed3e97f7906" title="Uart_TransmitStr" alt="" coords="304,107,427,133"/><area shape="rect" id="node4" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="475,5,525,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac0bdc4676149c5ac8b29e07f38aaebae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Uart_Enable </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00036">36</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_ac0bdc4676149c5ac8b29e07f38aaebae_icgraph.png" border="0" usemap="#uart_8c_ac0bdc4676149c5ac8b29e07f38aaebae_icgraph" alt=""/></div>
+<map name="uart_8c_ac0bdc4676149c5ac8b29e07f38aaebae_icgraph" id="uart_8c_ac0bdc4676149c5ac8b29e07f38aaebae_icgraph">
+<area shape="rect" id="node2" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="149,5,200,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af7988f5013b060a04a4454c73297fca3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Uart_TransmitChar </td>
+          <td>(</td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>data_U08</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00041">41</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_af7988f5013b060a04a4454c73297fca3_cgraph.png" border="0" usemap="#uart_8c_af7988f5013b060a04a4454c73297fca3_cgraph" alt=""/></div>
+<map name="uart_8c_af7988f5013b060a04a4454c73297fca3_cgraph" id="uart_8c_af7988f5013b060a04a4454c73297fca3_cgraph">
+<area shape="rect" id="node2" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="187,5,256,32"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_af7988f5013b060a04a4454c73297fca3_icgraph.png" border="0" usemap="#uart_8c_af7988f5013b060a04a4454c73297fca3_icgraph" alt=""/></div>
+<map name="uart_8c_af7988f5013b060a04a4454c73297fca3_icgraph" id="uart_8c_af7988f5013b060a04a4454c73297fca3_icgraph">
+<area shape="rect" id="node2" href="pwrd_8h.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="203,5,293,32"/><area shape="rect" id="node4" href="uart_8h.html#a5b802c1cb03edb5f419c6a2a8962e28c" title="Uart_TransmitInt" alt="" coords="188,56,308,83"/><area shape="rect" id="node5" href="uart_8c.html#ad0e2dfafbfa626311cce6ed3e97f7906" title="Uart_TransmitStr" alt="" coords="187,107,309,133"/><area shape="rect" id="node3" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="357,5,408,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a5b802c1cb03edb5f419c6a2a8962e28c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Uart_TransmitInt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a>&#160;</td>
+          <td class="paramname"><em>data_U16</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00046">46</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_a5b802c1cb03edb5f419c6a2a8962e28c_cgraph.png" border="0" usemap="#uart_8c_a5b802c1cb03edb5f419c6a2a8962e28c_cgraph" alt=""/></div>
+<map name="uart_8c_a5b802c1cb03edb5f419c6a2a8962e28c_cgraph" id="uart_8c_a5b802c1cb03edb5f419c6a2a8962e28c_cgraph">
+<area shape="rect" id="node2" href="uart_8c.html#af7988f5013b060a04a4454c73297fca3" title="Uart_TransmitChar" alt="" coords="173,5,307,32"/><area shape="rect" id="node3" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="355,5,424,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0e2dfafbfa626311cce6ed3e97f7906"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Uart_TransmitStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="uart_8c_source.html#l00052">52</a> of file <a class="el" href="uart_8c_source.html">uart.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8c_ad0e2dfafbfa626311cce6ed3e97f7906_cgraph.png" border="0" usemap="#uart_8c_ad0e2dfafbfa626311cce6ed3e97f7906_cgraph" alt=""/></div>
+<map name="uart_8c_ad0e2dfafbfa626311cce6ed3e97f7906_cgraph" id="uart_8c_ad0e2dfafbfa626311cce6ed3e97f7906_cgraph">
+<area shape="rect" id="node2" href="uart_8c.html#af7988f5013b060a04a4454c73297fca3" title="Uart_TransmitChar" alt="" coords="176,5,309,32"/><area shape="rect" id="node3" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="357,5,427,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,0 +1,6 @@
+<map id="getCalibrationState_E" name="getCalibrationState_E">
+<area shape="rect" id="node2" href="$butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39" title="Get actual button state. " alt="" coords="226,5,350,32"/>
+<area shape="rect" id="node3" href="$dsen_8c.html#a5adec43f339252f500ca96053ec09e2f" title="Dsen_storeClosedPos_B" alt="" coords="203,56,373,83"/>
+<area shape="rect" id="node4" href="$dsen_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5" title="withinRange_B" alt="" coords="422,31,533,57"/>
+<area shape="rect" id="node5" href="$dsen_8c.html#a80ec46ee35f16d40e575cdb0043772bc" title="eepromWrite" alt="" coords="429,81,525,108"/>
+</map>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ledc_5floop',['Ledc_loop',['../ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5',1,'ledc.c']]]
+  ['eepromread_5fu08',['eepromRead_U08',['../dsen_8c.html#ac6a80bcc80af2bc34923292ca8961f4b',1,'dsen.c']]],
+  ['eepromwrite',['eepromWrite',['../dsen_8c.html#a80ec46ee35f16d40e575cdb0043772bc',1,'dsen.c']]]
 ];

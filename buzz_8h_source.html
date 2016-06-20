@@ -23,7 +23,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fridge Alarm
-   &#160;<span id="projectnumber">2.0</span>
    </div>
   </td>
  </tr>
@@ -38,7 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -70,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">buzz.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="buzz_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">The MIT License (MIT)</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Copyright (c) 2015-2016 Andreas L.</span></div>
@@ -111,17 +110,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef BUZZ_H_</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUZZ_H_</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63d">   28</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    BUZZ_OFF_E,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    BUZZ_ON_E,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    BUZZ_ALARM_E</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} tSoundType_E;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> Buzz_init(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> Buzz_loop(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> Buzz_setSound(<span class="keyword">const</span> tSoundType_E soundTypeReq_E);</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da734bae5a33161215ef2e441e346ddc0d">   30</a></span>&#160;    <a class="code" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da734bae5a33161215ef2e441e346ddc0d">BUZZ_OFF_E</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd">   31</a></span>&#160;    <a class="code" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd">BUZZ_ON_E</a>,</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e">   32</a></span>&#160;    <a class="code" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e">BUZZ_ALARM_E</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <a class="code" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63d">tSoundType_E</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="buzz_8h.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="buzz_8h.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="buzz_8h.html#ace6999f70c281eccfccdd208927558bd">Buzz_setSound</a>(<span class="keyword">const</span> <a class="code" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63d">tSoundType_E</a> soundTypeReq_E);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* BUZZ_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="buzz_8h_html_ace6999f70c281eccfccdd208927558bd"><div class="ttname"><a href="buzz_8h.html#ace6999f70c281eccfccdd208927558bd">Buzz_setSound</a></div><div class="ttdeci">void Buzz_setSound(const tSoundType_E soundTypeReq_E)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00110">buzz.c:110</a></div></div>
+<div class="ttc" id="buzz_8h_html_af0e54e3a1e313d3db184d06a4b32924d"><div class="ttname"><a href="buzz_8h.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a></div><div class="ttdeci">void Buzz_loop(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00058">buzz.c:58</a></div></div>
+<div class="ttc" id="buzz_8h_html_a38e1244c0bd2a25996902b3c7ba07099"><div class="ttname"><a href="buzz_8h.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a></div><div class="ttdeci">void Buzz_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00043">buzz.c:43</a></div></div>
+<div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd">BUZZ_ON_E</a></div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00031">buzz.h:31</a></div></div>
+<div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63da734bae5a33161215ef2e441e346ddc0d"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da734bae5a33161215ef2e441e346ddc0d">BUZZ_OFF_E</a></div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00030">buzz.h:30</a></div></div>
+<div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63d"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63d">tSoundType_E</a></div><div class="ttdeci">tSoundType_E</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00028">buzz.h:28</a></div></div>
+<div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e">BUZZ_ALARM_E</a></div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00032">buzz.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

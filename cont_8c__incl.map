@@ -1,10 +1,10 @@
 <map id="cont.c" name="cont.c">
-<area shape="rect" id="node2" href="$cont_8h_source.html" title="cont.h" alt="" coords="84,80,141,107"/>
+<area shape="rect" id="node2" href="$cont_8h.html" title="cont.h" alt="" coords="84,80,141,107"/>
 <area shape="rect" id="node5" href="$butt_8h.html" title="Button module. " alt="" coords="5,80,59,107"/>
-<area shape="rect" id="node6" href="$buzz_8h_source.html" title="buzz.h" alt="" coords="167,80,228,107"/>
-<area shape="rect" id="node7" href="$conf_8h_source.html" title="conf.h" alt="" coords="420,80,477,107"/>
-<area shape="rect" id="node9" href="$ledc_8h_source.html" title="ledc.h" alt="" coords="338,80,395,107"/>
+<area shape="rect" id="node6" href="$buzz_8h.html" title="buzz.h" alt="" coords="167,80,228,107"/>
+<area shape="rect" id="node7" href="$conf_8h.html" title="conf.h" alt="" coords="420,80,477,107"/>
+<area shape="rect" id="node9" href="$ledc_8h.html" title="ledc.h" alt="" coords="338,80,395,107"/>
 <area shape="rect" id="node10" href="$dsen_8h.html" title="Door sensor module. " alt="" coords="252,80,313,107"/>
 <area shape="rect" id="node11" href="$pwrd_8h.html" title="Power down module. " alt="" coords="503,80,564,107"/>
-<area shape="rect" id="node3" href="$type_8h_source.html" title="type.h" alt="" coords="84,155,141,181"/>
+<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="84,155,141,181"/>
 </map>

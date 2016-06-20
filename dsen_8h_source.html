@@ -23,7 +23,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fridge Alarm
-   &#160;<span id="projectnumber">2.0</span>
    </div>
   </td>
  </tr>
@@ -38,7 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -70,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifndef DSEN_H_</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DSEN_H_</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;type.h&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="type_8h.html">type.h</a>&quot;</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
@@ -122,23 +121,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structtDsen__doorState__str.html">   46</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structtDsen__doorState__str.html#a47b6adbd066b0fb1e502e1775269b15f">   48</a></span>&#160;    <a class="code" href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33">tDsen_doorState_E</a> <a class="code" href="structtDsen__doorState__str.html#a47b6adbd066b0fb1e502e1775269b15f">doorState_E</a>; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">   49</a></span>&#160;    tU16 <a class="code" href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">ticksInState_U16</a>; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">   49</a></span>&#160;    <a class="code" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> <a class="code" href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">ticksInState_U16</a>; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}<a class="code" href="structtDsen__doorState__str.html">tDsen_doorState_str</a> ;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> <a class="code" href="dsen_8h.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="dsen_8h.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="structtDsen__doorState__str.html">tDsen_doorState_str</a> Dsen_getDoorState_str(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;tB Dsen_storeClosedPos_B(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="structtDsen__doorState__str.html">tDsen_doorState_str</a> <a class="code" href="dsen_8h.html#a93ae97086da49765b03e76941c31d888">Dsen_getDoorState_str</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f">tB</a> <a class="code" href="dsen_8h.html#a5adec43f339252f500ca96053ec09e2f">Dsen_storeClosedPos_B</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DSEN_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="structtDsen__doorState__str_html"><div class="ttname"><a href="structtDsen__doorState__str.html">tDsen_doorState_str</a></div><div class="ttdef"><b>Definition:</b> dsen.h:46</div></div>
-<div class="ttc" id="structtDsen__doorState__str_html_a47b6adbd066b0fb1e502e1775269b15f"><div class="ttname"><a href="structtDsen__doorState__str.html#a47b6adbd066b0fb1e502e1775269b15f">tDsen_doorState_str::doorState_E</a></div><div class="ttdeci">tDsen_doorState_E doorState_E</div><div class="ttdef"><b>Definition:</b> dsen.h:48</div></div>
-<div class="ttc" id="dsen_8h_html_a37ada16d7ede7f4bbd4f489290c02969"><div class="ttname"><a href="dsen_8h.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a></div><div class="ttdeci">void Dsen_init(void)</div><div class="ttdoc">Initializes dsen module. Must be called before Dsen_loop. </div><div class="ttdef"><b>Definition:</b> dsen.c:55</div></div>
-<div class="ttc" id="dsen_8h_html_a24adfba35d327aca1dc02e8bb949a173"><div class="ttname"><a href="dsen_8h.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a></div><div class="ttdeci">void Dsen_loop(void)</div><div class="ttdoc">Updates door state. </div><div class="ttdef"><b>Definition:</b> dsen.c:86</div></div>
-<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33a255d6c1ab41b5464cfc9bb27004504a7"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a255d6c1ab41b5464cfc9bb27004504a7">DSEN_CLOSED_E</a></div><div class="ttdef"><b>Definition:</b> dsen.h:42</div></div>
-<div class="ttc" id="structtDsen__doorState__str_html_a478deb0083c9e6a6960121922910d476"><div class="ttname"><a href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">tDsen_doorState_str::ticksInState_U16</a></div><div class="ttdeci">tU16 ticksInState_U16</div><div class="ttdef"><b>Definition:</b> dsen.h:49</div></div>
-<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33a5f575ed135b4a87cbb3ba2aaa2cd3b10"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a5f575ed135b4a87cbb3ba2aaa2cd3b10">DSEN_OPEN_E</a></div><div class="ttdef"><b>Definition:</b> dsen.h:43</div></div>
-<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33">tDsen_doorState_E</a></div><div class="ttdeci">tDsen_doorState_E</div><div class="ttdef"><b>Definition:</b> dsen.h:40</div></div>
+<div class="ttc" id="type_8h_html_a3e22901eae1672058ba1618c62036e07"><div class="ttname"><a href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a></div><div class="ttdeci">unsigned int tU16</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00040">type.h:40</a></div></div>
+<div class="ttc" id="structtDsen__doorState__str_html"><div class="ttname"><a href="structtDsen__doorState__str.html">tDsen_doorState_str</a></div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00046">dsen.h:46</a></div></div>
+<div class="ttc" id="type_8h_html_ab866ed0f99b400ecf124f57bb2ea623f"><div class="ttname"><a href="type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f">tB</a></div><div class="ttdeci">unsigned char tB</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00035">type.h:35</a></div></div>
+<div class="ttc" id="dsen_8h_html_a93ae97086da49765b03e76941c31d888"><div class="ttname"><a href="dsen_8h.html#a93ae97086da49765b03e76941c31d888">Dsen_getDoorState_str</a></div><div class="ttdeci">tDsen_doorState_str Dsen_getDoorState_str(void)</div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00185">dsen.c:185</a></div></div>
+<div class="ttc" id="structtDsen__doorState__str_html_a47b6adbd066b0fb1e502e1775269b15f"><div class="ttname"><a href="structtDsen__doorState__str.html#a47b6adbd066b0fb1e502e1775269b15f">tDsen_doorState_str::doorState_E</a></div><div class="ttdeci">tDsen_doorState_E doorState_E</div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00048">dsen.h:48</a></div></div>
+<div class="ttc" id="dsen_8h_html_a5adec43f339252f500ca96053ec09e2f"><div class="ttname"><a href="dsen_8h.html#a5adec43f339252f500ca96053ec09e2f">Dsen_storeClosedPos_B</a></div><div class="ttdeci">tB Dsen_storeClosedPos_B(void)</div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00206">dsen.c:206</a></div></div>
+<div class="ttc" id="dsen_8h_html_a37ada16d7ede7f4bbd4f489290c02969"><div class="ttname"><a href="dsen_8h.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a></div><div class="ttdeci">void Dsen_init(void)</div><div class="ttdoc">Initializes dsen module. Must be called before Dsen_loop. </div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00055">dsen.c:55</a></div></div>
+<div class="ttc" id="dsen_8h_html_a24adfba35d327aca1dc02e8bb949a173"><div class="ttname"><a href="dsen_8h.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a></div><div class="ttdeci">void Dsen_loop(void)</div><div class="ttdoc">Updates door state. </div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00086">dsen.c:86</a></div></div>
+<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33a255d6c1ab41b5464cfc9bb27004504a7"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a255d6c1ab41b5464cfc9bb27004504a7">DSEN_CLOSED_E</a></div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00042">dsen.h:42</a></div></div>
+<div class="ttc" id="structtDsen__doorState__str_html_a478deb0083c9e6a6960121922910d476"><div class="ttname"><a href="structtDsen__doorState__str.html#a478deb0083c9e6a6960121922910d476">tDsen_doorState_str::ticksInState_U16</a></div><div class="ttdeci">tU16 ticksInState_U16</div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00049">dsen.h:49</a></div></div>
+<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33a5f575ed135b4a87cbb3ba2aaa2cd3b10"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a5f575ed135b4a87cbb3ba2aaa2cd3b10">DSEN_OPEN_E</a></div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00043">dsen.h:43</a></div></div>
+<div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
+<div class="ttc" id="dsen_8h_html_a41f289664eb2dedca3ed5516ce2e4e33"><div class="ttname"><a href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33">tDsen_doorState_E</a></div><div class="ttdeci">tDsen_doorState_E</div><div class="ttdef"><b>Definition:</b> <a href="dsen_8h_source.html#l00040">dsen.h:40</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

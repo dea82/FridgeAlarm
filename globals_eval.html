@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Fridge Alarm: File Members</title>
+<title>Fridge Alarm: Globals</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fridge Alarm
-   &#160;<span id="projectnumber">2.0</span>
    </div>
   </td>
  </tr>
@@ -38,7 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,13 +60,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li class="current"><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li class="current"><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
   <div id="navrow3" class="tabs2">
     <ul class="tablist">
       <li><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
+      <li><a href="globals_vars.html"><span>Variables</span></a></li>
+      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li class="current"><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
@@ -79,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,11 +97,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>BUTT_RELEASED_E
 : <a class="el" href="butt_8h.html#ab6179310226614228473617b31e51161a37facdfd9611d1fc59d89d5e528d06e9">butt.h</a>
 </li>
+<li>BUZZ_ALARM_E
+: <a class="el" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e">buzz.h</a>
+</li>
+<li>BUZZ_OFF_E
+: <a class="el" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da734bae5a33161215ef2e441e346ddc0d">buzz.h</a>
+</li>
+<li>BUZZ_ON_E
+: <a class="el" href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd">buzz.h</a>
+</li>
+<li>CALIBRATION_FAIL_E
+: <a class="el" href="cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867a57846553d8acca57615479c037f5b11e">cont.c</a>
+</li>
+<li>CALIBRATION_SUCCESS_E
+: <a class="el" href="cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867a5ba041a1dc4d1291d99be7e96acb6bef">cont.c</a>
+</li>
 <li>DSEN_CLOSED_E
 : <a class="el" href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a255d6c1ab41b5464cfc9bb27004504a7">dsen.h</a>
 </li>
 <li>DSEN_OPEN_E
 : <a class="el" href="dsen_8h.html#a41f289664eb2dedca3ed5516ce2e4e33a5f575ed135b4a87cbb3ba2aaa2cd3b10">dsen.h</a>
+</li>
+<li>LEDC_GREEN_BLINK_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a5ab4d69344ea5f2bc49ab1c96e6a383e">ledc.h</a>
+</li>
+<li>LEDC_GREEN_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a422fa50a637e67f786d3ec1937a09bd5">ledc.h</a>
+</li>
+<li>LEDC_OFF_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a9531c3522c643b1e197c895cc9f1151d">ledc.h</a>
+</li>
+<li>LEDC_ORANGE_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a05902ad2d171e804dd7db72f0352f482">ledc.h</a>
+</li>
+<li>LEDC_RED_BLINK_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a4d62ae61975ae64da35f1a4376f85eeb">ledc.h</a>
+</li>
+<li>LEDC_RED_E
+: <a class="el" href="ledc_8h.html#aeb6784793e96552e98263119e8a682b3a149eeb9d7e96c0593f09fd10a6f4cdd1">ledc.h</a>
+</li>
+<li>NO_CALIBRATION_E
+: <a class="el" href="cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867a503c65e4342b9dc1713f0adb4757f041">cont.c</a>
+</li>
+<li>PWRD_INFINITE_SLEEP_E
+: <a class="el" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b">pwrd.h</a>
+</li>
+<li>PWRD_LONG_DEEP_SLEEP_E
+: <a class="el" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832abce7a0facdc272140477ec56d33a5132">pwrd.h</a>
+</li>
+<li>PWRD_SHORT_DEEP_SLEEP_E
+: <a class="el" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832ab7b706dff8623eded40368964a6b07a5">pwrd.h</a>
+</li>
+<li>PWRD_SLEEP_WITH_TIMER_RUNNING_E
+: <a class="el" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832a677ca245ff52503de379a16ff8f6a29f">pwrd.h</a>
+</li>
+<li>WDTC_16MS_E
+: <a class="el" href="wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa8644453cdf3966f56abb28e2a23745ce">wdtc.h</a>
+</li>
+<li>WDTC_8S_E
+: <a class="el" href="wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa618989f99df0a42243c976e7227dee13">wdtc.h</a>
+</li>
+<li>WDTC_OFF_E
+: <a class="el" href="wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa1f6d5af033b6f865ff38c09c8daffd3a">wdtc.h</a>
 </li>
 </ul>
 </div><!-- contents -->

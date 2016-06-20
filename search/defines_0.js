@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unaffected_5fsensor_5fvalue',['UNAFFECTED_SENSOR_VALUE',['../dsen_8c.html#a8731db9307538d5b47669eb4bc9d4285',1,'dsen.c']]]
+  ['abs',['ABS',['../type_8h.html#ae2f08dc603ae93c402abd918ba4e23e1',1,'type.h']]],
+  ['alarm_5fopen',['ALARM_OPEN',['../conf_8h.html#ab9c5f6e3e0873fe6ce0af2a7267f1fad',1,'conf.h']]]
 ];

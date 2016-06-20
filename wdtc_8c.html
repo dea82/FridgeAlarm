@@ -23,7 +23,6 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fridge Alarm
-   &#160;<span id="projectnumber">2.0</span>
    </div>
   </td>
  </tr>
@@ -38,7 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -86,23 +85,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">wdtc.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;wdtc.h&quot;</code><br/>
-<code>#include &lt;avr/io.h&gt;</code><br/>
-<code>#include &quot;conf.h&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
+<div class="textblock"><div class="dynheader">
 Include dependency graph for wdtc.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="wdtc_8c__incl.png" border="0" usemap="#wdtc_8c" alt=""/></div>
 <map name="wdtc_8c" id="wdtc_8c">
-<area shape="rect" id="node2" href="wdtc_8h_source.html" title="wdtc.h" alt="" coords="7,80,68,107"/><area shape="rect" id="node6" href="conf_8h_source.html" title="conf.h" alt="" coords="143,80,200,107"/><area shape="rect" id="node3" href="type_8h_source.html" title="type.h" alt="" coords="8,155,65,181"/></map>
+<area shape="rect" id="node2" href="wdtc_8h.html" title="wdtc.h" alt="" coords="7,80,68,107"/><area shape="rect" id="node6" href="conf_8h.html" title="conf.h" alt="" coords="143,80,200,107"/><area shape="rect" id="node3" href="type_8h.html" title="type.h" alt="" coords="8,155,65,181"/></map>
 </div>
-</div><table class="memberdecls">
+</div>
+<p><a href="wdtc_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a51bee133bcfd769d0dcbd6dd89599e95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51bee133bcfd769d0dcbd6dd89599e95"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Wdtc_SetTimer</b> (const tWdtc_Timeout_E timeout_E, const tB interrupt_B)</td></tr>
+<tr class="memitem:a51bee133bcfd769d0dcbd6dd89599e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95">Wdtc_SetTimer</a> (const <a class="el" href="wdtc_8h.html#ad97d39ba61deb6fad7154605b969147a">tWdtc_Timeout_E</a> timeout_E, const <a class="el" href="type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f">tB</a> interrupt_B)</td></tr>
 <tr class="separator:a51bee133bcfd769d0dcbd6dd89599e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a51bee133bcfd769d0dcbd6dd89599e95"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Wdtc_SetTimer </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="wdtc_8h.html#ad97d39ba61deb6fad7154605b969147a">tWdtc_Timeout_E</a>&#160;</td>
+          <td class="paramname"><em>timeout_E</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f">tB</a>&#160;</td>
+          <td class="paramname"><em>interrupt_B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="wdtc_8c_source.html#l00035">35</a> of file <a class="el" href="wdtc_8c_source.html">wdtc.c</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wdtc_8c_a51bee133bcfd769d0dcbd6dd89599e95_icgraph.png" border="0" usemap="#wdtc_8c_a51bee133bcfd769d0dcbd6dd89599e95_icgraph" alt=""/></div>
+<map name="wdtc_8c_a51bee133bcfd769d0dcbd6dd89599e95_icgraph" id="wdtc_8c_a51bee133bcfd769d0dcbd6dd89599e95_icgraph">
+<area shape="rect" id="node2" href="pwrd_8h.html#ae9a79c69fbb06348dd4808678092b942" title="Pwrd_wakeup" alt="" coords="168,5,272,32"/><area shape="rect" id="node4" href="pwrd_8h.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="175,56,265,83"/><area shape="rect" id="node3" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="320,31,371,57"/></map>
+</div>
+</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
