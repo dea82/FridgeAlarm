@@ -43,13 +43,13 @@ static void turnOff(void);
 inline void Buzz_init(void)
 {
 /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
- *   
+ *
  * In this case gives a buzzer frequency of 1690 Hz
- */    
+ */
 #if F_CPU == 8000000
     OCR0A = 36;
 #elif F_CPU == 9600000
-    OCR0A = 43;     
+    OCR0A = 43;
 #else
 #error "Correct compare value to CPU speed."
 #endif

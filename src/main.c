@@ -50,7 +50,7 @@ int main(void)
 
     /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
      * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4.
-     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure 
+     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure
      * to save it for later useage to detect if abnormal reset has occured.
      */
     tU08 statusRegister_U08 = MCUSR;
@@ -72,7 +72,7 @@ int main(void)
     /* Initialize controls */
     Cont_init();
     /* Initialize actuators */
-#if !UART_ENABLE    
+#if !UART_ENABLE
     Buzz_init();
 #endif
     Ledc_init();
@@ -89,7 +89,7 @@ int main(void)
      * Abnormal reset detected - goto infinite sleep with orange led
      * indicating that we have a system error. Put the MCU in "infinite"
      * sleep to save power, it could be BOD reset due to low batteries.
-     * The MCU is however possible to wakeup with the button - then it 
+     * The MCU is however possible to wakeup with the button - then it
      * will go back to normal function.
      */
     if(!(statusRegister_U08 & _BV(PORF)))
@@ -116,7 +116,7 @@ int main(void)
         Cont_loop();
 
         /* Actuators */
-#if !UART_ENABLE        
+#if !UART_ENABLE
         Buzz_loop();
 #endif
         Ledc_loop();

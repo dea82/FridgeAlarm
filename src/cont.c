@@ -78,10 +78,9 @@ static tCalibrationState_E getCalibrationState_E(void)
     tButt_State_str buttState_str = Butt_getState_str();
 
     /* Calibration state */
-    if ((buttState_str.state_E == BUTT_PRESSED_E
-            && buttState_str.tickInState_U08 * TICK
-                    > CALIBRATION_TIME_BUTTON)
-            && calibrationState_E == NO_CALIBRATION_E)
+    if ((buttState_str.state_E == BUTT_PRESSED_E) && 
+        (buttState_str.tickInState_U08 * TICK > CALIBRATION_TIME_BUTTON) &&
+        (calibrationState_E == NO_CALIBRATION_E))
     {
         /* Enters calibration mode */
         if (Dsen_storeClosedPos_B() == TRUE)
@@ -115,9 +114,9 @@ static void normalModeStateMachine(void)
     if (doorState_str.doorState_E == DSEN_CLOSED_E)
     {
         Buzz_setSound(BUZZ_OFF_E);
-        if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK)
-            && (counter_U08 > MIN_TIME_AWAKE / TICK)
-            && (buttState_str.state_E == BUTT_RELEASED_E))
+        if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK) &&
+            (counter_U08 > MIN_TIME_AWAKE / TICK) && 
+            (buttState_str.state_E == BUTT_RELEASED_E))
         {
             /* When door has been closed for a long time and no activity
              * on button it's OK to go to deep sleep. */
@@ -133,7 +132,6 @@ static void normalModeStateMachine(void)
         }
         /* Reset */
         inhibitAlarm_B = FALSE;
-
     }
     else /* DSEN_OPEN_E */
     {
@@ -141,7 +139,8 @@ static void normalModeStateMachine(void)
 
         if (doorState_str.ticksInState_U16 > ALARM_OPEN / TICK)
         {
-            /* Door has been open too long, sound the alarm if button has not inhibit it from going off. */
+            /* Door has been open too long, sound the alarm if button is not
+             * inhibiting it from going off. */
             if (buttState_str.state_E == BUTT_PRESSED_E)
             {
                 inhibitAlarm_B = TRUE;

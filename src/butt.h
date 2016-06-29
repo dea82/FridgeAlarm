@@ -45,16 +45,16 @@ THE SOFTWARE.
 typedef enum
 {
     BUTT_RELEASED_E, /**< Button released */
-    BUTT_PRESSED_E	/**< Button pressed */
+    BUTT_PRESSED_E   /**< Button pressed */
 }tButt_State_E;
 
 /**
- * £Active button state and for how many ticks
+ * Active button state and for how many ticks
  */
 typedef struct
 {
     tButt_State_E state_E; /**< Button state */
-    tU08 tickInState_U08; /**< Ticks in state */
+    tU08 tickInState_U08;  /**< Ticks in state */
 } tButt_State_str;
 
 /**
@@ -64,11 +64,11 @@ void Butt_init(void);
 
 /**
  * @brief      Updates button module's outputs
- * 
+ *
  * @note       This function shall be called periodically.
  *
  * @warning    Before making any call to this function make sure that
- * 			   Butt_init() has been called at least once.
+ *             Butt_init() has been called at least once.
  */
 void Butt_loop(void);
 
