@@ -131,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">/* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     * then it must be disabled here because it&#39;s kept after a reset! Ref. AVR132 chap 2.4.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     * to save it for later useage to detect if abnormal reset has occured.</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> statusRegister_U08 = MCUSR;</div>
@@ -153,7 +153,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">/* Initialize controls */</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a>();</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">/* Initialize actuators */</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#if !UART_ENABLE    </span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#if !UART_ENABLE</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span>    <a class="code" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a>();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span>    <a class="code" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a>();</div>
@@ -190,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e">Cont_loop</a>();</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">/* Actuators */</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#if !UART_ENABLE        </span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#if !UART_ENABLE</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor"></span>        <a class="code" href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a>();</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor"></span>        <a class="code" href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5">Ledc_loop</a>();</div>
@@ -214,7 +214,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="ledc_8h_html"><div class="ttname"><a href="ledc_8h.html">ledc.h</a></div></div>
 <div class="ttc" id="pwrd_8c_html_ae9a79c69fbb06348dd4808678092b942"><div class="ttname"><a href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942">Pwrd_wakeup</a></div><div class="ttdeci">void Pwrd_wakeup(void)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00049">pwrd.c:49</a></div></div>
 <div class="ttc" id="butt_8c_html_a7299e11463de911124ce0e31759e92bd"><div class="ttname"><a href="butt_8c.html#a7299e11463de911124ce0e31759e92bd">Butt_loop</a></div><div class="ttdeci">void Butt_loop(void)</div><div class="ttdoc">Updates button module&#39;s outputs. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00044">butt.c:44</a></div></div>
-<div class="ttc" id="butt_8c_html_a9c4c896707140c23dd1962b00ea44d1d"><div class="ttname"><a href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d">Butt_enableInterrupt</a></div><div class="ttdeci">void Butt_enableInterrupt(void)</div><div class="ttdoc">Enable interrupt for button state change. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00081">butt.c:81</a></div></div>
+<div class="ttc" id="butt_8c_html_a9c4c896707140c23dd1962b00ea44d1d"><div class="ttname"><a href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d">Butt_enableInterrupt</a></div><div class="ttdeci">void Butt_enableInterrupt(void)</div><div class="ttdoc">Enable interrupt for button state change. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00080">butt.c:80</a></div></div>
 <div class="ttc" id="pwrd_8h_html_a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b"><div class="ttname"><a href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b">PWRD_INFINITE_SLEEP_E</a></div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8h_source.html#l00044">pwrd.h:44</a></div></div>
 <div class="ttc" id="cont_8h_html"><div class="ttname"><a href="cont_8h.html">cont.h</a></div></div>
 <div class="ttc" id="buzz_8c_html_a38e1244c0bd2a25996902b3c7ba07099"><div class="ttname"><a href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a></div><div class="ttdeci">void Buzz_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00043">buzz.c:43</a></div></div>
