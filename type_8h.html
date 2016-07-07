@@ -127,8 +127,10 @@ Macros</h2></td></tr>
 <tr class="separator:a06e21ead9be60577c7a063d53a353bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9d5e8b3df325d0324d95d5d379d4054"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#af9d5e8b3df325d0324d95d5d379d4054">IO_CLR</a>(CFG)&#160;&#160;&#160;({ <a class="el" href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a>(CFG) &amp;= ~<a class="el" href="type_8h.html#a814dc3929ed14b43d4a1a6a4749ab465">GET_MASK</a>(CFG); })</td></tr>
 <tr class="separator:af9d5e8b3df325d0324d95d5d379d4054"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57b693c17bb2b6c49fd60151c697927b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#a57b693c17bb2b6c49fd60151c697927b">IO_PIN</a>(CFG)&#160;&#160;&#160;({ <a class="el" href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a>(CFG)})</td></tr>
+<tr class="memitem:a57b693c17bb2b6c49fd60151c697927b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#a57b693c17bb2b6c49fd60151c697927b">IO_PIN</a>(CFG)&#160;&#160;&#160;(<a class="el" href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a>(CFG))</td></tr>
 <tr class="separator:a57b693c17bb2b6c49fd60151c697927b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1aef147192baaf0c68436c71546fdcc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#ad1aef147192baaf0c68436c71546fdcc">IO_PORT</a>(CFG)&#160;&#160;&#160;(<a class="el" href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a>(CFG))</td></tr>
+<tr class="separator:ad1aef147192baaf0c68436c71546fdcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53ec7f7af5e8999e468848fb69866737"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#a53ec7f7af5e8999e468848fb69866737">GET_DDR</a>(P,...)&#160;&#160;&#160;(DDR ## P)</td></tr>
 <tr class="separator:a53ec7f7af5e8999e468848fb69866737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a024b15ed59c4c03cace9324860c553"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a>(P,...)&#160;&#160;&#160;(PORT ## P)</td></tr>
@@ -186,7 +188,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00090">90</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00091">91</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -200,7 +202,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00110">110</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00111">111</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -214,7 +216,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00113">113</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00114">114</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -264,10 +266,10 @@ Typedefs</h2></td></tr>
 <div class="line">    }                                                       \</div>
 <div class="line">})                                                          \</div>
 <div class="ttc" id="type_8h_html_a1bb283bd7893b9855e2f23013891fc82"><div class="ttname"><a href="type_8h.html#a1bb283bd7893b9855e2f23013891fc82">INPUT</a></div><div class="ttdeci">#define INPUT</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00051">type.h:51</a></div></div>
-<div class="ttc" id="type_8h_html_a0a024b15ed59c4c03cace9324860c553"><div class="ttname"><a href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a></div><div class="ttdeci">#define GET_PORT(P,...)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00082">type.h:82</a></div></div>
-<div class="ttc" id="type_8h_html_a53ec7f7af5e8999e468848fb69866737"><div class="ttname"><a href="type_8h.html#a53ec7f7af5e8999e468848fb69866737">GET_DDR</a></div><div class="ttdeci">#define GET_DDR(P,...)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00081">type.h:81</a></div></div>
-<div class="ttc" id="type_8h_html_a814dc3929ed14b43d4a1a6a4749ab465"><div class="ttname"><a href="type_8h.html#a814dc3929ed14b43d4a1a6a4749ab465">GET_MASK</a></div><div class="ttdeci">#define GET_MASK(P, bit)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00085">type.h:85</a></div></div>
-<div class="ttc" id="type_8h_html_ad0091f16e01240a18be976df2331da81"><div class="ttname"><a href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a></div><div class="ttdeci">#define GET_BIT(P, bit)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00084">type.h:84</a></div></div>
+<div class="ttc" id="type_8h_html_a0a024b15ed59c4c03cace9324860c553"><div class="ttname"><a href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a></div><div class="ttdeci">#define GET_PORT(P,...)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00083">type.h:83</a></div></div>
+<div class="ttc" id="type_8h_html_a53ec7f7af5e8999e468848fb69866737"><div class="ttname"><a href="type_8h.html#a53ec7f7af5e8999e468848fb69866737">GET_DDR</a></div><div class="ttdeci">#define GET_DDR(P,...)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00082">type.h:82</a></div></div>
+<div class="ttc" id="type_8h_html_a814dc3929ed14b43d4a1a6a4749ab465"><div class="ttname"><a href="type_8h.html#a814dc3929ed14b43d4a1a6a4749ab465">GET_MASK</a></div><div class="ttdeci">#define GET_MASK(P, bit)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00086">type.h:86</a></div></div>
+<div class="ttc" id="type_8h_html_ad0091f16e01240a18be976df2331da81"><div class="ttname"><a href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a></div><div class="ttdeci">#define GET_BIT(P, bit)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00085">type.h:85</a></div></div>
 <div class="ttc" id="type_8h_html_a90613b8a5170d1fc8ac31f6a4a4f5410"><div class="ttname"><a href="type_8h.html#a90613b8a5170d1fc8ac31f6a4a4f5410">NOPULLUP</a></div><div class="ttdeci">#define NOPULLUP</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00054">type.h:54</a></div></div>
 <div class="ttc" id="type_8h_html_aa65f05495aa2b9e5d89a7e79886a596e"><div class="ttname"><a href="type_8h.html#aa65f05495aa2b9e5d89a7e79886a596e">PULLUP</a></div><div class="ttdeci">#define PULLUP</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00053">type.h:53</a></div></div>
 <div class="ttc" id="type_8h_html_a61a3c9a18380aafb6e430e79bf596557"><div class="ttname"><a href="type_8h.html#a61a3c9a18380aafb6e430e79bf596557">OUTPUT</a></div><div class="ttdeci">#define OUTPUT</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00052">type.h:52</a></div></div>
@@ -286,7 +288,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00107">107</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00108">108</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -300,7 +302,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00104">104</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00105">105</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -342,7 +344,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00084">84</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00085">85</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -370,7 +372,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00081">81</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00082">82</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +400,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00085">85</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00086">86</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -426,7 +428,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00083">83</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00084">84</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -454,7 +456,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00082">82</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00083">83</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -472,7 +474,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00086">86</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00087">87</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -490,7 +492,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00094">94</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00095">95</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -508,7 +510,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00091">91</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00092">92</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -526,7 +528,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00092">92</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00093">93</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -571,12 +573,30 @@ Typedefs</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CFG</td><td>)</td>
-          <td>&#160;&#160;&#160;({ <a class="el" href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a>(CFG)})</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="type_8h.html#ad0091f16e01240a18be976df2331da81">GET_BIT</a>(CFG))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00077">77</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00078">78</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad1aef147192baaf0c68436c71546fdcc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IO_PORT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CFG</td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="type_8h.html#a0a024b15ed59c4c03cace9324860c553">GET_PORT</a>(CFG))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="type_8h_source.html#l00079">79</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>
@@ -612,7 +632,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="type_8h_source.html#l00093">93</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
+<p>Definition at line <a class="el" href="type_8h_source.html#l00094">94</a> of file <a class="el" href="type_8h_source.html">type.h</a>.</p>
 
 </div>
 </div>

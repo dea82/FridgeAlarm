@@ -1,7 +1,7 @@
 var searchData=
 [
   ['deep_5fsleep_5ftime',['DEEP_SLEEP_TIME',['../conf_8h.html#abe0e16d729c50c7794dd99983b1f47c4',1,'conf.h']]],
-  ['door_5fclosed_5foffset',['DOOR_CLOSED_OFFSET',['../conf_8h.html#a0b94fa57459c9ab7ed0156c75f3d3eb1',1,'conf.h']]],
+  ['door_5fclosed_5foffset',['DOOR_CLOSED_OFFSET',['../dsen_8c.html#a0b94fa57459c9ab7ed0156c75f3d3eb1',1,'dsen.c']]],
   ['doorclosed_5fu16',['doorClosed_U16',['../dsen_8c.html#a6a6a0911ccc3931e8a56ccc2a1f3caa6',1,'dsen.c']]],
   ['doorpos_5fu16',['doorPos_U16',['../dsen_8c.html#ad88d6d4fd7b5cc541d798f4a5609a9c5',1,'dsen.c']]],
   ['doorstate_5fe',['doorState_E',['../structtDsen__doorState__str.html#a47b6adbd066b0fb1e502e1775269b15f',1,'tDsen_doorState_str']]],
