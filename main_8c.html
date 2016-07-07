@@ -80,6 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">main.c File Reference</div>  </div>
@@ -95,11 +96,67 @@ Include dependency graph for main.c:</div>
 </div>
 <p><a href="main_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad754d9ce7833f975514694307444979c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(TASK_NAME, TASK, PRESCALER)</td></tr>
+<tr class="separator:ad754d9ce7833f975514694307444979c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ad754d9ce7833f975514694307444979c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADD_TASK</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TASK_NAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TASK, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PRESCALER&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">({                                                                          \</div>
+<div class="line">    if (CPU_LOAD)                                                           \</div>
+<div class="line">    {                                                                       <a class="code" href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92">\</a></div>
+<div class="line"><a class="code" href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92">        Cpul_startPoint</a>(PRESCALER);                                         \</div>
+<div class="line">    }                                                                       \</div>
+<div class="line">    TASK();                                                                 \</div>
+<div class="line">    if (CPU_LOAD)                                                           \</div>
+<div class="line">    {                                                                       <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">\</a></div>
+<div class="line"><a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">        tU08</a> cycles_U08 = <a class="code" href="cpul__asm_8h.html#a67da29d63e4520043093762151a7dfaa">Cpul_stopPoint_U08</a>();                             <a class="code" href="uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662">\</a></div>
+<div class="line"><a class="code" href="uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662">        Uart_TransmitByte</a>(cycles_U08);                                      \</div>
+<div class="line">    }                                                                       \</div>
+<div class="line">})</div>
+<div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
+<div class="ttc" id="uart_8c_html_a1a97c368c5f235450ebaa9dc4c9d1662"><div class="ttname"><a href="uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662">Uart_TransmitByte</a></div><div class="ttdeci">void Uart_TransmitByte(const uint8_t data)</div><div class="ttdef"><b>Definition:</b> <a href="uart_8c_source.html#l00043">uart.c:43</a></div></div>
+<div class="ttc" id="cpul__asm_8h_html_a0c278eda3299ef03023e00be9ca9bc92"><div class="ttname"><a href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92">Cpul_startPoint</a></div><div class="ttdeci">void Cpul_startPoint(tU08)</div><div class="ttdoc">Set start point for cpu load measurement. </div></div>
+<div class="ttc" id="cpul__asm_8h_html_a67da29d63e4520043093762151a7dfaa"><div class="ttname"><a href="cpul__asm_8h.html#a67da29d63e4520043093762151a7dfaa">Cpul_stopPoint_U08</a></div><div class="ttdeci">tU08 Cpul_stopPoint_U08(void)</div></div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="main_8c_source.html#l00046">46</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a840291bc02cba5474a4cb46a9b9566fe"></a>
 <div class="memitem">
@@ -116,14 +173,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Abnormal reset detected - goto infinite sleep with orange led indicating that we have a system error. Put the MCU in "infinite" sleep to save power, it could be BOD reset due to low batteries. The MCU is however possible to wakeup with the button - then it will go back to normal function.</p>
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00046">46</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="main_8c_source.html#l00062">62</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph.png" border="0" usemap="#main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" alt=""/></div>
 <map name="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" id="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph">
-<area shape="rect" id="node2" href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61" title="Initializes button module. " alt="" coords="127,5,198,32"/><area shape="rect" id="node3" href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969" title="Setup ADC conversion. " alt="" coords="124,56,201,83"/><area shape="rect" id="node5" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03" title="Cont_init" alt="" coords="125,107,200,133"/><area shape="rect" id="node6" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099" title="Buzz_init" alt="" coords="125,157,201,184"/><area shape="rect" id="node7" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf" title="Ledc_init" alt="" coords="125,208,200,235"/><area shape="rect" id="node8" href="uart_8c.html#ac0bdc4676149c5ac8b29e07f38aaebae" title="Uart_Enable" alt="" coords="115,259,210,285"/><area shape="rect" id="node9" href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d" title="Enable interrupt for button state change. " alt="" coords="287,309,425,336"/><area shape="rect" id="node10" href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0" title="Ledc_setOrange" alt="" coords="104,461,221,488"/><area shape="rect" id="node11" href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933" title="Pwrd_setSleepMode" alt="" coords="505,563,647,589"/><area shape="rect" id="node12" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="117,411,208,437"/><area shape="rect" id="node18" href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92" title="Set start point for cpu load measurement. " alt="" coords="107,639,219,665"/><area shape="rect" id="node19" href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942" title="Pwrd_wakeup" alt="" coords="111,309,215,336"/><area shape="rect" id="node21" href="butt_8c.html#a7299e11463de911124ce0e31759e92bd" title="Updates button module&#39;s outputs. " alt="" coords="124,689,201,716"/><area shape="rect" id="node22" href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173" title="Updates door state. " alt="" coords="121,791,205,817"/><area shape="rect" id="node24" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e" title="Cont_loop" alt="" coords="122,588,203,615"/><area shape="rect" id="node34" href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d" title="Buzz_loop" alt="" coords="121,867,204,893"/><area shape="rect" id="node37" href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5" title="Turns led on or off by request. " alt="" coords="122,917,203,944"/><area shape="rect" id="node4" href="dsen_8c.html#ac6a80bcc80af2bc34923292ca8961f4b" title="eepromRead_U08" alt="" coords="293,56,419,83"/><area shape="rect" id="node13" href="wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95" title="Wdtc_SetTimer" alt="" coords="299,259,413,285"/><area shape="rect" id="node14" href="cpul__asm_8h.html#af3d54b564a203a1fe64af23a5c5ba894" title="Cpul_stopPoint" alt="" coords="301,411,411,437"/><area shape="rect" id="node15" href="uart_8c.html#af7988f5013b060a04a4454c73297fca3" title="Uart_TransmitChar" alt="" coords="289,461,423,488"/><area shape="rect" id="node17" href="cpul__asm_8h.html#ad59816a091549ca3f4c2df9dc56fe072" title="Cpul_getMaxCycles_U08" alt="" coords="271,360,441,387"/><area shape="rect" id="node16" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="541,461,611,488"/><area shape="rect" id="node20" href="butt_8c.html#ac048c7e01d7df8486a39d986ddf76dcf" title="Disable interrupt for button state change. " alt="" coords="285,208,427,235"/><area shape="rect" id="node23" href="dsen_8c.html#a3a16057763b76b73843fe98bcab303d9" title="getDoorRawPos_U16" alt="" coords="281,816,431,843"/><area shape="rect" id="node25" href="cont_8c.html#aa11211b23404526609e5e17616e833c6" title="getCalibrationState_E" alt="" coords="281,765,431,792"/><area shape="rect" id="node30" href="buzz_8c.html#ace6999f70c281eccfccdd208927558bd" title="Buzz_setSound" alt="" coords="519,715,633,741"/><area shape="rect" id="node31" href="ledc_8c.html#ad7ae2e50a250292e2f8eb108bf7e13b4" title="Ledc_setState" alt="" coords="523,613,629,640"/><area shape="rect" id="node32" href="cont_8c.html#a0ed8e0f11089f4c6a158b28d3c9f9fbc" title="normalModeStateMachine" alt="" coords="269,664,443,691"/><area shape="rect" id="node26" href="butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39" title="Get actual button state. " alt="" coords="514,765,638,792"/><area shape="rect" id="node27" href="dsen_8c.html#a5adec43f339252f500ca96053ec09e2f" title="Dsen_storeClosedPos_B" alt="" coords="491,816,661,843"/><area shape="rect" id="node28" href="dsen_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5" title="withinRange_B" alt="" coords="710,791,821,817"/><area shape="rect" id="node29" href="dsen_8c.html#a80ec46ee35f16d40e575cdb0043772bc" title="eepromWrite" alt="" coords="717,841,813,868"/><area shape="rect" id="node33" href="dsen_8c.html#a93ae97086da49765b03e76941c31d888" title="Dsen_getDoorState_str" alt="" coords="497,664,655,691"/><area shape="rect" id="node35" href="buzz_8c.html#af5fccc5f751f090c43f156263862bbc0" title="turnOn" alt="" coords="325,867,387,893"/><area shape="rect" id="node36" href="buzz_8c.html#aeb163164023b67f3c86054564cdff9bb" title="turnOff" alt="" coords="325,917,387,944"/></map>
+<area shape="rect" id="node2" href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61" title="Initializes button module. " alt="" coords="127,5,198,32"/><area shape="rect" id="node3" href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969" title="Setup ADC conversion. " alt="" coords="124,56,201,83"/><area shape="rect" id="node5" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03" title="Cont_init" alt="" coords="125,107,200,133"/><area shape="rect" id="node6" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099" title="Buzz_init" alt="" coords="125,157,201,184"/><area shape="rect" id="node7" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf" title="Ledc_init" alt="" coords="125,208,200,235"/><area shape="rect" id="node8" href="uart_8c.html#ac0bdc4676149c5ac8b29e07f38aaebae" title="Uart_Enable" alt="" coords="115,259,210,285"/><area shape="rect" id="node9" href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d" title="Enable interrupt for button state change. " alt="" coords="287,360,425,387"/><area shape="rect" id="node10" href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0" title="Ledc_setOrange" alt="" coords="104,461,221,488"/><area shape="rect" id="node11" href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933" title="Pwrd_setSleepMode" alt="" coords="505,563,647,589"/><area shape="rect" id="node12" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="117,411,208,437"/><area shape="rect" id="node18" href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92" title="Set start point for cpu load measurement. " alt="" coords="107,639,219,665"/><area shape="rect" id="node19" href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942" title="Pwrd_wakeup" alt="" coords="111,309,215,336"/><area shape="rect" id="node21" href="butt_8c.html#a7299e11463de911124ce0e31759e92bd" title="Updates button module&#39;s outputs. " alt="" coords="124,689,201,716"/><area shape="rect" id="node22" href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173" title="Updates door state. " alt="" coords="121,752,205,779"/><area shape="rect" id="node24" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e" title="Cont_loop" alt="" coords="122,588,203,615"/><area shape="rect" id="node34" href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d" title="Buzz_loop" alt="" coords="121,828,204,855"/><area shape="rect" id="node37" href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5" title="Turns led on or off by request. " alt="" coords="122,879,203,905"/><area shape="rect" id="node4" href="dsen_8c.html#ac6a80bcc80af2bc34923292ca8961f4b" title="eepromRead_U08" alt="" coords="293,56,419,83"/><area shape="rect" id="node13" href="wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95" title="Wdtc_SetTimer" alt="" coords="299,309,413,336"/><area shape="rect" id="node14" href="uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662" title="Uart_TransmitByte" alt="" coords="290,461,422,488"/><area shape="rect" id="node17" href="cpul__asm_8h.html#a67da29d63e4520043093762151a7dfaa" title="Cpul_stopPoint_U08" alt="" coords="285,411,427,437"/><area shape="rect" id="node15" href="uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="507,461,645,488"/><area shape="rect" id="node16" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="731,461,800,488"/><area shape="rect" id="node20" href="butt_8c.html#ac048c7e01d7df8486a39d986ddf76dcf" title="Disable interrupt for button state change. " alt="" coords="285,259,427,285"/><area shape="rect" id="node23" href="dsen_8c.html#a3a16057763b76b73843fe98bcab303d9" title="getDoorRawPos_U16" alt="" coords="281,816,431,843"/><area shape="rect" id="node25" href="cont_8c.html#aa11211b23404526609e5e17616e833c6" title="getCalibrationState_E" alt="" coords="281,765,431,792"/><area shape="rect" id="node30" href="buzz_8c.html#ace6999f70c281eccfccdd208927558bd" title="Buzz_setSound" alt="" coords="519,613,633,640"/><area shape="rect" id="node31" href="ledc_8c.html#ad7ae2e50a250292e2f8eb108bf7e13b4" title="Ledc_setState" alt="" coords="523,715,629,741"/><area shape="rect" id="node32" href="cont_8c.html#a0ed8e0f11089f4c6a158b28d3c9f9fbc" title="normalModeStateMachine" alt="" coords="269,664,443,691"/><area shape="rect" id="node26" href="butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39" title="Get actual button state. " alt="" coords="514,765,638,792"/><area shape="rect" id="node27" href="dsen_8c.html#a5adec43f339252f500ca96053ec09e2f" title="Dsen_storeClosedPos_B" alt="" coords="491,816,661,843"/><area shape="rect" id="node28" href="dsen_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5" title="withinRange_B" alt="" coords="710,841,821,868"/><area shape="rect" id="node29" href="dsen_8c.html#a80ec46ee35f16d40e575cdb0043772bc" title="eepromWrite" alt="" coords="717,791,813,817"/><area shape="rect" id="node33" href="dsen_8c.html#a93ae97086da49765b03e76941c31d888" title="Dsen_getDoorState_str" alt="" coords="497,664,655,691"/><area shape="rect" id="node35" href="buzz_8c.html#af5fccc5f751f090c43f156263862bbc0" title="turnOn" alt="" coords="325,917,387,944"/><area shape="rect" id="node36" href="buzz_8c.html#aeb163164023b67f3c86054564cdff9bb" title="turnOff" alt="" coords="325,867,387,893"/></map>
 </div>
 </p>
 

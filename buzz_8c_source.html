@@ -192,8 +192,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="buzz_8c.html#a2229ca49478c9406137d6f99dbcfc365">soundType_E</a> = soundTypeReq_E;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="buzz_8h.html#acc2f7e550e2ce878410ddebe79ee9aee">  115</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="buzz_8c.html#acc2f7e550e2ce878410ddebe79ee9aee">Buzz_pauseOn</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">/* Normal port operation, disconnect OC0A with potential of leaving</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">     * pin state high. */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;     TCCR0A = 0;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="buzz_8h.html#a9abdcdfb8a586668bc17537558be8846">  122</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="buzz_8c.html#a9abdcdfb8a586668bc17537558be8846">Buzz_pauseOff</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="comment">/* Set to &#39;CTC&#39; mode, toggle on match */</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    TCCR0A = _BV(COM0A0) | _BV(WGM01);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="ttc" id="buzz_8c_html_aeb163164023b67f3c86054564cdff9bb"><div class="ttname"><a href="buzz_8c.html#aeb163164023b67f3c86054564cdff9bb">turnOff</a></div><div class="ttdeci">static void turnOff(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00099">buzz.c:99</a></div></div>
-<div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00037">type.h:37</a></div></div>
+<div class="ttc" id="buzz_8c_html_acc2f7e550e2ce878410ddebe79ee9aee"><div class="ttname"><a href="buzz_8c.html#acc2f7e550e2ce878410ddebe79ee9aee">Buzz_pauseOn</a></div><div class="ttdeci">void Buzz_pauseOn(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00115">buzz.c:115</a></div></div>
+<div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
 <div class="ttc" id="buzz_8c_html_ace6999f70c281eccfccdd208927558bd"><div class="ttname"><a href="buzz_8c.html#ace6999f70c281eccfccdd208927558bd">Buzz_setSound</a></div><div class="ttdeci">void Buzz_setSound(const tSoundType_E soundTypeReq_E)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00110">buzz.c:110</a></div></div>
 <div class="ttc" id="buzz_8h_html"><div class="ttname"><a href="buzz_8h.html">buzz.h</a></div></div>
 <div class="ttc" id="buzz_8c_html_ad2b445c1467aa6c552eb47d98dd070e3"><div class="ttname"><a href="buzz_8c.html#ad2b445c1467aa6c552eb47d98dd070e3">BUZZ_ALARM_PERIOD_TIME</a></div><div class="ttdeci">#define BUZZ_ALARM_PERIOD_TIME</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00036">buzz.c:36</a></div></div>
@@ -204,6 +218,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da8e25ef4d09f17db3b52ceeb0820375cd">BUZZ_ON_E</a></div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00031">buzz.h:31</a></div></div>
 <div class="ttc" id="buzz_8c_html_af5fccc5f751f090c43f156263862bbc0"><div class="ttname"><a href="buzz_8c.html#af5fccc5f751f090c43f156263862bbc0">turnOn</a></div><div class="ttdeci">static void turnOn(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00089">buzz.c:89</a></div></div>
 <div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63d"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63d">tSoundType_E</a></div><div class="ttdeci">tSoundType_E</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00028">buzz.h:28</a></div></div>
+<div class="ttc" id="buzz_8c_html_a9abdcdfb8a586668bc17537558be8846"><div class="ttname"><a href="buzz_8c.html#a9abdcdfb8a586668bc17537558be8846">Buzz_pauseOff</a></div><div class="ttdeci">void Buzz_pauseOff(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00122">buzz.c:122</a></div></div>
 <div class="ttc" id="buzz_8h_html_ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e"><div class="ttname"><a href="buzz_8h.html#ae9fa4b45043bc21a63f7fef7a88db63da4bd8120122fbdc54b4587210ca8b7d6e">BUZZ_ALARM_E</a></div><div class="ttdef"><b>Definition:</b> <a href="buzz_8h_source.html#l00032">buzz.h:32</a></div></div>
 <div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
 <div class="ttc" id="conf_8h_html"><div class="ttname"><a href="conf_8h.html">conf.h</a></div></div>

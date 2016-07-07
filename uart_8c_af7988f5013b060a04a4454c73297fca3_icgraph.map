@@ -1,6 +1,0 @@
-<map id="Uart_TransmitChar" name="Uart_TransmitChar">
-<area shape="rect" id="node2" href="$pwrd_8h.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="203,5,293,32"/>
-<area shape="rect" id="node4" href="$uart_8h.html#a5b802c1cb03edb5f419c6a2a8962e28c" title="Uart_TransmitInt" alt="" coords="188,56,308,83"/>
-<area shape="rect" id="node5" href="$uart_8c.html#ad0e2dfafbfa626311cce6ed3e97f7906" title="Uart_TransmitStr" alt="" coords="187,107,309,133"/>
-<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="357,5,408,32"/>
-</map>

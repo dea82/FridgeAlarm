@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['prescaler_5fu08',['prescaler_U08',['../structtCpul__ResultBlock__str.html#a217ecb1b4616da345413a35bc2c7c85c',1,'tCpul_ResultBlock_str']]],
   ['pullup',['PULLUP',['../type_8h.html#aa65f05495aa2b9e5d89a7e79886a596e',1,'type.h']]],
   ['pwrd_2ec',['pwrd.c',['../pwrd_8c.html',1,'']]],
   ['pwrd_2eh',['pwrd.h',['../pwrd_8h.html',1,'']]],
