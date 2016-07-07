@@ -120,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/* Assembly function. */</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#if CPU_LOAD</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="cpul__asm_8h.html">cpul_asm.h</a>&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;cpul_asm.h&quot;</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/* Move macro to cpul.h */</span></div>
@@ -191,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">for</span> (;;)</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    {</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#if CPU_LOAD</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor"></span>        <a class="code" href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92">Cpul_startPoint</a>(_BV(CS12) | _BV(CS11) | _BV(CS10));</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor"></span>        <a class="code" href="cpul_8h.html#a0c278eda3299ef03023e00be9ca9bc92">Cpul_startPoint</a>(_BV(CS12) | _BV(CS11) | _BV(CS10));</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor"></span>        <span class="comment">/* Startup */</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942">Pwrd_wakeup</a>();</div>
@@ -222,6 +222,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="ledc_8c_html_ab4f1295462973bb99d94351298ffd6d0"><div class="ttname"><a href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0">Ledc_setOrange</a></div><div class="ttdeci">void Ledc_setOrange(void)</div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00106">ledc.c:106</a></div></div>
 <div class="ttc" id="main_8c_html_ad754d9ce7833f975514694307444979c"><div class="ttname"><a href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a></div><div class="ttdeci">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00046">main.c:46</a></div></div>
 <div class="ttc" id="cont_8c_html_ad0c4d6789f162a899ceca3b2132dad03"><div class="ttname"><a href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a></div><div class="ttdeci">void Cont_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="cont_8c_source.html#l00046">cont.c:46</a></div></div>
+<div class="ttc" id="cpul_8h_html_a0c278eda3299ef03023e00be9ca9bc92"><div class="ttname"><a href="cpul_8h.html#a0c278eda3299ef03023e00be9ca9bc92">Cpul_startPoint</a></div><div class="ttdeci">void Cpul_startPoint(tU08)</div><div class="ttdoc">Set start point for cpu load measurement. </div></div>
 <div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
 <div class="ttc" id="buzz_8h_html"><div class="ttname"><a href="buzz_8h.html">buzz.h</a></div></div>
 <div class="ttc" id="ledc_8h_html"><div class="ttname"><a href="ledc_8h.html">ledc.h</a></div></div>
@@ -238,8 +239,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="butt_8c_html_a29c89ee8f7f2f16d82bde6c18c970d61"><div class="ttname"><a href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61">Butt_init</a></div><div class="ttdeci">void Butt_init(void)</div><div class="ttdoc">Initializes button module. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00037">butt.c:37</a></div></div>
 <div class="ttc" id="pwrd_8c_html_a3477e76bd20498bf27e93183de666cff"><div class="ttname"><a href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a></div><div class="ttdeci">void Pwrd_sleep(void)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00060">pwrd.c:60</a></div></div>
 <div class="ttc" id="ledc_8c_html_a1f357fe563e5483b7ec6446ca391d6a5"><div class="ttname"><a href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5">Ledc_loop</a></div><div class="ttdeci">void Ledc_loop(void)</div><div class="ttdoc">Turns led on or off by request. </div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00046">ledc.c:46</a></div></div>
-<div class="ttc" id="cpul__asm_8h_html"><div class="ttname"><a href="cpul__asm_8h.html">cpul_asm.h</a></div></div>
-<div class="ttc" id="cpul__asm_8h_html_a0c278eda3299ef03023e00be9ca9bc92"><div class="ttname"><a href="cpul__asm_8h.html#a0c278eda3299ef03023e00be9ca9bc92">Cpul_startPoint</a></div><div class="ttdeci">void Cpul_startPoint(tU08)</div><div class="ttdoc">Set start point for cpu load measurement. </div></div>
 <div class="ttc" id="butt_8h_html"><div class="ttname"><a href="butt_8h.html">butt.h</a></div><div class="ttdoc">Button module. </div></div>
 <div class="ttc" id="main_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00062">main.c:62</a></div></div>
 <div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
