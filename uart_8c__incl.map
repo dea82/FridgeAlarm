@@ -1,5 +1,6 @@
 <map id="uart.c" name="uart.c">
-<area shape="rect" id="node2" href="$conf_8h.html" title="conf.h" alt="" coords="11,80,68,107"/>
-<area shape="rect" id="node4" href="$uart_8h.html" title="uart.h" alt="" coords="95,80,149,107"/>
-<area shape="rect" id="node5" href="$type_8h.html" title="type.h" alt="" coords="95,155,152,181"/>
+<area shape="rect" id="node2" href="$buzz_8h.html" title="buzz.h" alt="" coords="5,80,67,107"/>
+<area shape="rect" id="node3" href="$conf_8h.html" title="conf.h" alt="" coords="91,80,148,107"/>
+<area shape="rect" id="node5" href="$type_8h.html" title="type.h" alt="" coords="200,155,257,181"/>
+<area shape="rect" id="node7" href="$uart_8h.html" title="uart.h" alt="" coords="225,80,279,107"/>
 </map>

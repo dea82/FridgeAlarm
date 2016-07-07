@@ -1,6 +1,4 @@
 <map id="transmit" name="transmit">
 <area shape="rect" id="node2" href="$uart_8h.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="123,5,261,32"/>
 <area shape="rect" id="node3" href="$uart_8h.html#a1a97c368c5f235450ebaa9dc4c9d1662" title="Uart_TransmitByte" alt="" coords="310,5,442,32"/>
-<area shape="rect" id="node4" href="$pwrd_8h.html#a3477e76bd20498bf27e93183de666cff" title="Pwrd_sleep" alt="" coords="491,5,581,32"/>
-<area shape="rect" id="node5" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="629,5,680,32"/>
 </map>

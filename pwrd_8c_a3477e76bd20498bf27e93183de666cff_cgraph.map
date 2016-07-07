@@ -1,8 +1,4 @@
 <map id="Pwrd_sleep" name="Pwrd_sleep">
-<area shape="rect" id="node2" href="$wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95" title="Wdtc_SetTimer" alt="" coords="159,5,273,32"/>
-<area shape="rect" id="node3" href="$butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d" title="Enable interrupt for button state change. " alt="" coords="147,56,285,83"/>
-<area shape="rect" id="node4" href="$uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662" title="Uart_TransmitByte" alt="" coords="150,107,282,133"/>
-<area shape="rect" id="node7" href="$cpul_8h.html#a67da29d63e4520043093762151a7dfaa" title="Cpul_stopPoint_U08" alt="" coords="145,157,287,184"/>
-<area shape="rect" id="node5" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="336,107,475,133"/>
-<area shape="rect" id="node6" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="523,107,592,133"/>
+<area shape="rect" id="node2" href="$wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95" title="Wdtc_SetTimer" alt="" coords="157,5,270,32"/>
+<area shape="rect" id="node3" href="$butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d" title="Enable interrupt for button state change. " alt="" coords="144,56,283,83"/>
 </map>
