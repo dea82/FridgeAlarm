@@ -111,3 +111,16 @@ void Buzz_setSound(const tSoundType_E soundTypeReq_E)
 {
     soundType_E = soundTypeReq_E;
 }
+
+void Buzz_pauseOn(void)
+{
+    /* Normal port operation, disconnect OC0A with potential of leaving
+     * pin state high. */
+     TCCR0A = 0;
+}
+
+void Buzz_pauseOff(void)
+{
+    /* Set to 'CTC' mode, toggle on match */
+    TCCR0A = _BV(COM0A0) | _BV(WGM01);
+}

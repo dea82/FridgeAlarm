@@ -28,10 +28,6 @@
 #include <avr/io.h>
 
 #if defined(__AVR_ATtiny85__)
-    .section .data
-maxCycles:
-    .data 0
-
     .section .text
 
 ;############################################################
@@ -68,66 +64,23 @@ Cpul_startPoint:
 ;#  SUMMARY
 ;#  This function will stop the timer used for calulation
 ;#  which can be used for CPU load calculation, benchmarks
-;#  etc. It will also store the maximum number of cycles in
-;#  RAM variable "maxCycles". If also handles overflow of
+;#  etc. It returns the number of cycles and handles overflow of
 ;#  counter and saturates counter value to 0xFF.
 ;#
 ;#  INPUT
 ;#  -
 ;#
 ;#  RETURN
-;#  -
+;#  number of cycles (one byte, r24)
 ;#
 ;############################################################
-    .global Cpul_stopPoint
-Cpul_stopPoint:
+    .global Cpul_stopPoint_U08
+Cpul_stopPoint_U08:
     out     TCCR1, r1     ;  Stop timer as fast as possible
-    in      r18, TCNT1    ;  Read counter value
+    in      r24, TCNT1    ;  Read counter value
     in      r19, TIFR     ;  Do we have an overflow?
     sbrc    r19, TOV1
-    ldi     r18, 0xFF     ;  Overflow has occured set to max
-    lds     r19, maxCycles;  What is the max value stored?
-    cp      r18, r19
-    brlo    Cpul_stopPoint_1
-    sts     maxCycles, r18
-Cpul_stopPoint_1:
+    ldi     r24, 0xFF     ;  Overflow has occured set to max
     ret
-
-;############################################################
-;#  FUNCTION: Cpul_getMaxCycles_U08
-;#
-;#  SUMMARY
-;#  Returns maximum number of cycles identified.
-;#
-;#  INPUT
-;#  -
-;#
-;#  RETURN
-;#  maxCycles (one byte, r24)
-;#
-;############################################################
-    .global Cpul_getMaxCycles_U08
-Cpul_getMaxCycles_U08:
-    lds r24, maxCycles
-    ret
-
-;############################################################
-;#  FUNCTION: Cpul_clearMaxCycles
-;#
-;#  SUMMARY
-;#  Clears maximum number of cycles identified.
-;#
-;#  INPUT
-;#  -
-;#
-;#  RETURN
-;#  -
-;#
-;############################################################
-    .global Cpul_clearMaxCycles
-Cpul_clearMaxCycles:
-    sts maxCycles, r1
-    ret
-
     .end
 #endif

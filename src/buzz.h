@@ -34,5 +34,6 @@ typedef enum
 void Buzz_init(void);
 void Buzz_loop(void);
 void Buzz_setSound(const tSoundType_E soundTypeReq_E);
-
+void Buzz_pauseOn(void);
+void Buzz_pauseOff(void);
 #endif /* BUZZ_H_ */

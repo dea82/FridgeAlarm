@@ -38,17 +38,12 @@ THE SOFTWARE.
 #include "wdtc.h"
 
 
-/* Assembly functions */
-#if CPU_LOAD
-extern void Cpul_stopPoint(void);
-extern tU08 Cpul_getMaxCycles_U08(void);
-#endif
 
 static tPwrd_sleepMode_E sleepMode_E;
 
 inline void Pwrd_wakeup(void)
 {
-    /** 
+    /**
      * If wakeup was caused by button interrupt the watchdog timer can have any value.
      *  Make sure to reset it before activating WDT reset otherwise we will have
      *  might have a reset during next cycle.
@@ -89,10 +84,6 @@ void Pwrd_sleep(void)
         MCUCR = _BV(SM1);
     }
 
-#if CPU_LOAD
-    Cpul_stopPoint();
-    Uart_TransmitChar(Cpul_getMaxCycles_U08());
-#endif
     cli(); /* Timed sequence make sure it's not disturbed */
     MCUCR |= (_BV(BODS) | _BV(SE) | _BV(BODSE));
     MCUCR &= ~_BV(BODSE);

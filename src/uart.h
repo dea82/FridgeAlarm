@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include "type.h"
 
 void Uart_Enable(void);
-void Uart_TransmitChar(const char data_U08);
-void Uart_TransmitInt(const tU16 data_U16);
-void Uart_TransmitStr(const const char *str);
+void Uart_TransmitBlock(const uint8_t * data, uint8_t size);
+void Uart_TransmitByte(const uint8_t data);
+
 #endif /* UART_H_ */
