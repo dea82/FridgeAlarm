@@ -22,10 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <avr/io.h>
-
 #ifndef CONF_H_
 #define CONF_H_
+
+#include <avr/io.h>
 
 /* Time the button shall be pressed for a calibration. [ms] */
 #define CALIBRATION_TIME_BUTTON 4000
@@ -85,6 +85,11 @@ THE SOFTWARE.
 #define BUZZ_CFG        B,0
 #define DSEN_SWITCH_CFG B,4
 #define UART_CFG        B,0
+
+/* Uart and Buzzer shares pin. To be able to have multi-function
+ * on pin buzzer must be disconnected from pin before transmitting. */
+#define UART_PRE_TX Buzz_pauseOn()
+#define UART_POST_TX Buzz_pauseOff()
 
 #define DDRB_INIT   0b00010111
 #define PORTB_INIT  0b00100000

@@ -26,33 +26,43 @@ THE SOFTWARE.
  * @file
  */
 
-#include "uart.h"
-
+#include "buzz.h"
 #include "conf.h"
+#include "type.h"
+#include "uart.h"
 
 /* Assembly function. */
 extern void transmit(unsigned char);
 
 void Uart_Enable(void)
 {
-    CONF_IO(UART_CFG, OUTPUT, 1);
+  CONF_IO(UART_CFG, OUTPUT, 1);
 }
 
-void Uart_TransmitChar(const char data_U08)
+
+void Uart_TransmitByte(const uint8_t data)
 {
-    transmit(data_U08);
+    Uart_TransmitBlock(&data, 1);
 }
 
-void Uart_TransmitInt(const tU16 data_U16)
+void Uart_TransmitBlock(const uint8_t * data, uint8_t size)
 {
-    Uart_TransmitChar(HI(data_U16));
-    Uart_TransmitChar(LO(data_U16));
-}
-
-void Uart_TransmitStr(const char *str)
-{
-    while (*str)
+#ifdef UART_PRE_TX
+    UART_PRE_TX;
+#endif
+    /* Should this function switching be handled by another module? main or new module? */
+    const uint8_t ddr = DDRB;
+    const uint8_t port = PORTB;
+    DDRB |= _BV(0);
+    PORTB |= _BV(0);
+    while(size--)
     {
-        Uart_TransmitChar(*str++);
+        transmit(*data);
+        data++;
     }
+    PORTB &= ~_BV(0) | port;
+    DDRB &= ~_BV(0) | ddr;
+#ifdef UART_POST_TX
+    UART_POST_TX;
+#endif
 }

@@ -22,15 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <limits.h>
-
 #ifndef TYPE_H_
 #define TYPE_H_
+
+#include <limits.h>
 
 /*** TYPE DEFINITIONS ***/
 
 #define  FALSE      0
 #define  TRUE       !FALSE
+
+#ifndef __ASSEMBLER__
 
 typedef unsigned char tB;
 
@@ -42,6 +44,7 @@ typedef unsigned int  tU16;
 
 typedef signed int tS16;
 
+#endif
 
 /*** PORT MANIPULATION DEFINITIONS ***/
 

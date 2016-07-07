@@ -37,10 +37,22 @@ THE SOFTWARE.
 #include "type.h"
 #include "uart.h"
 
-/* Assembly function. */
 #if CPU_LOAD
-#include "cpul_asm.h"
+#include "cpul.h"
+#define ADD_TASK(TASK_NAME, TASK, PRESCALER)				        \
+({                                                                              \
+    Cpul_startPoint(PRESCALER);                                                 \
+    TASK();                                                                     \
+    tU08 cycles_U08 = Cpul_stopPoint_U08();				        \
+    tCpul_ResultBlock_str resultBlock_str =                                     \
+      Cpul_CreateResultBlock_str(TASK_NAME, cycles_U08, PRESCALER);             \
+    Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(tCpul_ResultBlock_str)); \
+})
+#else
+#define ADD_TASK(TASK_NAME, TASK, PRESCALER) ({TASK();})
 #endif
+
+
 
 /* Declaring main as OS_main saves some register pushing to stack. */
 int main(void) __attribute__((OS_main));
@@ -58,7 +70,6 @@ int main(void)
     WDTCR = _BV(WDCE) | _BV(WDE);
     WDTCR = 0;
 
-
     /* Power saving - switch of analog comparator */
     ACSR |= _BV(ACD);
 
@@ -72,14 +83,8 @@ int main(void)
     /* Initialize controls */
     Cont_init();
     /* Initialize actuators */
-#if !UART_ENABLE
     Buzz_init();
-#endif
     Ledc_init();
-
-#if UART_ENABLE
-    Uart_Enable();
-#endif
 
     /* Enable global interrupt otherwise dsen will not be able to wake up
      * from ADC Noise reduction mode. */
@@ -102,24 +107,19 @@ int main(void)
 
     for (;;)
     {
-#if CPU_LOAD
-        Cpul_startPoint(_BV(CS12) | _BV(CS11) | _BV(CS10));
-#endif
         /* Startup */
         Pwrd_wakeup();
 
         /* Sensors */
-        Butt_loop();
-        Dsen_loop();
+        ADD_TASK("BUTT", Butt_loop, 1);
+        ADD_TASK("DSEN", Dsen_loop, 1);
 
         /* Controls*/
-        Cont_loop();
+        ADD_TASK("CONT", Cont_loop, 1);
 
         /* Actuators */
-#if !UART_ENABLE
-        Buzz_loop();
-#endif
-        Ledc_loop();
+        ADD_TASK("BUZZ", Buzz_loop, 1);
+        ADD_TASK("LEDC", Ledc_loop, 1);
 
         /* Powerdown */
         Pwrd_sleep();

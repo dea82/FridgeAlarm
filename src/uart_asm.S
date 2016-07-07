@@ -66,11 +66,11 @@ transmit:
 putchar0:
     ; Total clock cycles 10
     brcc    putchar1                            ; ### true = 2, false = 1
-    cbi     PORTB, PORTB0   ; Transmit 0        ; ### 2
-    rjmp    putchar2        ; else              ; ### 2
+    cbi     PORTB, 0           ; Transmit 0        ; ### 2
+    rjmp    putchar2                            ; else              ; ### 2
 putchar1:
-    sbi     PORTB, PORTB0   ; Transmit 1        ; ### 2
-    nop                     ; to equalize delay ; ### 1
+    sbi     PORTB, 0           ; Transmit 1        ; ### 2
+    nop                                         ; to equalize delay ; ### 1
 putchar2:
     ldi     loopcnt, DELAY_LOOPS                ; ### 1
 delay:
