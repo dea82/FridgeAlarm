@@ -26,6 +26,7 @@
 #include <avr/io.h>
 /* Include header with defined BAUD_RATE */
 #include "conf.h"
+#include "type.h"
 
 #define bitcnt  r25
 #define data    r24
@@ -66,10 +67,10 @@ transmit:
 putchar0:
     ; Total clock cycles 10
     brcc    putchar1                            ; ### true = 2, false = 1
-    cbi     PORTB, 0           ; Transmit 0        ; ### 2
+    cbi     IO_PORT(UART_CFG), IO_PIN(UART_CFG) ; Transmit 0        ; ### 2
     rjmp    putchar2                            ; else              ; ### 2
 putchar1:
-    sbi     PORTB, 0           ; Transmit 1        ; ### 2
+    sbi     IO_PORT(UART_CFG), IO_PIN(UART_CFG) ; Transmit 1        ; ### 2
     nop                                         ; to equalize delay ; ### 1
 putchar2:
     ldi     loopcnt, DELAY_LOOPS                ; ### 1

@@ -39,6 +39,10 @@ THE SOFTWARE.
  * the normal ADC-range will be 0-986 instead of 0-1023.
  */
 #define UNAFFECTED_SENSOR_VALUE 493
+/* Offset from stored position to trigger alarm. [-]*/
+#define DOOR_CLOSED_OFFSET 20
+/* Minimum accepted door position (calculated offset from 512) [-] */
+#define MIN_CAL_DOOR_CLOSED_POS 60
 
 static tDsen_doorState_str doorState_str;
 static tU16 doorClosed_U16;
