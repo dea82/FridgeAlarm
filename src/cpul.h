@@ -18,6 +18,6 @@ typedef struct
  */
 void Cpul_startPoint(tU08 prescalerRegister);
 tU08 Cpul_stopPoint_U08(void);
-tCpul_ResultBlock_str Cpul_CreateResultBlock_str(char name_c[], tU08 cycles_U08, tU08 prescaler_U08);
+tCpul_ResultBlock_str Cpul_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescaler_U08);
 
-#endif /* CPUL_H_ */ 
+#endif /* CPUL_H_ */

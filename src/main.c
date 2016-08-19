@@ -38,6 +38,7 @@ THE SOFTWARE.
 #include "uart.h"
 
 #if CPU_LOAD
+#include <avr/pgmspace.h>
 #include "cpul.h"
 #define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
 ({                                                                             \
@@ -45,7 +46,7 @@ THE SOFTWARE.
     TASK();                                                                    \
     tU08 cycles_U08 = Cpul_stopPoint_U08();	                                   \
     tCpul_ResultBlock_str resultBlock_str =                                    \
-      Cpul_CreateResultBlock_str(TASK_NAME, cycles_U08, PRESCALER);            \
+      Cpul_CreateResultBlock_str(PSTR(TASK_NAME), cycles_U08, PRESCALER);      \
     Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(tCpul_ResultBlock_str));\
 })
 #else
@@ -64,48 +65,51 @@ int main(void)
      * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure
      * to save it for later useage to detect if abnormal reset has occured.
      */
-    tU08 statusRegister_U08 = MCUSR;
-    MCUSR = 0;
-    WDTCR = _BV(WDCE) | _BV(WDE);
-    WDTCR = 0;
-
-    /* Power saving - switch of analog comparator */
-    ACSR |= _BV(ACD);
-
-    /* Initialize I/O Ports */
-    DDRB = DDRB_INIT;
-    PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
-
-    /* Initialize sensors */
-    Butt_init();
-    Dsen_init();
-    /* Initialize controls */
-    Cont_init();
-    /* Initialize actuators */
-    Buzz_init();
-    Ledc_init();
-
-    /* Enable global interrupt otherwise dsen will not be able to wake up
-     * from ADC Noise reduction mode. */
-    asm volatile("sei"::);
-
-    /**
-     * Abnormal reset detected - goto infinite sleep with orange led
-     * indicating that we have a system error. Put the MCU in "infinite"
-     * sleep to save power, it could be BOD reset due to low batteries.
-     * The MCU is however possible to wakeup with the button - then it
-     * will go back to normal function.
-     */
-    if(!(statusRegister_U08 & _BV(PORF)))
     {
-        Butt_enableInterrupt();
-        Ledc_setOrange();
-        Pwrd_setSleepMode(PWRD_INFINITE_SLEEP_E);
-        Pwrd_sleep();
-    }
+        tU08 statusRegister_U08 = MCUSR;
+        MCUSR = 0;
+        WDTCR = _BV(WDCE) | _BV(WDE);
+        WDTCR = 0;
 
+        /* Power saving - switch of analog comparator */
+        ACSR |= _BV(ACD);
+
+        /* Initialize I/O Ports */
+        DDRB = DDRB_INIT;
+        PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
+
+        /* Initialize sensors */
+        Butt_init();
+        Dsen_init();
+        /* Initialize controls */
+        Cont_init();
+        /* Initialize actuators */
+        Buzz_init();
+        Ledc_init();
+
+        /* Enable global interrupt otherwise dsen will not be able to wake up
+         * from ADC Noise reduction mode. */
+        asm volatile("sei"::);
+
+        /**
+         * Abnormal reset detected - goto infinite sleep with orange led
+         * indicating that we have a system error. Put the MCU in "infinite"
+         * sleep to save power, it could be BOD reset due to low batteries.
+         * The MCU is however possible to wakeup with the button - then it
+         * will go back to normal function.
+         */
+        if(!(statusRegister_U08 & _BV(PORF)))
+        {
+            Butt_enableInterrupt();
+            Ledc_setOrange();
+            Pwrd_setSleepMode(PWRD_INFINITE_SLEEP_E);
+            Pwrd_sleep();
+        }
+    }
+    
     for (;;)
     {
+
         /* Startup */
         Pwrd_wakeup();
 

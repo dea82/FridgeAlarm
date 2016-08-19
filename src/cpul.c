@@ -2,7 +2,7 @@
 
 #include "cpul.h"
 
-tCpul_ResultBlock_str Cpul_CreateResultBlock_str(char name_c[], tU08 cycles_U08, tU08 prescaler_U08)
+tCpul_ResultBlock_str Cpul_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescaler_U08)
 {
   tCpul_ResultBlock_str resultBlock_str = {{*name_c}, cycles_U08, prescaler_U08, 0};
 

@@ -65,9 +65,6 @@ THE SOFTWARE.
 
 #endif
 
-
-#define GET_PORT(P,...) (PORT ## P)
-
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
 
 /*************************************************
