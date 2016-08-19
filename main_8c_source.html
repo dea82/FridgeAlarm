@@ -119,88 +119,92 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uart_8h.html">uart.h</a>&quot;</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#if CPU_LOAD</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="cpul_8h.html">cpul.h</a>&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)                        \</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">({                                                                              \</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">    Cpul_startPoint(PRESCALER);                                                 \</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    TASK();                                                                     \</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">    tU08 cycles_U08 = Cpul_stopPoint_U08();                     \</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    tCpul_ResultBlock_str resultBlock_str =                                     \</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">      Cpul_CreateResultBlock_str(TASK_NAME, cycles_U08, PRESCALER);             \</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    Uart_TransmitBlock((tU08*)&amp;resultBlock_str, sizeof(tCpul_ResultBlock_str)); \</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">})</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="main_8c.html#ad754d9ce7833f975514694307444979c">   52</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ADD_TASK(TASK_NAME, TASK, PRESCALER) ({TASK();})</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cpul_8h.html">cpul.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">({                                                                             \</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    Cpul_startPoint(PRESCALER);                                                \</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">    TASK();                                                                    \</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    tU08 cycles_U08 = Cpul_stopPoint_U08();                                    \</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">    tCpul_ResultBlock_str resultBlock_str =                                    \</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">      Cpul_CreateResultBlock_str(PSTR(TASK_NAME), cycles_U08, PRESCALER);      \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    Uart_TransmitBlock((tU08*)&amp;resultBlock_str, sizeof(tCpul_ResultBlock_str));\</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">})</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="main_8c.html#ad754d9ce7833f975514694307444979c">   53</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ADD_TASK(TASK_NAME, TASK, PRESCALER) ({TASK();})</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/* Declaring main as OS_main saves some register pushing to stack. */</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">   58</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>) __attribute__((OS_main));</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/* ATTENTION! Initialization code can be found in boot.S */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">/* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     * then it must be disabled here because it&#39;s kept after a reset! Ref. AVR132 chap 2.4.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     * to save it for later useage to detect if abnormal reset has occured.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> statusRegister_U08 = MCUSR;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    MCUSR = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    WDTCR = _BV(WDCE) | _BV(WDE);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    WDTCR = 0;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">/* Power saving - switch of analog comparator */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ACSR |= _BV(ACD);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">/* Initialize I/O Ports */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    DDRB = DDRB_INIT;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    PORTB |= PORTB_INIT; <span class="comment">/* Optimization, only one bit is changed */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">/* Initialize sensors */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61">Butt_init</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a>();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">/* Initialize controls */</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a>();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">/* Initialize actuators */</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a>();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a>();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">/* Enable global interrupt otherwise dsen will not be able to wake up</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">     * from ADC Noise reduction mode. */</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;sei&quot;</span>::);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span>(!(statusRegister_U08 &amp; _BV(PORF)))</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d">Butt_enableInterrupt</a>();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0">Ledc_setOrange</a>();</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <a class="code" href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933">Pwrd_setSleepMode</a>(<a class="code" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b">PWRD_INFINITE_SLEEP_E</a>);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a>();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">for</span> (;;)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="comment">/* Startup */</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942">Pwrd_wakeup</a>();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="comment">/* Sensors */</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;BUTT&quot;</span>, <a class="code" href="butt_8c.html#a7299e11463de911124ce0e31759e92bd">Butt_loop</a>, 1);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;DSEN&quot;</span>, <a class="code" href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a>, 1);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/* Declaring main as OS_main saves some register pushing to stack. */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">   59</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>) __attribute__((OS_main));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">/* ATTENTION! Initialization code can be found in boot.S */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * then it must be disabled here because it&#39;s kept after a reset! Ref. AVR132 chap 2.4.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">     * to save it for later useage to detect if abnormal reset has occured.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> statusRegister_U08 = MCUSR;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        MCUSR = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        WDTCR = _BV(WDCE) | _BV(WDE);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        WDTCR = 0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">/* Power saving - switch of analog comparator */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        ACSR |= _BV(ACD);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">/* Initialize I/O Ports */</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        DDRB = DDRB_INIT;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        PORTB |= PORTB_INIT; <span class="comment">/* Optimization, only one bit is changed */</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">/* Initialize sensors */</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61">Butt_init</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">/* Initialize controls */</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">/* Initialize actuators */</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a>();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">/* Enable global interrupt otherwise dsen will not be able to wake up</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">         * from ADC Noise reduction mode. */</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;sei&quot;</span>::);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">if</span>(!(statusRegister_U08 &amp; _BV(PORF)))</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <a class="code" href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d">Butt_enableInterrupt</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <a class="code" href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0">Ledc_setOrange</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <a class="code" href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933">Pwrd_setSleepMode</a>(<a class="code" href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b">PWRD_INFINITE_SLEEP_E</a>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <a class="code" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">for</span> (;;)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">/* Startup */</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942">Pwrd_wakeup</a>();</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">/* Controls*/</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;CONT&quot;</span>, <a class="code" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e">Cont_loop</a>, 1);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="comment">/* Actuators */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;BUZZ&quot;</span>, <a class="code" href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a>, 1);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;LEDC&quot;</span>, <a class="code" href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5">Ledc_loop</a>, 1);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">/* Sensors */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;BUTT&quot;</span>, <a class="code" href="butt_8c.html#a7299e11463de911124ce0e31759e92bd">Butt_loop</a>, 1);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;DSEN&quot;</span>, <a class="code" href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a>, 1);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">/* Controls*/</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;CONT&quot;</span>, <a class="code" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e">Cont_loop</a>, 1);</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">/* Powerdown */</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a>();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">/* Actuators */</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;BUZZ&quot;</span>, <a class="code" href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a>, 1);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;LEDC&quot;</span>, <a class="code" href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5">Ledc_loop</a>, 1);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="comment">/* Powerdown */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <a class="code" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a>();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
 <div class="ttc" id="pwrd_8c_html_a190fd006f3e32468d06dc1f33ee84933"><div class="ttname"><a href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933">Pwrd_setSleepMode</a></div><div class="ttdeci">void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00094">pwrd.c:94</a></div></div>
 <div class="ttc" id="ledc_8c_html_a152a8cb8c7b3c0b54d414a7b95bd9baf"><div class="ttname"><a href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a></div><div class="ttdeci">void Ledc_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00039">ledc.c:39</a></div></div>
 <div class="ttc" id="dsen_8c_html_a37ada16d7ede7f4bbd4f489290c02969"><div class="ttname"><a href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a></div><div class="ttdeci">void Dsen_init(void)</div><div class="ttdoc">Setup ADC conversion. </div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00059">dsen.c:59</a></div></div>
@@ -208,7 +212,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="uart_8h_html"><div class="ttname"><a href="uart_8h.html">uart.h</a></div></div>
 <div class="ttc" id="dsen_8h_html"><div class="ttname"><a href="dsen_8h.html">dsen.h</a></div><div class="ttdoc">Door sensor module. </div></div>
 <div class="ttc" id="ledc_8c_html_ab4f1295462973bb99d94351298ffd6d0"><div class="ttname"><a href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0">Ledc_setOrange</a></div><div class="ttdeci">void Ledc_setOrange(void)</div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00106">ledc.c:106</a></div></div>
-<div class="ttc" id="main_8c_html_ad754d9ce7833f975514694307444979c"><div class="ttname"><a href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a></div><div class="ttdeci">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00052">main.c:52</a></div></div>
+<div class="ttc" id="main_8c_html_ad754d9ce7833f975514694307444979c"><div class="ttname"><a href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a></div><div class="ttdeci">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00053">main.c:53</a></div></div>
 <div class="ttc" id="cont_8c_html_ad0c4d6789f162a899ceca3b2132dad03"><div class="ttname"><a href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a></div><div class="ttdeci">void Cont_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="cont_8c_source.html#l00046">cont.c:46</a></div></div>
 <div class="ttc" id="cpul_8h_html"><div class="ttname"><a href="cpul_8h.html">cpul.h</a></div></div>
 <div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
@@ -227,7 +231,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="pwrd_8c_html_a3477e76bd20498bf27e93183de666cff"><div class="ttname"><a href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a></div><div class="ttdeci">void Pwrd_sleep(void)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00056">pwrd.c:56</a></div></div>
 <div class="ttc" id="ledc_8c_html_a1f357fe563e5483b7ec6446ca391d6a5"><div class="ttname"><a href="ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5">Ledc_loop</a></div><div class="ttdeci">void Ledc_loop(void)</div><div class="ttdoc">Turns led on or off by request. </div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00046">ledc.c:46</a></div></div>
 <div class="ttc" id="butt_8h_html"><div class="ttname"><a href="butt_8h.html">butt.h</a></div><div class="ttdoc">Button module. </div></div>
-<div class="ttc" id="main_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00058">main.c:58</a></div></div>
+<div class="ttc" id="main_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00059">main.c:59</a></div></div>
 <div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
 <div class="ttc" id="conf_8h_html"><div class="ttname"><a href="conf_8h.html">conf.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
