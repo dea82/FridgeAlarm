@@ -70,12 +70,12 @@ THE SOFTWARE.
 /*************************************************
  * PIN CONFIGURATION
  *************************************************/
-#define DSEN_CFG        B,3
+#define DOOR_CFG        B,3
 #define BUTT_CFG        B,5
 #define RED_LED_CFG     B,2
 #define GREEN_LED_CFG   B,1
 #define BUZZ_CFG        B,0
-#define DSEN_SWITCH_CFG B,4
+#define DOOR_SWITCH_CFG B,4
 #define UART_CFG        B,0
 
 /* Uart and Buzzer shares pin. To be able to have multi-function

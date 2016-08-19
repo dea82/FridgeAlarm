@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "buzz.h"
 #include "conf.h"
 #include "ledc.h"
-#include "dsen.h"
+#include "door.h"
 #include "pwrd.h"
 
 typedef enum
@@ -78,12 +78,12 @@ static tCalibrationState_E getCalibrationState_E(void)
     tButt_State_str buttState_str = Butt_getState_str();
 
     /* Calibration state */
-    if ((buttState_str.state_E == BUTT_PRESSED_E) && 
+    if ((buttState_str.state_E == BUTT_PRESSED_E) &&
         (buttState_str.tickInState_U08 * TICK > CALIBRATION_TIME_BUTTON) &&
         (calibrationState_E == NO_CALIBRATION_E))
     {
         /* Enters calibration mode */
-        if (Dsen_storeClosedPos_B() == TRUE)
+        if (Door_storeClosedPos_B() == TRUE)
         {
             calibrationState_E = CALIBRATION_SUCCESS_E;
         }
@@ -109,13 +109,13 @@ static void normalModeStateMachine(void)
     static tB inhibitAlarm_B;
     static tU08 counter_U08;
     tButt_State_str buttState_str = Butt_getState_str();
-    tDsen_doorState_str doorState_str = Dsen_getDoorState_str();
+    tDoor_doorState_str doorState_str = Door_getDoorState_str();
 
-    if (doorState_str.doorState_E == DSEN_CLOSED_E)
+    if (doorState_str.doorState_E == DOOR_CLOSED_E)
     {
         Buzz_setSound(BUZZ_OFF_E);
         if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK) &&
-            (counter_U08 > MIN_TIME_AWAKE / TICK) && 
+            (counter_U08 > MIN_TIME_AWAKE / TICK) &&
             (buttState_str.state_E == BUTT_RELEASED_E))
         {
             /* When door has been closed for a long time and no activity
@@ -133,7 +133,7 @@ static void normalModeStateMachine(void)
         /* Reset */
         inhibitAlarm_B = FALSE;
     }
-    else /* DSEN_OPEN_E */
+    else /* DOOR_OPEN_E */
     {
         counter_U08 = 0;
 

@@ -31,7 +31,7 @@ THE SOFTWARE.
 #include "buzz.h"
 #include "conf.h"
 #include "cont.h"
-#include "dsen.h"
+#include "door.h"
 #include "ledc.h"
 #include "pwrd.h"
 #include "type.h"
@@ -81,14 +81,14 @@ int main(void)
 
         /* Initialize sensors */
         Butt_init();
-        Dsen_init();
+        Door_init();
         /* Initialize controls */
         Cont_init();
         /* Initialize actuators */
         Buzz_init();
         Ledc_init();
 
-        /* Enable global interrupt otherwise dsen will not be able to wake up
+        /* Enable global interrupt otherwise door will not be able to wake up
          * from ADC Noise reduction mode. */
         asm volatile("sei"::);
 
@@ -107,7 +107,7 @@ int main(void)
             Pwrd_sleep();
         }
     }
-    
+
     for (;;)
     {
 
@@ -116,7 +116,7 @@ int main(void)
 
         /* Sensors */
         ADD_TASK("BUTT", Butt_loop, 1);
-        ADD_TASK("DSEN", Dsen_loop, 1);
+        ADD_TASK("DOOR", Door_loop, 1);
 
         /* Controls*/
         ADD_TASK("CONT", Cont_loop, 1);
