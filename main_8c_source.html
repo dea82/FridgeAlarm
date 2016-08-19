@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="buzz_8h.html">buzz.h</a>&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="conf_8h.html">conf.h</a>&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cont_8h.html">cont.h</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="dsen_8h.html">dsen.h</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="door_8h.html">door.h</a>&quot;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ledc_8h.html">ledc.h</a>&quot;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pwrd_8h.html">pwrd.h</a>&quot;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="type_8h.html">type.h</a>&quot;</span></div>
@@ -162,14 +162,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">/* Initialize sensors */</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61">Butt_init</a>();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="door_8c.html#a60abd4c81c9742e94c2e99073f44db22">Door_init</a>();</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">/* Initialize controls */</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a>();</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">/* Initialize actuators */</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a>();</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a>();</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">/* Enable global interrupt otherwise dsen will not be able to wake up</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">/* Enable global interrupt otherwise door will not be able to wake up</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">         * from ADC Noise reduction mode. */</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;sei&quot;</span>::);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
@@ -181,7 +181,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <a class="code" href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a>();</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">for</span> (;;)</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    {</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
@@ -190,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">/* Sensors */</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;BUTT&quot;</span>, <a class="code" href="butt_8c.html#a7299e11463de911124ce0e31759e92bd">Butt_loop</a>, 1);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;DSEN&quot;</span>, <a class="code" href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a>, 1);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;DOOR&quot;</span>, <a class="code" href="door_8c.html#a209565a2cf45312a7400b95e9e1a9e80">Door_loop</a>, 1);</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">/* Controls*/</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a>(<span class="stringliteral">&quot;CONT&quot;</span>, <a class="code" href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e">Cont_loop</a>, 1);</div>
@@ -207,18 +207,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
 <div class="ttc" id="pwrd_8c_html_a190fd006f3e32468d06dc1f33ee84933"><div class="ttname"><a href="pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933">Pwrd_setSleepMode</a></div><div class="ttdeci">void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00094">pwrd.c:94</a></div></div>
 <div class="ttc" id="ledc_8c_html_a152a8cb8c7b3c0b54d414a7b95bd9baf"><div class="ttname"><a href="ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf">Ledc_init</a></div><div class="ttdeci">void Ledc_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00039">ledc.c:39</a></div></div>
-<div class="ttc" id="dsen_8c_html_a37ada16d7ede7f4bbd4f489290c02969"><div class="ttname"><a href="dsen_8c.html#a37ada16d7ede7f4bbd4f489290c02969">Dsen_init</a></div><div class="ttdeci">void Dsen_init(void)</div><div class="ttdoc">Setup ADC conversion. </div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00059">dsen.c:59</a></div></div>
-<div class="ttc" id="dsen_8c_html_a24adfba35d327aca1dc02e8bb949a173"><div class="ttname"><a href="dsen_8c.html#a24adfba35d327aca1dc02e8bb949a173">Dsen_loop</a></div><div class="ttdeci">void Dsen_loop(void)</div><div class="ttdoc">Updates door state. </div><div class="ttdef"><b>Definition:</b> <a href="dsen_8c_source.html#l00090">dsen.c:90</a></div></div>
 <div class="ttc" id="uart_8h_html"><div class="ttname"><a href="uart_8h.html">uart.h</a></div></div>
-<div class="ttc" id="dsen_8h_html"><div class="ttname"><a href="dsen_8h.html">dsen.h</a></div><div class="ttdoc">Door sensor module. </div></div>
 <div class="ttc" id="ledc_8c_html_ab4f1295462973bb99d94351298ffd6d0"><div class="ttname"><a href="ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0">Ledc_setOrange</a></div><div class="ttdeci">void Ledc_setOrange(void)</div><div class="ttdef"><b>Definition:</b> <a href="ledc_8c_source.html#l00106">ledc.c:106</a></div></div>
 <div class="ttc" id="main_8c_html_ad754d9ce7833f975514694307444979c"><div class="ttname"><a href="main_8c.html#ad754d9ce7833f975514694307444979c">ADD_TASK</a></div><div class="ttdeci">#define ADD_TASK(TASK_NAME, TASK, PRESCALER)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00053">main.c:53</a></div></div>
 <div class="ttc" id="cont_8c_html_ad0c4d6789f162a899ceca3b2132dad03"><div class="ttname"><a href="cont_8c.html#ad0c4d6789f162a899ceca3b2132dad03">Cont_init</a></div><div class="ttdeci">void Cont_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="cont_8c_source.html#l00046">cont.c:46</a></div></div>
 <div class="ttc" id="cpul_8h_html"><div class="ttname"><a href="cpul_8h.html">cpul.h</a></div></div>
 <div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
+<div class="ttc" id="door_8h_html"><div class="ttname"><a href="door_8h.html">door.h</a></div><div class="ttdoc">Door sensor module. </div></div>
 <div class="ttc" id="buzz_8h_html"><div class="ttname"><a href="buzz_8h.html">buzz.h</a></div></div>
 <div class="ttc" id="ledc_8h_html"><div class="ttname"><a href="ledc_8h.html">ledc.h</a></div></div>
 <div class="ttc" id="pwrd_8c_html_ae9a79c69fbb06348dd4808678092b942"><div class="ttname"><a href="pwrd_8c.html#ae9a79c69fbb06348dd4808678092b942">Pwrd_wakeup</a></div><div class="ttdeci">void Pwrd_wakeup(void)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00044">pwrd.c:44</a></div></div>
+<div class="ttc" id="door_8c_html_a60abd4c81c9742e94c2e99073f44db22"><div class="ttname"><a href="door_8c.html#a60abd4c81c9742e94c2e99073f44db22">Door_init</a></div><div class="ttdeci">void Door_init(void)</div><div class="ttdoc">Setup ADC conversion. </div><div class="ttdef"><b>Definition:</b> <a href="door_8c_source.html#l00059">door.c:59</a></div></div>
 <div class="ttc" id="butt_8c_html_a7299e11463de911124ce0e31759e92bd"><div class="ttname"><a href="butt_8c.html#a7299e11463de911124ce0e31759e92bd">Butt_loop</a></div><div class="ttdeci">void Butt_loop(void)</div><div class="ttdoc">Updates button module&#39;s outputs. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00044">butt.c:44</a></div></div>
 <div class="ttc" id="butt_8c_html_a9c4c896707140c23dd1962b00ea44d1d"><div class="ttname"><a href="butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d">Butt_enableInterrupt</a></div><div class="ttdeci">void Butt_enableInterrupt(void)</div><div class="ttdoc">Enable interrupt for button state change. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00080">butt.c:80</a></div></div>
 <div class="ttc" id="pwrd_8h_html_a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b"><div class="ttname"><a href="pwrd_8h.html#a994085944e4959896b8a9080c7a91832af95a7ec6a844f5e68944531c8bf3261b">PWRD_INFINITE_SLEEP_E</a></div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8h_source.html#l00044">pwrd.h:44</a></div></div>
@@ -226,6 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="buzz_8c_html_a38e1244c0bd2a25996902b3c7ba07099"><div class="ttname"><a href="buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099">Buzz_init</a></div><div class="ttdeci">void Buzz_init(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00043">buzz.c:43</a></div></div>
 <div class="ttc" id="pwrd_8h_html"><div class="ttname"><a href="pwrd_8h.html">pwrd.h</a></div><div class="ttdoc">Power down module. </div></div>
 <div class="ttc" id="cont_8c_html_a79511b0620c51a6ea1418cf2b0daba0e"><div class="ttname"><a href="cont_8c.html#a79511b0620c51a6ea1418cf2b0daba0e">Cont_loop</a></div><div class="ttdeci">void Cont_loop(void)</div><div class="ttdef"><b>Definition:</b> <a href="cont_8c_source.html#l00051">cont.c:51</a></div></div>
+<div class="ttc" id="door_8c_html_a209565a2cf45312a7400b95e9e1a9e80"><div class="ttname"><a href="door_8c.html#a209565a2cf45312a7400b95e9e1a9e80">Door_loop</a></div><div class="ttdeci">void Door_loop(void)</div><div class="ttdoc">Updates door state. </div><div class="ttdef"><b>Definition:</b> <a href="door_8c_source.html#l00090">door.c:90</a></div></div>
 <div class="ttc" id="buzz_8c_html_af0e54e3a1e313d3db184d06a4b32924d"><div class="ttname"><a href="buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d">Buzz_loop</a></div><div class="ttdeci">void Buzz_loop(void)</div><div class="ttdef"><b>Definition:</b> <a href="buzz_8c_source.html#l00058">buzz.c:58</a></div></div>
 <div class="ttc" id="butt_8c_html_a29c89ee8f7f2f16d82bde6c18c970d61"><div class="ttname"><a href="butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61">Butt_init</a></div><div class="ttdeci">void Butt_init(void)</div><div class="ttdoc">Initializes button module. </div><div class="ttdef"><b>Definition:</b> <a href="butt_8c_source.html#l00037">butt.c:37</a></div></div>
 <div class="ttc" id="pwrd_8c_html_a3477e76bd20498bf27e93183de666cff"><div class="ttname"><a href="pwrd_8c.html#a3477e76bd20498bf27e93183de666cff">Pwrd_sleep</a></div><div class="ttdeci">void Pwrd_sleep(void)</div><div class="ttdef"><b>Definition:</b> <a href="pwrd_8c_source.html#l00056">pwrd.c:56</a></div></div>
