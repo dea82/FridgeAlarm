@@ -38,6 +38,9 @@ BUILDROOT = output
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(wildcard *.c)
 
+# Headers - only used for naming convention checker
+HEADERS = $(wildcard *.h)
+
 # List S (assembler) files here. Mandatory file is boot.S which
 # contains the reset and interrupt vector which must be built first!.
 ASRC = boot.S $(filter-out boot.S,$(wildcard *.S))
@@ -84,7 +87,7 @@ CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
 CFLAGS += $(CSTANDARD)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -Wall -Wstrict-prototypes -Werror=missing-prototypes
+CFLAGS += -Wall -Wstrict-prototypes -Werror=missing-prototypes -Wunused-macros
 
 ASFLAGS = $(COMMONFLAGS)
 ASFLAGS += -x assembler-with-cpp
@@ -99,8 +102,9 @@ CC = avr-gcc
 OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
+NAME_CONVENTION_CHECK = scripts/style-check.py
 
-all: check-inputs createdir build size
+all: check-inputs style-check createdir build size
 
 check-inputs:
 ifndef MCU_TARGET
@@ -110,12 +114,15 @@ ifndef F_CPU
 	$(error F_CPU must be specified!)
 endif
 
-build: $(FLASHFILE) $(LISTFILE)
-
+style-check:
+#	@echo "Naming convention check"
+#	@$(NAME_CONVENTION_CHECK) $(SRC) $(HEADERS)
 
 # Create output dir if not exist
 createdir:
 	@mkdir -p $(DEPDIR)
+
+build: $(FLASHFILE) $(LISTFILE)
 
 # Create final output files (.hex, .eep) from ELF output file.
 %.hex:  %.elf
