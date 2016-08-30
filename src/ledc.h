@@ -33,11 +33,11 @@ typedef enum
     LEDC_ORANGE_E,
     LEDC_GREEN_BLINK_E,
     LEDC_RED_BLINK_E,
-} tLedState_E;
+} tLedc_State_E;
 
-void Ledc_init(void);
-void Ledc_loop(void);
-void Ledc_setState(const tLedState_E state_E);
-void Ledc_setOrange(void);
+void Ledc_Init(void);
+void Ledc_Loop(void);
+void Ledc_SetState(const tLedc_State_E state_E);
+void Ledc_SetOrange(void);
 
 #endif /* LEDC_H_ */

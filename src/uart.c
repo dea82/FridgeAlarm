@@ -47,22 +47,9 @@ void Uart_TransmitByte(const uint8_t data)
 
 void Uart_TransmitBlock(const uint8_t * data, uint8_t size)
 {
-#ifdef UART_PRE_TX
-    UART_PRE_TX;
-#endif
-    /* Should this function switching be handled by another module? main or new module? */
-    const uint8_t ddr = DDRB;
-    const uint8_t port = PORTB;
-    DDRB |= _BV(0);
-    PORTB |= _BV(0);
     while(size--)
     {
         transmit(*data);
         data++;
     }
-    PORTB &= ~_BV(0) | port;
-    DDRB &= ~_BV(0) | ddr;
-#ifdef UART_POST_TX
-    UART_POST_TX;
-#endif
 }

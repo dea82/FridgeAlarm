@@ -60,7 +60,7 @@ typedef struct
 /**
  * @brief      Initializes button module
  */
-void Butt_init(void);
+void Butt_Init(void);
 
 /**
  * @brief      Updates button module's outputs
@@ -68,25 +68,25 @@ void Butt_init(void);
  * @note       This function shall be called periodically.
  *
  * @warning    Before making any call to this function make sure that
- *             Butt_init() has been called at least once.
+ *             Butt_Init() has been called at least once.
  */
-void Butt_loop(void);
+void Butt_Loop(void);
 
 /**
  * @brief      Get actual button state
  *
  * @return     Button state
  */
-tButt_State_str Butt_getState_str(void);
+tButt_State_str Butt_GetState_str(void);
 
 /**
  * @brief      Enable interrupt for button state change
  */
-void Butt_enableInterrupt(void);
+void Butt_EnableInterrupt(void);
 
 /**
  * @brief      Disable interrupt for button state change
  */
-void Butt_disableInterrupt(void);
+void Butt_DisableInterrupt(void);
 
 #endif /* BUTT_H_ */

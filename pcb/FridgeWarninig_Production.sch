@@ -17915,7 +17915,7 @@ DIN A4, landscape with location and doc. field</description>
 <sheets>
 <sheet>
 <plain>
-<text x="20.32" y="40.64" size="1.778" layer="91">R3 required to isolate 
+<text x="22.86" y="48.26" size="1.778" layer="91">R3 required to isolate 
 hall sensor during HVSP.</text>
 <text x="129.54" y="30.48" size="1.778" layer="91">Bypass capacitors for 
 transient response.</text>
@@ -17928,20 +17928,20 @@ transient response.</text>
 <instance part="GND5" gate="1" x="132.08" y="106.68"/>
 <instance part="R1" gate="G$1" x="25.4" y="111.76"/>
 <instance part="P+3" gate="VCC" x="152.4" y="60.96"/>
-<instance part="GND7" gate="1" x="60.96" y="45.72"/>
+<instance part="GND7" gate="1" x="63.5" y="53.34"/>
 <instance part="C3" gate="G$1" x="132.08" y="116.84"/>
 <instance part="C2" gate="G$1" x="152.4" y="50.8"/>
 <instance part="GND1" gate="1" x="127" y="5.08"/>
 <instance part="GND8" gate="1" x="45.72" y="101.6"/>
 <instance part="R2" gate="G$1" x="60.96" y="111.76"/>
-<instance part="C4" gate="G$1" x="60.96" y="58.42"/>
+<instance part="C4" gate="G$1" x="63.5" y="66.04"/>
 <instance part="C1" gate="G$1" x="139.7" y="50.8"/>
 <instance part="GND2" gate="1" x="50.8" y="-12.7"/>
 <instance part="P+4" gate="VCC" x="50.8" y="27.94"/>
 <instance part="R5" gate="G$1" x="38.1" y="-2.54" rot="R180"/>
-<instance part="R3" gate="G$1" x="50.8" y="71.12"/>
+<instance part="R3" gate="G$1" x="53.34" y="78.74"/>
 <instance part="S2" gate="G$1" x="134.62" y="7.62"/>
-<instance part="IC4" gate="G$1" x="25.4" y="60.96"/>
+<instance part="IC4" gate="G$1" x="27.94" y="68.58"/>
 <instance part="L1" gate="G$1" x="45.72" y="15.24"/>
 <instance part="T2" gate="G$1" x="48.26" y="-2.54"/>
 <instance part="FRAME1" gate="G$1" x="-35.56" y="-30.48"/>
@@ -17992,13 +17992,13 @@ transient response.</text>
 <segment>
 <pinref part="C4" gate="G$1" pin="2"/>
 <pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="60.96" y1="53.34" x2="60.96" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="60.96" x2="63.5" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="IC4" gate="G$1" pin="GND"/>
-<wire x1="60.96" y1="50.8" x2="60.96" y2="48.26" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="58.42" x2="38.1" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="58.42" x2="38.1" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="50.8" x2="60.96" y2="50.8" width="0.1524" layer="91"/>
-<junction x="60.96" y="50.8"/>
+<wire x1="63.5" y1="58.42" x2="63.5" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="66.04" x2="40.64" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="66.04" x2="40.64" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="58.42" x2="63.5" y2="58.42" width="0.1524" layer="91"/>
+<junction x="63.5" y="58.42"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -18106,10 +18106,10 @@ transient response.</text>
 <net name="N$5" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="OUT"/>
-<wire x1="33.02" y1="60.96" x2="38.1" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="60.96" x2="38.1" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="68.58" x2="40.64" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="68.58" x2="40.64" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="38.1" y1="71.12" x2="45.72" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="78.74" x2="48.26" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="HALL_VCC" class="0">
@@ -18120,12 +18120,12 @@ transient response.</text>
 </segment>
 <segment>
 <pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="60.96" y1="60.96" x2="60.96" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="63.5" x2="83.82" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="68.58" x2="63.5" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="71.12" x2="86.36" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="IC4" gate="G$1" pin="VCC"/>
-<wire x1="60.96" y1="63.5" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
-<junction x="60.96" y="63.5"/>
-<label x="71.12" y="63.5" size="1.778" layer="95"/>
+<wire x1="63.5" y1="71.12" x2="35.56" y2="71.12" width="0.1524" layer="91"/>
+<junction x="63.5" y="71.12"/>
+<label x="73.66" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="HALL_SENS_OUT" class="0">
@@ -18136,8 +18136,8 @@ transient response.</text>
 </segment>
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="55.88" y1="71.12" x2="83.82" y2="71.12" width="0.1524" layer="91"/>
-<label x="63.5" y="71.12" size="1.778" layer="95"/>
+<wire x1="58.42" y1="78.74" x2="86.36" y2="78.74" width="0.1524" layer="91"/>
+<label x="66.04" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SWITCH" class="0">

@@ -31,7 +31,7 @@
     .section .text
 
 ;############################################################
-;#  FUNCTION: Cpul_startPoint
+;#  FUNCTION: Cpul_StartPoint
 ;#
 ;#  SUMMARY
 ;#  This function will start the timer used for calulation
@@ -45,8 +45,8 @@
 ;#  -
 ;#
 ;############################################################
-    .global Cpul_startPoint
-Cpul_startPoint:
+    .global Cpul_StartPoint
+Cpul_StartPoint:
     out     TCCR1, r1   ; Stop timer
     out     TCNT1, r1   ; Reset timer
     in      r18, TIFR   ; Clear overflow flag by setting bit
@@ -74,8 +74,8 @@ Cpul_startPoint:
 ;#  number of cycles (one byte, r24)
 ;#
 ;############################################################
-    .global Cpul_stopPoint_U08
-Cpul_stopPoint_U08:
+    .global Cpul_StopPoint_U08
+Cpul_StopPoint_U08:
     out     TCCR1, r1     ;  Stop timer as fast as possible
     in      r24, TCNT1    ;  Read counter value
     in      r19, TIFR     ;  Do we have an overflow?

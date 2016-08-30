@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 /**
  * @file
- * 
+ *
  */
 
 #include "ledc.h"
@@ -34,16 +34,16 @@ THE SOFTWARE.
 
 #define BLINK_PERIOD_TIME 120 /* ms */
 
-static tLedState_E ledState_E = LEDC_OFF_E;
+static tLedc_State_E ledState_E = LEDC_OFF_E;
 
-inline void Ledc_init(void)
+inline void Ledc_Init(void)
 {
 }
 /**
  * @brief Turns led on or off by request
  *
  */
-inline void Ledc_loop(void)
+inline void Ledc_Loop(void)
 {
     static tU08 counter_U08;
     if (++counter_U08 > BLINK_PERIOD_TIME / TICK)
@@ -98,12 +98,12 @@ inline void Ledc_loop(void)
     }
 }
 
-void Ledc_setState(const tLedState_E state_E)
+void Ledc_SetState(const tLedc_State_E state_E)
 {
     ledState_E = state_E;
 }
 
-void Ledc_setOrange(void)
+void Ledc_SetOrange(void)
 {
     IO_SET(GREEN_LED_CFG);
     IO_SET(RED_LED_CFG);

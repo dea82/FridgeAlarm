@@ -44,7 +44,7 @@ THE SOFTWARE.
 /* Minimum accepted door position (calculated offset from 512) [-] */
 #define MIN_CAL_DOOR_CLOSED_POS 60
 
-static tDoor_doorState_str doorState_str;
+static tDoor_State_str doorState_str;
 static tU16 doorClosed_U16;
 static tU16 doorPos_U16;
 
@@ -56,7 +56,7 @@ static tU08 eepromRead_U08(const tU08 address);
 /**
  * @brief Setup ADC conversion.
  */
-inline void Door_init(void)
+inline void Door_Init(void)
 {
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
@@ -87,36 +87,36 @@ inline void Door_init(void)
     doorClosed_U16 += eepromRead_U08(1);
 }
 
-inline void Door_loop(void)
+inline void Door_Loop(void)
 {
     doorPos_U16 = getDoorRawPos_U16();
 
-    tDoor_doorState_E newDoorState_E;
+    tDoor_Position_E newposition_E;
     /* Algorithm handles both direction of magnet field */
     if (doorClosed_U16 < UNAFFECTED_SENSOR_VALUE)
     {
         if (doorPos_U16 > doorClosed_U16 + DOOR_CLOSED_OFFSET)
         {
-            newDoorState_E = DOOR_OPEN_E;
+            newposition_E = DOOR_OPEN_E;
         }
         else
         {
-            newDoorState_E = DOOR_CLOSED_E;
+            newposition_E = DOOR_CLOSED_E;
         }
     }
     else
     {
         if (doorPos_U16 < doorClosed_U16 - DOOR_CLOSED_OFFSET)
         {
-            newDoorState_E = DOOR_OPEN_E;
+            newposition_E = DOOR_OPEN_E;
         }
         else
         {
-            newDoorState_E = DOOR_CLOSED_E;
+            newposition_E = DOOR_CLOSED_E;
         }
     }
 
-    if (doorState_str.doorState_E == newDoorState_E)
+    if (doorState_str.position_E == newposition_E)
     {
         INC_U16(doorState_str.ticksInState_U16);
     }
@@ -124,7 +124,7 @@ inline void Door_loop(void)
     {
         doorState_str.ticksInState_U16 = 0;
     }
-    doorState_str.doorState_E = newDoorState_E;
+    doorState_str.position_E = newposition_E;
 
 }
 
@@ -186,7 +186,7 @@ static tU16 getDoorRawPos_U16(void)
     return sensorValue_U16;
 }
 
-tDoor_doorState_str Door_getDoorState_str(void)
+tDoor_State_str Door_GetState_str(void)
 {
     return doorState_str;
 }
@@ -207,7 +207,7 @@ static tB withinRange_B(const tU16 sensorValue_U16)
     return ret_B;
 }
 
-tB Door_storeClosedPos_B(void)
+tB Door_StoreClosedPos_B(void)
 {
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))

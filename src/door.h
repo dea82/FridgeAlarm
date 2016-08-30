@@ -41,19 +41,19 @@ typedef enum
 {
   DOOR_CLOSED_E,/**< Door considered closed */
   DOOR_OPEN_E	/**< Door considered open */
-} tDoor_doorState_E;
+} tDoor_Position_E;
 
 typedef struct
 {
-    tDoor_doorState_E doorState_E; /**< Door state */
+    tDoor_Position_E position_E; /**< Door state */
     tU16 ticksInState_U16; /**< Numer of ticks in state */
-}tDoor_doorState_str ;
+}tDoor_State_str ;
 
-/** @brief Initializes door module. Must be called before Door_loop. */
-void Door_init(void);
+/** @brief Initializes door module. Must be called before Door_Loop. */
+void Door_Init(void);
 /** @brief Updates door state. */
-void Door_loop(void);
-tDoor_doorState_str Door_getDoorState_str(void);
-tB Door_storeClosedPos_B(void);
+void Door_Loop(void);
+tDoor_State_str Door_GetState_str(void);
+tB Door_StoreClosedPos_B(void);
 
 #endif /* DOOR_H_ */

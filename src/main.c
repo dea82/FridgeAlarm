@@ -35,19 +35,17 @@ THE SOFTWARE.
 #include "ledc.h"
 #include "pwrd.h"
 #include "type.h"
-#include "uart.h"
 
 #if CPU_LOAD
 #include <avr/pgmspace.h>
 #include "cpul.h"
+#include "uart.h"
 #define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
 ({                                                                             \
-    Cpul_startPoint(PRESCALER);                                                \
+    Cpul_StartPoint(PRESCALER);                                                \
     TASK();                                                                    \
-    tU08 cycles_U08 = Cpul_stopPoint_U08();	                                   \
-    tCpul_ResultBlock_str resultBlock_str =                                    \
-      Cpul_CreateResultBlock_str(PSTR(TASK_NAME), cycles_U08, PRESCALER);      \
-    Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(tCpul_ResultBlock_str));\
+    tU08 cycles_U08 = Cpul_StopPoint_U08();	                                   \
+    Uart_TransmitBlock(&cycles_U08, sizeof(1));\
 })
 #else
 #define ADD_TASK(TASK_NAME, TASK, PRESCALER) ({TASK();})
@@ -80,13 +78,13 @@ int main(void)
         PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
 
         /* Initialize sensors */
-        Butt_init();
-        Door_init();
+        Butt_Init();
+        Door_Init();
         /* Initialize controls */
-        Cont_init();
+        Cont_Init();
         /* Initialize actuators */
-        Buzz_init();
-        Ledc_init();
+        Buzz_Init();
+        Ledc_Init();
 
         /* Enable global interrupt otherwise door will not be able to wake up
          * from ADC Noise reduction mode. */
@@ -101,10 +99,10 @@ int main(void)
          */
         if(!(statusRegister_U08 & _BV(PORF)))
         {
-            Butt_enableInterrupt();
-            Ledc_setOrange();
-            Pwrd_setSleepMode(PWRD_INFINITE_SLEEP_E);
-            Pwrd_sleep();
+            Butt_EnableInterrupt();
+            Ledc_SetOrange();
+            Pwrd_SetSleepMode(PWRD_INFINITE_SLEEP_E);
+            Pwrd_Sleep();
         }
     }
 
@@ -112,21 +110,21 @@ int main(void)
     {
 
         /* Startup */
-        Pwrd_wakeup();
+        Pwrd_Wakeup();
 
         /* Sensors */
-        ADD_TASK("BUTT", Butt_loop, 1);
-        ADD_TASK("DOOR", Door_loop, 1);
+        ADD_TASK("BUTT", Butt_Loop, 1);
+        ADD_TASK("DOOR", Door_Loop, 1);
 
         /* Controls*/
-        ADD_TASK("CONT", Cont_loop, 1);
+        ADD_TASK("CONT", Cont_Loop, 1);
 
         /* Actuators */
-        ADD_TASK("BUZZ", Buzz_loop, 1);
-        ADD_TASK("LEDC", Ledc_loop, 1);
+        ADD_TASK("BUZZ", Buzz_Loop, 1);
+        ADD_TASK("LEDC", Ledc_Loop, 1);
 
         /* Powerdown */
-        Pwrd_sleep();
+        Pwrd_Sleep();
     }
 
     return 0;

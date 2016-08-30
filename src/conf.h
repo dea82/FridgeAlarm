@@ -47,7 +47,7 @@ THE SOFTWARE.
 /* Rationale why Timer0 and PRADC is not disabled:
  * The module is disconnected and all registers connected
  * to the module is frozen and not accessible,
- * Buzz_init and Dsen_init will fail to set registers. */
+ * Buzz_Init and Dsen_init will fail to set registers. */
 #if defined(__AVR_ATtiny85__)
 
 #if CPU_LOAD
@@ -72,16 +72,15 @@ THE SOFTWARE.
  *************************************************/
 #define DOOR_CFG        B,3
 #define BUTT_CFG        B,5
+#if CPU_LOAD
+#define RED_LED_CFG     B,1
+#else
 #define RED_LED_CFG     B,2
+#endif
 #define GREEN_LED_CFG   B,1
 #define BUZZ_CFG        B,0
 #define DOOR_SWITCH_CFG B,4
-#define UART_CFG        B,0
-
-/* Uart and Buzzer shares pin. To be able to have multi-function
- * on pin buzzer must be disconnected from pin before transmitting. */
-#define UART_PRE_TX Buzz_pauseOn()
-#define UART_POST_TX Buzz_pauseOff()
+#define UART_CFG        B,2
 
 #define DDRB_INIT   0b00010111
 #define PORTB_INIT  0b00100000

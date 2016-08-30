@@ -23,13 +23,13 @@ THE SOFTWARE.
 */
 
 /*------------------------------------------------------------------------*//**
- * 
+ *
  * @file pwrd.h
  * @author     Andreas L.
  * @date       2016-06-03
- * 
+ *
  * @brief      Power down module
- * 
+ *
  * This module takes care of power down of the MCU.
  *----------------------------------------------------------------------------*/
 
@@ -40,14 +40,14 @@ typedef enum
 {
     PWRD_SHORT_DEEP_SLEEP_E,
     PWRD_LONG_DEEP_SLEEP_E,
-    PWRD_SLEEP_WITH_TIMER_RUNNING_E,
+    Pwrd_Sleep_WITH_TIMER_RUNNING_E,
     PWRD_INFINITE_SLEEP_E
-} tPwrd_sleepMode_E;
+} tPwrd_SleepMode_E;
 
-void Pwrd_sleep(void);
+void Pwrd_Sleep(void);
 
-void Pwrd_wakeup(void);
+void Pwrd_Wakeup(void);
 
-void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E);
+void Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E);
 
 #endif /* PWRD_H_ */

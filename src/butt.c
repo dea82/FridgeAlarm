@@ -34,17 +34,17 @@ THE SOFTWARE.
 
 static tButt_State_str buttState_str;
 
-inline void Butt_init(void)
+inline void Butt_Init(void)
 {
     /* Pin change interrupt on button - this does not enables the interrupt,
        this is done later. */
     PCINT(BUTT_CFG);
 }
 
-inline void Butt_loop(void)
+inline void Butt_Loop(void)
 {
     static tButt_State_str buttonRawOld_str;
-    tButt_State_E buttonRaw_E = 
+    tButt_State_E buttonRaw_E =
       (GET_STATUS(BUTT_CFG) ? BUTT_RELEASED_E : BUTT_PRESSED_E);
 
     /* Is raw button glitching */
@@ -58,7 +58,7 @@ inline void Butt_loop(void)
     }
 
     /* Check if raw value is stable */
-    if ((buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK) && 
+    if ((buttonRawOld_str.tickInState_U08 >= FILTER_TIME / TICK) &&
         (buttState_str.state_E != buttonRaw_E))
     {
         buttState_str.state_E = buttonRaw_E;
@@ -72,18 +72,18 @@ inline void Butt_loop(void)
     buttonRawOld_str.state_E = buttonRaw_E;
 }
 
-tButt_State_str Butt_getState_str(void)
+tButt_State_str Butt_GetState_str(void)
 {
     return buttState_str;
 }
 
-void Butt_enableInterrupt(void)
+void Butt_EnableInterrupt(void)
 {
     /* This enables the pin change interrupt. */
     GIMSK = _BV(PCIE);
 }
 
-void Butt_disableInterrupt(void)
+void Butt_DisableInterrupt(void)
 {
     /* Disable interrupt */
     GIMSK = 0;
@@ -93,4 +93,3 @@ void Butt_disableInterrupt(void)
      *  is set again. */
     GIFR = _BV(PCIF);
 }
-

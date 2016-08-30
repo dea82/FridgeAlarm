@@ -27,7 +27,7 @@ THE SOFTWARE.
 
 #include "type.h"
 
-void Cont_init(void);
-void Cont_loop(void);
+void Cont_Init(void);
+void Cont_Loop(void);
 
 #endif /* CONT_H_ */

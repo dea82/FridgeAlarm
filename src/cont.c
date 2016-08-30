@@ -43,28 +43,28 @@ typedef enum
 static tCalibrationState_E getCalibrationState_E(void);
 static void normalModeStateMachine(void);
 
-inline void Cont_init(void)
+inline void Cont_Init(void)
 {
     /* Nothing */
 }
 
-inline void Cont_loop(void)
+inline void Cont_Loop(void)
 {
     tCalibrationState_E calibrationState_E = getCalibrationState_E();
 
     /* Sets it default. */
-    Pwrd_setSleepMode(PWRD_SHORT_DEEP_SLEEP_E);
+    Pwrd_SetSleepMode(PWRD_SHORT_DEEP_SLEEP_E);
 
     if (calibrationState_E == CALIBRATION_SUCCESS_E)
     {
-        Buzz_setSound(BUZZ_OFF_E);
-        Ledc_setState(LEDC_GREEN_BLINK_E);
+        Buzz_SetSound(BUZZ_OFF_E);
+        Ledc_SetState(LEDC_GREEN_BLINK_E);
     }
     else if (calibrationState_E == CALIBRATION_FAIL_E)
     {
-        Buzz_setSound(BUZZ_ON_E);
-        Ledc_setState(LEDC_RED_BLINK_E);
-        Pwrd_setSleepMode(PWRD_SLEEP_WITH_TIMER_RUNNING_E);
+        Buzz_SetSound(BUZZ_ON_E);
+        Ledc_SetState(LEDC_RED_BLINK_E);
+        Pwrd_SetSleepMode(Pwrd_Sleep_WITH_TIMER_RUNNING_E);
     }
     else
     {
@@ -75,7 +75,7 @@ inline void Cont_loop(void)
 static tCalibrationState_E getCalibrationState_E(void)
 {
     static tCalibrationState_E calibrationState_E;
-    tButt_State_str buttState_str = Butt_getState_str();
+    tButt_State_str buttState_str = Butt_GetState_str();
 
     /* Calibration state */
     if ((buttState_str.state_E == BUTT_PRESSED_E) &&
@@ -83,7 +83,7 @@ static tCalibrationState_E getCalibrationState_E(void)
         (calibrationState_E == NO_CALIBRATION_E))
     {
         /* Enters calibration mode */
-        if (Door_storeClosedPos_B() == TRUE)
+        if (Door_StoreClosedPos_B() == TRUE)
         {
             calibrationState_E = CALIBRATION_SUCCESS_E;
         }
@@ -108,12 +108,12 @@ static void normalModeStateMachine(void)
 {
     static tB inhibitAlarm_B;
     static tU08 counter_U08;
-    tButt_State_str buttState_str = Butt_getState_str();
-    tDoor_doorState_str doorState_str = Door_getDoorState_str();
+    tButt_State_str buttState_str = Butt_GetState_str();
+    tDoor_State_str doorState_str = Door_GetState_str();
 
-    if (doorState_str.doorState_E == DOOR_CLOSED_E)
+    if (doorState_str.position_E == DOOR_CLOSED_E)
     {
-        Buzz_setSound(BUZZ_OFF_E);
+        Buzz_SetSound(BUZZ_OFF_E);
         if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK) &&
             (counter_U08 > MIN_TIME_AWAKE / TICK) &&
             (buttState_str.state_E == BUTT_RELEASED_E))
@@ -121,14 +121,14 @@ static void normalModeStateMachine(void)
             /* When door has been closed for a long time and no activity
              * on button it's OK to go to deep sleep. */
             counter_U08 = 0;
-            Ledc_setState(LEDC_OFF_E);
-            Pwrd_setSleepMode(PWRD_LONG_DEEP_SLEEP_E);
+            Ledc_SetState(LEDC_OFF_E);
+            Pwrd_SetSleepMode(PWRD_LONG_DEEP_SLEEP_E);
         }
         else
         {
             /* Door has not been closed long enough to go to deep sleep. */
             INC_U08(counter_U08);
-            Ledc_setState(LEDC_GREEN_E);
+            Ledc_SetState(LEDC_GREEN_E);
         }
         /* Reset */
         inhibitAlarm_B = FALSE;
@@ -147,21 +147,21 @@ static void normalModeStateMachine(void)
             }
             if (inhibitAlarm_B == TRUE)
             {
-                Buzz_setSound(BUZZ_OFF_E);
+                Buzz_SetSound(BUZZ_OFF_E);
             }
             else
             {
-                Buzz_setSound(BUZZ_ALARM_E);
+                Buzz_SetSound(BUZZ_ALARM_E);
                 /* Necessary to have the timer running due to the buzzer. */
-                Pwrd_setSleepMode(PWRD_SLEEP_WITH_TIMER_RUNNING_E);
+                Pwrd_SetSleepMode(Pwrd_Sleep_WITH_TIMER_RUNNING_E);
             }
-            Ledc_setState(LEDC_RED_BLINK_E);
+            Ledc_SetState(LEDC_RED_BLINK_E);
         }
         else
         {
             /* Door open but not long enough to sound the alarm. */
-            Ledc_setState(LEDC_RED_E);
-            Buzz_setSound(BUZZ_OFF_E);
+            Ledc_SetState(LEDC_RED_E);
+            Buzz_SetSound(BUZZ_OFF_E);
         }
     }
 }

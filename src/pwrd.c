@@ -39,9 +39,9 @@ THE SOFTWARE.
 
 
 
-static tPwrd_sleepMode_E sleepMode_E;
+static tPwrd_SleepMode_E sleepMode_E;
 
-inline void Pwrd_wakeup(void)
+inline void Pwrd_Wakeup(void)
 {
     /**
      * If wakeup was caused by button interrupt the watchdog timer can have any value.
@@ -49,11 +49,11 @@ inline void Pwrd_wakeup(void)
      *  might have a reset during next cycle.
      */
     asm volatile("wdr"::);
-    Butt_disableInterrupt();
+    Butt_DisableInterrupt();
     Wdtc_SetTimer(WDTC_16MS_E, FALSE);
 }
 
-void Pwrd_sleep(void)
+void Pwrd_Sleep(void)
 {
     /* If the controls find it ok to go to sleep, door closed for a long time then set
      * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
@@ -61,19 +61,19 @@ void Pwrd_sleep(void)
     if (sleepMode_E == PWRD_LONG_DEEP_SLEEP_E)
     {
         Wdtc_SetTimer(WDTC_8S_E, TRUE);
-        Butt_enableInterrupt();
+        Butt_EnableInterrupt();
     }
     else if (sleepMode_E == PWRD_INFINITE_SLEEP_E)
     {
         Wdtc_SetTimer(WDTC_OFF_E, FALSE);
-        Butt_enableInterrupt();
+        Butt_EnableInterrupt();
     }
     else
     {
         Wdtc_SetTimer(WDTC_16MS_E, TRUE);
     }
     /* Determine if timer shall be running in sleep */
-    if (sleepMode_E == PWRD_SLEEP_WITH_TIMER_RUNNING_E)
+    if (sleepMode_E == Pwrd_Sleep_WITH_TIMER_RUNNING_E)
     {
         /* Sleep mode idle */
         MCUCR = 0;
@@ -91,7 +91,7 @@ void Pwrd_sleep(void)
     asm volatile("sleep"::);
 }
 
-void Pwrd_setSleepMode(const tPwrd_sleepMode_E mode_E)
+void Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E)
 {
     sleepMode_E = mode_E;
 }

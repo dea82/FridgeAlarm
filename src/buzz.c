@@ -35,12 +35,12 @@ THE SOFTWARE.
 
 #define BUZZ_ALARM_PERIOD_TIME 1000 /* [ms]*/
 
-static tSoundType_E soundType_E;
+static tBuzz_SoundType_E soundType_E;
 
 static void turnOn(void);
 static void turnOff(void);
 
-inline void Buzz_init(void)
+inline void Buzz_Init(void)
 {
 /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
  *
@@ -55,7 +55,7 @@ inline void Buzz_init(void)
 #endif
 }
 
-inline void Buzz_loop(void)
+inline void Buzz_Loop(void)
 {
     static tU08 counter_U08;
 
@@ -107,20 +107,7 @@ static void turnOff(void)
     PRR = PRR_INIT | _BV(PRTIM0);
 }
 
-void Buzz_setSound(const tSoundType_E soundTypeReq_E)
+void Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E)
 {
     soundType_E = soundTypeReq_E;
-}
-
-void Buzz_pauseOn(void)
-{
-    /* Normal port operation, disconnect OC0A with potential of leaving
-     * pin state high. */
-     TCCR0A = 0;
-}
-
-void Buzz_pauseOff(void)
-{
-    /* Set to 'CTC' mode, toggle on match */
-    TCCR0A = _BV(COM0A0) | _BV(WGM01);
 }
