@@ -1,6 +1,6 @@
 <map id="getCalibrationState_E" name="getCalibrationState_E">
-<area shape="rect" id="node2" href="$butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39" title="Get actual button state. " alt="" coords="225,5,349,32"/>
-<area shape="rect" id="node3" href="$door_8c.html#acaf1f83512fc5b4186d22ba943b649e3" title="Door_storeClosedPos_B" alt="" coords="203,56,370,83"/>
+<area shape="rect" id="node2" href="$butt_8c.html#a83aa702bc07941bde1ab289a2af420aa" title="Get actual button state. " alt="" coords="223,5,350,32"/>
+<area shape="rect" id="node3" href="$door_8c.html#ada16a3c8f38c314f1244a4ae68fb5035" title="Door_StoreClosedPos_B" alt="" coords="203,56,371,83"/>
 <area shape="rect" id="node4" href="$door_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5" title="withinRange_B" alt="" coords="419,31,530,57"/>
 <area shape="rect" id="node5" href="$door_8c.html#a80ec46ee35f16d40e575cdb0043772bc" title="eepromWrite" alt="" coords="427,81,523,108"/>
 </map>

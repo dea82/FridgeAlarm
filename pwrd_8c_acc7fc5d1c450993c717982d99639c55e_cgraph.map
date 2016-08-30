@@ -1,0 +1,4 @@
+<map id="Pwrd_Wakeup" name="Pwrd_Wakeup">
+<area shape="rect" id="node2" href="$butt_8c.html#ae81a03fed92616b3cbaa9169e2db9eba" title="Disable interrupt for button state change. " alt="" coords="161,5,306,32"/>
+<area shape="rect" id="node3" href="$wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95" title="Wdtc_SetTimer" alt="" coords="177,56,290,83"/>
+</map>

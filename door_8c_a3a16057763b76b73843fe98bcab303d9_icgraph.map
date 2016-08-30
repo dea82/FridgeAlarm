@@ -1,4 +1,4 @@
 <map id="getDoorRawPos_U16" name="getDoorRawPos_U16">
-<area shape="rect" id="node2" href="$door_8h.html#a209565a2cf45312a7400b95e9e1a9e80" title="Updates door state. " alt="" coords="203,5,285,32"/>
-<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="333,5,384,32"/>
+<area shape="rect" id="node2" href="$door_8h.html#a540f529d9d035c0ed68bc00d69d36d4a" title="Updates door state. " alt="" coords="203,5,288,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="336,5,387,32"/>
 </map>

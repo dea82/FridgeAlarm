@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['butt_5fdisableinterrupt',['Butt_disableInterrupt',['../butt_8c.html#ac048c7e01d7df8486a39d986ddf76dcf',1,'Butt_disableInterrupt(void):&#160;butt.c'],['../butt_8h.html#ac048c7e01d7df8486a39d986ddf76dcf',1,'Butt_disableInterrupt(void):&#160;butt.c']]],
-  ['butt_5fenableinterrupt',['Butt_enableInterrupt',['../butt_8c.html#a9c4c896707140c23dd1962b00ea44d1d',1,'Butt_enableInterrupt(void):&#160;butt.c'],['../butt_8h.html#a9c4c896707140c23dd1962b00ea44d1d',1,'Butt_enableInterrupt(void):&#160;butt.c']]],
-  ['butt_5fgetstate_5fstr',['Butt_getState_str',['../butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39',1,'Butt_getState_str(void):&#160;butt.c'],['../butt_8h.html#abe3cadc3e687a98d1a5e2848a0c27b39',1,'Butt_getState_str(void):&#160;butt.c']]],
-  ['butt_5finit',['Butt_init',['../butt_8c.html#a29c89ee8f7f2f16d82bde6c18c970d61',1,'Butt_init(void):&#160;butt.c'],['../butt_8h.html#a29c89ee8f7f2f16d82bde6c18c970d61',1,'Butt_init(void):&#160;butt.c']]],
-  ['butt_5floop',['Butt_loop',['../butt_8c.html#a7299e11463de911124ce0e31759e92bd',1,'Butt_loop(void):&#160;butt.c'],['../butt_8h.html#a7299e11463de911124ce0e31759e92bd',1,'Butt_loop(void):&#160;butt.c']]],
-  ['buzz_5finit',['Buzz_init',['../buzz_8c.html#a38e1244c0bd2a25996902b3c7ba07099',1,'Buzz_init(void):&#160;buzz.c'],['../buzz_8h.html#a38e1244c0bd2a25996902b3c7ba07099',1,'Buzz_init(void):&#160;buzz.c']]],
-  ['buzz_5floop',['Buzz_loop',['../buzz_8c.html#af0e54e3a1e313d3db184d06a4b32924d',1,'Buzz_loop(void):&#160;buzz.c'],['../buzz_8h.html#af0e54e3a1e313d3db184d06a4b32924d',1,'Buzz_loop(void):&#160;buzz.c']]],
-  ['buzz_5fpauseoff',['Buzz_pauseOff',['../buzz_8c.html#a9abdcdfb8a586668bc17537558be8846',1,'Buzz_pauseOff(void):&#160;buzz.c'],['../buzz_8h.html#a9abdcdfb8a586668bc17537558be8846',1,'Buzz_pauseOff(void):&#160;buzz.c']]],
-  ['buzz_5fpauseon',['Buzz_pauseOn',['../buzz_8c.html#acc2f7e550e2ce878410ddebe79ee9aee',1,'Buzz_pauseOn(void):&#160;buzz.c'],['../buzz_8h.html#acc2f7e550e2ce878410ddebe79ee9aee',1,'Buzz_pauseOn(void):&#160;buzz.c']]],
-  ['buzz_5fsetsound',['Buzz_setSound',['../buzz_8c.html#ace6999f70c281eccfccdd208927558bd',1,'Buzz_setSound(const tSoundType_E soundTypeReq_E):&#160;buzz.c'],['../buzz_8h.html#ace6999f70c281eccfccdd208927558bd',1,'Buzz_setSound(const tSoundType_E soundTypeReq_E):&#160;buzz.c']]]
+  ['butt_5fdisableinterrupt',['Butt_DisableInterrupt',['../butt_8c.html#ae81a03fed92616b3cbaa9169e2db9eba',1,'Butt_DisableInterrupt(void):&#160;butt.c'],['../butt_8h.html#ae81a03fed92616b3cbaa9169e2db9eba',1,'Butt_DisableInterrupt(void):&#160;butt.c']]],
+  ['butt_5fenableinterrupt',['Butt_EnableInterrupt',['../butt_8c.html#ad56a866ab446e89e2e637e4958fd944c',1,'Butt_EnableInterrupt(void):&#160;butt.c'],['../butt_8h.html#ad56a866ab446e89e2e637e4958fd944c',1,'Butt_EnableInterrupt(void):&#160;butt.c']]],
+  ['butt_5fgetstate_5fstr',['Butt_GetState_str',['../butt_8c.html#a83aa702bc07941bde1ab289a2af420aa',1,'Butt_GetState_str(void):&#160;butt.c'],['../butt_8h.html#a83aa702bc07941bde1ab289a2af420aa',1,'Butt_GetState_str(void):&#160;butt.c']]],
+  ['butt_5finit',['Butt_Init',['../butt_8c.html#a41045471b4fd7f0eeddca3eb931bc726',1,'Butt_Init(void):&#160;butt.c'],['../butt_8h.html#a41045471b4fd7f0eeddca3eb931bc726',1,'Butt_Init(void):&#160;butt.c']]],
+  ['butt_5floop',['Butt_Loop',['../butt_8c.html#a5c63309a75005f0d6a6a0579eaae119b',1,'Butt_Loop(void):&#160;butt.c'],['../butt_8h.html#a5c63309a75005f0d6a6a0579eaae119b',1,'Butt_Loop(void):&#160;butt.c']]],
+  ['buzz_5finit',['Buzz_Init',['../buzz_8c.html#ae3ec81d9e47f1d24e9a0b57649a30b4c',1,'Buzz_Init(void):&#160;buzz.c'],['../buzz_8h.html#ae3ec81d9e47f1d24e9a0b57649a30b4c',1,'Buzz_Init(void):&#160;buzz.c']]],
+  ['buzz_5floop',['Buzz_Loop',['../buzz_8c.html#abaa9d4a1852089e75351120fb7e92d81',1,'Buzz_Loop(void):&#160;buzz.c'],['../buzz_8h.html#abaa9d4a1852089e75351120fb7e92d81',1,'Buzz_Loop(void):&#160;buzz.c']]],
+  ['buzz_5fsetsound',['Buzz_SetSound',['../buzz_8c.html#ad2f31826000d11c63183b0f67c3c55e9',1,'Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E):&#160;buzz.c'],['../buzz_8h.html#ad2f31826000d11c63183b0f67c3c55e9',1,'Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E):&#160;buzz.c']]]
 ];

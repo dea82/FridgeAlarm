@@ -1,7 +1,7 @@
 <map id="normalModeStateMachine" name="normalModeStateMachine">
-<area shape="rect" id="node2" href="$butt_8c.html#abe3cadc3e687a98d1a5e2848a0c27b39" title="Get actual button state. " alt="" coords="243,5,367,32"/>
-<area shape="rect" id="node3" href="$door_8c.html#a78c7edce985e6d1d7fe2d94562b31128" title="Door_getDoorState_str" alt="" coords="227,56,383,83"/>
-<area shape="rect" id="node4" href="$buzz_8c.html#ace6999f70c281eccfccdd208927558bd" title="Buzz_setSound" alt="" coords="248,107,363,133"/>
-<area shape="rect" id="node5" href="$ledc_8c.html#ad7ae2e50a250292e2f8eb108bf7e13b4" title="Ledc_setState" alt="" coords="252,157,359,184"/>
-<area shape="rect" id="node6" href="$pwrd_8c.html#a190fd006f3e32468d06dc1f33ee84933" title="Pwrd_setSleepMode" alt="" coords="234,208,377,235"/>
+<area shape="rect" id="node2" href="$butt_8c.html#a83aa702bc07941bde1ab289a2af420aa" title="Get actual button state. " alt="" coords="235,5,362,32"/>
+<area shape="rect" id="node3" href="$door_8c.html#a18ddfadf98515661813203a7f0226c6f" title="Door_GetState_str" alt="" coords="233,56,364,83"/>
+<area shape="rect" id="node4" href="$buzz_8c.html#ad2f31826000d11c63183b0f67c3c55e9" title="Buzz_SetSound" alt="" coords="241,107,357,133"/>
+<area shape="rect" id="node5" href="$ledc_8c.html#ae862cdf1a8640dd65a5234125f710f04" title="Ledc_SetState" alt="" coords="245,157,353,184"/>
+<area shape="rect" id="node6" href="$pwrd_8c.html#a79b6c723b315f8957fef56629a9e87a6" title="Pwrd_SetSleepMode" alt="" coords="227,208,371,235"/>
 </map>

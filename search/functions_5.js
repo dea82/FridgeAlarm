@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ledc_5finit',['Ledc_init',['../ledc_8c.html#a152a8cb8c7b3c0b54d414a7b95bd9baf',1,'Ledc_init(void):&#160;ledc.c'],['../ledc_8h.html#a152a8cb8c7b3c0b54d414a7b95bd9baf',1,'Ledc_init(void):&#160;ledc.c']]],
-  ['ledc_5floop',['Ledc_loop',['../ledc_8c.html#a1f357fe563e5483b7ec6446ca391d6a5',1,'Ledc_loop(void):&#160;ledc.c'],['../ledc_8h.html#a1f357fe563e5483b7ec6446ca391d6a5',1,'Ledc_loop(void):&#160;ledc.c']]],
-  ['ledc_5fsetorange',['Ledc_setOrange',['../ledc_8c.html#ab4f1295462973bb99d94351298ffd6d0',1,'Ledc_setOrange(void):&#160;ledc.c'],['../ledc_8h.html#ab4f1295462973bb99d94351298ffd6d0',1,'Ledc_setOrange(void):&#160;ledc.c']]],
-  ['ledc_5fsetstate',['Ledc_setState',['../ledc_8c.html#ad7ae2e50a250292e2f8eb108bf7e13b4',1,'Ledc_setState(const tLedState_E state_E):&#160;ledc.c'],['../ledc_8h.html#ad7ae2e50a250292e2f8eb108bf7e13b4',1,'Ledc_setState(const tLedState_E state_E):&#160;ledc.c']]]
+  ['ledc_5finit',['Ledc_Init',['../ledc_8c.html#a7771597d045b95915bea5646b07ff433',1,'Ledc_Init(void):&#160;ledc.c'],['../ledc_8h.html#a7771597d045b95915bea5646b07ff433',1,'Ledc_Init(void):&#160;ledc.c']]],
+  ['ledc_5floop',['Ledc_Loop',['../ledc_8c.html#a76c49efff0d504aac2b8910ce06a2bfe',1,'Ledc_Loop(void):&#160;ledc.c'],['../ledc_8h.html#a76c49efff0d504aac2b8910ce06a2bfe',1,'Ledc_Loop(void):&#160;ledc.c']]],
+  ['ledc_5fsetorange',['Ledc_SetOrange',['../ledc_8c.html#ae094e2d4b446d91fa17c2648e89d6b50',1,'Ledc_SetOrange(void):&#160;ledc.c'],['../ledc_8h.html#ae094e2d4b446d91fa17c2648e89d6b50',1,'Ledc_SetOrange(void):&#160;ledc.c']]],
+  ['ledc_5fsetstate',['Ledc_SetState',['../ledc_8c.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c'],['../ledc_8h.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c']]]
 ];

@@ -128,25 +128,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="uart_8h.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4">   48</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4">Uart_TransmitBlock</a>(<span class="keyword">const</span> uint8_t * data, uint8_t size)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifdef UART_PRE_TX</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span>    UART_PRE_TX;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span>    <span class="comment">/* Should this function switching be handled by another module? main or new module? */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">const</span> uint8_t ddr = DDRB;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> uint8_t port = PORTB;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    DDRB |= _BV(0);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    PORTB |= _BV(0);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">while</span>(size--)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7">transmit</a>(*data);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        data++;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    PORTB &amp;= ~_BV(0) | port;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    DDRB &amp;= ~_BV(0) | ddr;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#ifdef UART_POST_TX</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span>    UART_POST_TX;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">while</span>(size--)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7">transmit</a>(*data);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        data++;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 <div class="ttc" id="uart_8h_html"><div class="ttname"><a href="uart_8h.html">uart.h</a></div></div>
 <div class="ttc" id="uart_8c_html_aa428a976224eafb19d08eaf4dcb79fa7"><div class="ttname"><a href="uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7">transmit</a></div><div class="ttdeci">void transmit(unsigned char)</div></div>
 <div class="ttc" id="type_8h_html_a000ce1235745f9665c6ea31d99ca3369"><div class="ttname"><a href="type_8h.html#a000ce1235745f9665c6ea31d99ca3369">CONF_IO</a></div><div class="ttdeci">#define CONF_IO(CFG, IO, EXT)</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00057">type.h:57</a></div></div>
