@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    tU08 name_aU08[4]; /**< Module name */
+    char name_aC[4]; /**< Module name */
     tU08 prescaler_U08;  /**< Prescaler */
     tU08 cycles_U08;  /**< Number of cycles */
     tU08 crc_U08;  /**< CRC */

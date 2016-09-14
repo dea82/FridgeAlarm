@@ -64,7 +64,7 @@ inline void Cont_Loop(void)
     {
         Buzz_SetSound(BUZZ_ON_E);
         Ledc_SetState(LEDC_RED_BLINK_E);
-        Pwrd_SetSleepMode(Pwrd_Sleep_WITH_TIMER_RUNNING_E);
+        Pwrd_SetSleepMode(PWRD_SLEEP_WITH_TIMER_RUNNING_E);
     }
     else
     {
@@ -153,7 +153,7 @@ static void normalModeStateMachine(void)
             {
                 Buzz_SetSound(BUZZ_ALARM_E);
                 /* Necessary to have the timer running due to the buzzer. */
-                Pwrd_SetSleepMode(Pwrd_Sleep_WITH_TIMER_RUNNING_E);
+                Pwrd_SetSleepMode(PWRD_SLEEP_WITH_TIMER_RUNNING_E);
             }
             Ledc_SetState(LEDC_RED_BLINK_E);
         }

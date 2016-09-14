@@ -22,32 +22,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-/*------------------------------------------------------------------------*//**
- *
- * @file pwrd.h
- * @author     Andreas L.
- * @date       2016-06-03
- *
- * @brief      Power down module
- *
- * This module takes care of power down of the MCU.
- *----------------------------------------------------------------------------*/
+/**
+ * @file
+ */
 
-#ifndef PWRD_H_
-#define PWRD_H_
+#include "eepr.h"
 
-typedef enum
+#include <avr/interrupt.h>
+#include <avr/io.h>
+
+#include "type.h"
+
+void Eepr_Write(const tU08 address_U08, const tU08 data_U08)
 {
-    PWRD_SHORT_DEEP_SLEEP_E,
-    PWRD_LONG_DEEP_SLEEP_E,
-    PWRD_SLEEP_WITH_TIMER_RUNNING_E,
-    PWRD_INFINITE_SLEEP_E
-} tPwrd_SleepMode_E;
+    /* Wait for completion of previous write */
+    while(EECR & _BV(EEPE));
+    /* Set Programming mode */
+    EECR = 0;
+    /* Set up address and data registers */
+    EEAR = address_U08;
+    EEDR = data_U08;
+    /* Timed sequence - disable interrupt */
+    cli();
+    /* Write logical one to EEMPE */
+    EECR |= (1<<EEMPE);
+    /* Start eeprom write by setting EEPE */
+    EECR |= (1<<EEPE);
+    sei();
+}
 
-void Pwrd_Sleep(void);
-
-void Pwrd_Wakeup(void);
-
-void Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E);
-
-#endif /* PWRD_H_ */
+tU08 Eepr_Read_U08(const tU08 address_U08)
+{
+    /* Wait for completion of previous write */
+    while(EECR & (1<<EEPE));
+    /* Set up address register */
+    EEAR = address_U08;
+    /* Start eeprom read by writing EERE */
+    EECR |= (1<<EERE);
+    /* Return data from data register */
+    return EEDR;
+}

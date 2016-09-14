@@ -73,7 +73,7 @@ void Pwrd_Sleep(void)
         Wdtc_SetTimer(WDTC_16MS_E, TRUE);
     }
     /* Determine if timer shall be running in sleep */
-    if (sleepMode_E == Pwrd_Sleep_WITH_TIMER_RUNNING_E)
+    if (sleepMode_E == PWRD_SLEEP_WITH_TIMER_RUNNING_E)
     {
         /* Sleep mode idle */
         MCUCR = 0;

@@ -22,32 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-/*------------------------------------------------------------------------*//**
+/**
+ * @file
  *
- * @file pwrd.h
- * @author     Andreas L.
- * @date       2016-06-03
+ * @brief EEPROM module
  *
- * @brief      Power down module
- *
- * This module takes care of power down of the MCU.
- *----------------------------------------------------------------------------*/
+ * @details
+ */
 
-#ifndef PWRD_H_
-#define PWRD_H_
+#include "type.h"
 
-typedef enum
-{
-    PWRD_SHORT_DEEP_SLEEP_E,
-    PWRD_LONG_DEEP_SLEEP_E,
-    PWRD_SLEEP_WITH_TIMER_RUNNING_E,
-    PWRD_INFINITE_SLEEP_E
-} tPwrd_SleepMode_E;
+void Eepr_Write(const tU08 address_U08, const tU08 data_U08);
 
-void Pwrd_Sleep(void);
-
-void Pwrd_Wakeup(void);
-
-void Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E);
-
-#endif /* PWRD_H_ */
+tU08 Eepr_Read_U08(const tU08 address_U08);

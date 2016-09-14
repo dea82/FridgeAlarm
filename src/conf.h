@@ -41,6 +41,8 @@ THE SOFTWARE.
 /* Milliseconds between each loop. */
 #define TICK 16
 
+#define CALIBRATED_CLOSED_POS_ADDRESS 0
+
 /* Inherited defines */
 #define UART_ENABLE (DEBUG_ENABLE | CPU_LOAD)
 

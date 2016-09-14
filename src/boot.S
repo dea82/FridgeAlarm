@@ -27,7 +27,9 @@
 #include "conf.h"
 
 .org 0x0000
-.section .init0
+; Important to use vectors instead of init0 due to progmem data is
+; is placed before init sections.
+.section .vectors
 eor r1,r1
 rjmp Init
 reti         ; PCINT0

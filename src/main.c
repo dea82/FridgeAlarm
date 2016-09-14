@@ -42,13 +42,24 @@ THE SOFTWARE.
 #include "uart.h"
 #define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
 ({                                                                             \
-    Cpul_StartPoint(PRESCALER);                                                \
+    if(CPU_LOAD)                                                               \
+    {                                                                          \
+        Cpul_StartPoint(PRESCALER);                                            \
+    }                                                                          \
     TASK();                                                                    \
-    tU08 cycles_U08 = Cpul_StopPoint_U08();	                                   \
-    Uart_TransmitBlock(&cycles_U08, sizeof(1));\
+    if(CPU_LOAD)                                                               \
+    {                                                                          \
+        tU08 cycles_U08 = Cpul_StopPoint_U08();	                               \
+        tCpul_ResultBlock_str resultBlock_str =                                \
+            Cpul_CreateResultBlock_str(PSTR(TASK_NAME), cycles_U08, PRESCALER);\
+        Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));  \
+    }                                                                          \
 })
 #else
-#define ADD_TASK(TASK_NAME, TASK, PRESCALER) ({TASK();})
+#define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
+({                                                                             \
+    TASK();                                                                    \
+})
 #endif
 
 
@@ -116,7 +127,7 @@ int main(void)
         ADD_TASK("BUTT", Butt_Loop, 1);
         ADD_TASK("DOOR", Door_Loop, 1);
 
-        /* Controls*/
+        /* Controls */
         ADD_TASK("CONT", Cont_Loop, 1);
 
         /* Actuators */
