@@ -1,6 +1,0 @@
-<map id="eepromWrite" name="eepromWrite">
-<area shape="rect" id="node2" href="$door_8h.html#ada16a3c8f38c314f1244a4ae68fb5035" title="Door_StoreClosedPos_B" alt="" coords="149,5,317,32"/>
-<area shape="rect" id="node3" href="$cont_8c.html#aa11211b23404526609e5e17616e833c6" title="getCalibrationState_E" alt="" coords="365,5,515,32"/>
-<area shape="rect" id="node4" href="$cont_8h.html#abee706705ec382a15ede11aa72cfe7ca" title="Cont_Loop" alt="" coords="563,5,648,32"/>
-<area shape="rect" id="node5" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="696,5,747,32"/>
-</map>

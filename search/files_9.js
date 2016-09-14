@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wdtc_2ec',['wdtc.c',['../wdtc_8c.html',1,'']]],
-  ['wdtc_2eh',['wdtc.h',['../wdtc_8h.html',1,'']]]
+  ['uart_2ec',['uart.c',['../uart_8c.html',1,'']]],
+  ['uart_2eh',['uart.h',['../uart_8h.html',1,'']]]
 ];

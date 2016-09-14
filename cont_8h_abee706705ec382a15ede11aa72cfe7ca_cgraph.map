@@ -7,6 +7,6 @@
 <area shape="rect" id="node3" href="$butt_8c.html#a83aa702bc07941bde1ab289a2af420aa" title="Get actual button state. " alt="" coords="381,81,507,108"/>
 <area shape="rect" id="node4" href="$door_8c.html#ada16a3c8f38c314f1244a4ae68fb5035" title="Door_StoreClosedPos_B" alt="" coords="360,31,528,57"/>
 <area shape="rect" id="node5" href="$door_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5" title="withinRange_B" alt="" coords="577,5,687,32"/>
-<area shape="rect" id="node6" href="$door_8c.html#a80ec46ee35f16d40e575cdb0043772bc" title="eepromWrite" alt="" coords="584,56,680,83"/>
+<area shape="rect" id="node6" href="$eepr_8c.html#a5a5de118bc3206aa8347d3a4c706557d" title="Eepr_Write" alt="" coords="589,56,675,83"/>
 <area shape="rect" id="node11" href="$door_8c.html#a18ddfadf98515661813203a7f0226c6f" title="Door_GetState_str" alt="" coords="379,183,509,209"/>
 </map>

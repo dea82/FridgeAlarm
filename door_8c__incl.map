@@ -1,5 +1,6 @@
 <map id="door.c" name="door.c">
-<area shape="rect" id="node2" href="$door_8h.html" title="Door sensor module. " alt="" coords="8,80,65,107"/>
-<area shape="rect" id="node8" href="$conf_8h.html" title="conf.h" alt="" coords="379,80,436,107"/>
-<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="8,155,65,181"/>
+<area shape="rect" id="node2" href="$door_8h.html" title="Door sensor module. " alt="" coords="5,80,63,107"/>
+<area shape="rect" id="node7" href="$conf_8h.html" title="conf.h" alt="" coords="280,80,337,107"/>
+<area shape="rect" id="node8" href="$eepr_8h.html" title="EEPROM module. " alt="" coords="88,80,145,107"/>
+<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="47,155,104,181"/>
 </map>
