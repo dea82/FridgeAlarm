@@ -27,7 +27,7 @@
 #include "conf.h"
 
 .org 0x0000
-; Important to use vectors instead of init0 due to progmem data is
+; Important to use vectors instead of init0 due to progmem data
 ; is placed before init sections.
 .section .vectors
 eor r1,r1
