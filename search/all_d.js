@@ -2,6 +2,7 @@ var searchData=
 [
   ['position_5fe',['position_E',['../structtDoor__State__str.html#a4509c241866f1351e7d0c756e72ed94c',1,'tDoor_State_str']]],
   ['prescaler_5fu08',['prescaler_U08',['../structtCpul__ResultBlock__str.html#a217ecb1b4616da345413a35bc2c7c85c',1,'tCpul_ResultBlock_str']]],
+  ['pstr_5fcpu_5fload',['PSTR_CPU_LOAD',['../main_8c.html#ab1227e62288d8ff31824fbfca530dacd',1,'main.c']]],
   ['pullup',['PULLUP',['../type_8h.html#aa65f05495aa2b9e5d89a7e79886a596e',1,'type.h']]],
   ['pwrd_2ec',['pwrd.c',['../pwrd_8c.html',1,'']]],
   ['pwrd_2eh',['pwrd.h',['../pwrd_8h.html',1,'']]],

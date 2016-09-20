@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['eepr_5fread_5fu08',['Eepr_Read_U08',['../eepr_8c.html#a00ac00ce3432f540fb26d632b0496e86',1,'Eepr_Read_U08(const tU08 address_U08):&#160;eepr.c'],['../eepr_8h.html#a00ac00ce3432f540fb26d632b0496e86',1,'Eepr_Read_U08(const tU08 address_U08):&#160;eepr.c']]],
-  ['eepr_5fwrite',['Eepr_Write',['../eepr_8c.html#a5a5de118bc3206aa8347d3a4c706557d',1,'Eepr_Write(const tU08 address_U08, const tU08 data_U08):&#160;eepr.c'],['../eepr_8h.html#a5a5de118bc3206aa8347d3a4c706557d',1,'Eepr_Write(const tU08 address_U08, const tU08 data_U08):&#160;eepr.c']]]
+  ['door_5fgetstate_5fstr',['Door_GetState_str',['../door_8c.html#a18ddfadf98515661813203a7f0226c6f',1,'Door_GetState_str(void):&#160;door.c'],['../door_8h.html#a18ddfadf98515661813203a7f0226c6f',1,'Door_GetState_str(void):&#160;door.c']]],
+  ['door_5finit',['Door_Init',['../door_8c.html#a2edff6e1a215dc7ee41a58fc1c015568',1,'Door_Init(void):&#160;door.c'],['../door_8h.html#a2edff6e1a215dc7ee41a58fc1c015568',1,'Door_Init(void):&#160;door.c']]],
+  ['door_5floop',['Door_Loop',['../door_8c.html#a540f529d9d035c0ed68bc00d69d36d4a',1,'Door_Loop(void):&#160;door.c'],['../door_8h.html#a540f529d9d035c0ed68bc00d69d36d4a',1,'Door_Loop(void):&#160;door.c']]],
+  ['door_5fstoreclosedpos_5fb',['Door_StoreClosedPos_B',['../door_8c.html#ada16a3c8f38c314f1244a4ae68fb5035',1,'Door_StoreClosedPos_B(void):&#160;door.c'],['../door_8h.html#ada16a3c8f38c314f1244a4ae68fb5035',1,'Door_StoreClosedPos_B(void):&#160;door.c']]]
 ];
