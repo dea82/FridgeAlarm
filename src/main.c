@@ -35,34 +35,47 @@ THE SOFTWARE.
 #include "ledc.h"
 #include "pwrd.h"
 #include "type.h"
-
 #if CPU_LOAD
 #include <avr/pgmspace.h>
 #include "cpul.h"
 #include "uart.h"
-#define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
-({                                                                             \
-    if(CPU_LOAD)                                                               \
-    {                                                                          \
-        Cpul_StartPoint(PRESCALER);                                            \
-    }                                                                          \
-    TASK();                                                                    \
-    if(CPU_LOAD)                                                               \
-    {                                                                          \
-        tU08 cycles_U08 = Cpul_StopPoint_U08();	                               \
-        tCpul_ResultBlock_str resultBlock_str =                                \
-            Cpul_CreateResultBlock_str(PSTR(TASK_NAME), cycles_U08, PRESCALER);\
-        Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));  \
-    }                                                                          \
-})
-#else
-#define ADD_TASK(TASK_NAME, TASK, PRESCALER)                                   \
-({                                                                             \
-    TASK();                                                                    \
-})
 #endif
 
+#if CPU_LOAD
+/* Macro for putting string in flash if cpu load measurement is configured. */
+#define PSTR_CPU_LOAD(STRING) PSTR(STRING)
+#define UNUSED_CPU_LOAD
+#else
+/* Macro which enables build without including avr/pgmspace.h */
+#define PSTR_CPU_LOAD(STRING) STRING
+/* TODO: Find a better name and document! */
+#define UNUSED_CPU_LOAD __attribute__ ((unused))
+#endif
 
+static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
+                    void (* const task_fptr)(void),
+                    UNUSED_CPU_LOAD const tU08 prescaler_U08);
+
+/**
+ * [addTask description]
+ * @param taskName_c [description]
+ * @param task_fptr  [description]
+ */
+static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
+                    void (* const task_fptr)(void),
+                    UNUSED_CPU_LOAD const tU08 prescaler_U08)
+{
+#if CPU_LOAD
+    Cpul_StartPoint(prescaler_U08);
+#endif
+    task_fptr();
+#if CPU_LOAD
+    tU08 cycles_U08 = Cpul_StopPoint_U08();
+    tCpul_ResultBlock_str resultBlock_str =
+        Cpul_CreateResultBlock_str(taskName_c, cycles_U08, prescaler_U08);
+    Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));
+#endif
+}
 
 /* Declaring main as OS_main saves some register pushing to stack. */
 int main(void) __attribute__((OS_main));
@@ -98,7 +111,7 @@ int main(void)
         Ledc_Init();
 
         /* Enable global interrupt otherwise door will not be able to wake up
-         * from ADC Noise reduction mode. */
+         * from ADC Noise reduction mode or infinite sleep mode. */
         asm volatile("sei"::);
 
         /**
@@ -124,15 +137,15 @@ int main(void)
         Pwrd_Wakeup();
 
         /* Sensors */
-        ADD_TASK("BUTT", Butt_Loop, 1);
-        ADD_TASK("DOOR", Door_Loop, 1);
+        addTask(PSTR_CPU_LOAD("BUTT"), Butt_Loop, 1);
+        addTask(PSTR_CPU_LOAD("DOOR"), Door_Loop, 1);
 
         /* Controls */
-        ADD_TASK("CONT", Cont_Loop, 1);
+        addTask(PSTR_CPU_LOAD("CONT"), Cont_Loop, 1);
 
         /* Actuators */
-        ADD_TASK("BUZZ", Buzz_Loop, 1);
-        ADD_TASK("LEDC", Ledc_Loop, 1);
+        addTask(PSTR_CPU_LOAD("BUZZ"), Buzz_Loop, 1);
+        addTask(PSTR_CPU_LOAD("LEDC"), Ledc_Loop, 1);
 
         /* Powerdown */
         Pwrd_Sleep();

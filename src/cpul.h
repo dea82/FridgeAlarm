@@ -34,7 +34,7 @@ typedef struct
     tU08 cycles_U08;  /**< Number of cycles */
     tU08 crc_U08;  /**< CRC */
 } tCpul_ResultBlock_str;
-
+#if defined(__AVR_ATtiny85__)
 /**
  * @brief      Set start point for cpu load measurement
  *
@@ -42,6 +42,7 @@ typedef struct
  */
 void Cpul_StartPoint(tU08 prescalerRegister_U08);
 tU08 Cpul_StopPoint_U08(void);
+#endif
 tCpul_ResultBlock_str Cpul_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescaler_U08);
 
 #endif /* CPUL_H_ */

@@ -87,7 +87,8 @@ CFLAGS = $(COMMONFLAGS)
 CFLAGS += -O$(OPT)
 CFLAGS += $(CSTANDARD)
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-CFLAGS += -Wall -Wstrict-prototypes -Werror=missing-prototypes -Wunused-macros
+CFLAGS += -Wall -Wextra -Wunused -Wstrict-prototypes -Werror=missing-prototypes
+CFLAGS += -Wunused-macros
 
 ASFLAGS = $(COMMONFLAGS)
 ASFLAGS += -x assembler-with-cpp
