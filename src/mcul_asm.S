@@ -31,7 +31,7 @@
     .section .text
 
 ;############################################################
-;#  FUNCTION: Cpul_StartPoint
+;#  FUNCTION: Mcul_StartMeasurement
 ;#
 ;#  SUMMARY
 ;#  This function will start the timer used for calulation
@@ -45,8 +45,8 @@
 ;#  -
 ;#
 ;############################################################
-    .global Cpul_StartPoint
-Cpul_StartPoint:
+    .global Mcul_StartMeasurement
+Mcul_StartMeasurement:
     out     TCCR1, r1   ; Stop timer
     out     TCNT1, r1   ; Reset timer
     in      r18, TIFR   ; Clear overflow flag by setting bit
@@ -59,28 +59,23 @@ Cpul_StartPoint:
     ret
 
 ;############################################################
-;#  FUNCTION: Cpul_stopPoint
+;#  FUNCTION: Mcul_StopMeasurement
 ;#
 ;#  SUMMARY
 ;#  This function will stop the timer used for calulation
 ;#  which can be used for CPU load calculation, benchmarks
-;#  etc. It returns the number of cycles and handles overflow of
-;#  counter and saturates counter value to 0xFF.
+;#  etc.
 ;#
 ;#  INPUT
 ;#  -
 ;#
 ;#  RETURN
-;#  number of cycles (one byte, r24)
+;#  -
 ;#
 ;############################################################
-    .global Cpul_StopPoint_U08
-Cpul_StopPoint_U08:
+    .global Mcul_StopMeasurement
+Mcul_StopMeasurement:
     out     TCCR1, r1     ;  Stop timer as fast as possible
-    in      r24, TCNT1    ;  Read counter value
-    in      r19, TIFR     ;  Do we have an overflow?
-    sbrc    r19, TOV1
-    ldi     r24, 0xFF     ;  Overflow has occured set to max
     ret
     .end
 #endif

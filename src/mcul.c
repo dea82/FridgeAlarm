@@ -21,24 +21,43 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-
+#if defined(__AVR_ATtiny85__)
 #include <avr/pgmspace.h>
 
-#include "cpul.h"
+#include "mcul.h"
+#include "uart.h"
 
 static tU08 crc8_U08 (tU08 inCrc, tU08 inData);
 
-tCpul_ResultBlock_str Cpul_CreateResultBlock_str(const char * name_c, const tU08 cycles_U08, const tU08 prescaler_U08)
+void Mcul_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08)
 {
-  tCpul_ResultBlock_str resultBlock_str;
+    tU08 cycles_U08;
+
+    if (TIFR & _BV(TOV1))
+    {
+        cycles_U08 = 0xFF;
+    }
+    else
+    {
+        cycles_U08 = TCNT1;
+    }
+
+    tMcul_ResultBlock_str resultBlock_str =
+        Mcul_CreateResultBlock_str(taskName_c, cycles_U08, prescalerRegister_U08);
+    Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));
+}
+
+tMcul_ResultBlock_str Mcul_CreateResultBlock_str(const char * name_c, const tU08 cycles_U08, const tU08 prescalerRegister_U08)
+{
+  tMcul_ResultBlock_str resultBlock_str;
   strcpy_P(resultBlock_str.name_aC, (PGM_P)name_c);
   resultBlock_str.cycles_U08 = cycles_U08;
-  resultBlock_str.prescaler_U08 = prescaler_U08;
+  resultBlock_str.prescaler_U08 = prescalerRegister_U08;
 
   /* Temporary pointer */
   tU08 * data_pU08 = (tU08*)&resultBlock_str;
 
-  for (tU08 byte_U08 = sizeof(tCpul_ResultBlock_str); byte_U08 > sizeof(((tCpul_ResultBlock_str*)0)->crc_U08); byte_U08--)
+  for (tU08 byte_U08 = sizeof(tMcul_ResultBlock_str); byte_U08 > sizeof(((tMcul_ResultBlock_str*)0)->crc_U08); byte_U08--)
   {
     resultBlock_str.crc_U08 = crc8_U08(resultBlock_str.crc_U08, *data_pU08++);
   }
@@ -67,3 +86,4 @@ static tU08 crc8_U08 (tU08 inCrc_U08, tU08 inData_U08)
     }
     return data_U08;
 }
+#endif

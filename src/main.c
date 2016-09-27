@@ -37,8 +37,7 @@ THE SOFTWARE.
 #include "type.h"
 #if CPU_LOAD
 #include <avr/pgmspace.h>
-#include "cpul.h"
-#include "uart.h"
+#include "mcul.h"
 #endif
 
 #if CPU_LOAD
@@ -66,14 +65,12 @@ static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
                     UNUSED_CPU_LOAD const tU08 prescaler_U08)
 {
 #if CPU_LOAD
-    Cpul_StartPoint(prescaler_U08);
+    Mcul_StartMeasurement(prescaler_U08);
 #endif
     task_fptr();
 #if CPU_LOAD
-    tU08 cycles_U08 = Cpul_StopPoint_U08();
-    tCpul_ResultBlock_str resultBlock_str =
-        Cpul_CreateResultBlock_str(taskName_c, cycles_U08, prescaler_U08);
-    Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));
+    Mcul_StopMeasurement();
+    Mcul_OutputResult(taskName_c, prescaler_U08);
 #endif
 }
 
