@@ -1,6 +1,0 @@
-<map id="addTask" name="addTask">
-<area shape="rect" id="node2" href="$cpul_8c.html#a30391dfd753c6eebb05c445f91bdd4c8" title="Cpul_CreateResultBlock_str" alt="" coords="126,5,314,32"/>
-<area shape="rect" id="node4" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="151,56,289,83"/>
-<area shape="rect" id="node3" href="$cpul_8c.html#af337ebec28564cdf8e78ff1ac22fe0eb" title="crc8_U08" alt="" coords="363,5,442,32"/>
-<area shape="rect" id="node5" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="368,56,437,83"/>
-</map>
