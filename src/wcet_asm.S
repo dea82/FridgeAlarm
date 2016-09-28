@@ -31,7 +31,7 @@
     .section .text
 
 ;############################################################
-;#  FUNCTION: Mcul_StartMeasurement
+;#  FUNCTION: Wcet_StartMeasurement
 ;#
 ;#  SUMMARY
 ;#  This function will start the timer used for calulation
@@ -45,8 +45,8 @@
 ;#  -
 ;#
 ;############################################################
-    .global Mcul_StartMeasurement
-Mcul_StartMeasurement:
+    .global Wcet_StartMeasurement
+Wcet_StartMeasurement:
     out     TCCR1, r1   ; Stop timer
     out     TCNT1, r1   ; Reset timer
     in      r18, TIFR   ; Clear overflow flag by setting bit
@@ -59,7 +59,7 @@ Mcul_StartMeasurement:
     ret
 
 ;############################################################
-;#  FUNCTION: Mcul_StopMeasurement
+;#  FUNCTION: Wcet_StopMeasurement
 ;#
 ;#  SUMMARY
 ;#  This function will stop the timer used for calulation
@@ -73,8 +73,8 @@ Mcul_StartMeasurement:
 ;#  -
 ;#
 ;############################################################
-    .global Mcul_StopMeasurement
-Mcul_StopMeasurement:
+    .global Wcet_StopMeasurement
+Wcet_StopMeasurement:
     out     TCCR1, r1     ;  Stop timer as fast as possible
     ret
     .end

@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef MCUL_H_
-#define MCUL_H_
+#ifndef WCET_H_
+#define WCET_H_
 
 #include "type.h"
 
@@ -33,17 +33,17 @@ typedef struct
     tU08 prescaler_U08;  /**< Prescaler */
     tU08 cycles_U08;  /**< Number of cycles */
     tU08 crc_U08;  /**< CRC */
-} tMcul_ResultBlock_str;
+} tWcet_ResultBlock_str;
 #if defined(__AVR_ATtiny85__)
 /**
  * @brief      Set start point for cpu load measurement
  *
  * @param  prescalerRegister_U08  Prescaler register
  */
-void Mcul_StartMeasurement(tU08 prescalerRegister_U08);
-void Mcul_StopMeasurement(void);
-void Mcul_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08);
+void Wcet_StartMeasurement(tU08 prescalerRegister_U08);
+void Wcet_StopMeasurement(void);
+void Wcet_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08);
 #endif
-tMcul_ResultBlock_str Mcul_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescalerRegister_U08);
+tWcet_ResultBlock_str Wcet_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescalerRegister_U08);
 
-#endif /* MCUL_H_ */
+#endif /* WCET_H_ */

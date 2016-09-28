@@ -37,7 +37,7 @@ THE SOFTWARE.
 #include "type.h"
 #if CPU_LOAD
 #include <avr/pgmspace.h>
-#include "mcul.h"
+#include "wcet.h"
 #endif
 
 #if CPU_LOAD
@@ -65,12 +65,12 @@ static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
                     UNUSED_CPU_LOAD const tU08 prescaler_U08)
 {
 #if CPU_LOAD
-    Mcul_StartMeasurement(prescaler_U08);
+    Wcet_StartMeasurement(prescaler_U08);
 #endif
     task_fptr();
 #if CPU_LOAD
-    Mcul_StopMeasurement();
-    Mcul_OutputResult(taskName_c, prescaler_U08);
+    Wcet_StopMeasurement();
+    Wcet_OutputResult(taskName_c, prescaler_U08);
 #endif
 }
 
