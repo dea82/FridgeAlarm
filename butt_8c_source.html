@@ -116,14 +116,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="butt_8c.html#a50aaa126f0e56f2065b16457bf3ae683">   35</a></span>&#160;<span class="keyword">static</span> <a class="code" href="structtButt__State__str.html">tButt_State_str</a> <a class="code" href="butt_8c.html#a50aaa126f0e56f2065b16457bf3ae683">buttState_str</a>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="butt_8h.html#a41045471b4fd7f0eeddca3eb931bc726">   37</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="butt_8c.html#a41045471b4fd7f0eeddca3eb931bc726">Butt_Init</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="butt_8h.html#a41045471b4fd7f0eeddca3eb931bc726">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="butt_8c.html#a41045471b4fd7f0eeddca3eb931bc726">Butt_Init</a>(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">/* Pin change interrupt on button - this does not enables the interrupt,</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">       this is done later. */</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    PCINT(BUTT_CFG);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="butt_8h.html#a5c63309a75005f0d6a6a0579eaae119b">   44</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="butt_8c.html#a5c63309a75005f0d6a6a0579eaae119b">Butt_Loop</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="butt_8h.html#a5c63309a75005f0d6a6a0579eaae119b">   44</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="butt_8c.html#a5c63309a75005f0d6a6a0579eaae119b">Butt_Loop</a>(<span class="keywordtype">void</span>)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">static</span> <a class="code" href="structtButt__State__str.html">tButt_State_str</a> buttonRawOld_str;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="butt_8h.html#ab6179310226614228473617b31e51161">tButt_State_E</a> buttonRaw_E =</div>

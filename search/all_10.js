@@ -11,7 +11,6 @@ var searchData=
   ['tickinstate_5fu08',['tickInState_U08',['../structtButt__State__str.html#ac7d8615117ef2c001051731ac24bcc38',1,'tButt_State_str']]],
   ['ticksinstate_5fu16',['ticksInState_U16',['../structtDoor__State__str.html#a4738085a71a79a1e9edb15003145dae3',1,'tDoor_State_str']]],
   ['tledc_5fstate_5fe',['tLedc_State_E',['../ledc_8h.html#a26ca41b40a85995225f063c89e2d8c3d',1,'ledc.h']]],
-  ['tmcul_5fresultblock_5fstr',['tMcul_ResultBlock_str',['../structtMcul__ResultBlock__str.html',1,'']]],
   ['tpwrd_5fsleepmode_5fe',['tPwrd_SleepMode_E',['../pwrd_8h.html#a2d6d8cf8a14ad754992c9ba1feb5d02b',1,'pwrd.h']]],
   ['transmit',['transmit',['../uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.c']]],
   ['true',['TRUE',['../type_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'type.h']]],
@@ -20,6 +19,7 @@ var searchData=
   ['tu16',['tU16',['../type_8h.html#a3e22901eae1672058ba1618c62036e07',1,'type.h']]],
   ['turnoff',['turnOff',['../buzz_8c.html#aeb163164023b67f3c86054564cdff9bb',1,'buzz.c']]],
   ['turnon',['turnOn',['../buzz_8c.html#af5fccc5f751f090c43f156263862bbc0',1,'buzz.c']]],
+  ['twcet_5fresultblock_5fstr',['tWcet_ResultBlock_str',['../structtWcet__ResultBlock__str.html',1,'']]],
   ['twdtc_5ftimeout_5fe',['tWdtc_Timeout_E',['../wdtc_8h.html#ad97d39ba61deb6fad7154605b969147a',1,'wdtc.h']]],
   ['type_2eh',['type.h',['../type_8h.html',1,'']]]
 ];

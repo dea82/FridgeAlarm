@@ -9,7 +9,7 @@
 <area shape="rect" id="node10" href="$pwrd_8c.html#a79b6c723b315f8957fef56629a9e87a6" title="Pwrd_SetSleepMode" alt="" coords="505,563,649,589"/>
 <area shape="rect" id="node11" href="$pwrd_8c.html#ad5b9776adc0be712e25981e203fda384" title="Pwrd_Sleep" alt="" coords="118,309,210,336"/>
 <area shape="rect" id="node13" href="$pwrd_8c.html#acc7fc5d1c450993c717982d99639c55e" title="Pwrd_Wakeup" alt="" coords="111,360,217,387"/>
-<area shape="rect" id="node15" href="$main_8c.html#a9e78f036ce5ec3f92ee12a7bd974b97a" title="addTask" alt="" coords="128,563,200,589"/>
+<area shape="rect" id="node15" href="$main_8c.html#a3b68875f41442039cfa0599c67ab40e8" title="addTask" alt="" coords="128,563,200,589"/>
 <area shape="rect" id="node16" href="$butt_8c.html#a5c63309a75005f0d6a6a0579eaae119b" title="Updates button module&#39;s outputs. " alt="" coords="123,613,205,640"/>
 <area shape="rect" id="node17" href="$door_8c.html#a540f529d9d035c0ed68bc00d69d36d4a" title="Updates door state. " alt="" coords="121,664,207,691"/>
 <area shape="rect" id="node19" href="$cont_8c.html#abee706705ec382a15ede11aa72cfe7ca" title="Cont_Loop" alt="" coords="121,461,207,488"/>
