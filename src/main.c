@@ -35,40 +35,40 @@ THE SOFTWARE.
 #include "ledc.h"
 #include "pwrd.h"
 #include "type.h"
-#if CPU_LOAD
+#if WCET
 #include <avr/pgmspace.h>
 #include "wcet.h"
 #endif
 
-#if CPU_LOAD
+#if WCET
 /* Macro for putting string in flash if cpu load measurement is configured. */
-#define PSTR_CPU_LOAD(STRING) PSTR(STRING)
-#define UNUSED_CPU_LOAD
+#define PSTR_WCET(STRING) PSTR(STRING)
+#define UNUSED_WCET
 #else
 /* Macro which enables build without including avr/pgmspace.h */
-#define PSTR_CPU_LOAD(STRING) STRING
+#define PSTR_WCET(STRING) STRING
 /* TODO: Find a better name and document! */
-#define UNUSED_CPU_LOAD __attribute__ ((unused))
+#define UNUSED_WCET __attribute__ ((unused))
 #endif
 
-static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
+static void addTask(UNUSED_WCET const char *taskName_c,
                     void (* const task_fptr)(void),
-                    UNUSED_CPU_LOAD const tU08 prescaler_U08);
+                    UNUSED_WCET const tU08 prescaler_U08);
 
 /**
  * [addTask description]
  * @param taskName_c [description]
  * @param task_fptr  [description]
  */
-static void addTask(UNUSED_CPU_LOAD const char *taskName_c,
+static void addTask(UNUSED_WCET const char *taskName_c,
                     void (* const task_fptr)(void),
-                    UNUSED_CPU_LOAD const tU08 prescaler_U08)
+                    UNUSED_WCET const tU08 prescaler_U08)
 {
-#if CPU_LOAD
+#if WCET
     Wcet_StartMeasurement(prescaler_U08);
 #endif
     task_fptr();
-#if CPU_LOAD
+#if WCET
     Wcet_StopMeasurement();
     Wcet_OutputResult(taskName_c, prescaler_U08);
 #endif
@@ -134,15 +134,15 @@ int main(void)
         Pwrd_Wakeup();
 
         /* Sensors */
-        addTask(PSTR_CPU_LOAD("BUTT"), Butt_Loop, 1);
-        addTask(PSTR_CPU_LOAD("DOOR"), Door_Loop, 1);
+        addTask(PSTR_WCET("BUTT"), Butt_Loop, 1);
+        addTask(PSTR_WCET("DOOR"), Door_Loop, 1);
 
         /* Controls */
-        addTask(PSTR_CPU_LOAD("CONT"), Cont_Loop, 1);
+        addTask(PSTR_WCET("CONT"), Cont_Loop, 1);
 
         /* Actuators */
-        addTask(PSTR_CPU_LOAD("BUZZ"), Buzz_Loop, 1);
-        addTask(PSTR_CPU_LOAD("LEDC"), Ledc_Loop, 1);
+        addTask(PSTR_WCET("BUZZ"), Buzz_Loop, 1);
+        addTask(PSTR_WCET("LEDC"), Ledc_Loop, 1);
 
         /* Powerdown */
         Pwrd_Sleep();

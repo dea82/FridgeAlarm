@@ -32,9 +32,6 @@ THE SOFTWARE.
 #include <avr/io.h>
 
 #include "butt.h"
-#if CPU_LOAD
-#include "uart.h"
-#endif
 #include "wdtc.h"
 
 

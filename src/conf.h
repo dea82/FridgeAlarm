@@ -44,7 +44,7 @@ THE SOFTWARE.
 #define CALIBRATED_CLOSED_POS_ADDRESS 0
 
 /* Inherited defines */
-#define UART_ENABLE (DEBUG_ENABLE | CPU_LOAD)
+#define UART_ENABLE (DEBUG_ENABLE | WCET)
 
 /* Rationale why Timer0 and PRADC is not disabled:
  * The module is disconnected and all registers connected
@@ -52,7 +52,7 @@ THE SOFTWARE.
  * Buzz_Init and Dsen_init will fail to set registers. */
 #if defined(__AVR_ATtiny85__)
 
-#if CPU_LOAD
+#if WCET
 /* See comment above why these bits are choosen. */
 #define PRR_INIT _BV(PRUSI)
 #else
@@ -74,7 +74,7 @@ THE SOFTWARE.
  *************************************************/
 #define DOOR_CFG        B,3
 #define BUTT_CFG        B,5
-#if CPU_LOAD
+#if WCET
 #define RED_LED_CFG     B,1
 #else
 #define RED_LED_CFG     B,2
