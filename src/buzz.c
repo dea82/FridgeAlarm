@@ -40,7 +40,7 @@ static tBuzz_SoundType_E soundType_E;
 static void turnOn(void);
 static void turnOff(void);
 
-inline void Buzz_Init(void)
+void Buzz_Init(void)
 {
 /* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
  *
@@ -55,7 +55,7 @@ inline void Buzz_Init(void)
 #endif
 }
 
-inline void Buzz_Loop(void)
+void Buzz_Loop(void)
 {
     static tU08 counter_U08;
 

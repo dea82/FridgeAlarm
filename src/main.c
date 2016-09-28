@@ -40,29 +40,32 @@ THE SOFTWARE.
 #include "wcet.h"
 #endif
 
+/* Macro for putting string in flash during WCET measurement. */
 #if WCET
-/* Macro for putting string in flash if cpu load measurement is configured. */
 #define PSTR_WCET(STRING) PSTR(STRING)
-#define UNUSED_WCET
 #else
-/* Macro which enables build without including avr/pgmspace.h */
 #define PSTR_WCET(STRING) STRING
-/* TODO: Find a better name and document! */
-#define UNUSED_WCET __attribute__ ((unused))
 #endif
 
-static void addTask(UNUSED_WCET const char *taskName_c,
+/* Macro for declaring parameter as unused during WCET measurement. */
+#if WCET
+#define UNUSED_WITHOUT_WCET(param) param
+#else
+#define UNUSED_WITHOUT_WCET(param) UNUSED(param)
+#endif
+
+static void addTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
                     void (* const task_fptr)(void),
-                    UNUSED_WCET const tU08 prescaler_U08);
+                    const tU08 UNUSED_WITHOUT_WCET(prescaler_U08));
 
 /**
  * [addTask description]
  * @param taskName_c [description]
  * @param task_fptr  [description]
  */
-static void addTask(UNUSED_WCET const char *taskName_c,
+static void addTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
                     void (* const task_fptr)(void),
-                    UNUSED_WCET const tU08 prescaler_U08)
+                    const tU08 UNUSED_WITHOUT_WCET(prescaler_U08))
 {
 #if WCET
     Wcet_StartMeasurement(prescaler_U08);

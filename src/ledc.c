@@ -36,14 +36,14 @@ THE SOFTWARE.
 
 static tLedc_State_E ledState_E = LEDC_OFF_E;
 
-inline void Ledc_Init(void)
+void Ledc_Init(void)
 {
 }
 /**
  * @brief Turns led on or off by request
  *
  */
-inline void Ledc_Loop(void)
+void Ledc_Loop(void)
 {
     static tU08 counter_U08;
     if (++counter_U08 > BLINK_PERIOD_TIME / TICK)

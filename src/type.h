@@ -114,4 +114,8 @@ typedef signed int tS16;
 #define BODSE BPDSE
 #endif
 
+/* Attribute macros */
+#define FORCE_INLINE __attribute__((always_inline)) inline
+#define UNUSED(x) UNUSED_ ## x __attribute__((__unused__))
+
 #endif /* TYPE_H_ */

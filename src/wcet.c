@@ -29,6 +29,11 @@ THE SOFTWARE.
 
 static tU08 crc8_U08 (tU08 inCrc, tU08 inData);
 
+FORCE_INLINE void Wcet_StopMeasurement(void)
+{
+    TCCR1 = 0;
+}
+
 void Wcet_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08)
 {
     tU08 cycles_U08;

@@ -58,24 +58,5 @@ Wcet_StartMeasurement:
     out     TCCR1, r24
     ret
 
-;############################################################
-;#  FUNCTION: Wcet_StopMeasurement
-;#
-;#  SUMMARY
-;#  This function will stop the timer used for calulation
-;#  which can be used for CPU load calculation, benchmarks
-;#  etc.
-;#
-;#  INPUT
-;#  -
-;#
-;#  RETURN
-;#  -
-;#
-;############################################################
-    .global Wcet_StopMeasurement
-Wcet_StopMeasurement:
-    out     TCCR1, r1     ;  Stop timer as fast as possible
-    ret
     .end
 #endif

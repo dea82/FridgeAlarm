@@ -34,14 +34,14 @@ THE SOFTWARE.
 
 static tButt_State_str buttState_str;
 
-inline void Butt_Init(void)
+void Butt_Init(void)
 {
     /* Pin change interrupt on button - this does not enables the interrupt,
        this is done later. */
     PCINT(BUTT_CFG);
 }
 
-inline void Butt_Loop(void)
+void Butt_Loop(void)
 {
     static tButt_State_str buttonRawOld_str;
     tButt_State_E buttonRaw_E =

@@ -43,12 +43,12 @@ typedef enum
 static tCalibrationState_E getCalibrationState_E(void);
 static void normalModeStateMachine(void);
 
-inline void Cont_Init(void)
+void Cont_Init(void)
 {
     /* Nothing */
 }
 
-inline void Cont_Loop(void)
+void Cont_Loop(void)
 {
     tCalibrationState_E calibrationState_E = getCalibrationState_E();
 

@@ -54,23 +54,11 @@ static tU16 getDoorRawPos_U16(void);
 /**
  * @brief Setup ADC conversion.
  */
-inline void Door_Init(void)
+void Door_Init(void)
 {
 #if F_CPU == 9600000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 150 kHz. */
     ADCSRA = (1 << ADPS2) | (1 << ADPS1);
-#elif F_CPU == 1000000
-    /* Prescaler for ADC clock is set to 8, which gives a ADC clock of 125 kHz. */
-    ADCSRA = (1 << ADPS1) | (1 << ADPS0);
-#elif F_CPU == 1200000
-    /* Prescaler for ADC clock is set to 8, which gives a ADC clock of 150 kHz. */
-    ADCSRA = (1 << ADPS1) | (1 << ADPS0);
-#elif F_CPU == 4800000
-    /* Prescaler for ADC clock is set to 32, which gives a ADC clock of 150 kHz. */
-    ADCSRA = (1 << ADPS2) | (1 << ADPS0);
-#elif F_CPU == 600000
-    /* Prescaler for ADC clock is set to 4, which gives a ADC clock of 150 kHz. */
-    ADCSRA = (1 << ADPS1);
 #elif F_CPU == 8000000
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 125 kHz. */
     ADCSRA = (1 << ADPS2) | (1 << ADPS1);
@@ -85,7 +73,7 @@ inline void Door_Init(void)
     doorClosed_U16 += Eepr_Read_U08(CALIBRATED_CLOSED_POS_ADDRESS + 1);
 }
 
-inline void Door_Loop(void)
+void Door_Loop(void)
 {
     doorPos_U16 = getDoorRawPos_U16();
 
