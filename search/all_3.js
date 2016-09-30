@@ -1,16 +1,15 @@
 var searchData=
 [
-  ['deep_5fsleep_5ftime',['DEEP_SLEEP_TIME',['../conf_8h.html#abe0e16d729c50c7794dd99983b1f47c4',1,'conf.h']]],
-  ['door_2ec',['door.c',['../door_8c.html',1,'']]],
-  ['door_2eh',['door.h',['../door_8h.html',1,'']]],
-  ['door_5fclosed_5fe',['DOOR_CLOSED_E',['../door_8h.html#a4afe719e053ce0b1d6a9a1558cb6f244af629c35af72e7c3e8f5d756233ff557d',1,'door.h']]],
-  ['door_5fclosed_5foffset',['DOOR_CLOSED_OFFSET',['../door_8c.html#a0b94fa57459c9ab7ed0156c75f3d3eb1',1,'door.c']]],
-  ['door_5fgetstate_5fstr',['Door_GetState_str',['../door_8c.html#a18ddfadf98515661813203a7f0226c6f',1,'Door_GetState_str(void):&#160;door.c'],['../door_8h.html#a18ddfadf98515661813203a7f0226c6f',1,'Door_GetState_str(void):&#160;door.c']]],
-  ['door_5finit',['Door_Init',['../door_8c.html#a2edff6e1a215dc7ee41a58fc1c015568',1,'Door_Init(void):&#160;door.c'],['../door_8h.html#a2edff6e1a215dc7ee41a58fc1c015568',1,'Door_Init(void):&#160;door.c']]],
-  ['door_5floop',['Door_Loop',['../door_8c.html#a540f529d9d035c0ed68bc00d69d36d4a',1,'Door_Loop(void):&#160;door.c'],['../door_8h.html#a540f529d9d035c0ed68bc00d69d36d4a',1,'Door_Loop(void):&#160;door.c']]],
-  ['door_5fopen_5fe',['DOOR_OPEN_E',['../door_8h.html#a4afe719e053ce0b1d6a9a1558cb6f244ace4f926e1391eaab83941c6fabe857ba',1,'door.h']]],
-  ['door_5fstoreclosedpos_5fb',['Door_StoreClosedPos_B',['../door_8c.html#ada16a3c8f38c314f1244a4ae68fb5035',1,'Door_StoreClosedPos_B(void):&#160;door.c'],['../door_8h.html#ada16a3c8f38c314f1244a4ae68fb5035',1,'Door_StoreClosedPos_B(void):&#160;door.c']]],
-  ['doorclosed_5fu16',['doorClosed_U16',['../door_8c.html#a6a6a0911ccc3931e8a56ccc2a1f3caa6',1,'door.c']]],
-  ['doorpos_5fu16',['doorPos_U16',['../door_8c.html#ad88d6d4fd7b5cc541d798f4a5609a9c5',1,'door.c']]],
-  ['doorstate_5fstr',['doorState_str',['../door_8c.html#a9e406170943fcd664c9619fda8186736',1,'door.c']]]
+  ['calibrated_5fclosed_5fpos_5faddress',['CALIBRATED_CLOSED_POS_ADDRESS',['../conf_8h.html#a11d3481378af63a98ffe0c20650f3509',1,'conf.h']]],
+  ['calibration_5ffail_5fe',['CALIBRATION_FAIL_E',['../cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867a57846553d8acca57615479c037f5b11e',1,'cont.c']]],
+  ['calibration_5fsuccess_5fe',['CALIBRATION_SUCCESS_E',['../cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867a5ba041a1dc4d1291d99be7e96acb6bef',1,'cont.c']]],
+  ['calibration_5ftime_5fbutton',['CALIBRATION_TIME_BUTTON',['../conf_8h.html#ac4b804a7e7f4599d0d6a9aa8facca626',1,'conf.h']]],
+  ['conf_2eh',['conf.h',['../conf_8h.html',1,'']]],
+  ['conf_5fio',['CONF_IO',['../type_8h.html#a000ce1235745f9665c6ea31d99ca3369',1,'type.h']]],
+  ['cont_2ec',['cont.c',['../cont_8c.html',1,'']]],
+  ['cont_2eh',['cont.h',['../cont_8h.html',1,'']]],
+  ['cont_5finit',['Cont_Init',['../cont_8c.html#a79493510453d2159435dbffd76bdfaa2',1,'Cont_Init(void):&#160;cont.c'],['../cont_8h.html#a79493510453d2159435dbffd76bdfaa2',1,'Cont_Init(void):&#160;cont.c']]],
+  ['cont_5floop',['Cont_Loop',['../cont_8c.html#abee706705ec382a15ede11aa72cfe7ca',1,'Cont_Loop(void):&#160;cont.c'],['../cont_8h.html#abee706705ec382a15ede11aa72cfe7ca',1,'Cont_Loop(void):&#160;cont.c']]],
+  ['crc_5fu08',['crc_U08',['../structtWcet__ResultBlock__str.html#a9af016ccddc618526a37cbb43b75911c',1,'tWcet_ResultBlock_str']]],
+  ['cycles_5fu08',['cycles_U08',['../structtWcet__ResultBlock__str.html#a8ae68c320307994f22ac2b5e70eb5c20',1,'tWcet_ResultBlock_str']]]
 ];

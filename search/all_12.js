@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['wcet_2ec',['wcet.c',['../wcet_8c.html',1,'']]],
-  ['wcet_2eh',['wcet.h',['../wcet_8h.html',1,'']]],
-  ['wcet_5fcreateresultblock_5fstr',['Wcet_CreateResultBlock_str',['../wcet_8h.html#a6e23a1cd657567302f7aad0e5d70fcbf',1,'wcet.h']]],
-  ['wdtc_2ec',['wdtc.c',['../wdtc_8c.html',1,'']]],
-  ['wdtc_2eh',['wdtc.h',['../wdtc_8h.html',1,'']]],
-  ['wdtc_5f16ms_5fe',['WDTC_16MS_E',['../wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa8644453cdf3966f56abb28e2a23745ce',1,'wdtc.h']]],
-  ['wdtc_5f8s_5fe',['WDTC_8S_E',['../wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa618989f99df0a42243c976e7227dee13',1,'wdtc.h']]],
-  ['wdtc_5foff_5fe',['WDTC_OFF_E',['../wdtc_8h.html#ad97d39ba61deb6fad7154605b969147aa1f6d5af033b6f865ff38c09c8daffd3a',1,'wdtc.h']]],
-  ['wdtc_5fsettimer',['Wdtc_SetTimer',['../wdtc_8c.html#a51bee133bcfd769d0dcbd6dd89599e95',1,'Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB interrupt_B):&#160;wdtc.c'],['../wdtc_8h.html#a65171beff72461a7f3ad33cd84fa31fe',1,'Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB enableInterrupt_B):&#160;wdtc.c']]],
-  ['withinrange_5fb',['withinRange_B',['../door_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5',1,'door.c']]]
+  ['uart_2ec',['uart.c',['../uart_8c.html',1,'']]],
+  ['uart_2eh',['uart.h',['../uart_8h.html',1,'']]],
+  ['uart_5fenable',['Uart_Enable',['../uart_8c.html#ac0bdc4676149c5ac8b29e07f38aaebae',1,'Uart_Enable(void):&#160;uart.c'],['../uart_8h.html#ac0bdc4676149c5ac8b29e07f38aaebae',1,'Uart_Enable(void):&#160;uart.c'],['../conf_8h.html#aaaf6c77e3b8fec12ad625225a08c4f28',1,'UART_ENABLE():&#160;conf.h']]],
+  ['uart_5ftransmitblock',['Uart_TransmitBlock',['../uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4',1,'Uart_TransmitBlock(const uint8_t *data, uint8_t size):&#160;uart.c'],['../uart_8h.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4',1,'Uart_TransmitBlock(const uint8_t *data, uint8_t size):&#160;uart.c']]],
+  ['uart_5ftransmitbyte',['Uart_TransmitByte',['../uart_8c.html#a1a97c368c5f235450ebaa9dc4c9d1662',1,'Uart_TransmitByte(const uint8_t data):&#160;uart.c'],['../uart_8h.html#a1a97c368c5f235450ebaa9dc4c9d1662',1,'Uart_TransmitByte(const uint8_t data):&#160;uart.c']]],
+  ['unaffected_5fsensor_5fvalue',['UNAFFECTED_SENSOR_VALUE',['../door_8c.html#a8731db9307538d5b47669eb4bc9d4285',1,'door.c']]],
+  ['unused',['UNUSED',['../type_8h.html#a86d500a34c624c2cae56bc25a31b12f3',1,'type.h']]],
+  ['unused_5fwithout_5fwcet',['UNUSED_WITHOUT_WCET',['../main_8c.html#a368a43a4ae0d687656b204fde11b920e',1,'main.c']]]
 ];

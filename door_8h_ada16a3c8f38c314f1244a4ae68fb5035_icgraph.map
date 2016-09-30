@@ -1,5 +1,5 @@
 <map id="Door_StoreClosedPos_B" name="Door_StoreClosedPos_B">
 <area shape="rect" id="node2" href="$cont_8c.html#aa11211b23404526609e5e17616e833c6" title="getCalibrationState_E" alt="" coords="221,5,371,32"/>
 <area shape="rect" id="node3" href="$cont_8h.html#abee706705ec382a15ede11aa72cfe7ca" title="Cont_Loop" alt="" coords="419,5,504,32"/>
-<area shape="rect" id="node4" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="552,5,603,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#ab10c7c26d31ffbee82d7dc42ffb9f69d" title="__attribute__" alt="" coords="553,5,650,32"/>
 </map>

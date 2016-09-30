@@ -1,25 +1,6 @@
 var searchData=
 [
-  ['tb',['tB',['../type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f',1,'type.h']]],
-  ['tbutt_5fstate_5fe',['tButt_State_E',['../butt_8h.html#ab6179310226614228473617b31e51161',1,'butt.h']]],
-  ['tbutt_5fstate_5fstr',['tButt_State_str',['../structtButt__State__str.html',1,'']]],
-  ['tbuzz_5fsoundtype_5fe',['tBuzz_SoundType_E',['../buzz_8h.html#abcc70ff222bd75ccc609af04f29fb2cc',1,'buzz.h']]],
-  ['tcalibrationstate_5fe',['tCalibrationState_E',['../cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867',1,'cont.c']]],
-  ['tdoor_5fposition_5fe',['tDoor_Position_E',['../door_8h.html#a4afe719e053ce0b1d6a9a1558cb6f244',1,'door.h']]],
-  ['tdoor_5fstate_5fstr',['tDoor_State_str',['../structtDoor__State__str.html',1,'']]],
-  ['tick',['TICK',['../conf_8h.html#a7d5ee1cc1e801872efa1ea7486189019',1,'conf.h']]],
-  ['tickinstate_5fu08',['tickInState_U08',['../structtButt__State__str.html#ac7d8615117ef2c001051731ac24bcc38',1,'tButt_State_str']]],
-  ['ticksinstate_5fu16',['ticksInState_U16',['../structtDoor__State__str.html#a4738085a71a79a1e9edb15003145dae3',1,'tDoor_State_str']]],
-  ['tledc_5fstate_5fe',['tLedc_State_E',['../ledc_8h.html#a26ca41b40a85995225f063c89e2d8c3d',1,'ledc.h']]],
-  ['tpwrd_5fsleepmode_5fe',['tPwrd_SleepMode_E',['../pwrd_8h.html#a2d6d8cf8a14ad754992c9ba1feb5d02b',1,'pwrd.h']]],
-  ['transmit',['transmit',['../uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.c']]],
-  ['true',['TRUE',['../type_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'type.h']]],
-  ['ts16',['tS16',['../type_8h.html#a73a14a3560a5c73d571027ec2e2c6cdf',1,'type.h']]],
-  ['tu08',['tU08',['../type_8h.html#a9a48b3becea6028f01d4271e055aa5ff',1,'type.h']]],
-  ['tu16',['tU16',['../type_8h.html#a3e22901eae1672058ba1618c62036e07',1,'type.h']]],
-  ['turnoff',['turnOff',['../buzz_8c.html#aeb163164023b67f3c86054564cdff9bb',1,'buzz.c']]],
-  ['turnon',['turnOn',['../buzz_8c.html#af5fccc5f751f090c43f156263862bbc0',1,'buzz.c']]],
-  ['twcet_5fresultblock_5fstr',['tWcet_ResultBlock_str',['../structtWcet__ResultBlock__str.html',1,'']]],
-  ['twdtc_5ftimeout_5fe',['tWdtc_Timeout_E',['../wdtc_8h.html#ad97d39ba61deb6fad7154605b969147a',1,'wdtc.h']]],
-  ['type_2eh',['type.h',['../type_8h.html',1,'']]]
+  ['sleepmode_5fe',['sleepMode_E',['../pwrd_8c.html#aa4c61e514a674c4efa4f62a857156307',1,'pwrd.c']]],
+  ['soundtype_5fe',['soundType_E',['../buzz_8c.html#a11289f68cf6cc971126cdfeb3afc18c4',1,'buzz.c']]],
+  ['state_5fe',['state_E',['../structtButt__State__str.html#a0187ddcaee0818d3e509b8ea846482d1',1,'tButt_State_str']]]
 ];

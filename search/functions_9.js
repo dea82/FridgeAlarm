@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pwrd_5fsetsleepmode',['Pwrd_SetSleepMode',['../pwrd_8c.html#a79b6c723b315f8957fef56629a9e87a6',1,'Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E):&#160;pwrd.c'],['../pwrd_8h.html#a79b6c723b315f8957fef56629a9e87a6',1,'Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E):&#160;pwrd.c']]],
-  ['pwrd_5fsleep',['Pwrd_Sleep',['../pwrd_8c.html#ad5b9776adc0be712e25981e203fda384',1,'Pwrd_Sleep(void):&#160;pwrd.c'],['../pwrd_8h.html#ad5b9776adc0be712e25981e203fda384',1,'Pwrd_Sleep(void):&#160;pwrd.c']]],
-  ['pwrd_5fwakeup',['Pwrd_Wakeup',['../pwrd_8c.html#acc7fc5d1c450993c717982d99639c55e',1,'Pwrd_Wakeup(void):&#160;pwrd.c'],['../pwrd_8h.html#acc7fc5d1c450993c717982d99639c55e',1,'Pwrd_Wakeup(void):&#160;pwrd.c']]]
+  ['transmit',['transmit',['../uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.c']]],
+  ['turnoff',['turnOff',['../buzz_8c.html#aeb163164023b67f3c86054564cdff9bb',1,'buzz.c']]],
+  ['turnon',['turnOn',['../buzz_8c.html#af5fccc5f751f090c43f156263862bbc0',1,'buzz.c']]]
 ];
