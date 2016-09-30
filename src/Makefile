@@ -32,6 +32,15 @@ WCET ?= 0
 BAUD_RATE ?= 57600
 
 
+# Helper variable to determine if baud rate error check shall be performed
+UART_ENABLE = 0
+ifeq ($(WCET), 1)
+	UART_ENABLE = 1
+endif
+ifeq ($(DEBUG_ENABLE), 1)
+	UART_ENABLE = 1
+endif
+
 # Build directory
 BUILDROOT = output
 
@@ -104,8 +113,9 @@ OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
 NAME_CONVENTION_CHECK = scripts/style-check.py
+BAUD_RATE_ERROR_CHECK = tools/baudrate-error.sh
 
-all: check-inputs style-check createdir build size
+all: check-inputs style-check createdir build baudrate-error-check size
 
 check-inputs:
 ifndef MCU_TARGET
@@ -166,6 +176,18 @@ $(BUILDDIR)/%.o : %.S $(DEPDIR)/%.d
 # Dependency files. These are generated during compile of .c and .S.
 $(DEPDIR)/%.d: ;
 .PRECIOUS: $(DEPDIR)/%.d
+
+# Baud Rate Error check
+baudrate-error-check:
+ifeq ($(UART_ENABLE),1)
+	@echo
+	@echo "--------------------------"
+	@echo "UART Baud Rate Error Check"
+	@echo "--------------------------"
+	@$(BAUD_RATE_ERROR_CHECK) -f $(F_CPU) -b $(BAUD_RATE)
+else
+	@echo "Uart disabled"
+endif
 
 # Print size of output file
 size:
