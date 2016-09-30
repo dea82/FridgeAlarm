@@ -54,18 +54,18 @@ THE SOFTWARE.
 #define UNUSED_WITHOUT_WCET(param) UNUSED(param)
 #endif
 
-static void addTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
-                    void (* const task_fptr)(void),
-                    const tU08 UNUSED_WITHOUT_WCET(prescaler_U08));
+static void dispatchTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
+                         void (* const task_fptr)(void),
+                         const tU08 UNUSED_WITHOUT_WCET(prescaler_U08));
 
 /**
  * [addTask description]
  * @param taskName_c [description]
  * @param task_fptr  [description]
  */
-static void addTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
-                    void (* const task_fptr)(void),
-                    const tU08 UNUSED_WITHOUT_WCET(prescaler_U08))
+static void dispatchTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
+                         void (* const task_fptr)(void),
+                         const tU08 UNUSED_WITHOUT_WCET(prescaler_U08))
 {
 #if WCET
     Wcet_StartMeasurement(prescaler_U08);
@@ -78,8 +78,7 @@ static void addTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
 }
 
 /* Declaring main as OS_main saves some register pushing to stack. */
-int main(void) __attribute__((OS_main));
-int main(void)
+__attribute__((OS_main)) int main(void)
 {
     /* ATTENTION! Initialization code can be found in boot.S */
 
@@ -137,15 +136,15 @@ int main(void)
         Pwrd_Wakeup();
 
         /* Sensors */
-        addTask(PSTR_WCET("BUTT"), Butt_Loop, 1);
-        addTask(PSTR_WCET("DOOR"), Door_Loop, 1);
+        dispatchTask(PSTR_WCET("BUTT"), Butt_Loop, 1);
+        dispatchTask(PSTR_WCET("DOOR"), Door_Loop, 1);
 
         /* Controls */
-        addTask(PSTR_WCET("CONT"), Cont_Loop, 1);
+        dispatchTask(PSTR_WCET("CONT"), Cont_Loop, 1);
 
         /* Actuators */
-        addTask(PSTR_WCET("BUZZ"), Buzz_Loop, 1);
-        addTask(PSTR_WCET("LEDC"), Ledc_Loop, 1);
+        dispatchTask(PSTR_WCET("BUZZ"), Buzz_Loop, 1);
+        dispatchTask(PSTR_WCET("LEDC"), Ledc_Loop, 1);
 
         /* Powerdown */
         Pwrd_Sleep();
