@@ -22,22 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+#ifndef UART_H_
+#define UART_H_
 
-typedef enum
-{
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+#include "type.h"
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
+void Uart_Enable(void);
+void Uart_TransmitBlock(const uint8_t * data, uint8_t size);
+void Uart_TransmitByte(const uint8_t data);
 
-#endif /* LEDC_H_ */
+#endif /* UART_H_ */

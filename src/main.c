@@ -1,138 +1,154 @@
 /*
- * main.c
- *
- *  Created on: 18 feb 2015
- *      Author: andreas
- */
+The MIT License (MIT)
 
-/*** Standard library ***/
-#include <avr/interrupt.h>
-#include <avr/sleep.h>
-#include <avr/wdt.h>
-#include <util/delay.h>
+Copyright (c) 2015-2016 Andreas L.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+/**
+ * @file
+ */
 
 /*** User library ***/
 #include "butt.h"
 #include "buzz.h"
 #include "conf.h"
 #include "cont.h"
-#include "dsen.h"
+#include "door.h"
 #include "ledc.h"
+#include "pwrd.h"
 #include "type.h"
+#if WCET
+#include <avr/pgmspace.h>
+#include "wcet.h"
+#endif
 
-typedef enum
+/* Macro for putting string in flash during WCET measurement. */
+#if WCET
+#define PSTR_WCET(STRING) PSTR(STRING)
+#else
+#define PSTR_WCET(STRING) STRING
+#endif
+
+/* Macro for declaring parameter as unused during WCET measurement. */
+#if WCET
+#define UNUSED_WITHOUT_WCET(param) param
+#else
+#define UNUSED_WITHOUT_WCET(param) UNUSED(param)
+#endif
+
+static void dispatchTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
+                         void (* const task_fptr)(void),
+                         const tU08 UNUSED_WITHOUT_WCET(prescaler_U08));
+
+/**
+ * [addTask description]
+ * @param taskName_c [description]
+ * @param task_fptr  [description]
+ */
+static void dispatchTask(const char * UNUSED_WITHOUT_WCET(taskName_c),
+                         void (* const task_fptr)(void),
+                         const tU08 UNUSED_WITHOUT_WCET(prescaler_U08))
 {
-    WDTO_16MS_E, WDTO_8S_E,
-} tWatchdogTimeout_E;
-
-static void enableWatchdog(const tWatchdogTimeout_E time_E);
-static void powerDown(tSleepMode_E sleepMode_E);
-
-ISR(WDT_vect, ISR_NAKED)
-{
-    /* Just for wake-up, turn-off interrupt and reinitialize them again in main loop.
-     * Interrupt flag is cleared by MCU when entering the interrupt routine. */
-    asm volatile("ret");
+#if WCET
+    Wcet_StartMeasurement(prescaler_U08);
+#endif
+    task_fptr();
+#if WCET
+    Wcet_StopMeasurement();
+    Wcet_OutputResult(taskName_c, prescaler_U08);
+#endif
 }
 
-ISR(PCINT0_vect, ISR_ALIASOF(WDT_vect));
-
-int main(void)
+/* Declaring main as OS_main saves some register pushing to stack. */
+__attribute__((OS_main)) int main(void)
 {
+    /* ATTENTION! Initialization code can be found in boot.S */
+
     /* Check for WDT reset (save code size and assume true) - if a runaway pointer enables it,
-     * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4. */
-    WDTCR = 0;
+     * then it must be disabled here because it's kept after a reset! Ref. AVR132 chap 2.4.
+     * Reset status register because it will cause a new WDT reset if WDRF is set. Make sure
+     * to save it for later useage to detect if abnormal reset has occured.
+     */
+    {
+        tU08 statusRegister_U08 = MCUSR;
+        MCUSR = 0;
+        WDTCR = _BV(WDCE) | _BV(WDE);
+        WDTCR = 0;
 
-#if defined(__AVR_ATtiny13A__)
-    /* Reduce power consumption - turn off BOD during power down. */
-    BODCR = _BV(BODS) | _BV(BODSE);
-#elif defined(__AVR_ATtiny85__)
-    MCUCR |= _BV(BODS) | _BV(BODSE);
-#endif
-    /* Reduce power consumption - switch of Analog Comparator */
-    ACSR |= _BV(ACD);
+        /* Power saving - switch of analog comparator */
+        ACSR |= _BV(ACD);
 
-    /* Power reduction */
-    PRR |= _BV(PRTIM1) | _BV(PRUSI); // | _BV(PRADC);
-    DIDR0 |= _BV(AIN0D) | _BV(AIN1D) | _BV(ADC1D) | _BV(ADC2D); //TODO: ADC3D
+        /* Initialize I/O Ports */
+        DDRB = DDRB_INIT;
+        PORTB |= PORTB_INIT; /* Optimization, only one bit is changed */
 
-    DDRB = 0b00010111;
-    PORTB = 0b00100000;
+        /* Initialize sensors */
+        Butt_Init();
+        Door_Init();
+        /* Initialize controls */
+        Cont_Init();
+        /* Initialize actuators */
+        Buzz_Init();
+        Ledc_Init();
 
-    /* Initialize sensors */
-    Butt_init();
-    Dsen_init();
-    /* Initialize controls */
-    Cont_init();
-    /* Initialize actuators */
-    Buzz_init();
-    Ledc_init();
+        /* Enable global interrupt otherwise door will not be able to wake up
+         * from ADC Noise reduction mode or infinite sleep mode. */
+        asm volatile("sei"::);
+
+        /**
+         * Abnormal reset detected - goto infinite sleep with orange led
+         * indicating that we have a system error. Put the MCU in "infinite"
+         * sleep to save power, it could be BOD reset due to low batteries.
+         * The MCU is however possible to wakeup with the button - then it
+         * will go back to normal function.
+         */
+        if(!(statusRegister_U08 & _BV(PORF)))
+        {
+            Butt_EnableInterrupt();
+            Ledc_SetOrange();
+            Pwrd_SetSleepMode(PWRD_INFINITE_SLEEP_E);
+            Pwrd_Sleep();
+        }
+    }
 
     for (;;)
     {
-        /* Interrupt is always off here. WDT and PC_INT routines take care of that. */
-        enableWatchdog(WDTO_16MS_E);
-        /* Make sure to disable button interrupt before continue. The MCU is awake. */
-        Butt_disableInterrupt();
-        /* Ready to fire off interrupt again, but it should not happen until it's at sleep. */
-        sei();
+
+        /* Startup */
+        Pwrd_Wakeup();
 
         /* Sensors */
-        Butt_loop();
-        Dsen_loop();
+        dispatchTask(PSTR_WCET("BUTT"), Butt_Loop, 1);
+        dispatchTask(PSTR_WCET("DOOR"), Door_Loop, 1);
 
-        /* Controls*/
-        Cont_loop();
+        /* Controls */
+        dispatchTask(PSTR_WCET("CONT"), Cont_Loop, 1);
 
         /* Actuators */
-        Ledc_loop();
-        Buzz_loop();
+        dispatchTask(PSTR_WCET("BUZZ"), Buzz_Loop, 1);
+        dispatchTask(PSTR_WCET("LEDC"), Ledc_Loop, 1);
 
-        powerDown(Cont_sleepMode_E());
+        /* Powerdown */
+        Pwrd_Sleep();
     }
 
     return 0;
 }
-
-static void enableWatchdog(const tWatchdogTimeout_E time_E)
-{
-    wdt_reset();
-
-    switch (time_E)
-    {
-    case WDTO_16MS_E:
-        WDTCR = _BV(WDIF_C) | (_BV(WDT_INT) | _BV(WDCE));
-        break;
-    case WDTO_8S_E:
-        WDTCR = _BV(WDIF_C)
-                | (_BV(WDT_INT) | _BV(WDCE) | _BV(WDP3) | _BV(WDP0));
-        break;
-    default:
-        break;
-    }
-}
-
-static void powerDown(tSleepMode_E sleepMode_E)
-{
-
-    /* If the controls find it ok to go to sleep, door closed for a long time then set
-     * the WDT to 8 seconds. Enable the button interrupt to be able to wake it up from
-     * deep sleep.*/
-    if (sleepMode_E == CONT_LONG_DEEP_SLEEP_E)
-    {
-        enableWatchdog(WDTO_8S_E);
-        Butt_enableInterrupt();
-    }
-
-    if (sleepMode_E == CONT_SLEEP_WITH_TIMER_RUNNING_E)
-    {
-        set_sleep_mode(SLEEP_MODE_IDLE);
-    }
-    else
-    {
-        set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    }
-    sleep_mode()
-    ;
-}
-

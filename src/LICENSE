@@ -1,4 +1,3 @@
-/*
 The MIT License (MIT)
 
 Copyright (c) 2015-2016 Andreas L.
@@ -20,24 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-
-#ifndef LEDC_H_
-#define LEDC_H_
-
-typedef enum
-{
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
-
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
-
-#endif /* LEDC_H_ */

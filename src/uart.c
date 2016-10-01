@@ -22,22 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/**
+ * @file
+ */
 
-typedef enum
+#include "buzz.h"
+#include "conf.h"
+#include "type.h"
+#include "uart.h"
+
+/* Assembly function. */
+extern void transmit(unsigned char);
+
+void Uart_Enable(void)
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+  CONF_IO(UART_CFG, OUTPUT, 1);
+}
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
 
-#endif /* LEDC_H_ */
+void Uart_TransmitByte(const uint8_t data)
+{
+    Uart_TransmitBlock(&data, 1);
+}
+
+void Uart_TransmitBlock(const uint8_t * data, uint8_t size)
+{
+    while(size--)
+    {
+        transmit(*data);
+        data++;
+    }
+}

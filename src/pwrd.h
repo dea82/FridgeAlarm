@@ -22,22 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/*------------------------------------------------------------------------*//**
+ *
+ * @file pwrd.h
+ * @author     Andreas L.
+ * @date       2016-06-03
+ *
+ * @brief      Power down module
+ *
+ * This module takes care of power down of the MCU.
+ *----------------------------------------------------------------------------*/
+
+#ifndef PWRD_H_
+#define PWRD_H_
 
 typedef enum
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+    PWRD_SHORT_DEEP_SLEEP_E,
+    PWRD_LONG_DEEP_SLEEP_E,
+    PWRD_SLEEP_WITH_TIMER_RUNNING_E,
+    PWRD_INFINITE_SLEEP_E
+} tPwrd_SleepMode_E;
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
+void Pwrd_Sleep(void);
 
-#endif /* LEDC_H_ */
+void Pwrd_Wakeup(void);
+
+void Pwrd_SetSleepMode(const tPwrd_SleepMode_E mode_E);
+
+#endif /* PWRD_H_ */

@@ -22,22 +22,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+#ifndef WCET_H_
+#define WCET_H_
 
-typedef enum
+#include "type.h"
+
+typedef struct
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+    char name_aC[4]; /**< Module name */
+    tU08 prescaler_U08;  /**< Prescaler */
+    tU08 cycles_U08;  /**< Number of cycles */
+    tU08 crc_U08;  /**< CRC */
+} tWcet_ResultBlock_str;
+#if defined(__AVR_ATtiny85__)
+/**
+ * @brief      Set start point for cpu load measurement
+ *
+ * @param  prescalerRegister_U08  Prescaler register
+ */
+void Wcet_StartMeasurement(tU08 prescalerRegister_U08);
+void Wcet_StopMeasurement(void);
+void Wcet_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08);
+#endif
+tWcet_ResultBlock_str Wcet_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescalerRegister_U08);
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
-
-#endif /* LEDC_H_ */
+#endif /* WCET_H_ */

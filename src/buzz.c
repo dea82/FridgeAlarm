@@ -1,71 +1,130 @@
 /*
- * buzz.c
- *
- *  Created on: 18 feb 2015
- *      Author: andreas
+The MIT License (MIT)
+
+Copyright (c) 2015-2016 Andreas L.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+/**
+ * @file
  */
+
+#include "buzz.h"
 
 #include <avr/io.h>
 
-#include "buzz.h"
 #include "conf.h"
+#include "type.h"
 
-static tSoundType_E soundType_E;
-
-inline void Buzz_init(void)
-{
-//    CONF_IO(BUZZ_CFG, OUTPUT, 0);
-
-//TODO: Make sure to connect PWM to correct IO pin.
-#if 1
-
-    // Set to 'CTC' mode, toggle on match
-    TCCR0A |= (1 << WGM01) | (1 << COM0A0);
-
-    OCR0A = 30;
+#define BUZZ_ALARM_PERIOD_TIME 2000 /* [ms]*/
+#define BUZZER_FREQ 600UL /* [Hz] */
+#if defined(__AVR_ATtiny13A__)
+/* Lower this for lower consumption and sound level. */
+#define BUZZER_DUTY_CYCLE 10UL /* [%] */
 #endif
 
+static tBuzz_SoundType_E soundType_E;
+
+static void turnOn(void);
+static void turnOff(void);
+
+void Buzz_Init(void)
+{
+/* BuzzerFreq = F_CPU / (2 * Prescaler * (1 + OCR0A))
+ *
+ * In this case gives a buzzer frequency of 1690 Hz
+ */
+#if F_CPU == 8000000 && defined(__AVR_ATtiny85__)
+    OCR0A = F_CPU / (BUZZER_FREQ * 64 * 2) - 1;
+#elif F_CPU == 9600000 && defined(__AVR_ATtiny13A__)
+    OCR0A = F_CPU / (BUZZER_FREQ * 64) - 1;
+    OCR0B = (F_CPU / (BUZZER_FREQ * 64) - 1) * BUZZER_DUTY_CYCLE / 100;
+#else
+#error "Buzzer module does not support this combination of MCU and clock frequency";
+#endif
 }
 
-inline void Buzz_loop(void)
+void Buzz_Loop(void)
 {
-#if 1
     static tU08 counter_U08;
 
-    switch (soundType_E)
+    if (soundType_E == BUZZ_ON_E)
     {
-    case BUZZ_OFF_E:
-        TCCR0B = 0;
-//        PRR |= _BV(PRTIM0);
-        break;
-    case BUZZ_ON_E:
-//        PRR &= ~_BV(PRTIM0);
-        TCCR0B = _BV(CS01);
-        break;
-    case BUZZ_ALARM_E:
-//        PRR &= ~_BV(PRTIM0);
-        if (counter_U08 > 100)
+        turnOn();
+        counter_U08 = 0;
+    }
+    else if (soundType_E == BUZZ_ALARM_E)
+    {
+        if (++counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK)
         {
             counter_U08 = 0;
         }
-        else
+        if (counter_U08 < BUZZ_ALARM_PERIOD_TIME / TICK / 2)
         {
-            counter_U08++;
-        }
-        if (counter_U08 < 50)
-        {
-            TCCR0B = _BV(CS01);
+            turnOn();
         }
         else
         {
-            TCCR0B = 0;
+            turnOff();
         }
-        break;
     }
-#endif
+    else
+    {
+        turnOff();
+        counter_U08 = 0;
+    }
 }
 
-void Buzz_setSound(const tSoundType_E soundTypeReq_E)
+static void turnOn(void)
+{
+    /* Enable module before accessing registers */
+    PRR = PRR_INIT & ~_BV(PRTIM0);
+#if defined(__AVR_ATtiny85__)
+    /* Set to 'CTC' mode, toggle on match */
+    TCCR0A = _BV(COM0A0) | _BV(WGM01);
+    /* Start clock - prescaler 64 */
+    TCCR0B = _BV(CS01) | _BV(CS00);
+#elif defined(__AVR_ATtiny13A__)
+    /* Set to fast PWM mode, 50% duty cycle */
+    TCCR0A = _BV(COM0B1) | _BV(WGM01) | _BV(WGM00);
+    /* Start clock - prescaler 64 */
+    TCCR0B = _BV(WGM02) | _BV(CS01) | _BV(CS00);
+#else
+#error "Buzz module does not support this MCU."
+#endif
+
+
+}
+
+static void turnOff(void)
+{
+    /* Stop clock */
+    TCCR0B = 0;
+    /* Normal port operation, disconnect OC0A with potential of leaving
+     * pin state high. */
+    TCCR0A = 0;
+    /* Disconnect module */
+    PRR = PRR_INIT | _BV(PRTIM0);
+}
+
+void Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E)
 {
     soundType_E = soundTypeReq_E;
 }

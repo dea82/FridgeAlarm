@@ -1,4 +1,11 @@
-eagleUp_FridgeWarninig_0.5_board_bottom.png
-eagleUp_FridgeWarninig_0.5_board_top.png
-FridgeWarninig_0.5.log
-*.b##
+src/output
+src/tools/piezo-tester/output
+.DS_Store
+src/doc/doxygen
+src/doc/doxygen_sqlite3.db
+pcb/*.b#*
+pcb/*.s#*
+pcb/*.lck
+#Emacs files
+*#.*
+*~

@@ -22,22 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+#ifndef WDTC_H_
+#define WDTC_H_
+
+#include "type.h"
 
 typedef enum
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+    WDTC_OFF_E, WDTC_16MS_E, WDTC_8S_E,
+} tWdtc_Timeout_E;
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
+void Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E,
+    const tB enableInterrupt_B);
 
-#endif /* LEDC_H_ */
+#endif /* WDTC_H_ */

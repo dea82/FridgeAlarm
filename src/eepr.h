@@ -22,22 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/**
+ * @file
+ *
+ * @brief EEPROM module
+ *
+ * @details
+ */
 
-typedef enum
-{
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+#include "type.h"
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
+void Eepr_Write(const tU08 address_U08, const tU08 data_U08);
 
-#endif /* LEDC_H_ */
+tU08 Eepr_Read_U08(const tU08 address_U08);

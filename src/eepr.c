@@ -22,22 +22,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/**
+ * @file
+ */
 
-typedef enum
+#include "eepr.h"
+
+#include <avr/interrupt.h>
+#include <avr/io.h>
+
+#include "type.h"
+
+void Eepr_Write(const tU08 address_U08, const tU08 data_U08)
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+    /* Wait for completion of previous write */
+    while(EECR & _BV(EEPE));
+    /* Set Programming mode */
+    EECR = 0;
+    /* Set up address and data registers */
+    EEAR = address_U08;
+    EEDR = data_U08;
+    /* Timed sequence - disable interrupt */
+    cli();
+    /* Write logical one to EEMPE */
+    EECR |= (1<<EEMPE);
+    /* Start eeprom write by setting EEPE */
+    EECR |= (1<<EEPE);
+    sei();
+}
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
-
-#endif /* LEDC_H_ */
+tU08 Eepr_Read_U08(const tU08 address_U08)
+{
+    /* Wait for completion of previous write */
+    while(EECR & (1<<EEPE));
+    /* Set up address register */
+    EEAR = address_U08;
+    /* Start eeprom read by writing EERE */
+    EECR |= (1<<EERE);
+    /* Return data from data register */
+    return EEDR;
+}

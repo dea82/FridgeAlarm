@@ -1,0 +1,41 @@
+---
+sudo: required
+dist: trusty
+
+language: c
+
+compiler:
+    - gcc
+
+before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install -qq gcc-avr binutils-avr avr-libc doxygen graphviz
+
+env:
+  global:
+  # Used for deployment
+  - ENCRYPTION_LABEL: "78f1b569ea9f"
+  - COMMIT_AUTHOR_EMAIL: "andreas.laghamn@gmail.com"
+  - secure: "AyShV+wfAkdZH3Ls14U+Oz+6eL4aMfn7S0qxz9nqfs7apWJ/rHMgBHhtQLMhKKak/wI5enfD7nZPec8Q09D+DZrP+Jor4ZO6Lz0CsIDZ8+wmDcJI13HTvpVhBbQtOH2Kl7fDNUx/on1Isp/8CPF1s4GiMgyLw7y9qHGymeWAai7QFMK3/W9RGsuYfQcxaBFH+zNpnHfNoHxK1yXxsZoegch9da5icyswPDBtu9uZ27FMUDmRVhIcsXftdlFjsELCSTQycVWzZ6Pcc4SwoR3AWDSv05bsgkP6NoNyr4CbSo1jQ/buvoNp3O5IesF7tqhW1IxZYl9I/XBsyy+pUKwRS90pcpKl6/zU+0d5Hp+a9d9FFlVGgHGprg2jCrGNPh0ZY2j+cDKwBaNNw/1IenK/e6/Krf+LpuhWKpAZsmU+Nwn4EmjPBSms6t5pT77rrS+Ukxp/8a6Ric6bPW2IFO0Qzndls94JKdstQh4aO/hY19Ai1rGHjxDjRxIrpv2K6gcSYEoijn0k+ZFem/LKtq8dD2V1YMRBc+B7ndmn0r0Cb4JgG19ndaz4KlrXH47IxdRe/dyR4Azr4KdHoNZxhPxO8riFrU7CLQ4Xjjwk6MXbFuy+tKEjVaG0rw+nWT49FJakYwJ9NUSTI1ztNOPFNMi8ABnXQqtTEmidfzWoshTKtLc="
+
+addons:
+  coverity_scan:
+    project:
+      name: "dea82/FridgeAlarm"
+      description: "Build submitted via Travis CI"
+    notification_email: andreas.laghamn@gmail.com
+    build_command_prepend: "cov-configure --comptype gcc --compiler avr-gcc --template && make -C src clean"
+    build_command: "make -C src MCU_TARGET=attiny13a F_CPU=9600000"
+    branch_pattern: coverity-scan
+
+script: 
+  - make -C src MCU_TARGET=attiny13a F_CPU=9600000
+  - make -C src MCU_TARGET=attiny85 F_CPU=8000000
+  - make -C src clean
+  # Attiny does not have a Timer1 => CPU_LOAD impossible
+  - make -C src MCU_TARGET=attiny13a F_CPU=9600000 DEBUG_ENABLE=1 WCET=0 BAUD_RATE=57600
+  - make -C src MCU_TARGET=attiny85 F_CPU=8000000 DEBUG_ENABLE=1 WCET=1 BAUD_RATE=57600
+  # Deploy doxygen documentation to GitHub Pages
+  - ./.deployment/travis/doxygen.sh

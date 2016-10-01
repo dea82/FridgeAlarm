@@ -22,22 +22,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/**
+ * @file
+ *
+ * @brief Door sensor module
+ *
+ * @details This module handles the the hall sensor ADC conversion including validation
+ * of sensor value. It stores/reads sensor value to/from EEPROM. Finally
+ * it also creates door state with help of sensor value.
+ */
+
+#ifndef DOOR_H_
+#define DOOR_H_
+
+#include "type.h"
 
 typedef enum
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+  DOOR_CLOSED_E,/**< Door considered closed */
+  DOOR_OPEN_E	/**< Door considered open */
+} tDoor_Position_E;
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
+typedef struct
+{
+    tDoor_Position_E position_E; /**< Door state */
+    tU16 ticksInState_U16; /**< Numer of ticks in state */
+}tDoor_State_str ;
 
-#endif /* LEDC_H_ */
+/** @brief Initializes door module. Must be called before Door_Loop. */
+void Door_Init(void);
+/** @brief Updates door state. */
+void Door_Loop(void);
+tDoor_State_str Door_GetState_str(void);
+tB Door_StoreClosedPos_B(void);
+
+#endif /* DOOR_H_ */

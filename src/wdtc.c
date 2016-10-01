@@ -22,22 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef LEDC_H_
-#define LEDC_H_
+/**
+ * @file
+ */
 
-typedef enum
+#include "wdtc.h"
+
+#include <avr/io.h>
+
+#include "conf.h"
+
+void Wdtc_SetTimer(const tWdtc_Timeout_E timeout_E, const tB interrupt_B)
 {
-    LEDC_OFF_E,
-    LEDC_GREEN_E,
-    LEDC_RED_E,
-    LEDC_ORANGE_E,
-    LEDC_GREEN_BLINK_E,
-    LEDC_RED_BLINK_E,
-} tLedc_State_E;
+    switch(timeout_E)
+    {
+    case WDTC_OFF_E:
+        /* Timed sequence to turn WDT off. */
+        WDTCR = _BV(WDCE) | _BV(WDE);
+        WDTCR = 0;
+        break;
+    case WDTC_16MS_E:
+        WDTCR = _BV(WDIF) | ((1 & interrupt_B) << WDIE) | _BV(WDE);
+        break;
+    case WDTC_8S_E:
+        WDTCR = _BV(WDIF) |
+          ((1 & interrupt_B) << WDIE) | _BV(WDE) | _BV(WDP3) | _BV(WDP0);
+        break;
+    }
+}
 
-void Ledc_Init(void);
-void Ledc_Loop(void);
-void Ledc_SetState(const tLedc_State_E state_E);
-void Ledc_SetOrange(void);
-
-#endif /* LEDC_H_ */
