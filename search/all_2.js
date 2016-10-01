@@ -22,6 +22,5 @@ var searchData=
   ['buzz_5foff_5fe',['BUZZ_OFF_E',['../buzz_8h.html#abcc70ff222bd75ccc609af04f29fb2cca734bae5a33161215ef2e441e346ddc0d',1,'buzz.h']]],
   ['buzz_5fon_5fe',['BUZZ_ON_E',['../buzz_8h.html#abcc70ff222bd75ccc609af04f29fb2cca8e25ef4d09f17db3b52ceeb0820375cd',1,'buzz.h']]],
   ['buzz_5fsetsound',['Buzz_SetSound',['../buzz_8c.html#ad2f31826000d11c63183b0f67c3c55e9',1,'Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E):&#160;buzz.c'],['../buzz_8h.html#ad2f31826000d11c63183b0f67c3c55e9',1,'Buzz_SetSound(const tBuzz_SoundType_E soundTypeReq_E):&#160;buzz.c']]],
-  ['buzzer_5fduty_5fcycle',['BUZZER_DUTY_CYCLE',['../buzz_8c.html#a5bdb7f94068a81ae92482bf26c2ba7f7',1,'buzz.c']]],
   ['buzzer_5ffreq',['BUZZER_FREQ',['../buzz_8c.html#a53157b0c521fcb6114549b588626560d',1,'buzz.c']]]
 ];
