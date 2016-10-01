@@ -47,7 +47,7 @@ nop
 nop
 nop
 reti        ; WDT timeout
-#elsif defined(__AVR_ATtiny13A__)
+#elif defined(__AVR_ATtiny13A__)
 reti        ; WDT timeout
 reti        ; ADC Conversion Complete
 #endif
