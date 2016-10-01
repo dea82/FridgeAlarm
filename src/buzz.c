@@ -34,7 +34,9 @@ THE SOFTWARE.
 #include "type.h"
 
 #define BUZZ_ALARM_PERIOD_TIME 2000 /* [ms]*/
-#define BUZZER_FREQ 2000UL
+#define BUZZER_FREQ 600UL /* [Hz] */
+/* Lower this for lower consumption and sound level. */
+#define BUZZER_DUTY_CYCLE 10UL /* [%] */
 
 static tBuzz_SoundType_E soundType_E;
 
@@ -51,7 +53,7 @@ void Buzz_Init(void)
     OCR0A = F_CPU / (BUZZER_FREQ * 64 * 2) - 1;
 #elif F_CPU == 9600000 && defined(__AVR_ATtiny13A__)
     OCR0A = F_CPU / (BUZZER_FREQ * 64) - 1;
-    OCR0B = OCR0A / 2;
+    OCR0B = (F_CPU / (BUZZER_FREQ * 64) - 1) * BUZZER_DUTY_CYCLE / 100;
 #else
 #error "Buzzer module does not support this combination of MCU and clock frequency";
 #endif
