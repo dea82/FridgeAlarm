@@ -35,8 +35,10 @@ THE SOFTWARE.
 
 #define BUZZ_ALARM_PERIOD_TIME 2000 /* [ms]*/
 #define BUZZER_FREQ 600UL /* [Hz] */
+#if defined(__AVR_ATtiny13A__)
 /* Lower this for lower consumption and sound level. */
 #define BUZZER_DUTY_CYCLE 10UL /* [%] */
+#endif
 
 static tBuzz_SoundType_E soundType_E;
 
