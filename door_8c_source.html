@@ -137,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span>    <span class="comment">/* Prescaler for ADC clock is set to 64, which gives a ADC clock of 125 kHz. */</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    ADCSRA = (1 &lt;&lt; ADPS2) | (1 &lt;&lt; ADPS1);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Prescaler for ADC conversion is not supported for this CPU clock.&quot;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Prescaler for ADC conversion is not supported for this MCU clock.&quot;</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">/* Connect pin to ADC with 10-bit precision */</span></div>
