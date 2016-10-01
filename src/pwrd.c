@@ -82,8 +82,16 @@ void Pwrd_Sleep(void)
     }
 
     cli(); /* Timed sequence make sure it's not disturbed */
+#if defined(__AVR_ATtiny85__)
     MCUCR |= (_BV(BODS) | _BV(SE) | _BV(BODSE));
     MCUCR &= ~_BV(BODSE);
+#elif defined(__AVR_ATtiny13A__)
+    MCUCR |= _BV(SE);
+    BODCR = _BV(BODS) | _BV(BODSE);
+    BODCR = _BV(BODS);
+#else
+#error "Sleep module does not support selected MCU."
+#endif
     sei(); /* To be able to wake-up */
     asm volatile("sleep"::);
 }

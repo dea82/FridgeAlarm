@@ -64,7 +64,8 @@ THE SOFTWARE.
 #define PRR_INIT (0)
 #define WDIF WDTIF
 #define WDIE WDTIE
-
+#else
+#error "Conf module does not support selected MCU."
 #endif
 
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)
@@ -79,8 +80,13 @@ THE SOFTWARE.
 #else
 #define RED_LED_CFG     B,2
 #endif
+#if defined(__AVR_ATtiny85__)
 #define GREEN_LED_CFG   B,1
 #define BUZZ_CFG        B,0
+#else
+#define GREEN_LED_CFG   B,0
+#define BUZZ_CFG        B,1
+#endif
 #define DOOR_SWITCH_CFG B,4
 #define UART_CFG        B,2
 

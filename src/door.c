@@ -63,7 +63,7 @@ void Door_Init(void)
     /* Prescaler for ADC clock is set to 64, which gives a ADC clock of 125 kHz. */
     ADCSRA = (1 << ADPS2) | (1 << ADPS1);
 #else
-#error "Prescaler for ADC conversion is not supported for this CPU clock."
+#error "Prescaler for ADC conversion is not supported for this MCU clock."
 #endif
 
     /* Connect pin to ADC with 10-bit precision */

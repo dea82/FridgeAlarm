@@ -35,7 +35,7 @@ script:
   - make -C src MCU_TARGET=attiny85 F_CPU=8000000
   - make -C src clean
   # Attiny does not have a Timer1 => CPU_LOAD impossible
-  - make -C src MCU_TARGET=attiny13a F_CPU=9600000 DEBUG_ENABLE=1 CPU_LOAD=0 BAUD_RATE=57600
-  - make -C src MCU_TARGET=attiny85 F_CPU=8000000 DEBUG_ENABLE=1 CPU_LOAD=1 BAUD_RATE=57600
+  - make -C src MCU_TARGET=attiny13a F_CPU=9600000 DEBUG_ENABLE=1 WCET=0 BAUD_RATE=57600
+  - make -C src MCU_TARGET=attiny85 F_CPU=8000000 DEBUG_ENABLE=1 WCET=1 BAUD_RATE=57600
   # Deploy doxygen documentation to GitHub Pages
   - ./.deployment/travis/doxygen.sh

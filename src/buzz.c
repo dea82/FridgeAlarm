@@ -33,7 +33,8 @@ THE SOFTWARE.
 #include "conf.h"
 #include "type.h"
 
-#define BUZZ_ALARM_PERIOD_TIME 1000 /* [ms]*/
+#define BUZZ_ALARM_PERIOD_TIME 2000 /* [ms]*/
+#define BUZZER_FREQ 2000UL
 
 static tBuzz_SoundType_E soundType_E;
 
@@ -46,12 +47,13 @@ void Buzz_Init(void)
  *
  * In this case gives a buzzer frequency of 1690 Hz
  */
-#if F_CPU == 8000000
-    OCR0A = 36;
-#elif F_CPU == 9600000
-    OCR0A = 43;
+#if F_CPU == 8000000 && defined(__AVR_ATtiny85__)
+    OCR0A = F_CPU / (BUZZER_FREQ * 64 * 2) - 1;
+#elif F_CPU == 9600000 && defined(__AVR_ATtiny13A__)
+    OCR0A = F_CPU / (BUZZER_FREQ * 64) - 1;
+    OCR0B = OCR0A / 2;
 #else
-#error "Correct compare value to CPU speed."
+#error "Buzzer module does not support this combination of MCU and clock frequency";
 #endif
 }
 
@@ -70,7 +72,7 @@ void Buzz_Loop(void)
         {
             counter_U08 = 0;
         }
-        if (counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK / 2)
+        if (counter_U08 < BUZZ_ALARM_PERIOD_TIME / TICK / 2)
         {
             turnOn();
         }
@@ -90,10 +92,21 @@ static void turnOn(void)
 {
     /* Enable module before accessing registers */
     PRR = PRR_INIT & ~_BV(PRTIM0);
+#if defined(__AVR_ATtiny85__)
     /* Set to 'CTC' mode, toggle on match */
     TCCR0A = _BV(COM0A0) | _BV(WGM01);
     /* Start clock - prescaler 64 */
     TCCR0B = _BV(CS01) | _BV(CS00);
+#elif defined(__AVR_ATtiny13A__)
+    /* Set to fast PWM mode, 50% duty cycle */
+    TCCR0A = _BV(COM0B1) | _BV(WGM01) | _BV(WGM00);
+    /* Start clock - prescaler 64 */
+    TCCR0B = _BV(WGM02) | _BV(CS01) | _BV(CS00);
+#else
+#error "Buzz module does not support this MCU."
+#endif
+
+
 }
 
 static void turnOff(void)
