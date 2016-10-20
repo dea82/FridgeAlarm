@@ -27,7 +27,7 @@ THE SOFTWARE.
 #include "wcet.h"
 #include "uart.h"
 
-static tU08 crc8_U08 (tU08 inCrc, tU08 inData);
+static tU08 crc8_U08 (const tU08 inCrc, const  tU08 inData);
 
 FORCE_INLINE void Wcet_StopMeasurement(void)
 {
@@ -70,7 +70,7 @@ tWcet_ResultBlock_str Wcet_CreateResultBlock_str(const char * name_c, const tU08
   return resultBlock_str;
 }
 
-static tU08 crc8_U08 (tU08 inCrc_U08, tU08 inData_U08)
+static tU08 crc8_U08 (const tU08 inCrc_U08, const tU08 inData_U08)
 {
     tU08 i_U08;
     tU08 data_U08;
