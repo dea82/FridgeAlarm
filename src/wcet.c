@@ -27,10 +27,7 @@ THE SOFTWARE.
 #include "wcet.h"
 #include "uart.h"
 
-
 static tU08 crc8_U08 (const tU08 inCrc_U08, const  tU08 inData_U08);
-
-
 
 FORCE_INLINE void Wcet_StopMeasurement(void)
 {
