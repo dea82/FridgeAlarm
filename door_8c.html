@@ -80,7 +80,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -92,20 +91,11 @@ Include dependency graph for door.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="door_8c__incl.png" border="0" usemap="#door_8c" alt=""/></div>
 <map name="door_8c" id="door_8c">
-<area shape="rect" id="node2" href="door_8h.html" title="Door sensor module. " alt="" coords="5,80,63,107"/><area shape="rect" id="node7" href="conf_8h.html" title="conf.h" alt="" coords="280,80,337,107"/><area shape="rect" id="node8" href="eepr_8h.html" title="EEPROM module. " alt="" coords="88,80,145,107"/><area shape="rect" id="node3" href="type_8h.html" title="type.h" alt="" coords="47,155,104,181"/></map>
+<area shape="rect" id="node2" href="door_8h.html" title="Door sensor module. " alt="" coords="88,80,145,107"/><area shape="rect" id="node8" href="conf_8h.html" title="conf.h" alt="" coords="419,80,476,107"/><area shape="rect" id="node9" href="eepr_8h.html" title="EEPROM module. " alt="" coords="5,80,63,107"/><area shape="rect" id="node3" href="type_8h.html" title="type.h" alt="" coords="47,155,104,181"/></map>
 </div>
 </div>
 <p><a href="door_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a8731db9307538d5b47669eb4bc9d4285"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a8731db9307538d5b47669eb4bc9d4285">UNAFFECTED_SENSOR_VALUE</a>&#160;&#160;&#160;493</td></tr>
-<tr class="separator:a8731db9307538d5b47669eb4bc9d4285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b94fa57459c9ab7ed0156c75f3d3eb1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a0b94fa57459c9ab7ed0156c75f3d3eb1">DOOR_CLOSED_OFFSET</a>&#160;&#160;&#160;20</td></tr>
-<tr class="separator:a0b94fa57459c9ab7ed0156c75f3d3eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49f0e1296d9442152bb610de916596f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a49f0e1296d9442152bb610de916596f0">MIN_CAL_DOOR_CLOSED_POS</a>&#160;&#160;&#160;60</td></tr>
-<tr class="separator:a49f0e1296d9442152bb610de916596f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a3bb617deedd5bfb6ff61ff3ea6be45a5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="type_8h.html#ab866ed0f99b400ecf124f57bb2ea623f">tB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a3bb617deedd5bfb6ff61ff3ea6be45a5">withinRange_B</a> (const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> sensorValue_U16)</td></tr>
@@ -125,6 +115,12 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a6e3896476c443ded3bf276776669dd56"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a6e3896476c443ded3bf276776669dd56">unaffectedSensorValue_cU16</a> = 493</td></tr>
+<tr class="separator:a6e3896476c443ded3bf276776669dd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41ad7219be269fcc17db2122a56063ef"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a41ad7219be269fcc17db2122a56063ef">doorClosedOffset_cU08</a> = 20</td></tr>
+<tr class="separator:a41ad7219be269fcc17db2122a56063ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34926a19783b83f5af0d83648bc7cfe3"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a34926a19783b83f5af0d83648bc7cfe3">minCalDoorClosedPos_cU08</a> = 60</td></tr>
+<tr class="separator:a34926a19783b83f5af0d83648bc7cfe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e406170943fcd664c9619fda8186736"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structtDoor__State__str.html">tDoor_State_str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a9e406170943fcd664c9619fda8186736">doorState_str</a></td></tr>
 <tr class="separator:a9e406170943fcd664c9619fda8186736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a6a0911ccc3931e8a56ccc2a1f3caa6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#a6a6a0911ccc3931e8a56ccc2a1f3caa6">doorClosed_U16</a></td></tr>
@@ -132,50 +128,6 @@ Variables</h2></td></tr>
 <tr class="memitem:ad88d6d4fd7b5cc541d798f4a5609a9c5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="door_8c.html#ad88d6d4fd7b5cc541d798f4a5609a9c5">doorPos_U16</a></td></tr>
 <tr class="separator:ad88d6d4fd7b5cc541d798f4a5609a9c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a0b94fa57459c9ab7ed0156c75f3d3eb1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DOOR_CLOSED_OFFSET&#160;&#160;&#160;20</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="door_8c_source.html#l00043">43</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a49f0e1296d9442152bb610de916596f0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MIN_CAL_DOOR_CLOSED_POS&#160;&#160;&#160;60</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="door_8c_source.html#l00045">45</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8731db9307538d5b47669eb4bc9d4285"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UNAFFECTED_SENSOR_VALUE&#160;&#160;&#160;493</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Due to ~0.135 V supply loss to sensor compared with supply to ADC-converter the normal ADC-range will be 0-986 instead of 0-1023. </p>
-
-<p>Definition at line <a class="el" href="door_8c_source.html#l00041">41</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a18ddfadf98515661813203a7f0226c6f"></a>
 <div class="memitem">
@@ -191,7 +143,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00175">175</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00177">177</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -221,7 +173,7 @@ Here is the caller graph for this function:</div>
 <p>Setup ADC conversion. </p>
 <p>Initializes door module. Must be called before Door_Loop. </p>
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00057">57</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00059">59</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -259,7 +211,7 @@ Here is the caller graph for this function:</div>
 
 <p>Updates door state. </p>
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00076">76</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00078">78</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -295,7 +247,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00196">196</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00198">198</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -341,7 +293,7 @@ Here is the caller graph for this function:</div>
 <p>Make an AD conversion </p>
 <dl class="section return"><dt>Returns</dt><dd>door position </dd></dl>
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00121">121</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00123">123</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -376,7 +328,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00180">180</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00182">182</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -408,7 +360,29 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00048">48</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00050">50</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41ad7219be269fcc17db2122a56063ef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> doorClosedOffset_cU08 = 20</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="door_8c_source.html#l00045">45</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 </div>
 </div>
@@ -430,7 +404,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="door_8c_source.html#l00049">49</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+<p>Definition at line <a class="el" href="door_8c_source.html#l00051">51</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 </div>
 </div>
@@ -452,7 +426,52 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="door_8c_source.html#l00049">49</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a34926a19783b83f5af0d83648bc7cfe3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> minCalDoorClosedPos_cU08 = 60</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p>Definition at line <a class="el" href="door_8c_source.html#l00047">47</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6e3896476c443ded3bf276776669dd56"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> unaffectedSensorValue_cU16 = 493</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Due to ~0.135 V supply loss to sensor compared with supply to ADC-converter the normal ADC-range will be 0-986 instead of 0-1023. </p>
+
+<p>Definition at line <a class="el" href="door_8c_source.html#l00043">43</a> of file <a class="el" href="door_8c_source.html">door.c</a>.</p>
 
 </div>
 </div>

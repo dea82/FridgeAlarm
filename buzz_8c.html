@@ -80,7 +80,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -97,13 +96,6 @@ Include dependency graph for buzz.c:</div>
 </div>
 <p><a href="buzz_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ad2b445c1467aa6c552eb47d98dd070e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#ad2b445c1467aa6c552eb47d98dd070e3">BUZZ_ALARM_PERIOD_TIME</a>&#160;&#160;&#160;2000 /* [ms]*/</td></tr>
-<tr class="separator:ad2b445c1467aa6c552eb47d98dd070e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53157b0c521fcb6114549b588626560d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#a53157b0c521fcb6114549b588626560d">BUZZER_FREQ</a>&#160;&#160;&#160;600UL /* [Hz] */</td></tr>
-<tr class="separator:a53157b0c521fcb6114549b588626560d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af5fccc5f751f090c43f156263862bbc0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#af5fccc5f751f090c43f156263862bbc0">turnOn</a> (void)</td></tr>
@@ -119,38 +111,13 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a1fd255ef87398cdf94df103420b02b9e"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#a1fd255ef87398cdf94df103420b02b9e">buzzAlarmPeriodTime_cU16</a> = 2000</td></tr>
+<tr class="separator:a1fd255ef87398cdf94df103420b02b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e9471996e9779dd646a7575f962c3fe"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="type_8h.html#a274720c7817561d261e2b9f74397cef2">tU32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#a2e9471996e9779dd646a7575f962c3fe">buzzerFreq_cU32</a> = 600</td></tr>
+<tr class="separator:a2e9471996e9779dd646a7575f962c3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11289f68cf6cc971126cdfeb3afc18c4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="buzz_8h.html#abcc70ff222bd75ccc609af04f29fb2cc">tBuzz_SoundType_E</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="buzz_8c.html#a11289f68cf6cc971126cdfeb3afc18c4">soundType_E</a></td></tr>
 <tr class="separator:a11289f68cf6cc971126cdfeb3afc18c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="ad2b445c1467aa6c552eb47d98dd070e3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BUZZ_ALARM_PERIOD_TIME&#160;&#160;&#160;2000 /* [ms]*/</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="buzz_8c_source.html#l00036">36</a> of file <a class="el" href="buzz_8c_source.html">buzz.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a53157b0c521fcb6114549b588626560d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BUZZER_FREQ&#160;&#160;&#160;600UL /* [Hz] */</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="buzz_8c_source.html#l00037">37</a> of file <a class="el" href="buzz_8c_source.html">buzz.c</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ae3ec81d9e47f1d24e9a0b57649a30b4c"></a>
 <div class="memitem">
@@ -313,6 +280,50 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a1fd255ef87398cdf94df103420b02b9e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> buzzAlarmPeriodTime_cU16 = 2000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="buzz_8c_source.html#l00036">36</a> of file <a class="el" href="buzz_8c_source.html">buzz.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e9471996e9779dd646a7575f962c3fe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="type_8h.html#a274720c7817561d261e2b9f74397cef2">tU32</a> buzzerFreq_cU32 = 600</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="buzz_8c_source.html#l00037">37</a> of file <a class="el" href="buzz_8c_source.html">buzz.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a11289f68cf6cc971126cdfeb3afc18c4"></a>
 <div class="memitem">
 <div class="memproto">
