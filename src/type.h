@@ -39,10 +39,12 @@ typedef unsigned char tB;
 typedef unsigned char tU08;
 #define MAX_U08 UCHAR_MAX
 
-typedef unsigned int  tU16;
+typedef unsigned int tU16;
 #define MAX_U16 UINT_MAX
 
 typedef signed int tS16;
+
+typedef unsigned long tU32;
 
 #endif
 
