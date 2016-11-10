@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "conf.h"
 #include "type.h"
 
-#define BLINK_PERIOD_TIME 120 /* ms */
+static const tU08 blinkPeriodTime_cU08 = 120; /* ms */
 
 static tLedc_State_E ledState_E = LEDC_OFF_E;
 
@@ -46,7 +46,7 @@ void Ledc_Init(void)
 void Ledc_Loop(void)
 {
     static tU08 counter_U08;
-    if (++counter_U08 > BLINK_PERIOD_TIME / TICK)
+    if (++counter_U08 > blinkPeriodTime_cU08 / TICK)
     {
         counter_U08 = 0;
     }
@@ -73,7 +73,7 @@ void Ledc_Loop(void)
         break;
 
     case LEDC_GREEN_BLINK_E:
-        if (counter_U08 > BLINK_PERIOD_TIME / TICK / 2)
+        if (counter_U08 > blinkPeriodTime_cU08 / TICK / 2)
         {
             IO_SET(GREEN_LED_CFG);
         }
@@ -85,7 +85,7 @@ void Ledc_Loop(void)
         break;
 
     case LEDC_RED_BLINK_E:
-        if (counter_U08 > BLINK_PERIOD_TIME / TICK / 2)
+        if (counter_U08 > blinkPeriodTime_cU08 / TICK / 2)
         {
             IO_SET(RED_LED_CFG);
         }

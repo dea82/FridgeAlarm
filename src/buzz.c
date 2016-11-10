@@ -33,11 +33,11 @@ THE SOFTWARE.
 #include "conf.h"
 #include "type.h"
 
-#define BUZZ_ALARM_PERIOD_TIME 2000 /* [ms]*/
-#define BUZZER_FREQ 600UL /* [Hz] */
+static const tU16 buzzAlarmPeriodTime_cU16 = 2000; /* [ms]*/
+static const tU32 buzzerFreq_cU32 = 600; /* [Hz] */
 #if defined(__AVR_ATtiny13A__)
 /* Lower this for lower consumption and sound level. */
-#define BUZZER_DUTY_CYCLE 10UL /* [%] */
+static const tU08 buzzerDutyCycle_cU08 = 10; /* [%] */
 #endif
 
 static tBuzz_SoundType_E soundType_E;
@@ -52,10 +52,10 @@ void Buzz_Init(void)
  * In this case gives a buzzer frequency of 1690 Hz
  */
 #if F_CPU == 8000000 && defined(__AVR_ATtiny85__)
-    OCR0A = F_CPU / (BUZZER_FREQ * 64 * 2) - 1;
+    OCR0A = F_CPU / (buzzerFreq_cU32 * 64 * 2) - 1;
 #elif F_CPU == 9600000 && defined(__AVR_ATtiny13A__)
-    OCR0A = F_CPU / (BUZZER_FREQ * 64) - 1;
-    OCR0B = (F_CPU / (BUZZER_FREQ * 64) - 1) * BUZZER_DUTY_CYCLE / 100;
+    OCR0A = F_CPU / (buzzerFreq_cU32 * 64) - 1;
+    OCR0B = (F_CPU / (buzzerFreq_cU32 * 64) - 1) * buzzerDutyCycle_cU08 / 100;
 #else
 #error "Buzzer module does not support this combination of MCU and clock frequency";
 #endif
@@ -72,11 +72,11 @@ void Buzz_Loop(void)
     }
     else if (soundType_E == BUZZ_ALARM_E)
     {
-        if (++counter_U08 > BUZZ_ALARM_PERIOD_TIME / TICK)
+        if (++counter_U08 > buzzAlarmPeriodTime_cU16 / TICK)
         {
             counter_U08 = 0;
         }
-        if (counter_U08 < BUZZ_ALARM_PERIOD_TIME / TICK / 2)
+        if (counter_U08 < buzzAlarmPeriodTime_cU16 / TICK / 2)
         {
             turnOn();
         }

@@ -39,10 +39,12 @@ typedef unsigned char tB;
 typedef unsigned char tU08;
 #define MAX_U08 UCHAR_MAX
 
-typedef unsigned int  tU16;
+typedef unsigned int tU16;
 #define MAX_U16 UINT_MAX
 
 typedef signed int tS16;
+
+typedef unsigned long tU32;
 
 #endif
 
@@ -88,7 +90,6 @@ typedef signed int tS16;
 
 /* MATH MACRO DEFINITIONS */
 
-#define ABS(a)     (((a) < 0) ? -(a) : (a))
 #define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
 #define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
 #define LO(a)      ((tU08)((a) & 0xFF))

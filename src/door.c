@@ -29,20 +29,22 @@ THE SOFTWARE.
 #include "door.h"
 
 #include <avr/io.h>
+#include <stdlib.h>
 #include <util/delay.h>
 
 #include "conf.h"
 #include "eepr.h"
 
+
 /**
  * Due to ~0.135 V supply loss to sensor compared with supply to ADC-converter
  * the normal ADC-range will be 0-986 instead of 0-1023.
  */
-#define UNAFFECTED_SENSOR_VALUE 493
+static const tU16 unaffectedSensorValue_cU16 = 493;
 /* Offset from stored position to trigger alarm. [-]*/
-#define DOOR_CLOSED_OFFSET 20
+static const tU08 doorClosedOffset_cU08 = 20;
 /* Minimum accepted door position (calculated offset from 512) [-] */
-#define MIN_CAL_DOOR_CLOSED_POS 60
+static const tU08 minCalDoorClosedPos_cU08 = 60;
 
 static tDoor_State_str doorState_str;
 static tU16 doorClosed_U16;
@@ -79,9 +81,9 @@ void Door_Loop(void)
 
     tDoor_Position_E newposition_E;
     /* Algorithm handles both direction of magnet field */
-    if (doorClosed_U16 < UNAFFECTED_SENSOR_VALUE)
+    if (doorClosed_U16 < unaffectedSensorValue_cU16)
     {
-        if (doorPos_U16 > doorClosed_U16 + DOOR_CLOSED_OFFSET)
+        if (doorPos_U16 > doorClosed_U16 + doorClosedOffset_cU08)
         {
             newposition_E = DOOR_OPEN_E;
         }
@@ -92,7 +94,7 @@ void Door_Loop(void)
     }
     else
     {
-        if (doorPos_U16 < doorClosed_U16 - DOOR_CLOSED_OFFSET)
+        if (doorPos_U16 < doorClosed_U16 - doorClosedOffset_cU08)
         {
             newposition_E = DOOR_OPEN_E;
         }
@@ -181,7 +183,7 @@ static tB withinRange_B(const tU16 sensorValue_U16)
 {
     tB ret_B = FALSE;
     /* Cast should not be a problem due to the 10-bit resolution. */
-    if (ABS((tS16)sensorValue_U16 - UNAFFECTED_SENSOR_VALUE) > MIN_CAL_DOOR_CLOSED_POS)
+    if (abs((tS16)sensorValue_U16 - (tS16)unaffectedSensorValue_cU16) > minCalDoorClosedPos_cU08)
     {
         ret_B = TRUE;
     }
