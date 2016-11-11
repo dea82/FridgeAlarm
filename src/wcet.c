@@ -47,27 +47,28 @@ void Wcet_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08
         cycles_U08 = TCNT1;
     }
 
-    tWcet_ResultBlock_str resultBlock_str =
-        Wcet_CreateResultBlock_str(taskName_c, cycles_U08, prescalerRegister_U08);
+    tWcet_ResultBlock_str resultBlock_str;
+    Wcet_CreateResultBlock_str(&resultBlock_str, taskName_c, cycles_U08, prescalerRegister_U08);
     Uart_TransmitBlock((tU08*)&resultBlock_str, sizeof(resultBlock_str));
 }
 
-tWcet_ResultBlock_str Wcet_CreateResultBlock_str(const char * name_c, const tU08 cycles_U08, const tU08 prescalerRegister_U08)
+void Wcet_CreateResultBlock_str(tWcet_ResultBlock_str * const resultBlock_pstr,
+				const char * name_c,
+				const tU08 cycles_U08,
+				const tU08 prescalerRegister_U08)
 {
-  tWcet_ResultBlock_str resultBlock_str;
-  strcpy_P(resultBlock_str.name_aC, (PGM_P)name_c);
-  resultBlock_str.cycles_U08 = cycles_U08;
-  resultBlock_str.prescaler_U08 = prescalerRegister_U08;
+    strcpy_P(resultBlock_pstr->name_aC, (PGM_P)name_c);
+    resultBlock_pstr->cycles_U08 = cycles_U08;
+    resultBlock_pstr->prescaler_U08 = prescalerRegister_U08;
+    resultBlock_pstr->crc_U08 = 0;
 
-  /* Temporary pointer */
-  tU08 * data_pU08 = (tU08*)&resultBlock_str;
+    /* Temporary pointer */
+    tU08 * data_pU08 = (tU08*)resultBlock_pstr;
 
-  for (tU08 byte_U08 = sizeof(tWcet_ResultBlock_str); byte_U08 > sizeof(((tWcet_ResultBlock_str*)0)->crc_U08); byte_U08--)
-  {
-    resultBlock_str.crc_U08 = crc8_U08(resultBlock_str.crc_U08, *data_pU08++);
-  }
-
-  return resultBlock_str;
+    for (tU08 byte_U08 = sizeof(tWcet_ResultBlock_str); byte_U08 > sizeof(((tWcet_ResultBlock_str*)0)->crc_U08); byte_U08--)
+    {
+        resultBlock_pstr->crc_U08 = crc8_U08(resultBlock_pstr->crc_U08, *data_pU08++);
+    }
 }
 
 static tU08 crc8_U08 (const tU08 inCrc_U08, const tU08 inData_U08)
