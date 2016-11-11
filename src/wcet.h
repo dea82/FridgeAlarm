@@ -40,10 +40,13 @@ typedef struct
  *
  * @param  prescalerRegister_U08  Prescaler register
  */
-void Wcet_StartMeasurement(tU08 prescalerRegister_U08);
+void Wcet_StartMeasurement(const tU08 prescalerRegister_U08);
 void Wcet_StopMeasurement(void);
 void Wcet_OutputResult(const char * taskName_c, const tU08 prescalerRegister_U08);
 #endif
-tWcet_ResultBlock_str Wcet_CreateResultBlock_str(const char name_c[], const tU08 cycles_U08, const tU08 prescalerRegister_U08);
+void Wcet_CreateResultBlock_str(tWcet_ResultBlock_str * const resultBlock_pstr,
+				const char * name_c,
+				const tU08 cycles_U08,
+				const tU08 prescalerRegister_U08);
 
 #endif /* WCET_H_ */
