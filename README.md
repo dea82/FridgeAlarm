@@ -65,19 +65,19 @@ The -B250 makes it slow - however if the clock of the MCU is to slow it might no
 |Attiny13A|0x7A    |0xFA     |
 |Attiny85 |0xE2    |0x55     |
 ### Power consumption
-The following current consumption has been observed with prototype pcb, Attiny85 and magnetic buzzer.
-System mode      |Current consumption [mA]
------------------|:-----------------------:
-Buzzer and LED ON|42
-LED ON			 |2.3
-Deep sleep		 |0.024
-
-The following current consumption has been observed with production pcb, Attiny13A and piezo buzzer.
-System mode      |Current consumption [mA]
------------------|:-----------------------:
-Buzzer and LED ON|5
-LED ON			 |2.2
-Deep sleep		 |0.024
+The following current consumption has been observed: 
+#### Development PCB (Attiny85 with magnetic buzzer)
+|System mode      |Current consumption [mA]|
+|-----------------|:----------------------:|
+|Buzzer and LED ON|42                      |
+|LED ON           |2.3                     |
+|Deep sleep       |0.024                   |
+#### Production PCB (Attiny13A with piezo buzzer)
+|System mode      |Current consumption mA  |
+|-----------------|:----------------------:|
+|Buzzer and LED ON|5                       |
+|LED ON	          |2.2                     |
+|Deep sleep	  |0.024                   |
 
 
 ## Conclusion
