@@ -22,7 +22,6 @@
 
 ; This is a module for measuring time between two points.
 
-#define _SFR_ASM_COMPAT 1
 #define __SFR_OFFSET 0
 
 #include <avr/io.h>
