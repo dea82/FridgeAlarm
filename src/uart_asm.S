@@ -20,7 +20,6 @@
 ;OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;THE SOFTWARE.
 
-#define _SFR_ASM_COMPAT 1
 #define __SFR_OFFSET 0
 
 #include <avr/io.h>
@@ -56,7 +55,6 @@
 
 /* Calculate number of "balance" clock cycles needed. Delay function can only delay with at multiple of 3. This handles 1-2 clock cycles. */
 #define EXTRA_DELAYS ((DELAY_CYCLES + 1) % 3)
-
 
     .global transmit
 transmit:
