@@ -9,10 +9,10 @@ find_program(AVR_OBJCOPY avr-objcopy)
 find_program(AVR_SIZE_TOOL avr-size)
 find_program(AVR_OBJDUMP avr-objdump)
 
-SET(CMAKE_SYSTEM_NAME Generic)
-SET(CMAKE_C_COMPILER ${AVR_CC})
-SET(CMAKE_ASM_COMPILER ${AVR_CC})
-SET(CMAKE_LINKER ${AVR_CC})
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_C_COMPILER ${AVR_CC})
+set(CMAKE_ASM_COMPILER ${AVR_CC})
+set(CMAKE_LINKER ${AVR_CC})
 
 set(AVR_SIZE_ARGS -C;--mcu=${MCU})
 

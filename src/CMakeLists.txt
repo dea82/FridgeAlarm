@@ -28,6 +28,7 @@ message(STATUS "Building for target board: ${TARGET_BOARD}")
 message(STATUS "Current MCU is set to: ${MCU}")
 message(STATUS "Current F_CPU is set to: ${F_CPU}")
 
+
 file(GLOB SRC_FILES "*.S" "*.c" )
 
 SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
