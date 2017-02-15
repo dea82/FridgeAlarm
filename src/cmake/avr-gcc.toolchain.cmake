@@ -1,42 +1,102 @@
-option(MULTI_TARGETS "Add the MCU type to the target file name." ON)
-
-if(MULTI_TARGETS)
-        set(MCU_TYPE_FOR_FILENAME ${MCU})
-endif()
-
+# Find all executables. Makue they are in your PATH
 find_program(AVR_CC avr-gcc)
+#find_program(AVR_CXX avr-g++)
 find_program(AVR_OBJCOPY avr-objcopy)
 find_program(AVR_SIZE_TOOL avr-size)
 find_program(AVR_OBJDUMP avr-objdump)
 
+
 set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_C_COMPILER ${AVR_CC})
+#set(CMAKE_SYSTEM_PROCESSOR avr)
 set(CMAKE_ASM_COMPILER ${AVR_CC})
+set(CMAKE_C_COMPILER ${AVR_CC})
+#set(CMAKE_CXX_COMPILER ${AVR_CXX})
 set(CMAKE_LINKER ${AVR_CC})
 
-set(AVR_SIZE_ARGS -C;--mcu=${MCU})
+set(AVR_SIZE_ARGS -B)
 
-function(add_avr_executable EXECUTABLE_NAME)
-   if(NOT SRC_FILES)
-      message(FATAL_ERROR "No source files given for ${EXECUTABLE_NAME}.")
-   endif(NOT SRC_FILES)
+function(add_avr_executable EXECUTABLE_NAME MCU_TARGET)
 
+  # Check target board parameters
+  if(NOT DEFINED MULTI_TARGET OR MULTI_TARGET)
+    if(NOT TARGET_BOARDS)
+      message(WARNING "Specify valid target boards in TARGET_BOARS.")
+    endif()
+
+    if(NOT TARGET_BOARD)
+      # Target board has not been set as expected
+      if(TARGET_BOARDS)
+	# Print all valid target boards
+	message("Valid target boards are:")
+	foreach(valid_target_board ${TARGET_BOARDS})
+	  message(${valid_target_board})
+	endforeach()
+      endif()
+      message(FATAL_ERROR "TARGET_BOARD has not been specified.")
+    endif()
+    set(FILENAME_POSTFIX -${TARGET_BOARD})
+  endif()
+
+  # MCU shall always be specified!
+  if(NOT DEFINED MCU_TARGET)
+    message(FATAL_ERROR "MCU has not been specified.")
+  endif()
+
+  if(NOT ARGN)
+    message(FATAL_ERROR "No source files given for ${EXECUTABLE_NAME}.")
+  endif(NOT ARGN)
+
+  # Default to gnu99
+  if(NOT DEFINED CSTANDARD)
+    set(CSTANDARD "-std=gnu99")
+  endif()
+    
+  SET(CMAKE_C_FLAGS ${CFLAGS})
+  
    # set file names
-   set(elf_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.elf)
-   set(hex_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.hex)
-   set(map_file ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}.map)
-   set(eeprom_image ${EXECUTABLE_NAME}${MCU_TYPE_FOR_FILENAME}-eeprom.hex)
+   set(elf_file ${EXECUTABLE_NAME}${FILENAME_POSTFIX}.elf)
+   set(hex_file ${EXECUTABLE_NAME}${FILENAME_POSTFIX}.hex)
+   set(map_file ${EXECUTABLE_NAME}${FILENAME_POSTFIX}.map)
+   set(lst_file ${EXECUTABLE_NAME}${FILENAME_POSTFIX}.lst)
+   set(eeprom_image ${EXECUTABLE_NAME}${FILENAME_POSTFIX}-eeprom.hex)
+
+  if(DEFINED TARGET_BOARD)
+    message(STATUS "Building for target board: ${TARGET_BOARD}")
+  endif()
+  message(STATUS "MCU: " ${MCU_TARGET})
+  get_directory_property( DirDefs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS )
+  message(STATUS "Defines:")
+  foreach( d ${DirDefs} )
+    message( STATUS ${d} )
+  endforeach()
+
 
    # elf file
-   add_executable(${elf_file} EXCLUDE_FROM_ALL ${SRC_FILES})
+   add_executable(${elf_file} EXCLUDE_FROM_ALL ${ARGN})
 
-   set_target_properties(
-      ${elf_file}
-      PROPERTIES
-         COMPILE_FLAGS "-mmcu=${MCU} -Os -flto -fdata-sections -ffunction-sections -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums  -Wall -Wextra -Wunused -Wstrict-prototypes -Werror=missing-prototypes -Wunused-macros -Werror -gstabs"
-         LINK_FLAGS "-mmcu=${MCU} -Wl,--gc-sections -mrelax -Wl,-Map,${map_file} -flto -fdata-sections -ffunction-sections -nostartfiles -gstabs"
-   )
-
+   # Optimize for size
+   target_compile_options(${elf_file} PRIVATE -Os)
+   # Set target MCU
+   target_compile_options(${elf_file} PRIVATE -mmcu=${MCU_TARGET})
+   target_link_libraries (${elf_file} PRIVATE -mmcu=${MCU_TARGET})
+   # Various optimization
+   target_compile_options(${elf_file} PRIVATE -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums)
+   # Put functions and data in sections and use Link Time Optimization
+   target_compile_options(${elf_file} PRIVATE -fdata-sections -ffunction-sections -flto)
+   target_link_libraries (${elf_file} PRIVATE -fdata-sections -ffunction-sections -flto)
+   # Warnings
+   target_compile_options(${elf_file} PRIVATE -Wall -Wextra -Wunused -Wstrict-prototypes -Werror=missing-prototypes -Wunused-macros -Werror)
+   # Debug info
+   target_compile_options(${elf_file} PRIVATE -gstabs)
+   target_link_libraries (${elf_file} PRIVATE -gstabs)
+   # Map file
+   target_link_libraries (${elf_file} PRIVATE -Wl,-Map,${map_file})
+   # Relaxation
+   target_link_libraries (${elf_file} PRIVATE -Wl,-gc-sections -mrelax)
+   if(WITHOUT_STARTFILE)
+     target_link_libraries (${elf_file} PRIVATE -nostartfiles)
+   endif()
+     
    add_custom_command(
       OUTPUT ${hex_file}
       COMMAND
@@ -54,12 +114,19 @@ function(add_avr_executable EXECUTABLE_NAME)
             --change-section-lma .eeprom=0 --no-change-warnings
             -O ihex ${elf_file} ${eeprom_image}
       DEPENDS ${elf_file}
-   )
+      )
+
+    add_custom_command(
+      OUTPUT ${lst_file}
+      COMMAND ${AVR_OBJDUMP} -h -S ${elf_file} > ${lst_file}
+      DEPENDS ${elf_file}
+      )
+    
 
    add_custom_target(
       ${EXECUTABLE_NAME}
       ALL
-      DEPENDS ${hex_file} ${eeprom_image}
+      DEPENDS ${hex_file} ${eeprom_image} ${lst_file}
    )
 
    set_target_properties(
@@ -78,44 +145,44 @@ function(add_avr_executable EXECUTABLE_NAME)
    # upload - with avrdude
    add_custom_target(
       upload_${EXECUTABLE_NAME}
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} ${AVR_UPLOADTOOL_OPTIONS}
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} ${AVR_UPLOADTOOL_OPTIONS}
          -U flash:w:${hex_file}
          -P ${AVR_UPLOADTOOL_PORT}
       DEPENDS ${hex_file}
-      COMMENT "Uploading ${hex_file} to ${AVR_MCU} using ${AVR_PROGRAMMER}"
+      COMMENT "Uploading ${hex_file} to ${MCU_TARGET} using ${AVR_PROGRAMMER}"
    )
 
    # upload eeprom only - with avrdude
    # see also bug http://savannah.nongnu.org/bugs/?40142
    add_custom_target(
       upload_eeprom
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} ${AVR_UPLOADTOOL_OPTIONS}
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} ${AVR_UPLOADTOOL_OPTIONS}
          -U eeprom:w:${eeprom_image}
          -P ${AVR_UPLOADTOOL_PORT}
       DEPENDS ${eeprom_image}
-      COMMENT "Uploading ${eeprom_image} to ${AVR_MCU} using ${AVR_PROGRAMMER}"
+      COMMENT "Uploading ${eeprom_image} to ${MCU_TARGET} using ${AVR_PROGRAMMER}"
    )
 
    # get status
    add_custom_target(
       get_status
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT} -n -v
-      COMMENT "Get status from ${AVR_MCU}"
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT} -n -v
+      COMMENT "Get status from ${MCU_TARGET}"
    )
 
    # get fuses
    add_custom_target(
       get_fuses
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT} -n
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT} -n
          -U lfuse:r:-:b
          -U hfuse:r:-:b
-      COMMENT "Get fuses from ${AVR_MCU}"
+      COMMENT "Get fuses from ${MCU_TARGET}"
    )
 
    # set fuses
    add_custom_target(
       set_fuses
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
          -U lfuse:w:${AVR_L_FUSE}:m
          -U hfuse:w:${AVR_H_FUSE}:m
          COMMENT "Setup: High Fuse: ${AVR_H_FUSE} Low Fuse: ${AVR_L_FUSE}"
@@ -124,17 +191,17 @@ function(add_avr_executable EXECUTABLE_NAME)
    # get oscillator calibration
    add_custom_target(
       get_calibration
-         ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
-         -U calibration:r:${AVR_MCU}_calib.tmp:r
-         COMMENT "Write calibration status of internal oscillator to ${AVR_MCU}_calib.tmp."
+         ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
+         -U calibration:r:${MCU_TARGET}_calib.tmp:r
+         COMMENT "Write calibration status of internal oscillator to ${MCU_TARGET}_calib.tmp."
    )
 
    # set oscillator calibration
    add_custom_target(
       set_calibration
-      ${AVR_UPLOADTOOL} -p ${AVR_MCU} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
-         -U calibration:w:${AVR_MCU}_calib.hex
-         COMMENT "Program calibration status of internal oscillator from ${AVR_MCU}_calib.hex."
+      ${AVR_UPLOADTOOL} -p ${MCU_TARGET} -c ${AVR_PROGRAMMER} -P ${AVR_UPLOADTOOL_PORT}
+         -U calibration:w:${MCU_TARGET}_calib.hex
+         COMMENT "Program calibration status of internal oscillator from ${MCU_TARGET}_calib.hex."
    )
 
    # disassemble
@@ -144,4 +211,4 @@ function(add_avr_executable EXECUTABLE_NAME)
       DEPENDS ${elf_file}
    )
 
-endfunction(add_avr_executable)
+endfunction()
