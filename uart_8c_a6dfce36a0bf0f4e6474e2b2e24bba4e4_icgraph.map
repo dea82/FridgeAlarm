@@ -1,3 +1,6 @@
 <map id="Uart_TransmitBlock" name="Uart_TransmitBlock">
-<area shape="rect" id="node2" href="$uart_8h.html#a1a97c368c5f235450ebaa9dc4c9d1662" title="Uart_TransmitByte" alt="" coords="193,5,325,32"/>
+<area shape="rect" id="node2" href="$uart_8h.html#a1a97c368c5f235450ebaa9dc4c9d1662" title="Uart_TransmitByte" alt="" coords="195,5,327,32"/>
+<area shape="rect" id="node3" href="$wcet_8c.html#acfcc31ef3c78ccf319b2e395be1de260" title="Wcet_OutputResult" alt="" coords="193,56,330,83"/>
+<area shape="rect" id="node4" href="$main_8c.html#a4f1ae375d43553a6d05ecfe4b6ef91a0" title="dispatchTask" alt="" coords="379,56,479,83"/>
+<area shape="rect" id="node5" href="$main_8c.html#ab10c7c26d31ffbee82d7dc42ffb9f69d" title="__attribute__" alt="" coords="529,56,626,83"/>
 </map>

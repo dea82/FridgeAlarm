@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['doorclosed_5fu16',['doorClosed_U16',['../door_8c.html#a6a6a0911ccc3931e8a56ccc2a1f3caa6',1,'door.c']]],
-  ['doorclosedoffset_5fcu08',['doorClosedOffset_cU08',['../door_8c.html#a41ad7219be269fcc17db2122a56063ef',1,'door.c']]],
-  ['doorpos_5fu16',['doorPos_U16',['../door_8c.html#ad88d6d4fd7b5cc541d798f4a5609a9c5',1,'door.c']]],
-  ['doorstate_5fstr',['doorState_str',['../door_8c.html#a9e406170943fcd664c9619fda8186736',1,'door.c']]]
+  ['cathodepin',['cathodePin',['../structLedComponent__t.html#a06c140abf46aee561cd9e92428879441',1,'LedComponent_t']]],
+  ['crc_5fu08',['crc_U08',['../structtWcet__ResultBlock__str.html#a9af016ccddc618526a37cbb43b75911c',1,'tWcet_ResultBlock_str']]],
+  ['cycles_5fu08',['cycles_U08',['../structtWcet__ResultBlock__str.html#a8ae68c320307994f22ac2b5e70eb5c20',1,'tWcet_ResultBlock_str']]]
 ];

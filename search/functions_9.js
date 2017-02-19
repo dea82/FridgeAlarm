@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['transmit',['transmit',['../uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.c']]],
-  ['turnoff',['turnOff',['../buzz_8c.html#aeb163164023b67f3c86054564cdff9bb',1,'buzz.c']]],
-  ['turnon',['turnOn',['../buzz_8c.html#af5fccc5f751f090c43f156263862bbc0',1,'buzz.c']]]
+  ['setgpiopinhi',['setGpioPinHi',['../gpio_8c.html#a21a224f9aa9285e9856776dcb148edd0',1,'setGpioPinHi(const GPIOPin_t *const GPIOPin):&#160;gpio.c'],['../gpio_8h.html#a21a224f9aa9285e9856776dcb148edd0',1,'setGpioPinHi(const GPIOPin_t *const GPIOPin):&#160;gpio.c']]],
+  ['setgpiopinlo',['setGpioPinLo',['../gpio_8c.html#aa70bde0fe432ff236a4f63cdd0f63d0a',1,'setGpioPinLo(const GPIOPin_t *const GPIOPin):&#160;gpio.c'],['../gpio_8h.html#aa70bde0fe432ff236a4f63cdd0f63d0a',1,'setGpioPinLo(const GPIOPin_t *const GPIOPin):&#160;gpio.c']]]
 ];

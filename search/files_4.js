@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ledc_2ec',['ledc.c',['../ledc_8c.html',1,'']]],
-  ['ledc_2eh',['ledc.h',['../ledc_8h.html',1,'']]]
+  ['gpio_2ec',['gpio.c',['../gpio_8c.html',1,'']]],
+  ['gpio_2eh',['gpio.h',['../gpio_8h.html',1,'']]]
 ];

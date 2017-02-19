@@ -12,6 +12,7 @@ var searchData=
   ['ledc_5fred_5fe',['LEDC_RED_E',['../ledc_8h.html#a26ca41b40a85995225f063c89e2d8c3da149eeb9d7e96c0593f09fd10a6f4cdd1',1,'ledc.h']]],
   ['ledc_5fsetorange',['Ledc_SetOrange',['../ledc_8c.html#ae094e2d4b446d91fa17c2648e89d6b50',1,'Ledc_SetOrange(void):&#160;ledc.c'],['../ledc_8h.html#ae094e2d4b446d91fa17c2648e89d6b50',1,'Ledc_SetOrange(void):&#160;ledc.c']]],
   ['ledc_5fsetstate',['Ledc_SetState',['../ledc_8c.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c'],['../ledc_8h.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c']]],
+  ['ledcomponent_5ft',['LedComponent_t',['../structLedComponent__t.html',1,'']]],
   ['ledstate_5fe',['ledState_E',['../ledc_8c.html#ad8ea83d4f25a8c98b569fb3a34b2c89d',1,'ledc.c']]],
   ['lights_5fon_5fdoor_5fclosed',['LIGHTS_ON_DOOR_CLOSED',['../conf_8h.html#a48d647f8beed79212846fa76a4dc3dd0',1,'conf.h']]],
   ['lo',['LO',['../type_8h.html#a4ed3ab18698eb5b4437a569150e92960',1,'type.h']]]
