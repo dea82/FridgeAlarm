@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-#if defined(__AVR_ATtiny85__)
 #include <avr/pgmspace.h>
 
 #include "wcet.h"
@@ -92,4 +91,3 @@ static tU08 crc8_U08 (const tU08 inCrc_U08, const tU08 inData_U08)
     }
     return data_U08;
 }
-#endif

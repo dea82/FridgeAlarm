@@ -26,8 +26,7 @@
 
 #include <avr/io.h>
 
-#if defined(__AVR_ATtiny85__)
-    .section .text
+.section .text
 
 ;############################################################
 ;#  FUNCTION: Wcet_StartMeasurement
@@ -58,4 +57,3 @@ Wcet_StartMeasurement:
     ret
 
     .end
-#endif

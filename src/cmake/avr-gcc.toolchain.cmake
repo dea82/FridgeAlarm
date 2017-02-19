@@ -1,16 +1,18 @@
 # Find all executables. Makue they are in your PATH
 find_program(AVR_CC avr-gcc)
-#find_program(AVR_CXX avr-g++)
+find_program(AVR_CXX avr-g++)
 find_program(AVR_OBJCOPY avr-objcopy)
 find_program(AVR_SIZE_TOOL avr-size)
 find_program(AVR_OBJDUMP avr-objdump)
 
+# Todo: Check if programs were found. Otherwise there is
+# a risk that x86 gcc is called.
 
 set(CMAKE_SYSTEM_NAME Generic)
-#set(CMAKE_SYSTEM_PROCESSOR avr)
+set(CMAKE_SYSTEM_PROCESSOR avr)
 set(CMAKE_ASM_COMPILER ${AVR_CC})
 set(CMAKE_C_COMPILER ${AVR_CC})
-#set(CMAKE_CXX_COMPILER ${AVR_CXX})
+set(CMAKE_CXX_COMPILER ${AVR_CXX})
 set(CMAKE_LINKER ${AVR_CC})
 
 set(AVR_SIZE_ARGS -B)
