@@ -1,17 +1,17 @@
----
 sudo: required
 dist: trusty
 
-language: c
-
-compiler:
-    - gcc
+services:
+  - docker
 
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
   - sudo apt-get update -qq
+# Setup docker container
+  - docker build -t build_image .
+  - docker run -itd -v $TRAVIS_BUILD_DIR:/repo --name build_container build_image
 install:
-  - sudo apt-get install -qq gcc-avr binutils-avr avr-libc doxygen graphviz
+  - sudo apt-get install -qq doxygen graphviz
 
 env:
   global:
@@ -30,12 +30,8 @@ addons:
     build_command: "make -C src MCU_TARGET=attiny13a F_CPU=9600000"
     branch_pattern: coverity-scan
 
-script: 
-  - make -C src MCU_TARGET=attiny13a F_CPU=9600000
-  - make -C src MCU_TARGET=attiny85 F_CPU=8000000
-  - make -C src clean
-  # Attiny does not have a Timer1 => CPU_LOAD impossible
-  - make -C src MCU_TARGET=attiny13a F_CPU=9600000 DEBUG_ENABLE=1 WCET=0 BAUD_RATE=57600
-  - make -C src MCU_TARGET=attiny85 F_CPU=8000000 DEBUG_ENABLE=1 WCET=1 BAUD_RATE=57600
+script:  
+  - docker exec build_container cmake -H/repo/src -B/build -DTARGET_BOARD=PRODUCTION
+  - docker exec build_container cmake --build /build
   # Deploy doxygen documentation to GitHub Pages
   - ./.deployment/travis/doxygen.sh
