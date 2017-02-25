@@ -21,12 +21,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-#include <avr/pgmspace.h>
-
 #include "wcet.h"
-#include "uart.h"
 
-static tU08 crc8_U08 (const tU08 inCrc_U08, const  tU08 inData_U08);
+#include <avr/io.h>
+#include <avr/pgmspace.h>
+#include <util/crc16.h>
+
+#include "uart.h"
 
 FORCE_INLINE void Wcet_StopMeasurement(void)
 {
@@ -66,28 +67,6 @@ void Wcet_CreateResultBlock_str(tWcet_ResultBlock_str * const resultBlock_pstr,
 
     for (tU08 byte_U08 = sizeof(tWcet_ResultBlock_str); byte_U08 > sizeof(((tWcet_ResultBlock_str*)0)->crc_U08); byte_U08--)
     {
-        resultBlock_pstr->crc_U08 = crc8_U08(resultBlock_pstr->crc_U08, *data_pU08++);
+        resultBlock_pstr->crc_U08 = _crc8_ccitt_update(resultBlock_pstr->crc_U08, *data_pU08++);
     }
-}
-
-static tU08 crc8_U08 (const tU08 inCrc_U08, const tU08 inData_U08)
-{
-    tU08 i_U08;
-    tU08 data_U08;
-
-    data_U08 = inCrc_U08 ^ inData_U08;
-
-    for ( i_U08 = 0; i_U08 < 8; i_U08++ )
-    {
-        if (( data_U08 & 0x80 ) != 0 )
-        {
-            data_U08 <<= 1;
-            data_U08 ^= 0x07;
-        }
-        else
-        {
-            data_U08 <<= 1;
-        }
-    }
-    return data_U08;
 }
