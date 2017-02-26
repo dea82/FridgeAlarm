@@ -116,13 +116,6 @@ function(add_avr_executable EXECUTABLE_NAME MCU_TARGET)
          ADDITIONAL_MAKE_CLEAN_FILES "${map_file}"
    )
 
-   # disassemble
-   add_custom_target(
-      disassemble_${EXECUTABLE_NAME}
-      ${AVR_OBJDUMP} -h -S ${elf_file} > ${EXECUTABLE_NAME}.lst
-      DEPENDS ${elf_file}
-   )
-
 endfunction(add_avr_executable)
 
 function(avr_compile_definitions EXECUTABLE_NAME TARGET_DEFINITIONS)
