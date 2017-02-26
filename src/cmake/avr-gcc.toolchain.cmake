@@ -5,6 +5,10 @@ find_program(AVR_OBJCOPY avr-objcopy)
 find_program(AVR_SIZE_TOOL avr-size)
 find_program(AVR_OBJDUMP avr-objdump)
 
+if(NOT AVR_CC)
+  message(FATAL_ERROR "avr-gcc not found!")
+endif()
+
 # Todo: Check if programs were found. Otherwise there is
 # a risk that x86 gcc is called.
 
@@ -73,48 +77,43 @@ function(add_avr_executable EXECUTABLE_NAME MCU_TARGET)
      
   add_custom_command(
     OUTPUT ${hex_file}
-    COMMAND
-      ${AVR_OBJCOPY} -j .text -j .data -O ihex ${elf_file} ${hex_file}
-    COMMAND
-      ${AVR_SIZE_TOOL} ${AVR_SIZE_ARGS} ${elf_file}
+    COMMAND ${AVR_OBJCOPY} -j .text -j .data -O ihex ${elf_file} ${hex_file}
+    COMMAND ${AVR_SIZE_TOOL} ${AVR_SIZE_ARGS} ${elf_file}
     DEPENDS ${elf_file}
-   )
+  )
 
-   # eeprom
-   add_custom_command(
-      OUTPUT ${eeprom_image}
-      COMMAND
-         ${AVR_OBJCOPY} -j .eeprom --set-section-flags=.eeprom=alloc,load
-            --change-section-lma .eeprom=0 --no-change-warnings
-            -O ihex ${elf_file} ${eeprom_image}
-      DEPENDS ${elf_file}
-      )
+  # eeprom
+  add_custom_command(
+    OUTPUT ${eeprom_image}
+    COMMAND ${AVR_OBJCOPY} -j .eeprom --set-section-flags=.eeprom=alloc,load
+      --change-section-lma .eeprom=0 --no-change-warnings
+      -O ihex ${elf_file} ${eeprom_image}
+    DEPENDS ${elf_file}
+  )
 
-    add_custom_command(
-      OUTPUT ${lst_file}
-      COMMAND ${AVR_OBJDUMP} -h -S ${elf_file} > ${lst_file}
-      DEPENDS ${elf_file}
-      )
+  add_custom_command(
+    OUTPUT ${lst_file}
+    COMMAND ${AVR_OBJDUMP} -h -S ${elf_file} > ${lst_file}
+    DEPENDS ${elf_file}
+  )
     
 
-   add_custom_target(
-      ${EXECUTABLE_NAME}
-      ALL
-      DEPENDS ${hex_file} ${eeprom_image} ${lst_file}
-   )
+  add_custom_target(
+    ${EXECUTABLE_NAME}
+    ALL
+    DEPENDS ${hex_file} ${eeprom_image} ${lst_file}
+  )
 
-   set_target_properties(
-      ${EXECUTABLE_NAME}
-      PROPERTIES
-         OUTPUT_NAME "${elf_file}"
-   )
+  set_target_properties(
+    ${EXECUTABLE_NAME}
+    PROPERTIES OUTPUT_NAME "${elf_file}"
+  )
 
-   # clean
-   get_directory_property(clean_files ADDITIONAL_MAKE_CLEAN_FILES)
-   set_directory_properties(
-      PROPERTIES
-         ADDITIONAL_MAKE_CLEAN_FILES "${clean_files};${map_file}"
-   )
+  # clean
+  get_directory_property(clean_files ADDITIONAL_MAKE_CLEAN_FILES)
+  set_directory_properties(
+    PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${clean_files};${map_file}"
+  )
 
 endfunction(add_avr_executable)
 
