@@ -1,5 +1,5 @@
 <map id="wcet.c" name="wcet.c">
-<area shape="rect" id="node3" href="$wcet_8h.html" title="wcet.h" alt="" coords="144,80,205,107"/>
-<area shape="rect" id="node6" href="$uart_8h.html" title="uart.h" alt="" coords="230,80,284,107"/>
-<area shape="rect" id="node4" href="$type_8h.html" title="type.h" alt="" coords="187,155,244,181"/>
+<area shape="rect" id="node2" href="$wcet_8h.html" title="wcet.h" alt="" coords="5,80,67,107"/>
+<area shape="rect" id="node8" href="$uart_8h.html" title="uart.h" alt="" coords="431,80,485,107"/>
+<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="217,155,275,181"/>
 </map>

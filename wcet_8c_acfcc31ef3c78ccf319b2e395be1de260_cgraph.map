@@ -1,6 +1,5 @@
 <map id="Wcet_OutputResult" name="Wcet_OutputResult">
 <area shape="rect" id="node2" href="$wcet_8c.html#ae2a523d21bb49f464da78792078557ce" title="Wcet_CreateResultBlock_str" alt="" coords="192,5,384,32"/>
-<area shape="rect" id="node4" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="219,56,357,83"/>
-<area shape="rect" id="node3" href="$wcet_8c.html#abbdc4599910379b3af9f33e48dfb323d" title="crc8_U08" alt="" coords="433,5,511,32"/>
-<area shape="rect" id="node5" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="437,56,507,83"/>
+<area shape="rect" id="node3" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="219,56,357,83"/>
+<area shape="rect" id="node4" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="432,56,501,83"/>
 </map>

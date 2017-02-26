@@ -2,7 +2,6 @@
 <area shape="rect" id="node2" href="$wcet_8c.html#ada1cb8fe8ab9fc9c30648db21c8558c2" title="Wcet_StopMeasurement" alt="" coords="155,5,322,32"/>
 <area shape="rect" id="node3" href="$wcet_8c.html#acfcc31ef3c78ccf319b2e395be1de260" title="Wcet_OutputResult" alt="" coords="170,56,307,83"/>
 <area shape="rect" id="node4" href="$wcet_8c.html#ae2a523d21bb49f464da78792078557ce" title="Wcet_CreateResultBlock_str" alt="" coords="371,31,563,57"/>
-<area shape="rect" id="node6" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="397,81,536,108"/>
-<area shape="rect" id="node5" href="$wcet_8c.html#abbdc4599910379b3af9f33e48dfb323d" title="crc8_U08" alt="" coords="611,31,690,57"/>
-<area shape="rect" id="node7" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="616,81,685,108"/>
+<area shape="rect" id="node5" href="$uart_8c.html#a6dfce36a0bf0f4e6474e2b2e24bba4e4" title="Uart_TransmitBlock" alt="" coords="397,81,536,108"/>
+<area shape="rect" id="node6" href="$uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7" title="transmit" alt="" coords="611,81,680,108"/>
 </map>
