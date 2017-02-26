@@ -37,10 +37,10 @@ THE SOFTWARE.
 typedef unsigned char tB;
 
 typedef unsigned char tU08;
-#define MAX_U08 UCHAR_MAX
+#define MAX_U08 UINT8_MAX
 
 typedef unsigned int tU16;
-#define MAX_U16 UINT_MAX
+#define MAX_U16 UINT16_MAX
 
 typedef signed int tS16;
 
