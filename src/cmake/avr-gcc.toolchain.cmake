@@ -113,7 +113,7 @@ function(add_avr_executable EXECUTABLE_NAME MCU_TARGET)
    get_directory_property(clean_files ADDITIONAL_MAKE_CLEAN_FILES)
    set_directory_properties(
       PROPERTIES
-         ADDITIONAL_MAKE_CLEAN_FILES "${map_file}"
+         ADDITIONAL_MAKE_CLEAN_FILES "${clean_files};${map_file}"
    )
 
 endfunction(add_avr_executable)
