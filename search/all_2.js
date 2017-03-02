@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['blinkperiodtime_5fcu08',['blinkPeriodTime_cU08',['../ledc_8c.html#a9918dccd433709c26813e33e373187fd',1,'ledc.c']]],
+  ['blinkperiodtime_5fu08c',['blinkPeriodTime_U08c',['../ledc_8c.html#a505254666565d93b56475697f1177c40',1,'ledc.c']]],
   ['bods',['BODS',['../type_8h.html#af24b1a304a0f69164359713e85a70f58',1,'type.h']]],
   ['bodse',['BODSE',['../type_8h.html#abe3a1fad8a89c3a3f97037a6a90c5fb8',1,'type.h']]],
   ['butt_2ec',['butt.c',['../butt_8c.html',1,'']]],

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['deep_5fsleep_5ftime',['DEEP_SLEEP_TIME',['../conf_8h.html#abe0e16d729c50c7794dd99983b1f47c4',1,'conf.h']]],
   ['dispatchtask',['dispatchTask',['../main_8c.html#a4f1ae375d43553a6d05ecfe4b6ef91a0',1,'main.c']]],
   ['door_2ec',['door.c',['../door_8c.html',1,'']]],
   ['door_2eh',['door.h',['../door_8h.html',1,'']]],

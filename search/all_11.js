@@ -7,7 +7,7 @@ var searchData=
   ['tcalibrationstate_5fe',['tCalibrationState_E',['../cont_8c.html#a0533213d0aea16d2cb7577e4dcf99867',1,'cont.c']]],
   ['tdoor_5fposition_5fe',['tDoor_Position_E',['../door_8h.html#a4afe719e053ce0b1d6a9a1558cb6f244',1,'door.h']]],
   ['tdoor_5fstate_5fstr',['tDoor_State_str',['../structtDoor__State__str.html',1,'']]],
-  ['tick',['TICK',['../conf_8h.html#a7d5ee1cc1e801872efa1ea7486189019',1,'conf.h']]],
+  ['tick_5fu08c',['tick_U08c',['../conf_8c.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3',1,'tick_U08c():&#160;conf.c'],['../conf_8h.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3',1,'tick_U08c():&#160;conf.h']]],
   ['tickinstate_5fu08',['tickInState_U08',['../structtButt__State__str.html#ac7d8615117ef2c001051731ac24bcc38',1,'tButt_State_str']]],
   ['ticksinstate_5fu16',['ticksInState_U16',['../structtDoor__State__str.html#a4738085a71a79a1e9edb15003145dae3',1,'tDoor_State_str']]],
   ['tledc_5fstate_5fe',['tLedc_State_E',['../ledc_8h.html#a26ca41b40a85995225f063c89e2d8c3d',1,'ledc.h']]],

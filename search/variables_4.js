@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['filtertime_5fcu08',['filterTime_cU08',['../butt_8c.html#af57800601c8de13dfc8fa857e435ea8b',1,'butt.c']]]
+  ['filtertime_5fu08c',['filterTime_U08c',['../butt_8c.html#a43824760724dd16fdb9fce203bdfdd9a',1,'butt.c']]]
 ];

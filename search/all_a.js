@@ -14,6 +14,6 @@ var searchData=
   ['ledc_5fsetstate',['Ledc_SetState',['../ledc_8c.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c'],['../ledc_8h.html#ae862cdf1a8640dd65a5234125f710f04',1,'Ledc_SetState(const tLedc_State_E state_E):&#160;ledc.c']]],
   ['ledcomponent_5ft',['LedComponent_t',['../structLedComponent__t.html',1,'']]],
   ['ledstate_5fe',['ledState_E',['../ledc_8c.html#ad8ea83d4f25a8c98b569fb3a34b2c89d',1,'ledc.c']]],
-  ['lights_5fon_5fdoor_5fclosed',['LIGHTS_ON_DOOR_CLOSED',['../conf_8h.html#a48d647f8beed79212846fa76a4dc3dd0',1,'conf.h']]],
+  ['lightsondoorclosed_5fu16c',['lightsOnDoorClosed_U16c',['../conf_8c.html#a5767df22857634845e3af60ade25c42c',1,'lightsOnDoorClosed_U16c():&#160;conf.c'],['../conf_8h.html#a5767df22857634845e3af60ade25c42c',1,'lightsOnDoorClosed_U16c():&#160;conf.c']]],
   ['lo',['LO',['../type_8h.html#a4ed3ab18698eb5b4437a569150e92960',1,'type.h']]]
 ];

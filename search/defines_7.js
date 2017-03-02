@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hi',['HI',['../type_8h.html#af5151d0b21ecb38f78c10b10abc9d4f7',1,'type.h']]]
+  ['lo',['LO',['../type_8h.html#a4ed3ab18698eb5b4437a569150e92960',1,'type.h']]]
 ];

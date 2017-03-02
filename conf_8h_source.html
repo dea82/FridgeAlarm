@@ -112,77 +112,78 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;avr/io.h&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/* Time the button shall be pressed for a calibration. [ms] */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="conf_8h.html#ac4b804a7e7f4599d0d6a9aa8facca626">   31</a></span>&#160;<span class="preprocessor">#define CALIBRATION_TIME_BUTTON 4000</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="comment">/* Time before the system goes to power save mode when door is closed. [ms] */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="conf_8h.html#abe0e16d729c50c7794dd99983b1f47c4">   33</a></span>&#160;<span class="preprocessor">#define DEEP_SLEEP_TIME 2000</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span><span class="comment">/* Time before the alarm goes of with open door. [ms] */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="conf_8h.html#ab9c5f6e3e0873fe6ce0af2a7267f1fad">   35</a></span>&#160;<span class="preprocessor">#define ALARM_OPEN 40000</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span><span class="comment">/* Lights on after door closed [ms] */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="conf_8h.html#a48d647f8beed79212846fa76a4dc3dd0">   37</a></span>&#160;<span class="preprocessor">#define LIGHTS_ON_DOOR_CLOSED 2000</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span><span class="comment">/* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="conf_8h.html#a60e2fd53d777de6fbd4b5e8044a31ad0">   39</a></span>&#160;<span class="preprocessor">#define MIN_TIME_AWAKE 100</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="type_8h.html">type.h</a>&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef __ASSEMBLER__</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> <a class="code" href="conf_8h.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3">tick_U08c</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> <a class="code" href="conf_8h.html#a6acd438ceb80293c6770a3616fb0621d">calibrationTimeButton_U16c</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> <a class="code" href="conf_8h.html#aaa824d7eab08e729e36ce8156f8786fc">alarmOpen_U16c</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="conf_8h.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3">   35</a></span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> <a class="code" href="conf_8h.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3">tick_U08c</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a> <a class="code" href="conf_8h.html#a5767df22857634845e3af60ade25c42c">lightsOnDoorClosed_U16c</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> <a class="code" href="conf_8h.html#aa2a8951ac3fb3edb9e1782e1292746a1">minTimeAwake_U08c</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> <a class="code" href="conf_8h.html#a5e97b733f57e47a8c0ce21bc479dc054">calibratedClosedPosAddress_U08c</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/* Milliseconds between each loop. */</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="conf_8h.html#a7d5ee1cc1e801872efa1ea7486189019">   42</a></span>&#160;<span class="preprocessor">#define TICK 16</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="conf_8h.html#a11d3481378af63a98ffe0c20650f3509">   44</a></span>&#160;<span class="preprocessor">#define CALIBRATED_CLOSED_POS_ADDRESS 0</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/* Inherited defines */</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="conf_8h.html#aaaf6c77e3b8fec12ad625225a08c4f28">   47</a></span>&#160;<span class="preprocessor">#define UART_ENABLE (DEBUG_ENABLE | WCET)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/* Rationale why Timer0 and PRADC is not disabled:</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * The module is disconnected and all registers connected</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * to the module is frozen and not accessible,</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * Buzz_Init and Dsen_init will fail to set registers. */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#if defined(__AVR_ATtiny85__)</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#if WCET</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span><span class="comment">/* See comment above why these bits are choosen. */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define PRR_INIT _BV(PRUSI)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM1))</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#elif defined(__AVR_ATtiny13A__)</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define PRR_INIT (0)</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WDIF WDTIF</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WDIE WDTIE</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Conf module does not support selected MCU.&quot;</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*************************************************</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * PIN CONFIGURATION</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> *************************************************/</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#define DOOR_CFG        B,3</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUTT_CFG        B,5</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if WCET</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define RED_LED_CFG     B,1</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define RED_LED_CFG     B,2</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if defined(__AVR_ATtiny85__)</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GREEN_LED_CFG   B,1</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUZZ_CFG        B,0</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GREEN_LED_CFG   B,0</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUZZ_CFG        B,1</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DOOR_SWITCH_CFG B,4</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define UART_CFG        B,2</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define DDRB_INIT   0b00010111</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PORTB_INIT  0b00100000</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Not supported MCU.&quot;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CONF_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/* Rationale why Timer0 and PRADC is not disabled:</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * The module is disconnected and all registers connected</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * to the module is frozen and not accessible,</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * Buzz_Init and Dsen_init will fail to set registers. */</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#if defined(__AVR_ATtiny85__)</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#if WCET</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span><span class="comment">/* See comment above why these bits are choosen. */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define PRR_INIT _BV(PRUSI)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PRR_INIT (_BV(PRUSI) | _BV(PRTIM1))</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#elif defined(__AVR_ATtiny13A__)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define PRR_INIT (0)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WDIF WDTIF</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WDIE WDTIE</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Conf module does not support selected MCU.&quot;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/*************************************************</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * PIN CONFIGURATION</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> *************************************************/</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#define DOOR_CFG        B,3</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUTT_CFG        B,5</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if WCET</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define RED_LED_CFG     B,1</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define RED_LED_CFG     B,2</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if defined(__AVR_ATtiny85__)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GREEN_LED_CFG   B,1</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUZZ_CFG        B,0</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GREEN_LED_CFG   B,0</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define BUZZ_CFG        B,1</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DOOR_SWITCH_CFG B,4</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define UART_CFG        B,2</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#define DDRB_INIT   0b00010111</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PORTB_INIT  0b00100000</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#error &quot;Not supported MCU.&quot;</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CONF_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="type_8h_html_a3e22901eae1672058ba1618c62036e07"><div class="ttname"><a href="type_8h.html#a3e22901eae1672058ba1618c62036e07">tU16</a></div><div class="ttdeci">unsigned int tU16</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00042">type.h:42</a></div></div>
+<div class="ttc" id="conf_8h_html_a6acd438ceb80293c6770a3616fb0621d"><div class="ttname"><a href="conf_8h.html#a6acd438ceb80293c6770a3616fb0621d">calibrationTimeButton_U16c</a></div><div class="ttdeci">const tU16 calibrationTimeButton_U16c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8c_source.html#l00013">conf.c:13</a></div></div>
+<div class="ttc" id="conf_8h_html_a5e97b733f57e47a8c0ce21bc479dc054"><div class="ttname"><a href="conf_8h.html#a5e97b733f57e47a8c0ce21bc479dc054">calibratedClosedPosAddress_U08c</a></div><div class="ttdeci">const tU08 calibratedClosedPosAddress_U08c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8c_source.html#l00025">conf.c:25</a></div></div>
+<div class="ttc" id="conf_8h_html_aaa824d7eab08e729e36ce8156f8786fc"><div class="ttname"><a href="conf_8h.html#aaa824d7eab08e729e36ce8156f8786fc">alarmOpen_U16c</a></div><div class="ttdeci">const tU16 alarmOpen_U16c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8c_source.html#l00016">conf.c:16</a></div></div>
+<div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
+<div class="ttc" id="conf_8h_html_a38d0d40a7f31290da3ea7b8ee0f5b6b3"><div class="ttname"><a href="conf_8h.html#a38d0d40a7f31290da3ea7b8ee0f5b6b3">tick_U08c</a></div><div class="ttdeci">const tU08 tick_U08c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8h_source.html#l00035">conf.h:35</a></div></div>
+<div class="ttc" id="conf_8h_html_aa2a8951ac3fb3edb9e1782e1292746a1"><div class="ttname"><a href="conf_8h.html#aa2a8951ac3fb3edb9e1782e1292746a1">minTimeAwake_U08c</a></div><div class="ttdeci">const tU08 minTimeAwake_U08c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8c_source.html#l00022">conf.c:22</a></div></div>
+<div class="ttc" id="conf_8h_html_a5767df22857634845e3af60ade25c42c"><div class="ttname"><a href="conf_8h.html#a5767df22857634845e3af60ade25c42c">lightsOnDoorClosed_U16c</a></div><div class="ttdeci">const tU16 lightsOnDoorClosed_U16c</div><div class="ttdef"><b>Definition:</b> <a href="conf_8c_source.html#l00019">conf.c:19</a></div></div>
+<div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

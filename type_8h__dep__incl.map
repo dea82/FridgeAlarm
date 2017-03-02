@@ -1,20 +1,22 @@
 <map id="type.h" name="type.h">
-<area shape="rect" id="node2" href="$butt_8h.html" title="Button module. " alt="" coords="26,80,80,107"/>
-<area shape="rect" id="node5" href="$main_8c.html" title="main.c" alt="" coords="102,155,164,181"/>
-<area shape="rect" id="node7" href="$buzz_8c.html" title="buzz.c" alt="" coords="105,80,166,107"/>
-<area shape="rect" id="node8" href="$cont_8h.html" title="cont.h" alt="" coords="190,80,248,107"/>
-<area shape="rect" id="node9" href="$door_8h.html" title="Door sensor module. " alt="" coords="273,80,330,107"/>
-<area shape="rect" id="node11" href="$eepr_8h.html" title="EEPROM module. " alt="" coords="441,80,498,107"/>
-<area shape="rect" id="node12" href="$eepr_8c.html" title="eepr.c" alt="" coords="541,155,598,181"/>
-<area shape="rect" id="node13" href="$ledc_8c.html" title="ledc.c" alt="" coords="524,80,581,107"/>
-<area shape="rect" id="node14" href="$wdtc_8h.html" title="wdtc.h" alt="" coords="356,80,417,107"/>
-<area shape="rect" id="node16" href="$uart_8c.html" title="uart.c" alt="" coords="659,155,713,181"/>
-<area shape="rect" id="node17" href="$uart_8h.html" title="uart.h" alt="" coords="708,80,762,107"/>
-<area shape="rect" id="node19" href="$wcet_8h.html" title="wcet.h" alt="" coords="788,80,849,107"/>
-<area shape="rect" id="node3" href="$butt_8c.html" title="butt.c" alt="" coords="23,155,77,181"/>
-<area shape="rect" id="node4" href="$cont_8c.html" title="cont.c" alt="" coords="188,155,245,181"/>
-<area shape="rect" id="node6" href="$pwrd_8c.html" title="pwrd.c" alt="" coords="270,155,332,181"/>
-<area shape="rect" id="node10" href="$door_8c.html" title="door.c" alt="" coords="441,155,498,181"/>
-<area shape="rect" id="node15" href="$wdtc_8c.html" title="wdtc.c" alt="" coords="356,155,417,181"/>
-<area shape="rect" id="node18" href="$wcet_8c.html" title="wcet.c" alt="" coords="770,155,832,181"/>
+<area shape="rect" id="node2" href="$butt_8h.html" title="Button module. " alt="" coords="207,80,261,107"/>
+<area shape="rect" id="node5" href="$main_8c.html" title="main.c" alt="" coords="5,155,67,181"/>
+<area shape="rect" id="node7" href="$conf_8h.html" title="conf.h" alt="" coords="505,80,563,107"/>
+<area shape="rect" id="node8" href="$buzz_8c.html" title="buzz.c" alt="" coords="672,155,733,181"/>
+<area shape="rect" id="node11" href="$ledc_8c.html" title="ledc.c" alt="" coords="758,155,815,181"/>
+<area shape="rect" id="node12" href="$uart_8c.html" title="uart.c" alt="" coords="839,155,893,181"/>
+<area shape="rect" id="node14" href="$cont_8h.html" title="cont.h" alt="" coords="41,80,99,107"/>
+<area shape="rect" id="node15" href="$door_8h.html" title="Door sensor module. " alt="" coords="124,80,181,107"/>
+<area shape="rect" id="node16" href="$eepr_8h.html" title="EEPROM module. " alt="" coords="372,80,429,107"/>
+<area shape="rect" id="node17" href="$eepr_8c.html" title="eepr.c" alt="" coords="341,155,399,181"/>
+<area shape="rect" id="node18" href="$wdtc_8h.html" title="wdtc.h" alt="" coords="287,80,348,107"/>
+<area shape="rect" id="node19" href="$uart_8h.html" title="uart.h" alt="" coords="839,80,893,107"/>
+<area shape="rect" id="node21" href="$wcet_8h.html" title="wcet.h" alt="" coords="919,80,980,107"/>
+<area shape="rect" id="node3" href="$butt_8c.html" title="butt.c" alt="" coords="425,155,479,181"/>
+<area shape="rect" id="node4" href="$cont_8c.html" title="cont.c" alt="" coords="91,155,148,181"/>
+<area shape="rect" id="node6" href="$pwrd_8c.html" title="pwrd.c" alt="" coords="173,155,235,181"/>
+<area shape="rect" id="node9" href="$conf_8c.html" title="conf.c" alt="" coords="589,155,647,181"/>
+<area shape="rect" id="node10" href="$door_8c.html" title="door.c" alt="" coords="259,155,316,181"/>
+<area shape="rect" id="node13" href="$wdtc_8c.html" title="wdtc.c" alt="" coords="504,155,565,181"/>
+<area shape="rect" id="node20" href="$wcet_8c.html" title="wcet.c" alt="" coords="919,155,980,181"/>
 </map>
