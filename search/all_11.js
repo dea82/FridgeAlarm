@@ -12,7 +12,7 @@ var searchData=
   ['ticksinstate_5fu16',['ticksInState_U16',['../structtDoor__State__str.html#a4738085a71a79a1e9edb15003145dae3',1,'tDoor_State_str']]],
   ['tledc_5fstate_5fe',['tLedc_State_E',['../ledc_8h.html#a26ca41b40a85995225f063c89e2d8c3d',1,'ledc.h']]],
   ['tpwrd_5fsleepmode_5fe',['tPwrd_SleepMode_E',['../pwrd_8h.html#a2d6d8cf8a14ad754992c9ba1feb5d02b',1,'pwrd.h']]],
-  ['transmit',['transmit',['../uart_8c.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.c']]],
+  ['transmit',['transmit',['../uart_8h.html#aa428a976224eafb19d08eaf4dcb79fa7',1,'uart.h']]],
   ['true',['TRUE',['../type_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'type.h']]],
   ['ts16',['tS16',['../type_8h.html#a73a14a3560a5c73d571027ec2e2c6cdf',1,'type.h']]],
   ['tu08',['tU08',['../type_8h.html#a9a48b3becea6028f01d4271e055aa5ff',1,'type.h']]],
