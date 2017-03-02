@@ -30,5 +30,7 @@ THE SOFTWARE.
 void Uart_Enable(void);
 void Uart_TransmitBlock(const uint8_t * data, uint8_t size);
 void Uart_TransmitByte(const uint8_t data);
+/* Assembly function. */
+extern void transmit(unsigned char);
 
 #endif /* UART_H_ */

@@ -26,13 +26,11 @@ THE SOFTWARE.
  * @file
  */
 
+#include "uart.h"
+
 #include "buzz.h"
 #include "conf.h"
 #include "type.h"
-#include "uart.h"
-
-/* Assembly function. */
-extern void transmit(unsigned char);
 
 void Uart_Enable(void)
 {
