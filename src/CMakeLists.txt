@@ -5,7 +5,7 @@ project("FridgeAlarm" C ASM)
 set(WITHOUT_STARTFILE ON)
 
 # Common source files for all targets
-set(COMMON_SRC boot.S butt.c buzz.c cont.c door.c eepr.c gpio.c ledc.c main.c pwrd.c wdtc.c)
+set(COMMON_SRC boot.S butt.c buzz.c conf.c cont.c door.c eepr.c gpio.c ledc.c main.c pwrd.c wdtc.c)
 
 # Uncomment if avr-libc is not in your PATH
 include_directories("/usr/local/avr-gcc-6.3.0/avr/include/")

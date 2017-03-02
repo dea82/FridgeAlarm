@@ -27,24 +27,16 @@ THE SOFTWARE.
 
 #include <avr/io.h>
 
-/* Time the button shall be pressed for a calibration. [ms] */
-#define CALIBRATION_TIME_BUTTON 4000
-/* Time before the system goes to power save mode when door is closed. [ms] */
-#define DEEP_SLEEP_TIME 2000
-/* Time before the alarm goes of with open door. [ms] */
-#define ALARM_OPEN 40000
-/* Lights on after door closed [ms] */
-#define LIGHTS_ON_DOOR_CLOSED 2000
-/* Minimum time system awake. This it only to give a small flash every 8 second. [ms] */
-#define MIN_TIME_AWAKE 100
-
-/* Milliseconds between each loop. */
-#define TICK 16
-
-#define CALIBRATED_CLOSED_POS_ADDRESS 0
-
-/* Inherited defines */
-#define UART_ENABLE (DEBUG_ENABLE | WCET)
+#include "type.h"
+#ifndef __ASSEMBLER__
+extern const tU08 tick_U08c;
+extern const tU16 calibrationTimeButton_U16c;
+extern const tU16 alarmOpen_U16c;
+extern const tU08 tick_U08c;
+extern const tU16 lightsOnDoorClosed_U16c;
+extern const tU08 minTimeAwake_U08c;
+extern const tU08 calibratedClosedPosAddress_U08c;
+#endif
 
 /* Rationale why Timer0 and PRADC is not disabled:
  * The module is disconnected and all registers connected

@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "door.h"
 #include "pwrd.h"
 
+
 typedef enum
 {
     NO_CALIBRATION_E, CALIBRATION_SUCCESS_E, CALIBRATION_FAIL_E
@@ -79,7 +80,7 @@ static tCalibrationState_E getCalibrationState_E(void)
 
     /* Calibration state */
     if ((buttState_str.state_E == BUTT_PRESSED_E) &&
-        (buttState_str.tickInState_U08 * TICK > CALIBRATION_TIME_BUTTON) &&
+        (buttState_str.tickInState_U08 * tick_U08c > calibrationTimeButton_U16c) &&
         (calibrationState_E == NO_CALIBRATION_E))
     {
         /* Enters calibration mode */
@@ -114,8 +115,8 @@ static void normalModeStateMachine(void)
     if (doorState_str.position_E == DOOR_CLOSED_E)
     {
         Buzz_SetSound(BUZZ_OFF_E);
-        if ((doorState_str.ticksInState_U16 > LIGHTS_ON_DOOR_CLOSED / TICK) &&
-            (counter_U08 > MIN_TIME_AWAKE / TICK) &&
+        if ((doorState_str.ticksInState_U16 > lightsOnDoorClosed_U16c / tick_U08c) &&
+            (counter_U08 > minTimeAwake_U08c / tick_U08c) &&
             (buttState_str.state_E == BUTT_RELEASED_E))
         {
             /* When door has been closed for a long time and no activity
@@ -137,7 +138,7 @@ static void normalModeStateMachine(void)
     {
         counter_U08 = 0;
 
-        if (doorState_str.ticksInState_U16 > ALARM_OPEN / TICK)
+        if (doorState_str.ticksInState_U16 > alarmOpen_U16c / tick_U08c)
         {
             /* Door has been open too long, sound the alarm if button is not
              * inhibiting it from going off. */

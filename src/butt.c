@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 #include "conf.h"
 
-static const tU08 filterTime_cU08 = 70;  /*  70 ms */
+static const tU08 filterTime_U08c = 70;  /*  70 ms */
 
 static tButt_State_str buttState_str;
 
@@ -58,7 +58,7 @@ void Butt_Loop(void)
     }
 
     /* Check if raw value is stable */
-    if ((buttonRawOld_str.tickInState_U08 >= filterTime_cU08 / TICK) &&
+    if ((buttonRawOld_str.tickInState_U08 >= filterTime_U08c / tick_U08c) &&
         (buttState_str.state_E != buttonRaw_E))
     {
         buttState_str.state_E = buttonRaw_E;

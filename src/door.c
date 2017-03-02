@@ -71,8 +71,8 @@ void Door_Init(void)
     /* Connect pin to ADC with 10-bit precision */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
-    doorClosed_U16 = (Eepr_Read_U08(CALIBRATED_CLOSED_POS_ADDRESS) << 8);
-    doorClosed_U16 += Eepr_Read_U08(CALIBRATED_CLOSED_POS_ADDRESS + 1);
+    doorClosed_U16 = (Eepr_Read_U08(calibratedClosedPosAddress_U08c) << 8);
+    doorClosed_U16 += Eepr_Read_U08(calibratedClosedPosAddress_U08c + 1);
 }
 
 void Door_Loop(void)
@@ -200,8 +200,8 @@ tB Door_StoreClosedPos_B(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))
     {
-        Eepr_Write(CALIBRATED_CLOSED_POS_ADDRESS, HI(doorPos_U16));
-        Eepr_Write(CALIBRATED_CLOSED_POS_ADDRESS + 1, LO(doorPos_U16));
+        Eepr_Write(calibratedClosedPosAddress_U08c, HI(doorPos_U16));
+        Eepr_Write(calibratedClosedPosAddress_U08c + 1, LO(doorPos_U16));
         doorClosed_U16 = doorPos_U16;
         calibrationOk_B = TRUE;
     }

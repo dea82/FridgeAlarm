@@ -25,14 +25,14 @@ THE SOFTWARE.
 #ifndef TYPE_H_
 #define TYPE_H_
 
-#include <limits.h>
+#ifndef __ASSEMBLER__
+
+#include <inttypes.h>
 
 /*** TYPE DEFINITIONS ***/
 
 #define  FALSE      0
 #define  TRUE       !FALSE
-
-#ifndef __ASSEMBLER__
 
 typedef unsigned char tB;
 
@@ -47,6 +47,8 @@ typedef signed int tS16;
 typedef unsigned long tU32;
 
 #endif
+
+#define HALF_DIVISOR ((tU08)2)
 
 /*** PORT MANIPULATION DEFINITIONS ***/
 

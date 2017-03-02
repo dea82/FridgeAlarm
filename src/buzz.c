@@ -72,11 +72,11 @@ void Buzz_Loop(void)
     }
     else if (soundType_E == BUZZ_ALARM_E)
     {
-        if (++counter_U08 > buzzAlarmPeriodTime_cU16 / TICK)
+        if (++counter_U08 > buzzAlarmPeriodTime_cU16 / tick_U08c)
         {
             counter_U08 = 0;
         }
-        if (counter_U08 < buzzAlarmPeriodTime_cU16 / TICK / 2)
+        if (counter_U08 < buzzAlarmPeriodTime_cU16 / (tick_U08c / HALF_DIVISOR))
         {
             turnOn();
         }
