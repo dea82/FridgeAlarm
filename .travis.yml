@@ -31,7 +31,7 @@ addons:
     branch_pattern: coverity-scan
 
 script:  
-  - docker exec build_container cmake -H/repo/src -B/build -DTARGET_BOARD=PRODUCTION
+  - docker exec build_container cmake -H/repo/src -B/build
   - docker exec build_container cmake --build /build
   # Deploy doxygen documentation to GitHub Pages
   - ./.deployment/travis/doxygen.sh
