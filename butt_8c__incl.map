@@ -1,5 +1,6 @@
 <map id="butt.c" name="butt.c">
 <area shape="rect" id="node2" href="$butt_8h.html" title="Button module. " alt="" coords="5,80,59,107"/>
-<area shape="rect" id="node6" href="$conf_8h.html" title="conf.h" alt="" coords="84,80,141,107"/>
-<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="17,155,75,181"/>
+<area shape="rect" id="node6" href="$conf_8h.html" title="conf.h" alt="" coords="159,80,216,107"/>
+<area shape="rect" id="node7" href="$util_8h.html" title="util.h" alt="" coords="84,80,135,107"/>
+<area shape="rect" id="node3" href="$type_8h.html" title="type.h" alt="" coords="80,155,137,181"/>
 </map>

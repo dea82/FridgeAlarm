@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ledstate_5fe',['ledState_E',['../ledc_8c.html#ad8ea83d4f25a8c98b569fb3a34b2c89d',1,'ledc.c']]],
-  ['lightsondoorclosed_5fu16c',['lightsOnDoorClosed_U16c',['../conf_8c.html#a5767df22857634845e3af60ade25c42c',1,'lightsOnDoorClosed_U16c():&#160;conf.c'],['../conf_8h.html#a5767df22857634845e3af60ade25c42c',1,'lightsOnDoorClosed_U16c():&#160;conf.c']]]
+  ['mincaldoorclosedpos_5fcu08',['minCalDoorClosedPos_cU08',['../door_8c.html#a34926a19783b83f5af0d83648bc7cfe3',1,'door.c']]],
+  ['mintimeawake_5fu08c',['minTimeAwake_U08c',['../conf_8c.html#aa2a8951ac3fb3edb9e1782e1292746a1',1,'minTimeAwake_U08c():&#160;conf.c'],['../conf_8h.html#aa2a8951ac3fb3edb9e1782e1292746a1',1,'minTimeAwake_U08c():&#160;conf.c']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pstr_5fwcet',['PSTR_WCET',['../main_8c.html#aa6cd9202f9abd3ad30510bd2ce35e73f',1,'main.c']]],
-  ['pullup',['PULLUP',['../type_8h.html#aa65f05495aa2b9e5d89a7e79886a596e',1,'type.h']]]
+  ['unused',['UNUSED',['../type_8h.html#a86d500a34c624c2cae56bc25a31b12f3',1,'type.h']]],
+  ['unused_5fwithout_5fwcet',['UNUSED_WITHOUT_WCET',['../main_8c.html#a368a43a4ae0d687656b204fde11b920e',1,'main.c']]]
 ];

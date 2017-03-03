@@ -1,6 +1,5 @@
 <map id="ledc.c" name="ledc.c">
 <area shape="rect" id="node2" href="$ledc_8h.html" title="ledc.h" alt="" coords="5,80,61,107"/>
 <area shape="rect" id="node3" href="$conf_8h.html" title="conf.h" alt="" coords="87,80,144,107"/>
-<area shape="rect" id="node5" href="$type_8h.html" title="type.h" alt="" coords="148,155,205,181"/>
-<area shape="rect" id="node7" href="$gpio_8h.html" title="gpio.h" alt="" coords="230,80,287,107"/>
+<area shape="rect" id="node5" href="$type_8h.html" title="type.h" alt="" coords="153,155,211,181"/>
 </map>

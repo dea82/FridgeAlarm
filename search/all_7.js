@@ -10,6 +10,5 @@ var searchData=
   ['getdoorrawpos_5fu16',['getDoorRawPos_U16',['../door_8c.html#a3a16057763b76b73843fe98bcab303d9',1,'door.c']]],
   ['gpio_2ec',['gpio.c',['../gpio_8c.html',1,'']]],
   ['gpio_2eh',['gpio.h',['../gpio_8h.html',1,'']]],
-  ['gpiopin_5ft',['GPIOPin_t',['../structGPIOPin__t.html',1,'']]],
-  ['greenled',['greenLed',['../ledc_8c.html#a8bfe89d07435c0cda1f64053cb5a152a',1,'ledc.c']]]
+  ['gpiopin_5ft',['GPIOPin_t',['../structGPIOPin__t.html',1,'']]]
 ];

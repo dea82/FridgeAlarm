@@ -126,28 +126,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/* Timed sequence - disable interrupt */</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    cli();</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">/* Write logical one to EEMPE */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    EECR |= (1&lt;&lt;<a class="code" href="type_8h.html#a190ea91ea27d4e2b539016d6409292ad">EEMPE</a>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    EECR |= _BV(<a class="code" href="type_8h.html#a190ea91ea27d4e2b539016d6409292ad">EEMPE</a>);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">/* Start eeprom write by setting EEPE */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    EECR |= (1&lt;&lt;<a class="code" href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    EECR |= _BV(<a class="code" href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a>);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    sei();</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="eepr_8h.html#a00ac00ce3432f540fb26d632b0496e86">   54</a></span>&#160;<a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> <a class="code" href="eepr_8c.html#a00ac00ce3432f540fb26d632b0496e86">Eepr_Read_U08</a>(<span class="keyword">const</span> <a class="code" href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a> address_U08)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/* Wait for completion of previous write */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">while</span>(EECR &amp; (1&lt;&lt;<a class="code" href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a>));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">while</span>(EECR &amp; _BV(<a class="code" href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a>));</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">/* Set up address register */</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    EEAR = address_U08;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">/* Start eeprom read by writing EERE */</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    EECR |= (1&lt;&lt;EERE);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    EECR |= _BV(EERE);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">/* Return data from data register */</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> EEDR;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 <div class="ttc" id="eepr_8h_html"><div class="ttname"><a href="eepr_8h.html">eepr.h</a></div><div class="ttdoc">EEPROM module. </div></div>
 <div class="ttc" id="type_8h_html_a9a48b3becea6028f01d4271e055aa5ff"><div class="ttname"><a href="type_8h.html#a9a48b3becea6028f01d4271e055aa5ff">tU08</a></div><div class="ttdeci">unsigned char tU08</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00039">type.h:39</a></div></div>
 <div class="ttc" id="eepr_8c_html_a5a5de118bc3206aa8347d3a4c706557d"><div class="ttname"><a href="eepr_8c.html#a5a5de118bc3206aa8347d3a4c706557d">Eepr_Write</a></div><div class="ttdeci">void Eepr_Write(const tU08 address_U08, const tU08 data_U08)</div><div class="ttdef"><b>Definition:</b> <a href="eepr_8c_source.html#l00036">eepr.c:36</a></div></div>
-<div class="ttc" id="type_8h_html_a4aa38c6d55bab3b56e5df82cc7f23c68"><div class="ttname"><a href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a></div><div class="ttdeci">#define EEPE</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00108">type.h:108</a></div></div>
-<div class="ttc" id="type_8h_html_a190ea91ea27d4e2b539016d6409292ad"><div class="ttname"><a href="type_8h.html#a190ea91ea27d4e2b539016d6409292ad">EEMPE</a></div><div class="ttdeci">#define EEMPE</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00111">type.h:111</a></div></div>
+<div class="ttc" id="type_8h_html_a4aa38c6d55bab3b56e5df82cc7f23c68"><div class="ttname"><a href="type_8h.html#a4aa38c6d55bab3b56e5df82cc7f23c68">EEPE</a></div><div class="ttdeci">#define EEPE</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00099">type.h:99</a></div></div>
+<div class="ttc" id="type_8h_html_a190ea91ea27d4e2b539016d6409292ad"><div class="ttname"><a href="type_8h.html#a190ea91ea27d4e2b539016d6409292ad">EEMPE</a></div><div class="ttdeci">#define EEMPE</div><div class="ttdef"><b>Definition:</b> <a href="type_8h_source.html#l00102">type.h:102</a></div></div>
 <div class="ttc" id="eepr_8c_html_a00ac00ce3432f540fb26d632b0496e86"><div class="ttname"><a href="eepr_8c.html#a00ac00ce3432f540fb26d632b0496e86">Eepr_Read_U08</a></div><div class="ttdeci">tU08 Eepr_Read_U08(const tU08 address_U08)</div><div class="ttdef"><b>Definition:</b> <a href="eepr_8c_source.html#l00054">eepr.c:54</a></div></div>
 <div class="ttc" id="type_8h_html"><div class="ttname"><a href="type_8h.html">type.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
