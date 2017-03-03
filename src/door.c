@@ -34,6 +34,7 @@ THE SOFTWARE.
 
 #include "conf.h"
 #include "eepr.h"
+#include "util.h"
 
 
 /**
@@ -43,7 +44,8 @@ THE SOFTWARE.
 static const tU16 unaffectedSensorValue_cU16 = 493;
 /* Offset from stored position to trigger alarm. [-]*/
 static const tU08 doorClosedOffset_cU08 = 20;
-/* Minimum accepted door position (calculated offset from 512) [-] */
+/* Minimum accepted door position (calculated offset from unaffected
+ * sensor value) [-] */
 static const tU08 minCalDoorClosedPos_cU08 = 60;
 
 static tDoor_State_str doorState_str;
@@ -68,7 +70,7 @@ void Door_Init(void)
 #error "Prescaler for ADC conversion is not supported for this MCU clock."
 #endif
 
-    /* Connect pin to ADC with 10-bit precision */
+    /* Connect pin to ADC with 10-bit resolution */
     ADMUX = (_BV(MUX1) | _BV(MUX0));
 
     doorClosed_U16 = (Eepr_Read_U08(calibratedClosedPosAddress_U08c) << 8);
@@ -80,7 +82,7 @@ void Door_Loop(void)
     doorPos_U16 = getDoorRawPos_U16();
 
     tDoor_Position_E newposition_E;
-    /* Algorithm handles both direction of magnet field */
+    /* Algorithm handles both directions of magnet field */
     if (doorClosed_U16 < unaffectedSensorValue_cU16)
     {
         if (doorPos_U16 > doorClosed_U16 + doorClosedOffset_cU08)
@@ -106,7 +108,7 @@ void Door_Loop(void)
 
     if (doorState_str.position_E == newposition_E)
     {
-        INC_U16(doorState_str.ticksInState_U16);
+        Util_safeIncrementU16(&doorState_str.ticksInState_U16);
     }
     else
     {
@@ -200,8 +202,8 @@ tB Door_StoreClosedPos_B(void)
     tB calibrationOk_B = FALSE;
     if (withinRange_B(doorPos_U16))
     {
-        Eepr_Write(calibratedClosedPosAddress_U08c, HI(doorPos_U16));
-        Eepr_Write(calibratedClosedPosAddress_U08c + 1, LO(doorPos_U16));
+        Eepr_Write(calibratedClosedPosAddress_U08c, Util_hiByteU16_U08(doorPos_U16));
+        Eepr_Write(calibratedClosedPosAddress_U08c + 1, Util_loByteU16_U08(doorPos_U16));
         doorClosed_U16 = doorPos_U16;
         calibrationOk_B = TRUE;
     }

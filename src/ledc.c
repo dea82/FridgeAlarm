@@ -30,22 +30,11 @@ THE SOFTWARE.
 #include "ledc.h"
 
 #include "conf.h"
-#include "gpio.h"
 #include "type.h"
 
 static const tU08 blinkPeriodTime_U08c = 120; /* ms */
 
 static tLedc_State_E ledState_E = LEDC_OFF_E;
-
-typedef struct {
-  GPIOPin_t const * anodePin;
-  GPIOPin_t const * cathodePin;
-} LedComponent_t;
-
-static const MCU_t Attiny13a = {{{&PORTB, 0}, {&PORTB, 1}, {&PORTB, 2}}};
-
-static const LedComponent_t greenLed = {&Attiny13a.portB.P0, 0};
-static const LedComponent_t redLed = {&Attiny13a.portB.P2, 0};
 
 void Ledc_Init(void)
 {
@@ -64,13 +53,13 @@ void Ledc_Loop(void)
     switch (ledState_E)
     {
     case LEDC_OFF_E:
-      IO_CLR(GREEN_LED_CFG);
+        IO_CLR(GREEN_LED_CFG);
         IO_CLR(RED_LED_CFG);
         break;
     case LEDC_GREEN_E:
-      setGpioPinHi(greenLed.anodePin);
-      setGpioPinLo(redLed.anodePin);
-      break;
+        IO_SET(GREEN_LED_CFG);
+        IO_CLR(RED_LED_CFG);
+        break;
     case LEDC_RED_E:
         IO_CLR(GREEN_LED_CFG);
         IO_SET(RED_LED_CFG);

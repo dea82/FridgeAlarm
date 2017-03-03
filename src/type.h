@@ -37,10 +37,8 @@ THE SOFTWARE.
 typedef unsigned char tB;
 
 typedef unsigned char tU08;
-#define MAX_U08 UINT8_MAX
 
 typedef unsigned int tU16;
-#define MAX_U16 UINT16_MAX
 
 typedef signed int tS16;
 
@@ -89,13 +87,6 @@ typedef unsigned long tU32;
 #define GET_BIT(P, bit) (bit)
 #define GET_MASK(P, bit) (1 << (bit))
 #define GET_STATUS(CFG) (GET_PIN(CFG)&GET_MASK(CFG))
-
-/* MATH MACRO DEFINITIONS */
-
-#define INC_U08(a) ((a) == MAX_U08 ? MAX_U08 : (a)++)
-#define INC_U16(a) ((a) == MAX_U16 ? MAX_U16 : (a)++)
-#define LO(a)      ((tU08)((a) & 0xFF))
-#define HI(a)      ((tU08)((a) >> 8) )
 
 /* Pin interrupt macro */
 #if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny13A__)

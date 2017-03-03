@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "ledc.h"
 #include "door.h"
 #include "pwrd.h"
+#include "util.h"
 
 
 typedef enum
@@ -128,7 +129,7 @@ static void normalModeStateMachine(void)
         else
         {
             /* Door has not been closed long enough to go to deep sleep. */
-            INC_U08(counter_U08);
+            Util_safeIncrementU08(&counter_U08);
             Ledc_SetState(LEDC_GREEN_E);
         }
         /* Reset */

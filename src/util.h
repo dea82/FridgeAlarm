@@ -22,43 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-/**
- * @file
- */
-
-#include "eepr.h"
-
-#include <avr/interrupt.h>
-#include <avr/io.h>
+#ifndef UTIL_H_
+#define UTIL_H_
 
 #include "type.h"
 
-void Eepr_Write(const tU08 address_U08, const tU08 data_U08)
-{
-    /* Wait for completion of previous write */
-    while(EECR & _BV(EEPE));
-    /* Set Programming mode */
-    EECR = 0;
-    /* Set up address and data registers */
-    EEAR = address_U08;
-    EEDR = data_U08;
-    /* Timed sequence - disable interrupt */
-    cli();
-    /* Write logical one to EEMPE */
-    EECR |= _BV(EEMPE);
-    /* Start eeprom write by setting EEPE */
-    EECR |= _BV(EEPE);
-    sei();
-}
+void Util_safeIncrementU08(tU08 * const val_U08);
+void Util_safeIncrementU16(tU16 * const val_U16);
+tU08 Util_loByteU16_U08(const tU16 val_U16);
+tU08 Util_hiByteU16_U08(const tU16 val_U16);
 
-tU08 Eepr_Read_U08(const tU08 address_U08)
-{
-    /* Wait for completion of previous write */
-    while(EECR & _BV(EEPE));
-    /* Set up address register */
-    EEAR = address_U08;
-    /* Start eeprom read by writing EERE */
-    EECR |= _BV(EERE);
-    /* Return data from data register */
-    return EEDR;
-}
+#endif /* UTIL_H_ */

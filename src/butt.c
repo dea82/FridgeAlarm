@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include <avr/io.h>
 
 #include "conf.h"
+#include "util.h"
 
 static const tU08 filterTime_U08c = 70;  /*  70 ms */
 
@@ -50,7 +51,7 @@ void Butt_Loop(void)
     /* Is raw button glitching */
     if (buttonRawOld_str.state_E == buttonRaw_E)
     {
-        INC_U08(buttonRawOld_str.tickInState_U08);
+      Util_safeIncrementU08(&buttonRawOld_str.tickInState_U08);
     }
     else
     {
@@ -66,7 +67,7 @@ void Butt_Loop(void)
     }
     else
     {
-        INC_U08(buttState_str.tickInState_U08);
+      Util_safeIncrementU08(&buttState_str.tickInState_U08);
     }
 
     buttonRawOld_str.state_E = buttonRaw_E;
