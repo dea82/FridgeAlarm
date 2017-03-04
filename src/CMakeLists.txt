@@ -20,3 +20,12 @@ add_avr_executable(PROTOTYPE_WITH_WCET attiny85 ${COMMON_SRC} uart_asm.S uart.c 
 avr_compile_definitions(PROTOTYPE_WITH_WCET -DF_CPU=8000000)
 avr_compile_definitions(PROTOTYPE_WITH_WCET -DWCET=1)
 avr_compile_definitions(PROTOTYPE_WITH_WCET -DBAUD_RATE=57600)
+
+
+# Doxygen documentation generation
+find_package(Doxygen)
+if(NOT DOXYGEN_FOUND)
+  message(WARNING "Doxygen is needed to build documentation.")
+endif()
+add_custom_target(doc COMMAND doxygen ${CMAKE_SOURCE_DIR}/doc/doxygen_config
+                      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
