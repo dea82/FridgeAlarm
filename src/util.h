@@ -27,8 +27,8 @@ THE SOFTWARE.
 
 #include "type.h"
 
-void Util_safeIncrementU08(tU08 * const val_U08);
-void Util_safeIncrementU16(tU16 * const val_U16);
+void Util_safeIncrementU08(tU08 * const val_pU08);
+void Util_safeIncrementU16(tU16 * const val_pU16);
 tU08 Util_loByteU16_U08(const tU16 val_U16);
 tU08 Util_hiByteU16_U08(const tU16 val_U16);
 

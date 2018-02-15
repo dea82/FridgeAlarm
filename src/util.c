@@ -26,19 +26,19 @@ THE SOFTWARE.
 
 #include <inttypes.h>
 
-void Util_safeIncrementU08(tU08 * const val_U08)
+void Util_safeIncrementU08(tU08 * const val_pU08)
 {
-    if (*val_U08 != UINT8_MAX)
+    if (*val_pU08 != UINT8_MAX)
     {
-        (*val_U08)++;
+        (*val_pU08)++;
     }
 }
 
-void Util_safeIncrementU16(tU16 * const val_U16)
+void Util_safeIncrementU16(tU16 * const val_pU16)
 {
-    if (*val_U16 != UINT16_MAX)
+    if (*val_pU16 != UINT16_MAX)
     {
-        (*val_U16)++;
+        (*val_pU16)++;
     }
 }
 
